@@ -4,5 +4,7 @@
     {
         string nome = "Simone";
         Console.WriteLine($"Ciao {nome}");
-    }
+        Console.WriteLine("Ciao " + nome);
+        Console.WriteLine($"Ciao {nome} Ussi");
+    } 
 }
