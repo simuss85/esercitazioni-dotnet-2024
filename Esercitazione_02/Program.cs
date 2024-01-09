@@ -2,7 +2,9 @@
 {
     static void Main(string[] args)
     {
-        DateTime dataDiNascita = new DateTime(1985, 7, 30);
-        Console.WriteLine($"Sei nato il {dataDiNascita.ToLongDateString()}");
+        int a = 10;
+        int b = 20;
+        int c = a + b;
+        System.Console.WriteLine($"La somma di {a} e {b} è {c}");
     } 
 }
