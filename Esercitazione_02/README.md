@@ -57,3 +57,29 @@ class Program
 
 ```
 
+### 03 - Dichiarare variabili di tipo booleano:
+
+```c#
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool maggiorenne = true;
+        Console.WriteLine($"Sei maggiorenne? {maggiorenne}");
+    }
+}
+```
+
+### 04 - Dichiarare una variabile di tipo decimale:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        decimal altezza = 1.80M;
+        Console.WriteLine($"Sei alto {altezza} metri");
+    } 
+}
+```

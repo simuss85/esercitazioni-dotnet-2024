@@ -2,7 +2,7 @@
 {
     static void Main(string[] args)
     {
-        bool maggiorenne = true;
-        Console.WriteLine($"Sei maggiorenne? {maggiorenne}");
+        decimal altezza = 1.80M;
+        Console.WriteLine($"Sei alto {altezza} metri");
     } 
 }
