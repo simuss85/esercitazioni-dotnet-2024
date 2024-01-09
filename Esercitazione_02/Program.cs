@@ -2,10 +2,10 @@
 {
     static void Main(string[] args)
     {
-        int a = 10;
-        int b = 20;
-        decimal c = 1.5m;
-        decimal d = a + b + c;
-        System.Console.WriteLine($"La somma di {a}, {b}, {c} è {d}");
+        string nome = "Mario";
+        string cognome = "Mario";
+        bool uguali = (nome == cognome);
+        System.Console.WriteLine($"I due nomi sono uguali? {uguali}");
+
     } 
 }
