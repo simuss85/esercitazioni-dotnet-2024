@@ -17,7 +17,6 @@ Ecco alcune esercitazioni base su C# .NET Core senza l'utilizzo di namespaces.
 ### 01 - Dichiarare una variabile di tipo stringa:
 
 ```c#
-
 class Program
 {
     static void Main(string[] args)
@@ -45,7 +44,6 @@ class Program
 ### 02 - Dichiarare una variabile di tipo intero:
 
 ```c#
-
 class Program
 {
     static void Main(string[] args)
@@ -60,7 +58,6 @@ class Program
 ### 03 - Dichiarare variabili di tipo booleano:
 
 ```c#
-
 class Program
 {
     static void Main(string[] args)
@@ -82,4 +79,31 @@ class Program
         Console.WriteLine($"Sei alto {altezza} metri");
     } 
 }
+```
+
+### 05 - Dichiarare una variabile di tipo data:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        DateTime dataDiNascita = new DateTime(1985, 7, 30);
+        Console.WriteLine($"Sei nato il {dataDiNascita}");
+    } 
+}
+```
+
+### 06 - Dichiarare una variabile di tipo data utilizzando il metodo ToShortDateString():
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        DateTime dataDiNascita = new DateTime(1985, 7, 30);
+        Console.WriteLine($"Sei nato il {dataDiNascita.ToShortDateString()}");
+    } 
+}
+
 ```
