@@ -3,9 +3,8 @@
     static void Main(string[] args)
     {
         string nome = "Mario";
-        string cognome = "Mario";
-        bool uguali = (nome == cognome);
-        System.Console.WriteLine($"I due nomi sono uguali? {uguali}");
-
-    } 
+        string cognome = "Rossi";
+        bool diversi = (nome != cognome);
+        System.Console.WriteLine($"I due nomi sono uguali? {diversi}");
+    }
 }

@@ -151,3 +151,35 @@ class Program
     } 
 }
 ```
+
+### 10 - Utilizzare l'operatore == per confrontare due stringhe:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string nome = "Mario";
+        string cognome = "Mario";
+        bool uguali = (nome == cognome);
+        System.Console.WriteLine($"I due nomi sono uguali? {uguali}");
+
+    } 
+}
+```
+
+### 11 - Utilizzare l'operatore != per confrontare due stringhe:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string nome = "Mario";
+        string cognome = "Mario";
+        bool diversi = (nome != cognome);
+        System.Console.WriteLine($"I due nomi sono uguali? {diversi}");
+
+    } 
+}
+```
