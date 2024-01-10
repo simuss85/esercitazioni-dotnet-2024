@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj": {}
+    "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj": {
+    "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj",
+        "projectUniqueName": "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj",
         "projectName": "Esercitazione_01",
-        "projectPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj",
-        "packagesPath": "C:\\Users\\DOTNET\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\obj\\",
+        "projectPath": "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\Esercitazione_01.csproj",
+        "packagesPath": "C:\\Users\\sussi\\.nuget\\packages\\",
+        "outputPath": "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_01\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DOTNET\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sussi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
