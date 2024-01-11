@@ -344,3 +344,24 @@ class Program
     }
 }
 ```
+
+### 21 - Esempio di array Join:
+
+```c#
+class Program
+{
+
+    static void Main(string[] args)
+    {
+        // esempio di array join
+        string[] nomi = new string[] {"Alice", "Bob", "Charlie"};
+
+        // unisce tutti gli elementi dell'array nomi in una singola stringa, separati da virgola e spazio
+        string nomiConcatenati = String.Join(", ", nomi);
+
+        System.Console.WriteLine($"Ciao {nomiConcatenati}");   
+        
+    }
+
+}
+```

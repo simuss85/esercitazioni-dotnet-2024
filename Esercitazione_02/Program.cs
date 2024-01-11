@@ -1,62 +1,16 @@
-﻿/* class Program
+﻿class Program
 {
 
     static void Main(string[] args)
-    {   
-        // INPUT 
-        int[] numeri = [1, 2, 3, 4, 5];
+    {
+        // esempio di array join
+        string[] nomi = new string[] {"Alice", "Bob", "Charlie"};
 
-        string[] nomi = new string[] {"Mario", "Luigi", "Luca"};
+        // unisce tutti gli elementi dell'array nomi in una singola stringa, separati da virgola e spazio
+        string nomiConcatenati = String.Join(", ", nomi);
 
-        List<int> listaNumeri = new List<int> {1, 2, 3, 4, 5};
-
-
-        List<string> listaNomi = new List<string> {"Mario", "Luigi", "Luca"};
-
-        Stack<int> pilaNumeri = new Stack<int>(numeri);
-
-        Queue<string> codaNomi = new Queue<string>(nomi);
-
-
-
-        // OUTPUT 
-        // stampa array di numeri con foreach
-        System.Console.WriteLine($"Prova stampa array numeri:");
-
-        foreach (int numero in numeri)
-        {
-            System.Console.Write(numero + ", ");
-        }
+        System.Console.WriteLine($"Ciao {nomiConcatenati}");   
         
-        System.Console.WriteLine("\n"); //  ritorno a capo
-
-
-        // stampa array di nomi con foreach
-        System.Console.WriteLine($"Prova stampa array nomi:");
-
-        foreach (string nome in nomi)
-        {
-            System.Console.Write(nome + ", ");
-        }
-        
-        System.Console.WriteLine("\n"); //  ritorno a capo
-        
-        // stampa lista di numeri con for
-        System.Console.WriteLine($"Prova stampa lista numeri:");
-
-        for (int i = 0; i < listaNumeri.Count; i++)
-        {
-            System.Console.Write(listaNumeri[i] + ", ");
-        }
-        
-        System.Console.WriteLine("\n"); //  ritorno a capo
-
-        // aggiungo un nome nuovo alla lista
-        listaNomi.Add("Veronica");
-
-        stampa(listaNomi);
-        stampa(nomi);
-
     }
 
     static void stampa(List<string> listString)
@@ -81,4 +35,4 @@
             System.Console.Write(elemento + ", ");
         }
     }
-} */
+}
