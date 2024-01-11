@@ -7,8 +7,8 @@
         nomi.Enqueue("Mario"); // aggiungo elemento con metodo Enqueue
         nomi.Enqueue("Luigi");
         nomi.Enqueue("Giovanni");
-
-        System.Console.WriteLine($"Ciao {nomi.Dequeue()}, {nomi.Dequeue()} e {nomi.Dequeue()}");
+        
+        System.Console.WriteLine($"Ciao {nomi.Dequeue()}, {nomi.Dequeue()} e {nomi.Dequeue}");
         
     }
 }
