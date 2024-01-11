@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj": {}
+    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj": {}
   },
   "projects": {
-    "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj": {
+    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj",
+        "projectUniqueName": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj",
         "projectName": "Esercitazione_02",
-        "projectPath": "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj",
-        "packagesPath": "C:\\Users\\sussi\\.nuget\\packages\\",
-        "outputPath": "D:\\workspace\\Corso dotNet 2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\obj\\",
+        "projectPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\Esercitazione_02.csproj",
+        "packagesPath": "C:\\Users\\DOTNET\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Esercitazione_02\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\sussi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\DOTNET\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
