@@ -1,5 +1,6 @@
-﻿class Program
+﻿/* class Program
 {
+
     static void Main(string[] args)
     {   
         // INPUT 
@@ -8,6 +9,7 @@
         string[] nomi = new string[] {"Mario", "Luigi", "Luca"};
 
         List<int> listaNumeri = new List<int> {1, 2, 3, 4, 5};
+
 
         List<string> listaNomi = new List<string> {"Mario", "Luigi", "Luca"};
 
@@ -68,6 +70,7 @@
 
         System.Console.WriteLine("\n"); //  ritorno a capo
 
+
     }
 
     static void stampa(string[] arrayString)
@@ -78,4 +81,4 @@
             System.Console.Write(elemento + ", ");
         }
     }
-}
+} */
