@@ -198,3 +198,19 @@ class Program
     }
 }
 ```
+
+### 13 - Dichiarare un array di stringhe: 
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] nomi = new string[3]; // array con numero predeterminato elementi
+        nomi[0] = "Mario";             // si puo' inserire un elemento in una posizione specifica
+        nomi[1] = "Luigi";             // deve contenere dati dello stesso tipo
+        nomi[2] = "Giovanni";
+        System.Console.WriteLine($"Ciao {nomi[0]}, {nomi[1]} e {nomi[2]}");
+    }
+}
+```
