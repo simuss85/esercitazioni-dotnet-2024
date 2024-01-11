@@ -2,13 +2,12 @@
 {
     static void Main(string[] args)
     {
-        int[] numeri = new int[3];
-        numeri[0] = 10;
-        numeri[1] = 20;
-        numeri[2] = 20;
-        numeri[3] = "30"; // elemento non di tipo numerico
-        // array che non c'e'
-        System.Console.WriteLine($"I numeri sono {numeri[0]}, {numeri[1]} e {numeri[3]}");
-        System.Console.WriteLine($"I numeri sono {numeri[0]}, {numeri[1]} e {numeri[2]}");
+        string[] nomi = new string[3];
+        nomi[0] = "Mario";
+        nomi[1] = "Luigi";
+        nomi[2] = "Giovanni"; 
+        System.Console.WriteLine($"Ciao {nomi[0]}, {nomi[1]} e {nomi[2]}");
+        System.Console.WriteLine($"Il numero di elementi e' {nomi.Length}");
+        
     }
 }
