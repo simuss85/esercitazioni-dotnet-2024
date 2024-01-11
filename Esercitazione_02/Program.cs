@@ -3,12 +3,12 @@
     static void Main(string[] args)
     {   
         // utilizziamo il diamond invece di parentesi quadre
-        List<string> nomi = new List<string>();
-        nomi.Add("Mario"); // aggiungo elemento con metodo add
-        nomi.Add("Luigi");
-        nomi.Add("Giovanni");
+        Stack<string> nomi = new Stack<string>();
+        nomi.Push("Mario"); // aggiungo elemento con metodo Push
+        nomi.Push("Luigi");
+        nomi.Push("Giovanni");
 
-        System.Console.WriteLine($"Ciao {nomi[0]}, {nomi[1]} e {nomi[2]}");
-        System.Console.WriteLine($"Il numero di elementi e' {nomi.Count}");
+        System.Console.WriteLine($"Ciao {nomi.Pop()}, {nomi.Pop()} e {nomi.Pop()}");
+        
     }
 }
