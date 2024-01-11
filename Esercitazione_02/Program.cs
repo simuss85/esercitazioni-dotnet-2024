@@ -3,11 +3,11 @@
     static void Main(string[] args)
     {   
         // utilizziamo il diamond invece di parentesi quadre
-        List<string> nomi = new List<string>();
-        nomi.Add("Mario"); // aggiungo elemento con metodo add
-        nomi.Add("Luigi");
-        nomi.Add("Giovanni");
+        List<int> numeri = new List<int>();
+        numeri.Add(10); // aggiungo elemento con metodo add
+        numeri.Add(20);
+        numeri.Add(30);
 
-        System.Console.WriteLine($"Ciao {nomi[0]}, {nomi[1]} e {nomi[2]}");
+        System.Console.WriteLine($"Ciao {numeri[0]}, {numeri[1]} e {numeri[2]}");
     }
 }
