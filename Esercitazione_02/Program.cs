@@ -3,17 +3,15 @@
 
     static void Main(string[] args)
     {
-        // esempio di array join
-        string[] nomi = new string[] {"Alice", "Bob", "Charlie"};
+        // riordino lista numerica
+        List<int> numeri = new List<int> {2,1,5,25,9,10,15};
+        numeri.Sort();
 
-        // unisce tutti gli elementi dell'array nomi in una singola stringa, separati da virgola e spazio
-        string nomiConcatenati = String.Join(", ", nomi);
-
-        System.Console.WriteLine($"Ciao {nomiConcatenati}");   
+        stampa(numeri);   
         
     }
 
-    static void stampa(List<string> listString)
+    static void stampa(List<int> listString)
     {   
         System.Console.WriteLine("Funzione stampa lista di stringhe:");
 
@@ -27,12 +25,12 @@
 
     }
 
-    static void stampa(string[] arrayString)
-    {
-        System.Console.WriteLine("Funzione stampa arrai di stringhe:");
-        foreach(string elemento in arrayString)
-        {
-            System.Console.Write(elemento + ", ");
-        }
-    }
+    // static void stampa(string[] arrayString)
+    // {
+    //     System.Console.WriteLine("Funzione stampa arrai di stringhe:");
+    //     foreach(string elemento in arrayString)
+    //     {
+    //         System.Console.Write(elemento + ", ");
+    //     }
+    // }
 }
