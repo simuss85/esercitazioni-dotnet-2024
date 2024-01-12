@@ -2,15 +2,17 @@
 {
     static void Main(string[] args)
     {
-        List<string> nomi = new List<string>();
-        nomi.Add("Mario");
-        nomi.Add("Luigi");
-        nomi.Add("Giovanni");
-
-        foreach (string nome in nomi)
+        Dictionary<string, int> eta = new ()
         {
-            System.Console.WriteLine($"Ciao {nome}");
+            {"Mario", 25},
+            {"Luigi", 30},
+            {"Giovanni", 35}
+        };
+
+        foreach (string nome in eta.Keys)
+        {
+            System.Console.WriteLine($"Ciao {nome} hai {eta[$"{nome}"]} anni");
         }
-     
+
     }
 }
