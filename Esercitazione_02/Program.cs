@@ -6,8 +6,12 @@
         int b = 20;
         if (a > b) // la condizione da verificare si scrive tra parentesi
         {
-            System.Console.WriteLine($"{a} e' maggiore di ");
+            System.Console.WriteLine($"{a} e' maggiore di {b}");
         }
-        System.Console.WriteLine("Fine!");
+        else
+        {
+            System.Console.WriteLine($"{a} e' minore di {b}");
+        }
+        
     }
 }
