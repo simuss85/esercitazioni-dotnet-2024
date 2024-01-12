@@ -2,17 +2,25 @@
 {
     static void Main(string[] args)
     {
-        Dictionary<string, int> eta = new ()
-        {
-            {"Mario", 25},
-            {"Luigi", 30},
-            {"Giovanni", 35}
-        };
+        string[] nomi = new string[5];
+        nomi[0] = "Luigi";
+        nomi[1] = "Mario";
+        nomi[2] = "Luca";
+        nomi[3] = "Mario";
+        nomi[4] = "Mario";
 
-        foreach (string nome in eta.Keys)
+        List<string> lista = new List<string>();
+
+        foreach (string nome in nomi)
         {
-            System.Console.WriteLine($"Ciao {nome} hai {eta[$"{nome}"]} anni");
+            if (nome == "Mario")
+            {
+                System.Console.WriteLine("Trovato!");
+                lista.Add(nome);
+            }
         }
+
+        System.Console.WriteLine($"La lista contiene {lista.Count} elementi");
 
     }
 }
