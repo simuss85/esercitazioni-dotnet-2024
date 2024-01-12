@@ -2,11 +2,13 @@
 {
     static void Main(string[] args)
     {
-        Dictionary<string, string> nomi = new Dictionary<string, string>();
-        nomi.Add("Mario", "Rossi");
-        nomi.Add("Luigi", "Verdi");
-        nomi.Add("Giovanni", "Bianchi");
-        System.Console.WriteLine($"Ciao {nomi["Mario"]} {nomi["Luigi"]} e {nomi["Giovanni"]}");
+        Dictionary<string, int> nomi = new Dictionary<string, int>()
+        {
+            {"Mario", 25},
+            {"Luigi", 30},
+            {"Giovanni", 35}
+        };
+        System.Console.WriteLine($"Le vostre età sono {nomi["Mario"]} {nomi["Luigi"]} e {nomi["Giovanni"]}");
 
     }
 }
