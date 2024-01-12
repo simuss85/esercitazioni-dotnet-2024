@@ -393,3 +393,191 @@ class Program
     }
 }
 ```
+
+### 23 - Utilizzare l'istruzione if:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        int a = 10;
+        int b = 20;
+        if (a > b) // la condizione da verificare si scrive tra parentesi
+        {
+            System.Console.WriteLine($"{a} e' maggiore di {b}");
+        }
+        System.Console.WriteLine("Fine!");
+    }
+}
+
+```
+
+### 24 - Utilizzare istruzione if con else:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        int a = 10;
+        int b = 20;
+        if (a > b) // la condizione da verificare si scrive tra parentesi
+        {
+            System.Console.WriteLine($"{a} e' maggiore di {b}");
+        }
+        else
+        {
+            System.Console.WriteLine($"{a} e' minore di {b}");
+        }
+        
+    }
+}
+```
+
+### 25 - Utilizzare istruzione if con else-if else:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        int a = 10;
+        int b = 20;
+        if (a > b) // la condizione da verificare si scrive tra parentesi
+        {
+            System.Console.WriteLine("{a} e' maggiore di {b}");
+        }
+        if (a < b)
+        {
+            System.Console.WriteLine("{a} e' minore di {b}");
+        }
+        else
+        {
+            System.Console.WriteLine($"{a} e' uguale a {b}");
+        }
+
+    }
+}
+```
+
+### 26 - Utilizzare l'istruzione switch:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        int a = 10;
+        // int b = 20;
+        switch (a)
+        {
+            case 10:
+                System.Console.WriteLine($"{a} e' uguale a 10");
+                break;
+            case 20:
+                System.Console.WriteLine($"{a} e' uguale a 20");
+                break;
+            default:
+                System.Console.WriteLine($"{a} non e' uguale a 10 o 20");
+                break;
+        }
+
+    }
+}
+```
+
+### 27 - Dichiarare un dizionario di sttinghe:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary<string, string> nomi = new Dictionary<string, string>();
+        nomi.Add("Mario", "Rossi");
+        nomi.Add("Luigi", "Verdi");
+        nomi.Add("Giovanni", "Bianchi");
+        System.Console.WriteLine($"Ciao {nomi["Mario"]} {nomi["Luigi"]} e {nomi["Giovanni"]}");
+
+    }
+}
+```
+
+### 28 - Inizializzare dizionario senza metodo Add:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary<string, int> nomi = new Dictionary<string, int>()
+        {
+            {"Mario", 25},
+            {"Luigi", 30},
+            {"Giovanni", 35}
+        };
+
+        System.Console.WriteLine($"Le vostre età sono {nomi["Mario"]} {nomi["Luigi"]} e {nomi["Giovanni"]}");
+
+    }
+}
+```
+
+### 29 - Utilizzare il ciclo for:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            System.Console.WriteLine($"Il valore di i è {i}");
+        }
+
+    }
+}
+```
+
+### 30 - Utilizzare il ciclo foreach con un array di stringhe:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] nomi = new string[3];
+        nomi[0] = "Mario";
+        nomi[1] = "Luigi";
+        nomi[2] = "Giovanni";
+
+        foreach (string nome in nomi)
+        {
+            System.Console.WriteLine($"Ciao {nome}");
+        }
+        
+    }
+}
+```
+
+### 31 - Utilizzare il ciclo foreach con una lista:
+
+```c# 
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> nomi = new List<string>();
+        nomi.Add("Mario");
+        nomi.Add("Luigi");
+        nomi.Add("Giovanni");
+
+        foreach (string nome in nomi)
+        {
+            System.Console.WriteLine($"Ciao {nome}");
+        }
+     
+    }
+}
+```
