@@ -3,18 +3,19 @@
     static void Main(string[] args)
     {
         int a = 10;
-        int b = 20;
-        if (a > b) // la condizione da verificare si scrive tra parentesi
+        // int b = 20;
+        switch (a)
         {
-            System.Console.WriteLine("{a} e' maggiore di {b}");
+            case 10:
+                System.Console.WriteLine($"{a} e' uguale a 10");
+                break;
+            case 20:
+                System.Console.WriteLine($"{a} e' uguale a 20");
+                break;
+            default:
+                System.Console.WriteLine($"{a} non e' uguale a 10 o 20");
+                break;
         }
-        else
-        {
-            System.Console.WriteLine($"{a} e' minore di {b}");
-        }
-        if (a < b)
-        {
-             System.Console.WriteLine("Prova");
-        }
+
     }
 }
