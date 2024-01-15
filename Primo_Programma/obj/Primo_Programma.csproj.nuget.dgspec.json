@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj": {}
+    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj": {
+    "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj",
+        "projectUniqueName": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj",
         "projectName": "Primo_Programma",
-        "projectPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj",
+        "projectPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\Primo_Programma.csproj",
         "packagesPath": "C:\\Users\\DOTNET\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-clonato-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\obj\\",
+        "outputPath": "C:\\Users\\DOTNET\\Documents\\Corso-Dotnet-2024\\esercitazioni-dotnet-2024\\Primo_Programma\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DOTNET\\AppData\\Roaming\\NuGet\\NuGet.Config"

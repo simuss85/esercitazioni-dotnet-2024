@@ -2,25 +2,17 @@
 {
     static void Main(string[] args)
     {
-        string[] nomi = new string[5];
-        nomi[0] = "Luigi";
-        nomi[1] = "Mario";
-        nomi[2] = "Luca";
-        nomi[3] = "Mario";
-        nomi[4] = "Mario";
+        string[] nomi = ["Luigi", "Mario", "Luca"];
 
-        List<string> lista = new List<string>();
+        int i = 0; // creo contatore
 
-        foreach (string nome in nomi)
+        while (i < nomi.Length)
         {
-            if (nome == "Mario")
-            {
-                System.Console.WriteLine("Trovato!");
-                lista.Add(nome);
-            }
+            Console.WriteLine($"Ciao {nomi[i]}");
+            i++; // incremento contatore
         }
 
-        System.Console.WriteLine($"La lista contiene {lista.Count} elementi");
+        System.Console.WriteLine($"Fine");
 
     }
 }
