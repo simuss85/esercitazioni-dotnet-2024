@@ -1,41 +1,25 @@
 ﻿class Program
 {
     static void Main(string[] args)
-    {   
-        Console.Clear();
-        System.Console.WriteLine("Inserisci un comando speciale ('cmd:info', 'cmd:exit')");
+    {
+       Console.WriteLine("Premi 'Ctrl' + 'N' per temrinare...");
 
-        while (true)
-        {
+       // ciclo loop
+       while (true)
+       {
+            // aspetta finche non viene premuto un tasto
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true); // ???
 
-            string? input = Console.ReadLine();
-
-            if (input.StartsWith("cmd:"))
+            // verifica se il tasto 'Ctrl' è tenuto premuto
+            if ((keyInfo.Modifiers & ConsoleModifiers.Control) != 0)
             {
-                string comando = input.Substring(4);
-
-                switch (comando)
+                // controlla se il tasto premuto è N
+                if (keyInfo.Key == ConsoleKey.N)
                 {
-                    case "info":
-                        System.Console.WriteLine("Comando 'info' riconosciuto. Ecco le informazioni...");
-                        break;
-
-                    case "exit":
-                        System.Console.WriteLine("Comando 'exit' riconosciuto. Uscita in corso...");
-                        return;
-                    
-                    default:
-                        System.Console.WriteLine($"Comando '{comando}' non riconosciuto.");
-                        break;
+                    Console.WriteLine("Combinazione 'Ctrl' + 'N' rilevata...");
+                    break;
                 }
-            }
-            else
-            {
-                System.Console.WriteLine("Input non valido. Inserisci un comando valido");
-            }
-
-            System.Console.WriteLine("\nInserisci un altro comando");
-            
-        }
+            }  
+       }
     }
 }

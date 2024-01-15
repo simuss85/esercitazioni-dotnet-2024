@@ -723,7 +723,7 @@ class Program
                 if (keyInfo.Key == ConsoleKey.N)
                 {
                     Console.WriteLine("Combinazione 'Ctrl' + 'N' rilevata...");
-                    break;
+                    break; ///
                 }
             }  
        }
