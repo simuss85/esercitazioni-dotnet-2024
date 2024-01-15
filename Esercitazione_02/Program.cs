@@ -2,24 +2,37 @@
 {
     static void Main(string[] args)
     {
-       Console.WriteLine("Premi 'Ctrl' + 'N' per temrinare...");
+        System.Console.WriteLine("Inserisci il tuo nome");
+        string? nome = Console.ReadLine();
 
-       // ciclo loop
-       while (true)
-       {
-            // aspetta finche non viene premuto un tasto
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true); // ???
+        while (true)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Selezione un opzione:");
+            System.Console.WriteLine("1 - saluto");
+            System.Console.WriteLine("e - exit");
 
-            // verifica se il tasto 'Ctrl' è tenuto premuto
-            if ((keyInfo.Modifiers & ConsoleModifiers.Control) != 0)
+            string? input = Console.ReadLine();
+
+            switch (input)
             {
-                // controlla se il tasto premuto è N
-                if (keyInfo.Key == ConsoleKey.N)
-                {
-                    Console.WriteLine("Combinazione 'Ctrl' + 'N' rilevata...");
+                case "1":
+                    System.Console.WriteLine($"Ciao {nome}");
                     break;
-                }
-            }  
-       }
+
+                case "e":
+                    return;
+
+                default:
+                    System.Console.WriteLine($"Opzione {input} non valida. Riprova");
+                    break;
+            }
+
+            System.Console.WriteLine("Premi un tasto per continuare...");
+            Console.ReadKey();
+            
+        }
+
     }
 }
+
