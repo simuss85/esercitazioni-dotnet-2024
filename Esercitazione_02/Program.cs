@@ -2,17 +2,16 @@
 {
     static void Main(string[] args)
     {
-        string[] nomi = ["Luigi", "Mario", "Luca"];
+       System.Console.WriteLine("Premi 'N' per temrinare...");
 
-        int i = 0; // creo contatore
-
-        while (i < nomi.Length)
-        {
-            Console.WriteLine($"Ciao {nomi[i]}");
-            i++; // incremento contatore
-        }
-
-        System.Console.WriteLine($"Fine");
-
+       // ciclo loop
+       while (true)
+       {
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            if (keyInfo.Key == ConsoleKey.N)
+            {
+                break; // esce dal ciclo se viene premuto N
+            }  
+       }
     }
 }

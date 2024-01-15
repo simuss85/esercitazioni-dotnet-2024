@@ -636,7 +636,7 @@ class Program
 }
 ```
 
-### 34 - Utilizzare coclo while con array di stringhe:
+### 34 - Utilizzare ciclo while con array di stringhe:
 
 ```c#
 class Program
@@ -654,6 +654,49 @@ class Program
         }
 
         System.Console.WriteLine($"Fine");
+    }
+}
+```
+
+### 35 - Utilizzare ciclo while con List:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<string> nomi = ["Mario", "Luca", "Paolo"];
+        int i = 0; // creo contatore
+
+        while (i < nomi.Count)
+        {
+            Console.WriteLine($"Ciao {nomi[i]}");
+            i++; // incremento contatore
+        }
+
+        System.Console.WriteLine($"Fine");
+    }
+}
+```
+
+### 36 - Utilizzare la classe ConsoleKeyInfo e il ciclo while:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+       System.Console.WriteLine("Premi 'N' per temrinare...");
+
+       // ciclo loop
+       while (true)
+       {
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            if (keyInfo.Key == ConsoleKey.N)
+            {
+                break; // esce dal ciclo se viene premuto N
+            }  
+       }
     }
 }
 ```
