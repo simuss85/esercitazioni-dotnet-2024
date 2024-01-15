@@ -679,7 +679,7 @@ class Program
 }
 ```
 
-### 36 - Utilizzare la classe ConsoleKeyInfo e il ciclo while:
+### 36 - Utilizzare la classe ConsoleKeyInfo e il ciclo while. Premi N per uscire:
 
 ```c#
 class Program
@@ -697,6 +697,132 @@ class Program
                 break; // esce dal ciclo se viene premuto N
             }  
        }
+    }
+}
+```
+
+### 37 - Utilizzare ConsoleKeyInfo e ciclo while. Premi 'Ctrl'+'Q':
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+       Console.WriteLine("Premi 'Ctrl' + 'N' per temrinare...");
+
+       // ciclo loop
+       while (true)
+       {
+            // aspetta finche non viene premuto un tasto
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true); // ???
+
+            // verifica se il tasto 'Ctrl' è tenuto premuto
+            if ((keyInfo.Modifiers & ConsoleModifiers.Control) != 0)
+            {
+                // controlla se il tasto premuto è N
+                if (keyInfo.Key == ConsoleKey.N)
+                {
+                    Console.WriteLine("Combinazione 'Ctrl' + 'N' rilevata...");
+                    break;
+                }
+            }  
+       }
+    }
+}
+```
+
+### 38 - Menu di selezione semplice:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.Clear();
+            System.Console.WriteLine("Menu di selezione");
+            System.Console.WriteLine("1. Opzione Uno");
+            System.Console.WriteLine("2. Opzione Due");
+            System.Console.WriteLine("3. Opzione Tre");
+            System.Console.WriteLine("4. Esci");
+
+            System.Console.WriteLine("\nInserisci il numero dell'opzione desiderata: ");
+            string? input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    System.Console.WriteLine("Hai selezionato l'opzione 1");
+                    break;
+
+                case "2":
+                    System.Console.WriteLine("Hai selezionato l'opzione 2");
+                    break;
+
+                case "3":
+                    System.Console.WriteLine("Hai selezionato l'opzione 3");
+                    break;
+
+                case "4":
+                    System.Console.WriteLine("Uscita in corso..");
+                    return;
+                    
+                default :
+                    System.Console.WriteLine("Errore nella selezione. Riprova");
+                    break;
+            }
+
+            System.Console.WriteLine("Premi un tasto per continuare");
+            Console.ReadKey();
+            
+        }
+    }
+}
+```
+
+### 39 - Menu di selezione doppio controllo:
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {   
+        Console.Clear();
+        System.Console.WriteLine("Inserisci un comando speciale ('cmd:info', 'cmd:exit')");
+
+        while (true)
+        {
+
+            string? input = Console.ReadLine();
+
+            if (input.StartsWith("cmd:"))
+            {
+                string comando = input.Substring(4);
+
+                switch (comando)
+                {
+                    case "info":
+                        System.Console.WriteLine("Comando 'info' riconosciuto. Ecco le informazioni...");
+                        break;
+
+                    case "exit":
+                        System.Console.WriteLine("Comando 'exit' riconosciuto. Uscita in corso...");
+                        return;
+                    
+                    default:
+                        System.Console.WriteLine($"Comando '{comando}' non riconosciuto.");
+                        break;
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("Input non valido. Inserisci un comando valido");
+            }
+
+            System.Console.WriteLine("\nInserisci un altro comando");
+            
+        }
     }
 }
 ```
