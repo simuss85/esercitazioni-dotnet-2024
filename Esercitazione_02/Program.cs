@@ -1,28 +1,37 @@
 ﻿class Program
 {
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
-        int timeoutInSeconds = 5; // imposta il tempo di attesa in secondi
+        int timeoutInSeconds = 5;
+        Console.WriteLine($"Inserisci input entro {timeoutInSeconds} secondi:");
 
-        Task inputTask = Task.Run(() =>
+        bool inputReceived = false;
+        string? input = "";
+
+        DateTime endTime = DateTime.Now.AddSeconds(timeoutInSeconds);
+
+        while (DateTime.Now < endTime)
         {
-            Console.WriteLine($"Inserisici un input entro {timeoutInSeconds} secondi:");            
-            return Console.ReadLine();
-        });
-
-        Task delayTask = Task.Delay(TimeSpan.FromSeconds(timeoutInSeconds));
-
-        if (await Task.WhenAny(inputTask, delayTask) == inputTask)
-        {
-            // l'utente ha inserito un input
-            string input = await (inputTask as Task<string>);
-            Console.WriteLine($"Hai inserito: {input}");            
+            if (Console.KeyAvailable)
+            {
+                input = Console.ReadLine();
+                inputReceived = true;
+                break;
+            }
+            // Thread.Sleep(400);
+            // System.Console.WriteLine($"{DateTime.Now}");
         }
-        else 
+
+        if (inputReceived)
         {
-            // il tempo è scaduto
+            Console.WriteLine($"Hai inserito: {input}");
+            
+        }
+        else
+        {
             System.Console.WriteLine("Tempo scaduto!");
         }
+        
 
     }
 }
