@@ -487,7 +487,7 @@ class Program
 }
 ```
 
-### 27 - Dichiarare un dizionario di sttinghe:
+### 27 - Dichiarare un dizionario di stringhe:
 
 ```c#
 class Program
@@ -708,7 +708,7 @@ class Program
 {
     static void Main(string[] args)
     {
-       Console.WriteLine("Premi 'Ctrl' + 'N' per temrinare...");
+       Console.WriteLine("Premi 'Ctrl' + 'N' per terminare...");
 
        // ciclo loop
        while (true)
@@ -956,6 +956,39 @@ class Program
 
             }
 
+        }
+
+    }
+}
+```
+
+### 42 - Gestione del timeout nell'inserimento di un input
+
+```c#
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        int timeoutInSeconds = 5; // imposta il tempo di attesa in secondi
+
+        Task inputTask = Task.Run(() =>
+        {
+            Console.WriteLine($"Inserisici un input entro {timeoutInSeconds} secondi:");            
+            return Console.ReadLine();
+        });
+
+        Task delayTask = Task.Delay(TimeSpan.FromSeconds(timeoutInSeconds));
+
+        if (await Task.WhenAny(inputTask, delayTask) == inputTask)
+        {
+            // l'utente ha inserito un input
+            string input = await (inputTask as Task<string>);
+            Console.WriteLine($"Hai inserito: {input}");            
+        }
+        else 
+        {
+            // il tempo è scaduto
+            System.Console.WriteLine("Tempo scaduto!");
         }
 
     }
