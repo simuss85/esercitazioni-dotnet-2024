@@ -1,11 +1,10 @@
-﻿namespace esercitazioni
-{
-    class Program
+﻿    class Program
     {
-        // prova di commit da cassa
+        // programma per le prove 
         static void Main(string[] args)
         {
-            Console.WriteLine("CIAO!");
+            List<int> list = [1,2,3];
+
+            list.ForEach(s => Console.Write($"{s} "));
         }
     }
-}
