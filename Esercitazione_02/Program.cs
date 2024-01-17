@@ -1,37 +1,18 @@
-﻿class Program
+﻿
+class Program
 {
+    // questo programma genera 10 numeri casuali e ne calcola la somma
     static void Main(string[] args)
     {
-        int timeoutInSeconds = 5;
-        Console.WriteLine($"Inserisci input entro {timeoutInSeconds} secondi:");
-
-        bool inputReceived = false;
-        string? input = "";
-
-        DateTime endTime = DateTime.Now.AddSeconds(timeoutInSeconds);
-
-        while (DateTime.Now < endTime)
+        Random random = new Random();           // Generatore di numeri casuali
+        int somma = 0;
+        for (int i = 0; i < 10; i++)
         {
-            if (Console.KeyAvailable)
-            {
-                input = Console.ReadLine();
-                inputReceived = true;
-                break;
-            }
-            // Thread.Sleep(400);
-            // System.Console.WriteLine($"{DateTime.Now}");
+            int numero = random.Next(1,10);     // Genera un numero casuale tra 1 e 10 si dice che l'intervallo è [1,11)
+            somma += numero;
+            Console.WriteLine($"Il numero casuale è {numero}"); // interpolazione di stringhe
         }
-
-        if (inputReceived)
-        {
-            Console.WriteLine($"Hai inserito: {input}");
-            
-        }
-        else
-        {
-            System.Console.WriteLine("Tempo scaduto!");
-        }
-        
-
+        Console.WriteLine($"La somma è {somma}");    
     }
+
 }
