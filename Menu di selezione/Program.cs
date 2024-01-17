@@ -27,7 +27,7 @@ class Program
             System.Console.WriteLine("e - exit\n");
             System.Console.Write("Scegli un'opzione: ");
 
-            string? input = Console.ReadLine().ToLower(); // prende anche input maiuscoli
+            string? input = Console.ReadLine()!.ToLower(); // prende anche input maiuscoli
 
 
 
@@ -48,7 +48,7 @@ class Program
                     System.Console.WriteLine("Hai selezionato l'opzione 3");
                     System.Console.WriteLine("Trascina qui dentro un file...");
 
-                    string? filePath = Console.ReadLine().Trim('"'); // rimuove le virgolette
+                    string? filePath = Console.ReadLine()!.Trim('"'); // rimuove le virgolette
                     System.Console.WriteLine("Premi invio...");
                     Console.ReadLine();
 
@@ -73,10 +73,10 @@ class Program
                 case "5":
                     System.Console.WriteLine("Hai selezionato l'opzione 5");
                     System.Console.WriteLine("Inserisci la frequenza");
-                    freq = Int32.Parse(Console.ReadLine());
+                    freq = Int32.Parse(Console.ReadLine()!);
 
                     System.Console.WriteLine("Inserisci durata in ms");
-                    ms = Int32.Parse(Console.ReadLine());
+                    ms = Int32.Parse(Console.ReadLine()!);
 
                     Console.Beep(freq, ms);
                     break;
@@ -86,7 +86,7 @@ class Program
                     System.Console.WriteLine("Hai selezionato l'opzione 6");
                     System.Console.WriteLine("Inserisci secondi");
 
-                    int count = Int32.Parse(Console.ReadLine());
+                    int count = Int32.Parse(Console.ReadLine()!);
                     Random random = new Random(); // variabile random
 
                     for (int i = 0; i < count; i++)
@@ -107,7 +107,7 @@ class Program
                 case "8":
                     System.Console.WriteLine("Hai selezionato l'opzione 8");
                     System.Console.Write("Inserisci un timer per la console in secondi: ");
-                    int timeoutInSeconds = Int32.Parse(Console.ReadLine());
+                    int timeoutInSeconds = Int32.Parse(Console.ReadLine()!);
 
                     Task inputTask = Task.Run(() =>
                     {
@@ -120,7 +120,7 @@ class Program
                     if (await Task.WhenAny(inputTask, delayTask) == inputTask)
                     {
                         // l'utente ha inserito un input
-                        input = await (inputTask as Task<string>);
+                        input = await (inputTask as Task<string>)!;
                         Console.WriteLine($"Hai inserito: {input}");
                     }
                     else
@@ -144,7 +144,7 @@ class Program
                         System.Console.WriteLine("r - Torna indietro\n");
                         System.Console.Write("Scegli un'opzione: ");
 
-                        input = Console.ReadLine().ToLower(); // prende anche input minuscoli
+                        input = Console.ReadLine()!.ToLower(); // prende anche input minuscoli
                         continua = true;
 
                         switch (input)
