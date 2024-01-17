@@ -1101,3 +1101,27 @@ class Program
 
 }
 ```
+
+### 47 - Genera un numero casuale per sorteggiare un nome da una lista:
+
+```c#
+class Program
+{
+    // questo programma genera un numero casuale per sorteggiare una lista:
+    static void Main(string[] args)
+    {
+        List<string> nomi = ["Alex", "Simone", "Fabio", "Giada",
+                             "Carlo", "Dylan", "Natalia", "Ale"];
+        Random random = new Random();
+        int i = 0;
+        while (i < 10)
+        {
+            int indice = random.Next(0, nomi.Count);
+            Console.WriteLine($"Il nome sorteggiato è {nomi[indice]}");
+            i++;
+        }
+        
+    }
+
+}
+```
