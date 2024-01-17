@@ -1085,3 +1085,19 @@ class Program
 
 }
 ```
+
+### 46 - Genera un numero casuale per sorteggiare un nome dall'array:
+```c#
+class Program
+{
+    // questo programma genera un numero casuale per sorteggiare un array:
+    static void Main(string[] args)
+    {
+        string[] nomi = ["Mario", "Luigi", "Giovanni"];
+        Random random = new Random();
+        int indice = random.Next(0, nomi.Length);
+        Console.WriteLine($"Il nome sorteggiato è {nomi[indice]}");
+    }
+
+}
+```
