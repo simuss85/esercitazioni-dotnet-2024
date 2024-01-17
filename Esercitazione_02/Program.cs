@@ -11,8 +11,12 @@ class Program
             int numero = random.Next(1,10);     // Genera un numero casuale tra 1 e 10 si dice che l'intervallo è [1,11)
             somma += numero;
             Console.WriteLine($"Il numero casuale è {numero}"); // interpolazione di stringhe
+            Thread.Sleep(500); // rallenta visualizzazione output
         }
-        Console.WriteLine($"La somma è {somma}");    
+        Console.Write("La somma è "); // usato il write per non andare a capo
+        Console.ForegroundColor = ConsoleColor.DarkCyan;   
+        Console.WriteLine($"{somma}");
+        Console.ResetColor();
     }
 
 }
