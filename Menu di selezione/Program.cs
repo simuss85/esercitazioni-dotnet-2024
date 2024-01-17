@@ -1,4 +1,5 @@
-﻿class Program
+﻿using System;
+class Program
 {
     static async Task Main(string[] args)
     {
@@ -6,9 +7,7 @@
         int freq, ms; // variabili per le opzioni 5, 6
         bool continua; // variabile per opzione 9
         string? prodotto = ""; // variabile per opzione 9
-        List<string> listaSpesa = new List<string>(); // lista per opzione 9
-                                                      // listaSpesa.Add("Vuota"); // prova di debug
-                                                      // System.Console.WriteLine(listaSpesa.Count);
+        List<string> listaSpesa = new List<string>(); 
 
         do
         {
@@ -85,10 +84,10 @@
                 case "6":
                     //
                     System.Console.WriteLine("Hai selezionato l'opzione 6");
-                    System.Console.WriteLine("Inserisci un valore tra 1 a 10");
+                    System.Console.WriteLine("Inserisci secondi");
 
                     int count = Int32.Parse(Console.ReadLine());
-                    var random = new Random(); // variabile random
+                    Random random = new Random(); // variabile random
 
                     for (int i = 0; i < count; i++)
                     {
@@ -162,14 +161,14 @@
                                         Console.WriteLine($"- {elemento}");
                                     }
                                     System.Console.WriteLine("\nPremi per continuare...");
-                                    Console.ReadLine();
+                                    Console.ReadKey();
 
                                 }
                                 else
                                 {
                                     System.Console.WriteLine("\nLista vuota\n");
                                     System.Console.WriteLine("Premi per continuare...");
-                                    Console.ReadLine();
+                                    Console.ReadKey();
                                 }
 
                                 break;
@@ -301,7 +300,9 @@
             }
 
             System.Console.WriteLine("\nPremi un tasto per continuare...");
-            Console.ReadLine();
+            Console.ReadKey();
+
+            
 
         }
         while (true);

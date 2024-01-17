@@ -962,7 +962,7 @@ class Program
 }
 ```
 
-### 42 - Gestione del timeout nell'inserimento di un input asincrono con TASK
+### 42 - Gestione del timeout nell'inserimento di un input asincrono con TASK:
 
 ```c#
 class Program
@@ -995,7 +995,7 @@ class Program
 }
 ```
 
-### 43 - Gestione del timeout nell'inserimento di un input semplice
+### 43 - Gestione del timeout nell'inserimento di un input semplice:
 
 ```c#
 class Program
