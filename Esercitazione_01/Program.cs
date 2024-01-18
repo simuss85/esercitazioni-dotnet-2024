@@ -1,12 +1,20 @@
-﻿    class Program
+﻿
+class Program
+{
+    // programma per le prove 
+    static void Main(string[] args)
     {
-        // programma per le prove 
-        static void Main(string[] args)
-        {
-           Console.WriteLine("inserisci:\r");    
-           Console.ReadLine();
-   
-           Console.WriteLine("\rprova");  
-           Thread.Sleep(200); 
-        }
+
+        double a = double.Parse(Console.ReadLine()!.Replace(".",","));
+        double b = double.Parse(Console.ReadLine()!.Replace(".",","));
+
+        double r = a / b;
+
+        Console.WriteLine($"{r}");
+        // Console.WriteLine($"{CultureInfo.GetCultures()}");
+
+
+
+
     }
+}

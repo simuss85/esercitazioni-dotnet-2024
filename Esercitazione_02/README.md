@@ -15,6 +15,8 @@ Ecco alcune esercitazioni base su C# .NET Core senza l'utilizzo di namespaces.
 ## 01 - Esercitazioni su tipi di dato e variabili:
 
 ### 01 - Dichiarare una variabile di tipo stringa:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -40,8 +42,11 @@ class Program
 }
 
 ```
+</details>
 
 ### 02 - Dichiarare una variabile di tipo intero:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -54,8 +59,11 @@ class Program
 }
 
 ```
+</details>
 
 ### 03 - Dichiarare variabili di tipo booleano:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -67,8 +75,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 04 - Dichiarare una variabile di tipo decimale:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -80,8 +91,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 05 - Dichiarare una variabile di tipo data:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -93,8 +107,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 06 - Dichiarare una variabile di tipo data utilizzando il metodo ToShortDateString():
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -105,10 +122,12 @@ class Program
         Console.WriteLine($"Sei nato il {dataDiNascita.ToShortDateString()}");
     } 
 }
-
 ```
+</details>
 
 ### 07 - Dichiarare una variabile di tipo data e utilizzare il metodo ToLongDateString():
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -120,8 +139,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 08 - Utilizzare l'operatore + per sommare due interi:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -135,8 +157,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 09 - Utilizzare l'operatore + per sommare due interi e un decimale:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -151,8 +176,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 10 - Utilizzare l'operatore == per confrontare due stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -167,8 +195,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 11 - Utilizzare l'operatore != per confrontare due stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -183,8 +214,11 @@ class Program
     } 
 }
 ```
+</details>
 
 ### 12 - Utilizzare l'operatore > per confrontare due interi:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -198,8 +232,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 13 - Dichiarare un array di stringhe: 
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -214,8 +251,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 14 - Dichiarare un array di interi:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -233,8 +273,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 15 - Dichiarare un array di stringhe e utilizzare il metodo Length:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -251,8 +294,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 16 - Dichiarare una lista di stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -269,8 +315,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 17 - Dichiarare una lista di interi:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -287,8 +336,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 18 - Dichiarare una lista di stringhe e utilizzare il metodo Count:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -306,8 +358,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 19 - Dichiarare una pila di stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -325,8 +380,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 20 - Dichiarare una coda di stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -344,8 +402,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 21 - Esempio di array Join:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -361,8 +422,11 @@ class Program
 
 }
 ```
+</details>
 
 ### 22 - Riordino di una lista con metodo Sort e funzione di stampa:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -393,8 +457,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 23 - Utilizzare l'istruzione if:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -410,10 +477,12 @@ class Program
         System.Console.WriteLine("Fine!");
     }
 }
-
 ```
+</details>
 
 ### 24 - Utilizzare istruzione if con else:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -434,8 +503,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 25 - Utilizzare istruzione if con else-if else:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -460,8 +532,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 26 - Utilizzare l'istruzione switch:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -486,8 +561,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 27 - Dichiarare un dizionario di stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -503,8 +581,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 28 - Inizializzare dizionario senza metodo Add:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -523,8 +604,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 29 - Utilizzare il ciclo for:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -539,8 +623,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 30 - Utilizzare il ciclo foreach con un array di stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -560,8 +647,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 31 - Utilizzare il ciclo foreach con una lista:
+<details>
+    <summary> codice </summary>
 
 ```c# 
 class Program
@@ -577,12 +667,14 @@ class Program
         {
             System.Console.WriteLine($"Ciao {nome}");
         }
-     
     }
 }
 ```
+</details>
 
 ### 32 - Utilizzare foreach per scoprire quali key contiene un dictionary:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -604,8 +696,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 33 - Cerca un valore string in un array e lo copia in una lista:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -635,8 +730,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 34 - Utilizzare ciclo while con array di stringhe:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -657,8 +755,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 35 - Utilizzare ciclo while con List:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -678,8 +779,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 36 - Utilizzare la classe ConsoleKeyInfo e il ciclo while. Premi N per uscire:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -700,8 +804,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 37 - Utilizzare ConsoleKeyInfo e ciclo while. Premi 'Ctrl'+'Q':
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -730,8 +837,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 38 - Menu di selezione semplice:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -780,8 +890,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 39 - Menu di selezione doppio controllo:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -826,6 +939,9 @@ class Program
     }
 }
 ```
+</details>
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -865,10 +981,12 @@ class Program
 
     }
 }
-
 ```
+</details>
 
 ### 40 - Drag and Drop di un file per leggerne il contenuto:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -893,7 +1011,11 @@ class Program
     }
 }
 ```
+</details>
+
 ### 41 - Menu con opzioni:
+<details>
+    <summary> codice </summary>
 
 ```c# 
 class Program
@@ -961,8 +1083,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 42 - Gestione del timeout nell'inserimento di un input asincrono con TASK:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -994,8 +1119,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 43 - Gestione del timeout nell'inserimento di un input semplice:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -1031,15 +1159,16 @@ class Program
         {
             System.Console.WriteLine("Tempo scaduto!");
         }
-        
-
     }
 }
 ```
+</details>
 
 ### 44 - Utilizzare la classe Random per generare un numero casuale compreso tra 1 e 10 e lo somma 10 volte:
-```c#
+<details>
+    <summary> codice </summary>
 
+```c#
 class Program
 {
     // questo programma genera 10 numeri casuali e ne calcola la somma
@@ -1060,9 +1189,13 @@ class Program
 
 }
 ```
-### 45 - Esempio 44 modificato con output colorato:
-```c#
+</details>
 
+### 45 - Esempio 44 modificato con output colorato:
+<details>
+    <summary> codice </summary>
+
+```c#
 class Program
 {
     // questo programma genera 10 numeri casuali e ne calcola la somma
@@ -1082,11 +1215,14 @@ class Program
         Console.WriteLine($"{somma}");
         Console.ResetColor();  
     }
-
 }
 ```
+</details>
 
 ### 46 - Genera un numero casuale per sorteggiare un nome dall'array:
+<details>
+    <summary> codice </summary>
+
 ```c#
 class Program
 {
@@ -1098,11 +1234,13 @@ class Program
         int indice = random.Next(0, nomi.Length);
         Console.WriteLine($"Il nome sorteggiato è {nomi[indice]}");
     }
-
 }
 ```
+</details>
 
 ### 47 - Genera un numero casuale per sorteggiare un nome da una lista:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -1120,13 +1258,14 @@ class Program
             Console.WriteLine($"Il nome sorteggiato è {nomi[indice]}");
             i++;
         }
-        
     }
-
 }
 ```
+</details>
 
 ### 48 - Crea matrice 2x2 e la visualizza:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -1141,21 +1280,20 @@ class Program
         {
             for (int j = 0; j < matrice[i].Length; j++)
             {
-                Console.Write($"{matrice[i][j]} ");
-                
+                Console.Write($"{matrice[i][j]} ");   
             }
             Console.WriteLine("");
-        }
-        
+        } 
     }
-
 }
 ```
+</details>
 
 ### 49 - Buzz & Fizz con menu di scelta (for o Random):
+<details>
+    <summary> codice </summary>
 
 ```c#
-
 class Program
 {
     // Gin & Fizz...
@@ -1263,8 +1401,11 @@ class Program
     }
 }
 ```
+</details>
 
 ### 50 - Buzz & Fizz ver_2:
+<details>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -1512,8 +1653,12 @@ class Program
     }
 }
 ```
+</details>
 
 ### 51 - Funzione Lambda:
+<details>
+    <summary> codice </summary>
+
 ```c#
  class Program
     {
@@ -1526,9 +1671,12 @@ class Program
         }
     }
 ```
+</details>
 
 ### 53 - Calcolatrice base con interi, chiede prima l'opzione:
-
+<details>
+    <summary> codice </summary>
+    
 ```c#
 class Program
 {
@@ -1681,13 +1829,13 @@ class Program
 
 }
 ```
+</details>
 
 ### 54 - Calcolatrice base con interi, chede prima i numeri:
+<details>
+    <summary> codice </summary>
 
 ```c#
-using System.Diagnostics.Tracing;
-using System.Security;
-
 class Program
 {
     static void Main(string[] args)
@@ -1787,3 +1935,4 @@ class Program
 
 }
 ```
+</details>

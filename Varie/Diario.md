@@ -14,8 +14,22 @@ Argomenti:
 ## 18 gen 2024
 Argomenti:
 - Creazione prima calcolatrice.
+- Utilizzare le etichette nel codice per il comando "goto"
+- Gestire le lingue 'CurrentCulture'
+- Gestire il punto o la virgola in inserimento double
 
 ### Info
 Utilizziamo il costrutto switch.
 Verifichiamo l'input inserito, deve essere di tipo intero. 
 Controlla che lo zero non sia inserito nella divisione.
+Prova le due versioni.
+Utilizza i double.
+
+### Note
+- attenzione a come si scrive il numero double (virgola o punto).
+Possibile soluzione:
+
+```c#
+    double a = double.Parse(Console.ReadLine()!.Replace(".",","));
+```
+
