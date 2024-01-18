@@ -5,6 +5,9 @@
         {
             List<int> list = [1,2,3];
 
-            list.ForEach(s => Console.Write($"{s} "));
+            Console.WriteLine($"{string.Join(", ", list)}");
+            list = list.Distinct().ToList();
+            
+            List<string> nomi = ["a", "bi", "ciao"];            
         }
     }

@@ -79,7 +79,7 @@
                         {
                             Console.WriteLine($"{i}");
                         }
-                        Thread.Sleep(300);
+                        Thread.Sleep(100);
 
                     }
                     Console.WriteLine("Premi per continuare...");
@@ -97,11 +97,15 @@
 
                     while (count < prove)
                     {
-                        int numero = random.Next(1, 100);
+                        int numero = random.Next(1, 1000);
 
                         if ((numero % 3 == 0) && (numero % 5 == 0)) // divisibile per 3 e 5
                         {
-                            Console.WriteLine($"{numero} - Fizz & Buzz");
+                            Console.Write($"{numero} - ");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Fizz & Buzz");
+                            Console.ResetColor();
+
                             if (!(fizzNbuzzList.Contains(numero)))
                             {
                                 fizzNbuzzList.Add(numero);
@@ -109,7 +113,11 @@
                         }
                         else if (numero % 3 == 0) // divisibile per 3
                         {
-                            Console.WriteLine($"{numero} - Fizz");
+                            Console.Write($"{numero} - ");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("Fizz");
+                            Console.ResetColor();
+
                             if (!(fizzList.Contains(numero)))
                             {
                                 fizzList.Add(numero);
@@ -118,7 +126,11 @@
                         }
                         else if (numero % 5 == 0) // divisibile per 5
                         {
-                            Console.WriteLine($"{numero} - Buzz");
+                            Console.Write($"{numero} - ");
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine("Buzz");
+                            Console.ResetColor();
+
                             if (!(buzzList.Contains(numero)))
                             {
                                 buzzList.Add(numero);
@@ -129,7 +141,7 @@
                         {
                             Console.WriteLine($"{numero}");  
                         }
-                        Thread.Sleep(300);
+                        Thread.Sleep(100);
                         count++;
                     }
                     break;
@@ -141,7 +153,8 @@
                     Console.Write("Fizz & Buzz:");
                     Console.ResetColor();
                     Console.Write(" [");
-                    
+                    fizzList.Sort();
+
                     if (fizzNbuzzList.Count == 0)   // verifica lista vuota
                     {
                         Console.WriteLine("vuota]");
@@ -171,6 +184,7 @@
                     Console.Write("Fizz:");
                     Console.ResetColor();
                     Console.Write(" [");
+                    fizzList.Sort();
 
                     if (fizzList.Count == 0)   // verifica lista vuota
                     {
@@ -201,6 +215,7 @@
                     Console.Write("Buzz:");
                     Console.ResetColor();
                     Console.Write(" [");
+                    buzzList.Sort();
 
                     if (buzzList.Count == 0)   // verifica lista vuota
                     {
