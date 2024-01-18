@@ -16,11 +16,5 @@ class Program
         // Console.WriteLine(String.Format(CultureInfo.InvariantCulture,"{0:0.00}", r));
         Console.WriteLine(r.ToString("0.0000"));
         Console.WriteLine($"{r}");
-
-        Math.
-        
-
-
-
     }
 }
