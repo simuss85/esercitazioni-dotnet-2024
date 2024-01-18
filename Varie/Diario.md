@@ -17,6 +17,9 @@ Argomenti:
 - Utilizzare le etichette nel codice per il comando "goto"
 - Gestire le lingue 'CurrentCulture'
 - Gestire il punto o la virgola in inserimento double
+- Gestire l'output dei decimali 
+- Bitwise operator
+- Programma che genera un numero random e chiede di indovinare il numero
 
 ### Info
 Utilizziamo il costrutto switch.
