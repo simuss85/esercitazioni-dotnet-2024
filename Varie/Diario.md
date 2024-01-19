@@ -85,17 +85,31 @@ Argomenti:
 
 ### Info
 > Indicare se il numero è più basso/alto.  
-> 
->
-> 
->
+> Indicare se il numero è pari o dispari.
+> La somma delle cifre è.
+> Il numero inizia con.
+> Inserisci il Thread.Sleep per simulare che pensa
 
 ### Note
-- 
-
+- Utilizza il % e la / per isolare le cifre del numero:
 ```c#
-    
+    primaCifra = x / 10;
+    resto = x % 10; // rimane 1 cifra
 ```
+- Utilizza <i><b>case</b></i> nello switch senza i <i><b>break</i></b>:
+```c#
+    ......
+case 7:               // suggerimento se piu alto o piu basso
+case 6:               // per tre volte
+case 5:               // di fila 
+case 3:               // e per il 
+case 2:               // resto dei
+case 1:               // tentativi rimasti
+
+    if (input < x)
+    ......
+```
+
 </details>
 
 ## 23 gen 2024
