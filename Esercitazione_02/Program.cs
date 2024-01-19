@@ -4,7 +4,10 @@
     {
         // programma che genera un numero tra 1 e 100 e chiede di indivinare il numero
         // se sbaglio esce, se indovino mi avvisa con un output. Ho a disposizione 
-        // 10 tentativi. Invia suggerimenti per indovinare il numero (piu alto/basso).
+        // 10 tentativi. 
+        // Suggerimenti: 
+        //               - il numero è (piu alto/basso).
+        //               - il numero è (pari o dispari).
 
         Random random = new();
         int x = random.Next(1, 100);
@@ -35,18 +38,33 @@
 
             // introduco i suggerimenti
             Console.Write("Suggerimento. Il numero segreto è ");
-            if (input < x)
+            if (tentativi == 9)      // suggerimento pari o dispari al primo errore 
             {
-                Console.WriteLine("più alto!");
+                if (x % 2 == 0)
+                {
+                    Console.WriteLine("pari");
+                }
+                else
+                {
+                    Console.WriteLine("dispari");
+                }
+
             }
             else
             {
-                Console.WriteLine("più basso!");
+                if (input < x)      // suggerimento se piu alto o piu basso
+                {
+                    Console.WriteLine("più alto!");
+                }
+                else
+                {
+                    Console.WriteLine("più basso!");
+                }
             }
+            // richiesta input in caso di errore
             Console.Write("\nInserisci: ");
             input = int.Parse(Console.ReadLine()!);
         }
-
         Console.WriteLine($"HAI PERSO!\nIl numero era {x}");
     }
 }

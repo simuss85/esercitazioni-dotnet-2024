@@ -75,7 +75,7 @@ Possibile soluzione:
 </details>
 
 ## 19 gen 2024
-<details>
+<details open>
     <summary> </summary>
 
 Argomenti:
