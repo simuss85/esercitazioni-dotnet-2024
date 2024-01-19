@@ -72,4 +72,120 @@ Possibile soluzione:
 ```c#
     double a = double.Parse(Console.ReadLine()!.Replace(".",","));
 ```
+</details>
 
+## 19 gen 2024
+<details>
+    <summary> </summary>
+
+Argomenti:
+- Indovina il numero con i suggerimenti e 10 tentativi.  
+- 
+
+
+### Info
+> Indicare se il numero è più basso/alto.  
+> 
+>
+> 
+>
+
+### Note
+- 
+
+```c#
+    
+```
+</details>
+
+## 23 gen 2024
+<details>
+    <summary> </summary>
+
+Argomenti:
+- 
+
+
+### Info
+>
+> 
+>
+> 
+>
+
+### Note
+- 
+
+```c#
+    
+```
+</details>
+
+## 24 gen 2024
+<details>
+    <summary> </summary>
+
+Argomenti:
+- 
+
+
+### Info
+>
+> 
+>
+> 
+>
+
+### Note
+- 
+
+```c#
+    
+```
+</details>
+
+## 25 gen 2024
+<details>
+    <summary> </summary>
+
+Argomenti:
+- 
+
+
+### Info
+>
+> 
+>
+> 
+>
+
+### Note
+- 
+
+```c#
+    
+```
+</details>
+
+## 26 gen 2024
+<details>
+    <summary> </summary>
+
+Argomenti:
+- 
+
+
+### Info
+>
+> 
+>
+> 
+>
+
+### Note
+- 
+
+```c#
+    
+```
+</details>
