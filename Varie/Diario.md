@@ -72,6 +72,14 @@ Possibile soluzione:
 ```c#
     double a = double.Parse(Console.ReadLine()!.Replace(".",","));
 ```
+
+- nascondere il tasto premuto da console
+
+```c#
+    // inserisci senza che si vede il tasto sullo schermo
+    ConsoleKeyInfo key = Console.ReadKey(true);
+    string selezione = key.keyChar.ToString();
+```
 </details>
 
 ## 19 gen 2024

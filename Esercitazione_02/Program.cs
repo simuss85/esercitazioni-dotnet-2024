@@ -12,7 +12,8 @@
         //               - la prima cifra è.
 
         Random random = new();
-        int x = random.Next(1, 1000);
+        int maxRand = 1000;
+        int x = random.Next(1, maxRand);
         int input, tentativi = 10;
         int sleep; // per il Thread.Sleep random
         int primaCifra = 0, somma, resto;
@@ -24,7 +25,7 @@
 
         while (tentativi != 1)
         {   
-            Console.WriteLine($"numero segreto: {x}");      // #### debug ####
+            // Console.WriteLine($"numero segreto: {x}");      // #### debug ####
             if (input == x)
             {
                 if (tentativi == 10)
@@ -43,7 +44,7 @@
             for (int i = 0; i < 3; i++)     // ci pensa su!!!
             {
                 Console.Write(". ");
-                Thread.Sleep(200);
+                Thread.Sleep(280);
             }
 
             Console.WriteLine($"\nMi dispiace, hai ancora {tentativi} tentativi");
@@ -55,8 +56,8 @@
                 case 9:     // suggerimento pari o dispari al primo errore 
 
                     Console.Write("Suggerimento. Il numero segreto è ");
-                    sleep = random.Next(1, 7);
-                    Thread.Sleep(sleep);               // ci pensa su!!!
+                    sleep = random.Next(1, 5);
+                    Thread.Sleep(sleep*500);               // ci pensa su!!!
 
                     if (x % 2 == 0)
                     {
@@ -72,6 +73,8 @@
                     somma = x;
                     resto = 0;
                     string risp = "La somma delle cifre è ";
+                    sleep = random.Next(1, 5);
+                    Thread.Sleep(sleep*500);               // ci pensa su!!!
 
                     if (x < 10)
                     {   
@@ -108,6 +111,10 @@
                 case 2:               // resto dei
                 case 1:               // tentativi rimasti
 
+                    Console.Write("Suggerimento. Il numero segreto è ");
+                    sleep = random.Next(1, 5);
+                    Thread.Sleep(sleep*500);               // ci pensa su!!!
+
                     if (input < x)
                     {
                         Console.WriteLine("più alto!");
@@ -132,6 +139,6 @@
             Console.Write("\nInserisci: ");
             input = int.Parse(Console.ReadLine()!);
         }
-        Console.WriteLine($"HAI PERSO!\nIl numero era {x}");
+        Console.WriteLine($"\nHAI PERSO!\nIl numero era {x}");
     }
 }
