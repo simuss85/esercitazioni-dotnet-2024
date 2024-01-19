@@ -96,15 +96,15 @@ Argomenti:
     primaCifra = x / 10;
     resto = x % 10; // rimane 1 cifra
 ```
-- Utilizza <i><b>case</b></i> nello switch senza i <i><b>break</i></b>:
+- Utilizza <i> **case** </i> nello switch senza i <i>**break**</i>:
 ```c#
     ......
-case 7:               // suggerimento se piu alto o piu basso
-case 6:               // per tre volte
-case 5:               // di fila 
-case 3:               // e per il 
-case 2:               // resto dei
-case 1:               // tentativi rimasti
+    case 7:               // suggerimento se piu alto o piu basso
+    case 6:               // per tre volte
+    case 5:               // di fila 
+    case 3:               // e per il 
+    case 2:               // resto dei
+    case 1:               // tentativi rimasti
 
     if (input < x)
     ......
