@@ -12,7 +12,6 @@ Ecco alcune esercitazioni base su C# .NET Core senza l'utilizzo di namespaces.
 - 04 - Condizioni
 - 05 - Cicli
 
-## 01 - Esercitazioni su tipi di dato e variabili:
 
 ### 01 - Dichiarare una variabile di tipo stringa:
 <details>
@@ -1238,7 +1237,321 @@ class Program
 ```
 </details>
 
-### 47 - Genera un numero casuale per sorteggiare un nome da una lista:
+### 47 - Menu di selezione con il best-off dei programmi passati:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static async Task Main(string[] args)
+    {
+
+        int freq, ms; // variabili per le opzioni 5, 6
+        bool continua; // variabile per opzione 9
+        string? prodotto = ""; // variabile per opzione 9
+        List<string> listaSpesa = new List<string>();
+
+        do
+        {
+            Console.Clear(); // pulisce lo schermo
+
+            // stampa il menu
+            Console.WriteLine("Menu delle opzioni:");
+            Console.WriteLine("1 - Nascondi il cursore");
+            Console.WriteLine("2 - Mostra il cursore");
+            Console.WriteLine("3 - Drag&Drop");
+            Console.WriteLine("4 - Emetti beep");
+            Console.WriteLine("5 - Emetti beep prolungato");
+            Console.WriteLine("6 - Crea melodia random");
+            Console.WriteLine("7 - Saluto!");
+            Console.WriteLine("8 - Timeout della console");
+            Console.WriteLine("9 - Lista della spesa");
+            Console.WriteLine("e - exit\n");
+            Console.Write("Scegli un'opzione: ");
+
+            string? input = Console.ReadLine()!.ToLower(); // prende anche input maiuscoli
+
+
+
+            switch (input)
+            {
+                case "1":
+                    Console.WriteLine("Hai selezionato l'opzione 1");
+                    Console.CursorVisible = false;
+                    break;
+
+                case "2":
+                    Console.WriteLine("Hai selezionato l'opzione 2");
+                    Console.CursorVisible = true;
+                    break;
+
+                case "3":
+                    // drag & drop
+                    Console.WriteLine("Hai selezionato l'opzione 3");
+                    Console.WriteLine("Trascina qui dentro un file...");
+
+                    string? filePath = Console.ReadLine()!.Trim('"'); // rimuove le virgolette
+                    Console.WriteLine("Premi invio...");
+                    Console.ReadLine();
+
+                    try
+                    {
+                        string contenuto = File.ReadAllText(filePath);
+                        Console.WriteLine("Contenuto del file: ");
+                        Console.WriteLine(contenuto);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Si è verificato un errore: {ex.Message}");
+
+                    }
+                    break;
+
+                case "4":
+                    Console.WriteLine("Hai selezionato l'opzione 4");
+                    Console.Beep();
+                    break;
+
+                case "5":
+                    Console.WriteLine("Hai selezionato l'opzione 5");
+                    Console.WriteLine("Inserisci la frequenza");
+                    freq = Int32.Parse(Console.ReadLine()!);
+
+                    Console.WriteLine("Inserisci durata in ms");
+                    ms = Int32.Parse(Console.ReadLine()!);
+
+                    Console.Beep(freq, ms);
+                    break;
+
+                case "6":
+                    //
+                    Console.WriteLine("Hai selezionato l'opzione 6");
+                    Console.WriteLine("Inserisci secondi");
+
+                    int count = Int32.Parse(Console.ReadLine()!);
+                    Random random = new Random(); // variabile random
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        freq = random.Next(1, 10) * 100; // crea un numero random tra 100 e 1000
+                        Console.Beep(freq, 500);
+                    }
+                    break;
+
+                case "7":
+                    Console.WriteLine("Hai selezionato l'opzione 7");
+                    Console.WriteLine("Inserici il tuo nome");
+                    string? nome = Console.ReadLine();
+
+                    Console.WriteLine($"\nCiao {nome}, piacere di conoscerti!");
+                    break;
+
+                case "8":
+                    Console.WriteLine("Hai selezionato l'opzione 8");
+                    Console.Write("Inserisci un timer per la console in secondi: ");
+                    int timeoutInSeconds = Int32.Parse(Console.ReadLine()!);
+
+                    Task inputTask = Task.Run(() =>
+                    {
+                        Console.WriteLine($"Inserisici un input entro {timeoutInSeconds} secondi:");
+                        return Console.ReadLine();
+                    });
+
+                    Task delayTask = Task.Delay(TimeSpan.FromSeconds(timeoutInSeconds));
+
+                    if (await Task.WhenAny(inputTask, delayTask) == inputTask)
+                    {
+                        // l'utente ha inserito un input
+                        input = await (inputTask as Task<string>)!;
+                        Console.WriteLine($"Hai inserito: {input}");
+                    }
+                    else
+                    {
+                        // il tempo è scaduto
+                        Console.WriteLine("Tempo scaduto! Premi invio...");
+                    }
+                    break;
+
+                case "9":
+
+                    do
+                    {
+                        Console.Clear();
+
+                        Console.WriteLine("Hai selezionato l'opzione 9");
+                        Console.WriteLine("Lista della spesa:");
+                        Console.WriteLine("v - Visualizza lista");
+                        Console.WriteLine("a - Aggiungi");
+                        Console.WriteLine("d - Elimina");
+                        Console.WriteLine("r - Torna indietro\n");
+                        Console.Write("Scegli un'opzione: ");
+
+                        input = Console.ReadLine()!.ToLower(); // prende anche input minuscoli
+                        continua = true;
+
+                        switch (input)
+                        {
+                            case "v":
+                                // visualizza gli elementi salvati nella lista
+                                Console.Clear();
+
+                                if (listaSpesa.Count != 0)
+                                {
+                                    Console.WriteLine("Lettura lista..\n");
+                                    foreach (string elemento in listaSpesa)
+                                    {
+                                        Console.WriteLine($"- {elemento}");
+                                    }
+                                    Console.WriteLine("\nPremi per continuare...");
+                                    Console.ReadKey();
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nLista vuota\n");
+                                    Console.WriteLine("Premi per continuare...");
+                                    Console.ReadKey();
+                                }
+
+                                break;
+
+                            case "a":
+                                // aggiunge elementi alla lista senza ripetizioni
+                                bool inserisci = true;
+
+                                while (inserisci)
+                                {
+                                    Console.Clear();
+
+                                    Console.WriteLine("Premi 'ctrl'+'h' per terminare");
+                                    Console.Write("Inserisci un prodotto: ");
+
+
+                                    ConsoleKeyInfo keyInfo = Console.ReadKey(); // salva il primo carattere digitato
+
+                                    if ((keyInfo.Modifiers & ConsoleModifiers.Control) != 0) // verifica se ho premuto 'ctrl'
+                                    {
+                                        if (keyInfo.Key == ConsoleKey.H)
+                                        {
+                                            Console.WriteLine("\nFine inserimento..");
+                                            inserisci = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        prodotto = keyInfo.KeyChar + Console.ReadLine(); // concateno per non perdere il primo elemento
+                                                                                         // Console.WriteLine($"Prova inserimento {prodotto}"); // debug
+                                                                                         // Console.WriteLine("Premi invio..");
+                                                                                         // Console.ReadLine();
+
+                                        while (listaSpesa.Contains(prodotto)) // controlla che l elemento sia unico nella lista
+                                        {
+                                            Console.WriteLine("Hai gia inserito questo prodotto.");
+                                            Console.Write("Riprova... ");
+                                            prodotto = Console.ReadLine();
+                                        }
+
+                                        listaSpesa.Add(prodotto);
+                                        Console.WriteLine($"Hai inserito '{prodotto}'\n");
+                                        Thread.Sleep(1000);
+                                    }
+                                }
+
+                                break;
+
+                            case "d":
+                                // elimina un elemento se nella lista
+                                Console.Clear();
+
+                                Console.WriteLine("Elimina prodotti");
+                                if (listaSpesa.Count != 0) // se la lista non è gia vuota esegue il codice
+                                {
+                                    Console.WriteLine("Premi 'ctrl'+'h' per terminare");
+                                    Console.Write("Inserisci il prodotto da eliminare: ");
+
+                                    ConsoleKeyInfo keyInfo = Console.ReadKey();
+
+                                    if ((keyInfo.Modifiers & ConsoleModifiers.Control) != 0)
+                                    {
+                                        if (keyInfo.Key == ConsoleKey.H)
+                                        {
+                                            Console.WriteLine("\nFine inserimento..");
+                                            inserisci = false;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        prodotto = keyInfo.KeyChar + Console.ReadLine();
+
+                                        while (!(listaSpesa.Contains(prodotto)))
+                                        {
+                                            Console.WriteLine($"'{prodotto}' non presente nella lista");
+                                            Console.WriteLine("Ecco la lista completa:");
+                                            foreach (string elemento in listaSpesa)
+                                            {
+                                                Console.WriteLine($"- {elemento}");
+                                            }
+                                            Console.Write("\nQuale prodotto vuoi eliminare? ");
+                                            prodotto = Console.ReadLine();
+
+                                        }
+                                        listaSpesa.Remove(prodotto);
+                                        Console.WriteLine($"Hai eliminato '{prodotto}' dalla lista");
+                                    }
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("La lista della spesa è vuota");
+                                }
+                                break;
+
+                            case "r":
+                                // torna al menu principale se premiamo 'crtl' + 'r'
+                                Console.WriteLine("Salvataggio lista...");
+
+                                // attende 3 secondi prima di proseguire per simulare un salvataggio
+                                Thread.Sleep(1200);
+
+                                Console.WriteLine("Fatto!");
+                                continua = false;
+                                break;
+
+                            default:
+                                // errore di selezione
+                                Console.WriteLine("Selezione errata. Riprova");
+                                break;
+                        }
+                    }
+                    while (continua);
+
+                    break;
+
+                case "e":
+                    Console.WriteLine("Uscita in corso...");
+                    return;
+
+                default:
+                    Console.WriteLine("Selezione errata. Riprova");
+                    break;
+
+            }
+
+            Console.WriteLine("\nPremi un tasto per continuare...");
+            Console.ReadKey();
+
+        }
+        while (true);
+    }
+}
+```
+</details>
+
+### 48 - Genera un numero casuale per sorteggiare un nome da una lista:
 <details>
     <summary> codice </summary>
 
@@ -1263,7 +1576,7 @@ class Program
 ```
 </details>
 
-### 48 - Crea matrice 2x2 e la visualizza:
+### 49 - Crea matrice 2x2 e la visualizza:
 <details>
     <summary> codice </summary>
 
@@ -1289,7 +1602,7 @@ class Program
 ```
 </details>
 
-### 49 - Buzz & Fizz con menu di scelta (for o Random):
+### 50 - Buzz & Fizz con menu di scelta (for o Random):
 <details>
     <summary> codice </summary>
 
@@ -1403,7 +1716,7 @@ class Program
 ```
 </details>
 
-### 50 - Buzz & Fizz ver_2:
+### 51 - Buzz & Fizz ver_2:
 <details>
     <summary> codice </summary>
 
@@ -1655,7 +1968,7 @@ class Program
 ```
 </details>
 
-### 51 - Funzione Lambda:
+### 52 - Funzione Lambda:
 <details>
     <summary> codice </summary>
 
@@ -1673,7 +1986,7 @@ class Program
 ```
 </details>
 
-### 52 - Genera un numero tra 1 e 100 e chiede di indovinare:
+### 53 - Genera un numero tra 1 e 100 e chiede di indovinare:
 <details>
     <summary> codice </summary>
     
@@ -1703,8 +2016,9 @@ class Program
     }
 }
 ```
+</details>
 
-### 53 - Calcolatrice base con interi, chiede prima l'opzione:
+### 54 - Calcolatrice base con interi, chiede prima l'opzione:
 <details>
     <summary> codice </summary>
     
@@ -1862,7 +2176,7 @@ class Program
 ```
 </details>
 
-### 54 - Calcolatrice base con interi, chede prima i numeri:
+### 55 - Calcolatrice base con interi, chede prima i numeri:
 <details>
     <summary> codice </summary>
 
@@ -1968,9 +2282,9 @@ class Program
 ```
 </details>
 
-### 55 - Indovina il numero segreto da 1 a 100 con tentativi:
+### 56 - Indovina il numero segreto da 1 a 100 con tentativi:
 <details>
-    <summary> codice <summary>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -2009,9 +2323,9 @@ class Program
 ```
 </details>
 
-### 56 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti:
+### 57 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti:
 <details>
-    <summary> codice <summary>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -2067,10 +2381,11 @@ class Program
     }
 }
 ```
+</details>
 
-### 57 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti_v2:
+### 58 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti_v2:
 <details>
-    <summary> codice <summary>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -2144,10 +2459,11 @@ class Program
     }
 }
 ```
+</details>
 
-### 58 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti_v3:
+### 59 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti_v3:
 <details>
-    <summary> codice <summary>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -2288,10 +2604,11 @@ class Program
     }
 }
 ```
+</details>
 
-### 59 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti_v4:
+### 60 - Indovina il numero segreto da 1 a 100 con tentativi e gli aiuti_v4:
 <details>
-    <summary> codice <summary>
+    <summary> codice </summary>
 
 ```c#
 class Program
@@ -2420,5 +2737,15 @@ class Program
     }
 }
 ```
-
 </details>
+
+### 61 - Indovina il numero segreto 'THE GAME':
+<details>
+    <summary> codice </summary>
+
+```c#
+//
+```
+</details>
+
+

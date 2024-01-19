@@ -1,9 +1,29 @@
 # esercitazioni-dotnet-2024
 
-**ESERCITAZIONI**
+### Contenuto delle cartelle
 
->Prima esercitazione riguardante il versionamento
+**ESERCITAZIONE_01**
 
-- 1 Versione semplice 
-- 2 Versione con metodo main
+> Programma di appoggio per le prove
 
+**ESERCITAZIONE_02**
+
+> Elenco dei programmi svolti a lezione
+
+**File-condivisi-in-aula**
+
+> File e programmi condivisi a lezione 
+
+**MieClassi**
+
+> Le mie classi 
+
+**Varie**
+
+> Documentazione personale
+
+- Diario 
+- Git
+- Markdown
+- Problemi
+- VSCode
