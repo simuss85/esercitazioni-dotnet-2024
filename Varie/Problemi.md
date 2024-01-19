@@ -5,17 +5,4 @@
 3. Fixare i warning gialli da VSC.
 4. Nascondere il codice nel file file.md (collapse).
 
-## 4. Nascondere il codice nel file file.md (collapse)
-https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab
 
-<details>
-    <summary> titolo </summary>
-
- ### codice
- ```c#
-    Console.WriteLine("Ciao");
- ```
-</details>
-
-### guida markdown
-http://elearning.lngs.infn.it/help.php?file=advanced_markdown.html
