@@ -117,7 +117,7 @@
             }
 
             // richiesta input in caso di errore
-            Console.Write("\nInserisci: ");
+            Console.Write("\nriprova: ");
             input = int.Parse(Console.ReadLine()!);
         }
         Console.WriteLine($"HAI PERSO!\nIl numero era {x}");

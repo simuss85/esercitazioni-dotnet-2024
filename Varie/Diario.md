@@ -88,15 +88,20 @@ Possibile soluzione:
 
 Argomenti:
 - Indovina il numero con i suggerimenti e 10 tentativi.  
-- 
+- Implementare e aggiungere altri suggerimenti.
+- Implementare un sistema a punteggi con possibilità di creare un nuovo gioco.
+
 
 
 ### Info
 > Indicare se il numero è più basso/alto.  
-> Indicare se il numero è pari o dispari.
-> La somma delle cifre è.
-> Il numero inizia con.
-> Inserisci il Thread.Sleep per simulare che pensa
+> Indicare se il numero è pari o dispari.  
+> La somma delle cifre è.  
+> Il numero inizia con.  
+> Inserisci il Thread.Sleep per simulare che sta pensando.  
+> Inserisci un ciclo per poter avviare un nuovo gioco.  
+> Inserimento di un contatore per i punti.  
+>
 
 ### Note
 - Utilizza il % e la / per isolare le cifre del numero:
@@ -104,7 +109,7 @@ Argomenti:
     primaCifra = x / 10;
     resto = x % 10; // rimane 1 cifra
 ```
-- Utilizza <i> **case** </i> nello switch senza i <i>**break**</i>:
+- Utilizza **case** nello switch senza i **break**:
 ```c#
     ......
     case 7:               // suggerimento se piu alto o piu basso
@@ -117,8 +122,21 @@ Argomenti:
     if (input < x)
     ......
 ```
-
+- Somma delle cifre di un numero:
+```c#
+    resto = x;
+    while (resto > 0)
+    {
+        somma += resto % 10;
+        resto /= 10;
+    }
+```
 </details>
+
+## 22 gen 2024
+
+> [!NOTE]  
+> Lezione annullata!!!
 
 ## 23 gen 2024
 <details>

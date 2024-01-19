@@ -2371,9 +2371,8 @@ class Program
                     resto = x;
                     while (resto > 0)
                     {
-                        maxRand /= 10; // per dividere il numero
-                        somma += resto / maxRand;
-                        resto = x % maxRand;
+                        somma += resto % 10;
+                        resto /= 10;
                     }
 
                     Console.Write($"La somma delle cifre è ");
