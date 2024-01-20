@@ -1,15 +1,26 @@
 # Mini guida ai comandi Markdown
 
+indice:
+1. Link alle pagine web.  
+2. Invio a capo del testo.  
+3. Usare il grassetto e il corsivo.  
+4. Nascondere il codice (collapse).
+5. Cambiare colore del font.
+6. Inserire i **link** come una descrizione.
+
+
 ## 1. Guide dal web
 
 <details>
-    <summary>link</summary>
+    <summary>link di rifertimento</summary>
 
-- https://www.ionos.it/digitalguide/siti-web/programmazione-del-sito-web/markdown/<br>
-- https://www.html.it/articoli/markdown-guida-al-linguaggio<br> 
-- https://experienceleague.adobe.com/docs/contributor/contributor-guide/writing-essentials/markdown.html?lang=it<br>
-- http://elearning.lngs.infn.it/help.php?file=advanced_markdown.html<br>  
-- https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab<br>
+- [guida semplice](https://www.ionos.it/digitalguide/siti-web/programmazione-del-sito-web/markdown/)<br>
+- [altra guida semplice](http://elearning.lngs.infn.it/help.php?file=advanced_markdown.html)<br>  
+- [guida html.it](https://www.html.it/articoli/markdown-guida-al-linguaggio)<br> 
+- [guida adobe avanzata](https://experienceleague.adobe.com/docs/contributor/contributor-guide/writing-essentials/markdown.html?lang=it)<br>
+- [altra guida avanzata](https://daringfireball.net/projects/markdown/syntax)
+- [collapse del testo](https://gist.github.com/pierrejoubert73/902cc94d79424356a8d20be2b382e1ab)<br>
+- [cambiare il colore](https://www.puntoinformaticofree.it/markdown_tutorial/markdown-9/markdown-15/)<br>
 
 </details>
 
@@ -32,7 +43,7 @@ un'altra in ***corsivo grassetto***, oppure ___corsivo grassetto___
 
 ```
 
-## 4. Nascondere il codice nel file file.md (collapse)
+## 4. Nascondere il codice (collapse).
 
 ```md
 <details>
@@ -48,3 +59,22 @@ un'altra in ***corsivo grassetto***, oppure ___corsivo grassetto___
     Console.WriteLine("Ciao");
  ```
 </details>
+
+## 5. Cambiare il colore del font
+Utilizzare il tag html '*font color*' e il colore scelto.
+
+esempio
+
+```md
+Una parola di colore <font color="red">rosso</font>
+```
+
+## 6. Inserire i link come una descrizione
+Utilizzare la sintassi \[descrizione\](link)
+
+esempio
+
+```md
+il link normale è https://www.puntoinformaticofree.it/markdown_tutorial/
+il link con descrizione è [descrizione](https://www.puntoinformaticofree.it/markdown_tutorial/)
+```

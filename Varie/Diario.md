@@ -1,14 +1,68 @@
 # Corso di programmazione dotNet 2024
 
-## 08 gen 2024
+<small>Lezioni seguite in <font color="lime">verde</font>. Lezioni annullate in <font color="red">rosso</font>
+</small>
+
 <details>
-    <summary> </summary>
-    Presentazione del corso e dei compagni.
+    <summary><b>
+        <font color="lime" size= 4>08 gen 2024</font></summary>
+
+  
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
 </details>
 
-## 09 gen 2024
+## <font color="lime">09 gen 2024</font>
 <details>
     <summary> </summary>
+
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 10 gen 2024
@@ -19,26 +73,156 @@
 ## 11 gen 2024
 <details>
     <summary> </summary>
+
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 12 gen 2024
 <details>
     <summary> </summary>
+
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 15 gen 2024
 <details>
     <summary> </summary>
+
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 16 gen 2024
 <details>
     <summary> </summary>
+
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 17 gen 2024
 <details>
     <summary> </summary>
+
+Argomenti:
+- ....
+- ....
+- ....
+
+### Info
+> .... 
+> .... 
+> .... 
+
+### Note
+- attenzione a ........
+Possibile soluzione 1:
+
+```c#
+    // codice di esempio 1
+```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
     Argomenti:  
 - Fizz Buzz
 
@@ -91,8 +275,6 @@ Argomenti:
 - Implementare e aggiungere altri suggerimenti.
 - Implementare un sistema a punteggi con possibilità di creare un nuovo gioco.
 
-
-
 ### Info
 > Indicare se il numero è più basso/alto.  
 > Indicare se il numero è pari o dispari.  
@@ -101,7 +283,6 @@ Argomenti:
 > Inserisci il Thread.Sleep per simulare che sta pensando.  
 > Inserisci un ciclo per poter avviare un nuovo gioco.  
 > Inserimento di un contatore per i punti.  
->
 
 ### Note
 - Utilizza il % e la / per isolare le cifre del numero:
@@ -143,22 +324,30 @@ Argomenti:
     <summary> </summary>
 
 Argomenti:
-- 
-
+- ....
+- ....
+- ....
 
 ### Info
->
-> 
->
-> 
->
+> .... 
+> .... 
+> .... 
 
 ### Note
-- 
+- attenzione a ........
+Possibile soluzione 1:
 
 ```c#
-    
+    // codice di esempio 1
 ```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 24 gen 2024
@@ -166,22 +355,30 @@ Argomenti:
     <summary> </summary>
 
 Argomenti:
-- 
-
+- ....
+- ....
+- ....
 
 ### Info
->
-> 
->
-> 
->
+> .... 
+> .... 
+> .... 
 
 ### Note
-- 
+- attenzione a ........
+Possibile soluzione 1:
 
 ```c#
-    
+    // codice di esempio 1
 ```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 25 gen 2024
@@ -189,22 +386,30 @@ Argomenti:
     <summary> </summary>
 
 Argomenti:
-- 
-
+- ....
+- ....
+- ....
 
 ### Info
->
-> 
->
-> 
->
+> .... 
+> .... 
+> .... 
 
 ### Note
-- 
+- attenzione a ........
+Possibile soluzione 1:
 
 ```c#
-    
+    // codice di esempio 1
 ```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>
 
 ## 26 gen 2024
@@ -212,20 +417,28 @@ Argomenti:
     <summary> </summary>
 
 Argomenti:
-- 
-
+- ....
+- ....
+- ....
 
 ### Info
->
-> 
->
-> 
->
+> .... 
+> .... 
+> .... 
 
 ### Note
-- 
+- attenzione a ........
+Possibile soluzione 1:
 
 ```c#
-    
+    // codice di esempio 1
 ```
+
+- attenzione a ........
+Possibile soluzione 2:
+
+```c#
+    // codice di esempio 2
+```
+
 </details>

@@ -17,10 +17,10 @@ class Program
 
         Random random = new();
         string input;
-        int mioNumero, tentativi = 0, maxTentativi;
-        int sleep; // per il Thread.Sleep random
+        int mioNumero, tentativi, maxTentativi;
         int somma = 0, resto; // controlli per la somma tra le cifre
-        bool continua = true;
+        bool continua = true; // controllo per la nuova partita
+        bool indovinato = false; // contrtollo per numero sbagliato
         // per il punteggio e i premi
         double punteggio, punteggioTotale = 0, moltiplicatore;
         int bonus;
@@ -101,7 +101,7 @@ class Program
             }
 
             int x = random.Next(1, maxRand);
-            int primaCifra = x / (maxRand / 10); // memorizza la prima cifra
+            tentativi = maxTentativi;
 
             // parte il gioco con gli aiuti
             Console.Clear();
@@ -116,7 +116,7 @@ class Program
                 input = Console.ReadLine()!;
             }
 
-            while (tentativi < maxTentativi)
+            while (!indovinato && tentativi != 1) //evito di farne uno in piu
             {
                 Console.WriteLine($"numero segreto: {x}");      // #### debug ####
                 if (mioNumero == x)
@@ -125,14 +125,16 @@ class Program
                     {
                         Console.WriteLine("\nChe fortuna!!!");  // se si indovina alla prima sei fortunato
                         punteggioTotale += bonus;
+                        indovinato = true;
                     }
                     else
                     {
                         Console.WriteLine($"\nComplimenti hai indovinato con {tentativi} tentativi!!!");
                         punteggioTotale = moltiplicatore * tentativi;
+                        indovinato = true;
                     }
                 }
-                tentativi++;
+                tentativi--;
 
                 for (int i = 0; i < 3; i++)     // ci pensa su!!!
                 {
@@ -149,8 +151,6 @@ class Program
                     case 10:     // suggerimento pari o dispari al primo errore 
 
                         Console.Write("Suggerimento. Il numero segreto è ");
-                        sleep = random.Next(1, 5);
-                        Thread.Sleep(sleep * 500);               // ci pensa su!!!
 
                         if (x % 2 == 0)
                         {
@@ -172,19 +172,16 @@ class Program
                         }
 
                         Console.Write($"La somma delle cifre è ");
-                        sleep = random.Next(1, 5);
-                        Thread.Sleep(sleep * 500);               // ci pensa su!!!
                         Console.WriteLine($"{somma}");
                         break;
 
                     case 4:     // suggerimento prima cifra è
+                        int primaCifra = x / (maxRand / 10); // memorizza la prima cifra
                         Console.WriteLine($"La prima cifra del numero segreto è {primaCifra}");
                         break;
 
                     default:
                         Console.Write("Suggerimento. Il numero segreto è ");
-                        sleep = random.Next(1, 5);
-                        Thread.Sleep(sleep * 500);               // ci pensa su!!!
 
                         if (mioNumero < x)
                         {
@@ -221,10 +218,8 @@ class Program
         }
         while (continua);
 
-    Uscita:
         Console.WriteLine($"Hai accumulato {punteggioTotale} punti\n");
         Console.WriteLine("Hai vinto il premio seguente...");
-
 
     }
 }
