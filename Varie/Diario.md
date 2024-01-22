@@ -1,12 +1,10 @@
 # Corso di programmazione dotNet 2024
 
-<small>Lezioni seguite in <font color="lime">verde</font>. Lezioni annullate in <font color="red">rosso</font> \space
-</small>
+<small>Lezioni seguite in ${\color{lightgreen}verde}$. Lezioni annullate in ${\color{red}rosso}$
+</small>  
 
 <details>
-    <summary><b>
-        <font color="lime" size= 4>08 gen 2024</font></summary>
-
+    <summary><h2> ${\color{lightgreen}08 \ gen \ 2024}$ </h2></summary>
   
 Argomenti:
 - ....
