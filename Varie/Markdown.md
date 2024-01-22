@@ -1,13 +1,16 @@
 # Mini guida ai comandi Markdown
 
-indice:
-1. Link alle pagine web.  
-2. Invio a capo del testo.  
-3. Usare il grassetto e il corsivo.  
-4. Nascondere il codice (collapse).
-5. Cambiare colore del font.
-6. Inserire i **link** come una descrizione.
-
+indice:  
+<!-- TOC -->
+[1. Guide dal web.](#1-guide-dal-web)  
+[2. Invio a capo del testo.](#2-invio-a-capo-del-testo)  
+[3. Usare il grassetto e il corsivo.](#3-usare-il-grassetto-e-il-corsivo)  
+[4. Nascondere il codice (collapse).](#4-nascondere-il-codice-collapse)  
+[5. Cambiare colore del font.](#5-cambiare-il-colore-del-font)  
+[6. Inserire i **link** come una descrizione.](#6-inserire-i-link-come-una-descrizione)  
+[7. Utilizzare i toc per creare un indice cliccabile.](#7-utilizzare-i-toc-per-creare-un-indice-cliccabile)  
+[8. Lista emoji](#8-lista-emoji)
+<!-- /TOC -->
 
 ## 1. Guide dal web
 
@@ -78,3 +81,31 @@ esempio
 il link normale è https://www.puntoinformaticofree.it/markdown_tutorial/
 il link con descrizione è [descrizione](https://www.puntoinformaticofree.it/markdown_tutorial/)
 ```
+
+## 7. Utilizzare i toc per creare un indice cliccabile.
+Utilizzando la sintassi ***'\[titolo\](#riferimento-al-titolo-nel-file)'*** possiamo creare un indice cliccabile. In questo modo possiamo accedere direttamente alla sezione desiderata (come in questo stesso file.md).  
+Per poter referenziare una parte del testo dobbiamo utilizzare il carattere '#' nelle parentesi e selezionare la sezione corretta.  
+Nota che la sezione di destinazione deve iniziare a partire da un **titolo** che si crea sempre con il carattere '#'.
+
+esempio
+
+```md
+<!-- inizio dei TOC -->
+[Titolo che può essere anche di tipo elenco numerato o puntato](#titolo-della-sezione-da-referenziare)
+[Un altro titolo](#secondo-titolo-della-sezione-da-referenziare)
+<!-- /fine dei toc -->
+
+# Titolo della sezione da referenziare
+Contenuto della sezione
+
+## Secondo titolo della sezione da referenziare
+Altro contenuto
+.....
+```
+
+## 8. Lista emoji
+Ecco un [elenco delle emoji](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#smileys--emotion) 
+che si possono ulizzare nel file.md tramite il carattere ':nome-emoji:'  
+
+> [!TIP]  
+> Utilizza l'editor di github per visualizzare le emoji in tempo reale

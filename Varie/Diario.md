@@ -1,6 +1,6 @@
 # Corso di programmazione dotNet 2024
 
-<small>Lezioni seguite in <font color="lime">verde</font>. Lezioni annullate in <font color="red">rosso</font>
+<small>Lezioni seguite in <font color="lime">verde</font>. Lezioni annullate in <font color="red">rosso</font> \space
 </small>
 
 <details>
@@ -67,7 +67,7 @@ Possibile soluzione 2:
 
 ## 10 gen 2024
 
-> [!NOTE]  
+> [!WARNING]  
 > Lezione annullata!!!
 
 ## 11 gen 2024
@@ -316,7 +316,7 @@ Argomenti:
 
 ## 22 gen 2024
 
-> [!NOTE]  
+> [!WARNING]  
 > Lezione annullata!!!
 
 ## 23 gen 2024

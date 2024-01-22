@@ -1,12 +1,20 @@
 # Problemi e soluzioni
+<!-- TOC -->
+[1. VSCode non riconosce l'autocompletamento (intelliCode).](#1-vscode-non-riconosce-lautocompletamento-intellicode)  
+[2. Cancellare commit inviato per errore.](#2-cancellare-commit-inviato-per-errore)  
+[3. Gestire i warning gialli da VSC.](#3-gestire-i-warning-gialli-da-VSC)  
+[4. Nella shell non visualizzo i colori e le informazioni sul branch git MacOS.](#4-nella-shell-non-visualizzo-i-colori-e-le-informazioni-sul-branch-git-macos)  
+[5. Modifica autocompletamento shell maiuscole/minuscole.](#5-modifica-autocompletamento-shell-maiuscoleminuscole)  
 
-1. VSCode non riconosce l'autocompletamento (intelliCode).  
-2. Cancellare commit inviato per errore.
-3. Gestire i warning gialli da VSC.
-4. Su mac non visualizzo le informazioni sul branch ne i colori.
-5. Modifica autocompletamento shell maiuscole/minuscole.
+<!-- /TOC -->
 
-## 4. Su mac non visualizzo le informazioni sul branch ne i colori.
+## 1. VSCode non riconosce l'autocompletamento (intelliCode). 
+
+## 2. Cancellare commit inviato per errore.
+
+## 3. Gestire i warning gialli da VSC.
+
+## 4. Nella shell non visualizzo i colori e le informazioni sul branch git (MacOS).
 [soluzione web](https://dev.to/devpato/customize-your-mac-terminal-vs-code-too-easy-2315)
 
 Procedura:
