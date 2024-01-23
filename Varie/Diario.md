@@ -327,20 +327,18 @@ Argomenti:
 Argomenti:
 - Verifica del programma svolto nella lezione precedente
 - Gestione degli **errori** e delle **eccezioni**
-- ....  
+- Applicare la gestione degli errori ai nostri programmi. 
+- Modificata la calcolatrice n.55 con la gestione try-cath.   
+
 
 ### Gestione degli errori e delle eccezioni.  
 Try-catch-finally e try-catch-trow-finally. Try-catch-finally di solito usato per la gestione dei database.  
 Differenziare gli errori per il programmatore e quelli per l'utente, quindi con la gestione di essi semplifico l'usabilità dei programmi.  
 
-
-
 ### Info
 > Potrei implementare i colori nel codice.  
 > Programmino per insegnare la matematica ai bambini e ai DSA.  
 > Modifica il Diario, inserisci una batteria con il % che indica il livello del corso.  
->   
-> 
 
 ### Note 
 - Controlla l'input del numero quando seleziono il numero di tentativi  
@@ -373,7 +371,7 @@ Codice:
 
     // visualizzare il max indice per un array
     int maxArray = Array.MaxLength
-    
+
 ```
 
 </details>
