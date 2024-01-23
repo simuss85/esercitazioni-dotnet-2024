@@ -321,7 +321,7 @@ Argomenti:
 > Lezione annullata!!!
 
 <!-- ***************   23 gen 2024   ******************** -->
-<details open>
+<details>
     <summary><h2>23 gen 2024 ✔️</h2></summary>
 
 Argomenti:
