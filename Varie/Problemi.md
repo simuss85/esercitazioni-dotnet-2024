@@ -8,7 +8,23 @@
 
 <!-- /TOC -->
 
-## 1. VSCode non riconosce l'autocompletamento (intelliCode). 
+## 1. VSCode non riconosce l'autocompletamento (intelliCode).  
+
+Possibili soluzioni:
+- Si sta utilizzando un estensione per la lingua che causa dei problemi.  
+  Provare a disinstallare e installare di nuovo.
+- C'è un problema nel file ***solution.sln***. Potrebbe capitare che il progetto attuale non sia stato aggiunto alla *solution*. Provare ad aggiungere il nuovo progetto nel modo seguente:
+   1. Aprire il terminale nella root della *solution*.
+   2. Verifica che nel file sia presente il nuovo progetto digitando:
+  
+  ```sh
+     dotnet sln list
+  ```
+     3. Nel caso in cui il progetto non sia presente, aggiungerlo aggiungerlo digitando:
+
+   ```sh
+      dotnet sln add "trascina qui la cartella del progetto oppure digita il nome del file.csproj"
+   ```
 
 ## 2. Cancellare commit inviato per errore.
 
@@ -24,7 +40,7 @@
     // utilizza il carattere ! dopo il nome del metodo
     string input = Console.ReadLine()!;
 ```
-1. Disattivare qualsiasi tipo di warning e riabilitarlo.
+2. Disattivare qualsiasi tipo di warning e riabilitarlo.
 
    esempio:
 ```c#
