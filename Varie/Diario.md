@@ -1,10 +1,11 @@
 # Corso di programmazione dotNet 2024
 
-<small>Lezioni seguite in ${\color{lightgreen}verde}$. Lezioni annullate in ${\color{red}rosso}$
+<small>Lezioni seguite  ✔️. Lezioni perse in ❌.
 </small>  
 
+<!-- ***************   08 gen 2024   ******************** -->
 <details>
-    <summary><h2> ${\color{lightgreen}08 \ gen \ 2024}$ </h2></summary>
+    <summary><h2>08 gen 2024 ✔️</h2></summary>
   
 Argomenti:
 - ....
@@ -32,9 +33,9 @@ Possibile soluzione 2:
 ```
 </details>
 
-## <font color="lime">09 gen 2024</font>
+<!-- ***************   09 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>09 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - ....
@@ -63,14 +64,18 @@ Possibile soluzione 2:
 
 </details>
 
-## 10 gen 2024
+<!-- ***************   10 gen 2024   ******************** -->
+<details>
+    <summary><h2>10 gen 2024 ❌</h2></summay>
 
 > [!WARNING]  
 > Lezione annullata!!!
 
-## 11 gen 2024
+</details>
+
+<!-- ***************   11 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>11 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - ....
@@ -99,9 +104,9 @@ Possibile soluzione 2:
 
 </details>
 
-## 12 gen 2024
+<!-- ***************   12 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>12 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - ....
@@ -130,9 +135,9 @@ Possibile soluzione 2:
 
 </details>
 
-## 15 gen 2024
+<!-- ***************   15 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>15 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - ....
@@ -161,9 +166,9 @@ Possibile soluzione 2:
 
 </details>
 
-## 16 gen 2024
+<!-- ***************   16 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>16 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - ....
@@ -192,9 +197,9 @@ Possibile soluzione 2:
 
 </details>
 
-## 17 gen 2024
+<!-- ***************   17 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>17 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - ....
@@ -227,9 +232,9 @@ Possibile soluzione 2:
 </details>
 
 
-## 18 gen 2024
+<!-- ***************   18 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>18 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - Creazione prima calcolatrice.
@@ -264,9 +269,9 @@ Possibile soluzione:
 ```
 </details>
 
-## 19 gen 2024
-<details open>
-    <summary> </summary>
+<!-- ***************   19 gen 2024   ******************** -->
+<details>
+    <summary><h2>19 gen 2024 ✔️</h2></summary>
 
 Argomenti:
 - Indovina il numero con i suggerimenti e 10 tentativi.  
@@ -312,14 +317,56 @@ Argomenti:
 ```
 </details>
 
-## 22 gen 2024
+<!-- ***************   22 gen 2024   ******************** -->
+<details>
+    <summary><h2>22 gen 2024 ❌</h2></summay>
 
 > [!WARNING]  
 > Lezione annullata!!!
 
-## 23 gen 2024
+</details>
+
+<!-- ***************   23 gen 2024   ******************** -->
+<details open>
+    <summary><h2>23 gen 2024 ✔️</h2></summary>
+
+Argomenti:
+- Verifica del programma svolto nella lezione precedente
+- ....
+- ....
+
+### Info
+> Potrei implementare i colori nel codice
+> Programmino per insegnare la matematica ai bambini e ai DSA
+> .... 
+
+### Note 
+- Controlla l'input del numero quando seleziono il numero di tentativi
+Possibile soluzione: 
+
+```c#
+    // da verificare
+```
+
+- Potrei utilizzare un bool di debug per il controllo del codice
+Possibile soluzione:
+
+```c#
+    // all'inizio del programma
+    bool debug = false;
+    
+    // quando mi serve utilizzarlo
+    if (debug)
+    {
+        // esegui l'azione da controllare
+    }
+```
+
+</details>
+
+<!-- ***************   24 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>24 gen 2024 </h2></summary>
 
 Argomenti:
 - ....
@@ -348,9 +395,9 @@ Possibile soluzione 2:
 
 </details>
 
-## 24 gen 2024
+<!-- ***************   25 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
+    <summary><h2>25 gen 2024 </h2></summary>
 
 Argomenti:
 - ....
@@ -379,40 +426,9 @@ Possibile soluzione 2:
 
 </details>
 
-## 25 gen 2024
+<!-- ***************   26 gen 2024   ******************** -->
 <details>
-    <summary> </summary>
-
-Argomenti:
-- ....
-- ....
-- ....
-
-### Info
-> .... 
-> .... 
-> .... 
-
-### Note
-- attenzione a ........
-Possibile soluzione 1:
-
-```c#
-    // codice di esempio 1
-```
-
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
-
-</details>
-
-## 26 gen 2024
-<details>
-    <summary> </summary>
+    <summary><h2>26 gen 2024 </h2></summary>
 
 Argomenti:
 - ....
