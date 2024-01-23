@@ -2,7 +2,7 @@
 
 **Contenuto delle cartelle**
 
-### ESERCITAZIONE_01
+## ESERCITAZIONE_01
 
 > Programma di appoggio per le prove
 

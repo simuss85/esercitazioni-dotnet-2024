@@ -65,13 +65,10 @@ Possibile soluzione 2:
 </details>
 
 <!-- ***************   10 gen 2024   ******************** -->
-<details>
-    <summary><h2>10 gen 2024 ❌</h2></summay>
+## 22 gen 2024 ❌
 
 > [!WARNING]  
 > Lezione annullata!!!
-
-</details>
 
 <!-- ***************   11 gen 2024   ******************** -->
 <details>
@@ -318,13 +315,10 @@ Argomenti:
 </details>
 
 <!-- ***************   22 gen 2024   ******************** -->
-<details>
-    <summary><h2>22 gen 2024 ❌</h2></summay>
+## 22 gen 2024 ❌
 
 > [!WARNING]  
 > Lezione annullata!!!
-
-</details>
 
 <!-- ***************   23 gen 2024   ******************** -->
 <details open>
@@ -332,23 +326,31 @@ Argomenti:
 
 Argomenti:
 - Verifica del programma svolto nella lezione precedente
-- ....
-- ....
+- Gestione degli **errori** e delle **eccezioni**
+- ....  
+
+### Gestione degli errori e delle eccezioni.  
+Try-catch-finally e try-catch-trow-finally. Try-catch-finally di solito usato per la gestione dei database.  
+Differenziare gli errori per il programmatore e quelli per l'utente, quindi con la gestione di essi semplifico l'usabilità dei programmi.  
+
+
 
 ### Info
-> Potrei implementare i colori nel codice
-> Programmino per insegnare la matematica ai bambini e ai DSA
-> .... 
+> Potrei implementare i colori nel codice.  
+> Programmino per insegnare la matematica ai bambini e ai DSA.  
+> Modifica il Diario, inserisci una batteria con il % che indica il livello del corso.  
+>   
+> 
 
 ### Note 
-- Controlla l'input del numero quando seleziono il numero di tentativi
+- Controlla l'input del numero quando seleziono il numero di tentativi  
 Possibile soluzione: 
 
 ```c#
     // da verificare
 ```
 
-- Potrei utilizzare un bool di debug per il controllo del codice
+- Potrei utilizzare un bool di debug per il controllo del codice  
 Possibile soluzione:
 
 ```c#
@@ -360,6 +362,18 @@ Possibile soluzione:
     {
         // esegui l'azione da controllare
     }
+```
+
+- Verificare il max numero possibile per int o per indice array.  
+Codice:
+
+```c#
+    // visualizza il max numero per int
+    int max = int.MaxValue;
+
+    // visualizzare il max indice per un array
+    int maxArray = Array.MaxLength
+    
 ```
 
 </details>

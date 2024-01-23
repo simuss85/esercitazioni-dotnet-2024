@@ -1,31 +1,20 @@
-﻿enum Color
+﻿class Test
 {
-    Red = 15,
-    Green = 25,
-    Blue = 35
-}
-
-class Test
-{
-    static void Main()
+    static void Main(string[] args)
     {
-        Console.WriteLine(StringFromColor(Color.Red));
-        Console.WriteLine(StringFromColor(Color.Green));
-        Console.WriteLine(StringFromColor(Color.Blue));
+        try
+        {
+           StackOverflow();
+        }
+        catch (StackOverflowException e)
+        {
+            Console.WriteLine($"{e.Message}");
+            throw new StackOverflowException("MIO MESSAGGIO");
+        }
     }
 
-    static string StringFromColor(Color c)
+    static void StackOverflow()
     {
-        switch (c)
-        {
-            case Color.Red:
-                return $"Red = {(int)c}";
-            case Color.Green:
-                return $"Green = {(int)c}";
-            case Color.Blue:
-                return $"Blue = {(int)c}";
-            default:
-                return "Invalid color";
-        }
+        StackOverflow();
     }
 }

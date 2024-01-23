@@ -3062,3 +3062,175 @@ class Test
 }
 ```
 </details>
+
+### 62 - Gestione errori: verifcare l'input utente numero tra 1 e 10:
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Inserisci un numero tra 1 e 10");
+        int numero = int.Parse(Console.ReadLine()!);
+        if (numero < 1 || numero > 10)
+        {
+            Console.WriteLine("Il numero non è valido");
+            return;
+        }
+        Console.WriteLine($"Il numero inserito è {numero}");
+        
+    }
+}
+```
+</details>
+
+### 63 - Gestione errori: verifcare l'input utente numero tra 1 e 10 con try-catch di base:
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Inserisci un numero tra 1 e 10");
+        try
+        {
+            int numero = int.Parse(Console.ReadLine()!);
+            if (numero < 1 || numero > 10)
+            {
+                Console.WriteLine("Il numero non è valido!!!!");
+                return; // non va mai nel catch ed esce
+            }
+            Console.WriteLine($"Il numero inserito è {numero}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Il numero non è valido");
+            return;
+        }
+    }
+}
+```
+</details>
+
+### 64 - Gestione errori: gestire eccezione System.IO.IOException (accesso a file non esistente):
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            string contenuto = File.ReadAllText("file.txt");    // il file deve essere nella stessa cartella del programma
+            Console.WriteLine(contenuto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Il file non esiste");
+            return;
+        }
+    }
+}
+```
+</details>
+
+### 65 - Gestione errori: gestire eccezione System.IndexOutOfRangeException (tento di accedere ad un elemento di un array con indice non valido):
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] numeri = [1,2,3];
+        try
+        {
+            Console.WriteLine(numeri[3]);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Indice array non valido");
+            return;
+        }
+    }
+}
+```
+</details>
+
+### 66 - Gestione errori: gestire System.NullReferenceException (quando si tenta di accedere ad un oggetto null):
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string? nome = null;
+        try
+        {
+            Console.WriteLine(nome.Length);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Il nome non è valido");
+            return;
+        }
+    }
+}
+```
+</details>
+
+### 67 - Gestione errori: gestire System.OutOfMemoryException (si verifica quando non c'è abbastanza memoria disponibile):
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            int[] numeri = new int[int.MaxValue]; //int.MaxValue è il max valore per un int (2.147.483.647)
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Memoria insufficiente");
+            return;
+        }
+    }
+}
+```
+</details>
+
+### 68 - Gestione errori: gestire System.ArgumentException (si verifica quando un argomento di un metodo non è valido):
+<details>
+    <summary>codice</summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+           int numero = int.Parse("ciao"); // genera eccezione
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Il numero non è valido");
+            //Console.WriteLine(e.Message);
+            return;
+        }
+    }
+}
+```
+</details>
