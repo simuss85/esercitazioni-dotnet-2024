@@ -4,7 +4,7 @@
     {
         // semplice calcolatrice con quattro operatori e selettore switch
         int x, y, risultato = 0;
-        string? input, outputString = "";
+        string? input, outputString;
 
         do
         {
@@ -22,7 +22,7 @@
         PrimoInput: // ############################## inizio nuovo codice ###################################
             Console.WriteLine("Inserisci il primo numero");
 
-            input = Console.ReadLine();
+            input = Console.ReadLine()!;
 
             // ************************************   vecchio codice  ***************************************
             // while (!(int.TryParse(input, out x))) // controllo sul primo numero inserito
@@ -55,7 +55,7 @@
 
         SecondoInput:
             Console.Write("Inserisci il secondo numero: ");
-            input = Console.ReadLine();
+            input = Console.ReadLine()!;
 
             // ****************************  versione vecchia  *******************************************
             // while (!(int.TryParse(input, out y))) // controllo sul secondo numero inserito
@@ -129,14 +129,15 @@
                 // int resto = x % y;
                 // outputString = "La divisione";
                 // ************************************************************************************************
-                Divisione:
                     try
                     {
                         risultato = x / y;
                         int resto = x % y;
                         outputString = "La divisione";
                     }
+                    #pragma warning disable
                     catch (Exception e)
+                    #pragma warning enable
                     {
                         Console.WriteLine("Attenzione, non puoi eseguire una divisione per zero.");
                         goto SecondoInput;
