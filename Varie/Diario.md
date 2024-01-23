@@ -65,7 +65,7 @@ Possibile soluzione 2:
 </details>
 
 <!-- ***************   10 gen 2024   ******************** -->
-## 22 gen 2024 ❌
+## 10 gen 2024 ❌
 
 > [!WARNING]  
 > Lezione annullata!!!
