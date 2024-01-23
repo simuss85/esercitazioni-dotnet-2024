@@ -14,6 +14,29 @@
 
 ## 3. Gestire i warning gialli da VSC.
 
+1. Possibile riferimento null di una variabile **string**.
+   
+   esempio:
+```c#
+    // utilizza il carattere ? dopo il nome del tipo    
+    string? input = Console.ReadLine();
+
+    // utilizza il carattere ! dopo il nome del metodo
+    string input = Console.ReadLine()!;
+```
+1. Disattivare qualsiasi tipo di warning e riabilitarlo.
+
+   esempio:
+```c#
+    /* quando non utilizzo una variabile nel programma apre in warning
+       quindi posso disabilitare momentaneamente i warning e all'occorrenza
+    */ rittivarli anche subito dopo
+
+    #pragma warning disable
+    int numero; // variabile non utilizzata
+    #pragma warning restore
+```
+
 ## 4. Nella shell non visualizzo i colori e le informazioni sul branch git (MacOS).
 [soluzione web](https://dev.to/devpato/customize-your-mac-terminal-vs-code-too-easy-2315)
 
