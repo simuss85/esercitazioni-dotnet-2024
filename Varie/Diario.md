@@ -435,8 +435,8 @@ Possibile soluzione 1:
 ```c#
     static void Main(string[] args)
     {
-        double expRad = 4;
-        double exp = 1.0 / 3;
+        double expRad = 3;
+        double exp = 1.0 / expRand;
         double n = -8;
         int segno = 1;
         if (n < 0)
@@ -458,13 +458,6 @@ Possibile soluzione 1:
         Console.WriteLine($"Radice {expRad} di {n} = {risultato}");
         
     }
-```
-
-- attenzione a ........  
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
 ```
 
 </details>
