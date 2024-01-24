@@ -4,22 +4,46 @@
     {
         try
         {
-           StackOverflow();
+            F();
         }
-        catch (StackOverflowException e)
+        catch (Exception e)
         {
-            Console.WriteLine($"{e.InnerException}");
-            throw new StackOverflowException("MIO MESSAGGIO");
+            Console.WriteLine("Errore!");
+            e = new Exception("ERRORE");
+            throw;
         }
     }
 
-    static void StackOverflow()
+    static void F()
     {
-        StackOverflow();
+        try
+        {
+            G();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("PROVA G");
+        }
+
+
+
+
     }
 
-    public void Errore()
+    static void G()
     {
+
+        try
+        {
+            F();
+        }
+        catch (Exception e)
+        {
+            throw new Exception("PROVA G");
+        }
+
+
+
 
     }
 }
