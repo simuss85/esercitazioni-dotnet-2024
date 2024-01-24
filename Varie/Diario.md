@@ -362,11 +362,26 @@ Differenziare gli errori per il programmatore e quelli per l'utente, quindi con 
 > Modifica il Diario, inserisci una batteria con il % che indica il livello del corso.  
 
 ### Note 
-- Controlla l'input del numero quando seleziono il numero di tentativi  
+- Controlla l'input del numero quando seleziono il numero di tentativi. I caratteri non devono essere ammessi.    
 Possibile soluzione: 
 
 ```c#
-    // da verificare
+    ............
+    case "d":
+    InputD:
+        Console.WriteLine("Scegli il numero di tentativi (max 10).");
+        input = Console.ReadLine()!;
+        
+        try     // gestione errore carattere inserito al posto di un int
+        {
+            maxTentativi = int.Parse(input);                
+        }
+        catch 
+        {
+            Console.WriteLine("Devi inserire un numero valido.");
+            goto InputD;   
+        }
+    ............
 ```
 
 - Potrei utilizzare un bool di debug per il controllo del codice  
@@ -403,12 +418,12 @@ Codice:
 
 Argomenti:
 - Finire le modifiche della gestione errori (lezione precedente).
-- ....
+- Eseguire beta-test del programma del collega.
 - ....
 
 ### Info
-> .... 
-> .... 
+> Creazione file README.md per la gestione dei BETA-TEST.
+> Consiglio di utilizzare Jira Software o Trello.
 > .... 
 
 ### Note
