@@ -2,11 +2,11 @@
 
 **Contenuto delle cartelle**
 
-## ESERCITAZIONE_01
+## Beta_teting
 
-> Programma di appoggio per le prove
+> Programma di test e prove varie
 
-## ESERCITAZIONE_02
+## Esercitazioni
 
 > Elenco dei programmi svolti a lezione
 
