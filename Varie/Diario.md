@@ -417,21 +417,47 @@ Codice:
     <summary><h2>24 gen 2024 ✔️</h2></summary>
 
 Argomenti:
-- Finire le modifiche della gestione errori (lezione precedente).
+- Finire le modifiche della gestione errori (lezione precedente).  
+- Introduzione al beta-test
 - Eseguire beta-test del programma del collega.
-- ....
+- Eseguire il post-beta testing.
+
 
 ### Info
-> Creazione file README.md per la gestione dei BETA-TEST.
+> Creazione file README.md per la gestione dei BETA-TEST.  
 > Consiglio di utilizzare Jira Software o Trello.
-> .... 
 
 ### Note
-- attenzione a ........  
+- Eseguire la radice N-esima di un numero negativo con la funzione **Math.Pow(double, double)**. Con esponente pari la radic di un numero negativo nonesiste, mentre con esponente dispari si e corrisponde alla radice del numero positivo e poi cambiata di segno.  
+Esempio: radice 3a di 8 = 2; radice 3a di -8 = -2.  
 Possibile soluzione 1:
 
 ```c#
-    // codice di esempio 1
+    static void Main(string[] args)
+    {
+        double expRad = 4;
+        double exp = 1.0 / 3;
+        double n = -8;
+        int segno = 1;
+        if (n < 0)
+        {
+            if (expRad % 2 == 0)
+            {
+                Console.WriteLine("Operazione impossibile");
+                return;
+            }
+            else
+            {
+                segno = -1;
+                n *= segno;
+            }
+        }
+        double risultato = Math.Pow(n, exp);
+        n *= segno;
+        risultato *= segno;
+        Console.WriteLine($"Radice {expRad} di {n} = {risultato}");
+        
+    }
 ```
 
 - attenzione a ........  
