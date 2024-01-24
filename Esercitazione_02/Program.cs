@@ -1,4 +1,4 @@
-﻿class Program
+﻿class Test
 {
     static void Main(string[] args)
     {
@@ -72,8 +72,7 @@
                     while (!(maxTentativi <= 3 && maxTentativi > 0))
                     {
                         Console.WriteLine("Puoi fare un massimo di 3 tentativi in modalità facile");
-                        Console.WriteLine("Scegli il numero di tentativi ");
-                        maxTentativi = int.Parse(Console.ReadLine()!);
+                        goto InputF;
                     }
                     maxRand = 10;
                     moltiplicatore = 1.2;
@@ -98,8 +97,7 @@
                     while (!(maxTentativi <= 6 && maxTentativi > 0))
                     {
                         Console.WriteLine("Puoi fare un massimo di 6 tentativi in modalità normale");
-                        Console.WriteLine("Scegli il numero di tentativi ");
-                        maxTentativi = int.Parse(Console.ReadLine()!);
+                        goto InputM;
                     }
                     maxRand = 100;
                     moltiplicatore = 1.6;
@@ -124,8 +122,7 @@
                     while (!(maxTentativi <= 10 && maxTentativi > 0))
                     {
                         Console.WriteLine("Puoi fare un massimo di 10 tentativi in modalità difficile");
-                        Console.WriteLine("Scegli il numero di tentativi ");
-                        maxTentativi = int.Parse(Console.ReadLine()!);
+                        goto InputD;
                     }
                     maxRand = 1000;
                     moltiplicatore = 2.1;
@@ -156,10 +153,17 @@
                 // richiesta del numero in input
                 input = Console.ReadLine()!;
                 // verifica input utente 
+            DigitaNumero:
                 while (!(int.TryParse(input, out mioNumero)))
                 {
                     Console.Write("Digita il numero correttamente: ");
                     input = Console.ReadLine()!;
+                }
+                if (mioNumero > maxRand || mioNumero <= 0)
+                {
+                    Console.Write($"Inserisci un numero tra 1 e {maxRand}: ");
+                    input = Console.ReadLine()!;
+                    goto DigitaNumero;
                 }
 
                 if (mioNumero == x)
@@ -278,7 +282,7 @@
 
 
             Console.WriteLine("\nVuoi continuare? s/n");
-        InputContinua:    
+        InputContinua:
             input = Console.ReadLine()!.ToLower();
 
             if (input == "n")
