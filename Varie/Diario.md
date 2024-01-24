@@ -6,30 +6,51 @@
 <!-- ***************   08 gen 2024   ******************** -->
 <details>
     <summary><h2>08 gen 2024 ✔️</h2></summary>
-  
+
+Breve introduzione al corso, presentazione dei colleghi. Raccolta del materiale su github. 
+
 Argomenti:
-- ....
-- ....
-- ....
+- Installare l'ambiente di lavoro sul pc (VSCode, Git, SDK.net, estensioni VSCode).
+- Registrazione su ***github.com*** e prime basi sul versionamento del codice.
+- Primi comandi da terminale: git e dotnet.
+- Creazione token gitub.
+- Creazione prima app da console dotnet.
+- Creazione ambiente di lavoro e creazione primo repository.
+- Creazione primo file README.md e breve introduzione al Markdown.
 
 ### Info
-> .... 
-> .... 
-> .... 
+> Password pc 'aula'. Password admin '!Aula'.  
+> Estensioni VSCode: C# Dev Kit, Intellicode for C#, C# Snippets, Italiano pack.
 
 ### Note
-- attenzione a ........
-Possibile soluzione 1:
+Domande da fare per i colloqui aziendali:
+>1. *Utilizzate JS per il vostro tipo di lavoro?*
+>2. *QUale hub utilizzate per il versionamento?*
+>3. *Utilizzate BootStrap o TailWind?*
+>4. *Utilizzate DB relazionali o a documenti (MongoDB)*
 
-```c#
-    // codice di esempio 1
+### Note
+- Primi comandi **git** utilizzati:
+
+```sh
+    $ git                        // lista di comandi
+    $ git --version              // versione installata
+    $ git auth login             // per accedere a git
+    $ git init                   // inizializza il repository
+    $ git log                    // visualizza lista dei commit
+    $ git status                 // viualizza lo stato del repository
+    $ git add                    // aggiunge i file allo stage
+    $ git commit -m "mess"       // esegue il commit 
+    
 ```
+- Primi comandi **dotnet** utilizzati:
 
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
+```sh
+    $ dotnet --version           // versione installata
+    $ dotnet new                 // visualizza opzioni di creazione nuovo progetto
+    $ dotnet new console         // creo nuovo progetto di app console (da terminale)
+    $ dotnet new webapp          // creo nuovo progetto di app web (sito web)
+    
 ```
 </details>
 
@@ -377,11 +398,11 @@ Codice:
 </details>
 
 <!-- ***************   24 gen 2024   ******************** -->
-<details>
-    <summary><h2>24 gen 2024 </h2></summary>
+<details open>
+    <summary><h2>24 gen 2024 ✔️</h2></summary>
 
 Argomenti:
-- ....
+- Finire le modifiche della gestione errori (lezione precedente).
 - ....
 - ....
 
@@ -391,14 +412,14 @@ Argomenti:
 > .... 
 
 ### Note
-- attenzione a ........
+- attenzione a ........  
 Possibile soluzione 1:
 
 ```c#
     // codice di esempio 1
 ```
 
-- attenzione a ........
+- attenzione a ........  
 Possibile soluzione 2:
 
 ```c#
