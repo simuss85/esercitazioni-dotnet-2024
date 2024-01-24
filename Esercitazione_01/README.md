@@ -2,7 +2,7 @@
 
 ### Segnalazione dei bug:
 
-1. Dopo aver selezionato la modalità, devo inserire i tentativi da utilizzare.
+✔️ Dopo aver selezionato la modalità, devo inserire i tentativi da utilizzare.(RISOLTO)
  ```sh
     Scegli il numero di tentativi
     $ 78                                                              //se qua scrivo lettere la gestisce
@@ -11,7 +11,7 @@
     $ hk6
     Unhandled exception. System.FormatException
   ```
-  Oppure.
+Oppure.
   ```sh
     Scegli il numero di tentativi (max 3).
     $ g
@@ -26,7 +26,7 @@
 
 ### Suggerimenti:
 
-1. Inserire un controllo sul range dei numeri da indovinare.
+✔️ Inserire un controllo sul range dei numeri da indovinare.(AGGIUNTO)
  ```sh
     Inizia il gioco. Indovina il numero tra 1 e 10
     Hai 3 tentativi
