@@ -467,29 +467,26 @@ Possibile soluzione 1:
     <summary><h2>25 gen 2024 ✔️</h2></summary>
 
 Argomenti:
-- Documentazione beta-test e post beta-test
-- Installata estenzione "Github Markdown Preview" per visualizzare i file .md in modo corretto.
+- Creazione documentazione beta-test e post beta-test.
 - Introduzione ai grafici [**Mermaid**](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/).
-- ....
+- Persistenza dei dati con la gestione dei file, txt, csv, JSON.
+- Accenno ai database: DB relazionali, DB non relazionali, Entity Framework.
 
 ### Info
-> .... 
-> .... 
-> .... 
+> Installata estenzione "Github Markdown Preview" per visualizzare i file .md in modo corretto.
+
 
 ### Note
-- ....
-Possibile soluzione 1:
+- Utilizza il metodo Array.Copy
+esempio
 
 ```c#
-    // codice di esempio 1
-```
-
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
+    .......
+    string[] lines = File.ReadAllLines(path);
+    string[] righe = new string[lines.Length];
+    
+    Array.Copy(lines, righe, lines.Length);
+    .......
 ```
 
 </details>
