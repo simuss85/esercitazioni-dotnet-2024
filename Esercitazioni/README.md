@@ -4149,7 +4149,7 @@ class Program
 ```
 </details>
 
-### 76 - File: legge un file.txt e stampare a schermo solo i nomi che iniziano per 'a':
+### 76 - File: legge un file.txt e stampare a schermo solo i nomi che iniziano per 'a' anche se non ci sono:
 <details>
     <summary> codice </summary>
 
@@ -4178,3 +4178,119 @@ class Program
     }
 }
 ```
+</details>
+
+### 77 - File: legge un file.txt e stampare a schermo solo i nomi che iniziano per 'a' con (Lambda):
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+
+        foreach (string line in lines)
+        {
+            if (line.StartsWith("a"))
+            {
+                Console.WriteLine(line);
+            }
+        }
+        if (!lines.Any(line => line.StartsWith("a"))) // funzione lambda
+        {
+            Console.WriteLine("Nessun nome trovato");
+        }
+    }
+}
+```
+</details>
+
+### 78 - File: legge un file.txt e copia su un altro file.txt le parole che iniziano per 'a' con (Lambda):
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+        string[] nomi = new string[lines.Length];
+                
+        for (int i = 0; i < lines.Length; i++)
+        {
+            nomi[i] = lines[i];
+        }
+
+        string path2 = @"prova.txt";    // il file deve essere nella stessa cartella del programma
+        File.Create(path2).Close();
+        foreach (string nome in nomi)
+        {
+            if (nome.StartsWith("a"))
+            {
+                File.AppendAllText(path2, nome + "\n");
+            }
+        }
+
+        if (!nomi.Any(nome => nome.StartsWith("a")))
+        {
+            File.AppendAllText(path2, "Nessun nome trovato");
+        }
+    }
+}
+```
+</details>
+
+### 79 - File: legge un file.txt e sorteggia un nome random:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] nomi = File.ReadAllLines(path);
+
+        Random random = new Random();
+
+        int index = random.Next(nomi.Length);
+        Console.WriteLine(nomi[index]);
+        
+    }
+}
+```
+</details>
+
+### 80 - File: legge un file.txt e sorteggia un nome random e lo salva in un altro file:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] nomi = File.ReadAllLines(path);
+
+        Random random = new Random();
+        int index = random.Next(nomi.Length);
+        Console.WriteLine(nomi[index]);
+        // creazione secondo file
+        string path2 = @"prova.txt";
+        File.Create(path2).Close();
+        File.AppendAllText(path2, nomi[index] + "\n");
+    }
+}
+```
+</details>
