@@ -3394,6 +3394,8 @@ class Program
     }
 }
 ```
+</details>
+
 ### 71 - Gestione errori: 61 - Indovina il numero 'THE GAME':
 <details>
     <summary> codice </summary>
@@ -4049,3 +4051,130 @@ class Test
 }
 ```
 </details>
+
+### 73 - File: legge un file.txt e stampa a video il suo contenuto riga per riga:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+        foreach (string line in lines)
+        {
+            Console.WriteLine(line); // stampa la riga
+        }
+    }
+}
+```
+</details>
+
+### 74 - File: legge un file.txt ed effettua la copia in un altro array:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+        string[] righe = new string[lines.Length];
+                
+        for (int i = 0; i < righe.Length; i++)
+        {
+            righe[i] = lines[i];
+        }
+
+        foreach (string riga in righe)
+        {
+            Console.WriteLine(riga);
+        }
+    }
+}
+```
+oppure utilizzando il metodo 'Array.Copy()':
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+       // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+        string[] righe = new string[lines.Length];
+        
+        Array.Copy(lines, righe, lines.Length);
+
+        foreach (string riga in righe)
+        {
+            Console.WriteLine(riga);
+        }
+    }
+}
+
+```
+</details>
+
+### 75 - File: legge un file.txt e stampare a schermo solo i nomi che iniziano per 'a':
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+
+        foreach (string line in lines)
+        {
+            if (line.StartsWith("a"))
+            {
+                Console.WriteLine(line);
+            }
+                
+        }
+    }
+}
+```
+</details>
+
+### 76 - File: legge un file.txt e stampare a schermo solo i nomi che iniziano per 'a':
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        // percorso del file con @
+        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
+        string[] lines = File.ReadAllLines(path);
+        bool trovato = false;
+
+        foreach (string line in lines)
+        {
+            if (line.StartsWith("a"))
+            {
+                Console.WriteLine(line);
+                trovato = true;
+            }    
+        }
+        if (!trovato)
+        {
+            Console.WriteLine("Nessun nome trovato");
+        }
+    }
+}
+```
