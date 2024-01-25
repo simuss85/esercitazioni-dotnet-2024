@@ -1,9 +1,9 @@
 
-# BETA TEST GUESS MY NUMBER
+# BETA TEST INDOVINA IL NUMERO SEGRETO
 
 ## OBIETTIVI
 
-Testare il gioco, segnalare eventuali bug, consigli e spunti sull'user experience.
+Testare il programma, segnalare eventuali bug, consigli e spunti sull'user experience.
 - Eccezioni del try-catch
   prova bene tutte le eccezioni possibili:
   inserire stringhe invece che numeri, provare numeri troppo grossi ecc.
@@ -12,20 +12,17 @@ Testare il gioco, segnalare eventuali bug, consigli e spunti sull'user experienc
 Controllare problema x che non sono riuscito a risolvere
 
 
-
 ### USER EXPERIENCE:
-- Hai suggerimenti per migliorare l'esperienza dell'utente su questo gioco?
-- Come valuti l'usabilità e la chiarezza del gioco?
+- Hai suggerimenti per migliorare l'esperienza dell'utente su questo programma?
+- Come valuti l'usabilità e la chiarezza dei menu?
 - I colori utilizzati nei messaggi all'utente sono leggibili?
 
 ## POST BETA TEST:
 
 <details>
-<summary> Raccolta feedback </summary>
-<details>
-
-<summary> Feedback di Ale </summary>
-
+  <summary> Raccolta feedback </summary>
+  <details>
+    <summary> Feedback di Alex </summary>
 
 >  **Eccezioni**
 
@@ -33,14 +30,16 @@ Controllare problema x che non sono riuscito a risolvere
 - [ ] numeri maggiori o minori
 
 >  **Bug**
+- [ ] numeri maggiori o minori
 
-Miglioramenti
+>  **Miglioramenti**
+
 - [x] esplicitare il range di numeri tra i quali indovinare
 - [x] togliere True e False dai messaggi in console
-</details>
+
+  </details>
 </details>
 
-</details>
 
 Priorità
 1. Range 
@@ -49,7 +48,6 @@ Priorità
 ## Tempistica di sviluppo
 
 ```mermaid
-
 gantt
     title A Gantt Diagram
     dateFormat  YYYY-MM-DD
