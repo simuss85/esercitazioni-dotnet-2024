@@ -463,7 +463,7 @@ Possibile soluzione 1:
 </details>
 
 <!-- ***************   25 gen 2024   ******************** -->
-<details open>
+<details>
     <summary><h2>25 gen 2024 ✔️</h2></summary>
 
 Argomenti:
@@ -471,10 +471,10 @@ Argomenti:
 - Introduzione ai grafici [**Mermaid**](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/).
 - Persistenza dei dati con la gestione dei file, txt, csv, JSON.
 - Accenno ai database: DB relazionali, DB non relazionali, Entity Framework.
+- Accenno alle *Lambda Function*.
 
 ### Info
 > Installata estenzione "Github Markdown Preview" per visualizzare i file .md in modo corretto.
-
 
 ### Note
 - Utilizza il metodo Array.Copy
@@ -489,6 +489,28 @@ esempio
     .......
 ```
 
+- Utilizzo funzione Lambda
+esempio
+
+```c#
+    .......
+    if (!lines.Any(line => line.StartsWith("a"))) // funzione lambda
+    {
+        Console.WriteLine("Nessun nome trovato");
+    }
+    .......
+    // versione con funzione classica
+    .......
+    if (!lines.Any(Prova))
+    {
+        Console.WriteLine("Nessun nome trovato");
+    }
+    // funzione 
+    static bool Prova(string s)
+    {
+        return s.StartsWith("a");
+    }
+```
 </details>
 
 <!-- ***************   26 gen 2024   ******************** -->
