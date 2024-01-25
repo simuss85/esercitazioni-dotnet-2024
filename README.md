@@ -2,7 +2,7 @@
 
 **Contenuto delle cartelle**
 
-## Beta_teting
+## Beta_testing
 
 > Programma di test e prove varie
 

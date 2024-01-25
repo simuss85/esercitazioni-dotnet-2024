@@ -413,7 +413,7 @@ Codice:
 </details>
 
 <!-- ***************   24 gen 2024   ******************** -->
-<details open>
+<details>
     <summary><h2>24 gen 2024 ✔️</h2></summary>
 
 Argomenti:
@@ -463,12 +463,13 @@ Possibile soluzione 1:
 </details>
 
 <!-- ***************   25 gen 2024   ******************** -->
-<details>
-    <summary><h2>25 gen 2024 </h2></summary>
+<details open>
+    <summary><h2>25 gen 2024 ✔️</h2></summary>
 
 Argomenti:
-- ....
-- ....
+- Documentazione beta-test e post beta-test
+- Installata estenzione "Github Markdown Preview" per visualizzare i file .md in modo corretto.
+- Introduzione ai grafici [**Mermaid**](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/).
 - ....
 
 ### Info
@@ -477,7 +478,7 @@ Argomenti:
 > .... 
 
 ### Note
-- attenzione a ........
+- ....
 Possibile soluzione 1:
 
 ```c#
