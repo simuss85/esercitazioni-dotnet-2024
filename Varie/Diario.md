@@ -33,23 +33,23 @@ Domande da fare per i colloqui aziendali:
 - Primi comandi **git** utilizzati:
 
 ```sh
-    $ git                        // lista di comandi
-    $ git --version              // versione installata
-    $ git auth login             // per accedere a git
-    $ git init                   // inizializza il repository
-    $ git log                    // visualizza lista dei commit
-    $ git status                 // viualizza lo stato del repository
-    $ git add                    // aggiunge i file allo stage
-    $ git commit -m "mess"       // esegue il commit 
+    $ git                        # lista di comandi
+    $ git --version              # versione installata
+    $ git auth login             # per accedere a git
+    $ git init                   # inizializza il repository
+    $ git log                    # visualizza lista dei commit
+    $ git status                 # viualizza lo stato del repository
+    $ git add                    # aggiunge i file allo stage
+    $ git commit -m "mess"       # esegue il commit 
     
 ```
 - Primi comandi **dotnet** utilizzati:
 
 ```sh
-    $ dotnet --version           // versione installata
-    $ dotnet new                 // visualizza opzioni di creazione nuovo progetto
-    $ dotnet new console         // creo nuovo progetto di app console (da terminale)
-    $ dotnet new webapp          // creo nuovo progetto di app web (sito web)
+    $ dotnet --version           # versione installata
+    $ dotnet new                 # visualizza opzioni di creazione nuovo progetto
+    $ dotnet new console         # creo nuovo progetto di app console (da terminale)
+    $ dotnet new webapp          # creo nuovo progetto di app web (sito web)
     
 ```
 </details>
