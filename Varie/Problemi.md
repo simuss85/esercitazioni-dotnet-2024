@@ -1,10 +1,11 @@
 # Problemi e soluzioni
 <!-- TOC -->
 [1. VSCode non riconosce l'autocompletamento (intelliCode).](#1-vscode-non-riconosce-lautocompletamento-intellicode)  
-[2. Cancellare commit inviato per errore.](#2-cancellare-commit-inviato-per-errore)  
+[2. Cancellare commit inviato per errore su github.](#2-cancellare-commit-inviato-per-errore-su-github)  
 [3. Gestire i warning gialli da VSC.](#3-gestire-i-warning-gialli-da-VSC)  
 [4. Nella shell non visualizzo i colori e le informazioni sul branch git MacOS.](#4-nella-shell-non-visualizzo-i-colori-e-le-informazioni-sul-branch-git-macos)  
 [5. Modifica autocompletamento shell maiuscole/minuscole.](#5-modifica-autocompletamento-shell-maiuscoleminuscole)  
+[6. Creato per errore un doppio autore con lo stesso account git](#6-creato-per-errore-un-doppio-autore-con-lo-stesso-account-git)
 
 <!-- /TOC -->
 
@@ -23,10 +24,29 @@ Possibili soluzioni:
      3. Nel caso in cui il progetto non sia presente, aggiungerlo aggiungerlo digitando:
 
    ```sh
-      dotnet sln add "trascina qui la cartella del progetto oppure digita il nome del file.csproj"
+      dotnet sln add       #trascina qui la cartella del progetto oppure digita il nome del file.csproj
    ```
 
-## 2. Cancellare commit inviato per errore.
+## 2. Cancellare commit inviato per errore su github.
+
+Nel caso volessimo cancellare un commit gia inviato al server di github eseguiamo questa procedura:
+
+1. Visualizza lo stato attuale di tutti i commit su di una riga con il comando seguente:
+
+```sh
+   git status --oneline --all
+```
+2. Eliminiamo l'ultimo commit (o gli n-ultimi), scegliendo l'opzione `--hard` nel caso volessimo ripristinare anche dal repository locale tutti i file, oppure `--soft` per mantenere i file modificati:
+
+```sh
+   git reset --soft[--hard] HEAD~1           #cancella l'ultimo commit
+   git reset --soft[--hard] HEAD~3           #cancella ultimi 3 commit
+   git reset --soft[--hard] HEAD^            #anche questo cancella ultimo commit
+```
+3. Controlliamo lo status dei commit come nel punto 1. e se siamo soddisfatti digitiamo:
+```sh
+   git push --force
+```
 
 ## 3. Gestire i warning gialli da VSC.
 
@@ -105,3 +125,20 @@ Per utilizzare sia maiuscole che minuscole indifferentemente si deve creare il f
 
 Riavvia il terminale.
 
+## 6. Creato per errore un doppio autore con lo stesso account git:
+Potrebbe capitare quando nella procedura di inizializzazione di github sul nuovo pc si esegue un accesso diverso da quello con token. Purtroppo non si possono modificare i commit passati quindi non risulterà alcun contributo da parte dell'autore doppio.  
+Conviene quindi salvare ciò che ci serve, cancellare dal pc locale tutto il repository e procedere come segue.
+Per prima cosa verifichiamo la versione di *gh* installata sul pc digitando il comando:
+```sh
+   gh version
+```
+Nel caso non venisse visualizzata alcuna versione, probabilmente non è stata installata precedentemente. Su windows basta installare il file.exe. Su mac seguire la procedura seguente, dopo aver installato il pacchetto `brew` (vedi la guida):
+```sh
+   brew install gh
+```
+Una volta installato *gh* eseguire l'accesso e seguire la procedura guidata, con il comando:
+```sh
+   gh auth login
+```
+Arrivati alla sezione token, andiamo su github per generare un nuovo token e copiamolo nel terminale quando richiesto.  
+Adesso tutto dovrebbe essere corretto.
