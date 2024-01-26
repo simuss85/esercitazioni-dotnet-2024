@@ -514,32 +514,36 @@ esempio
 </details>
 
 <!-- ***************   26 gen 2024   ******************** -->
-<details>
-    <summary><h2>26 gen 2024 </h2></summary>
+<details open>
+    <summary><h2>26 gen 2024 ✔️</h2></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
+- Utilizzo, creazione, gestione dei *file*.
+- Implementa la gestione dei file nel gioco *indovina il numero THE GAME*.
 
 ### Info
-> .... 
+> Salva il punteggio ad ogni sessione di gioco in modo cumulativo.
 > .... 
 > .... 
 
-### Note
-- attenzione a ........
+### Note 
+- Verificare se un giocatore è gia nel file
+
+Possibile soluzione :
+
+```c#
+    //mi copio il file su un array di string   
+    string[] listaGiocatori = File.ReadAllLines(path);
+    // verifico se è un nuovo giocatore
+    if (!listaGiocatori.Any(linea => linea.StartsWith(nomeGiocatore)))
+    .....
+```
+### Note per il Mac
+- Utilizza "OpenCore Legacy Patcher" per installare i MacOS più recenti non supportti di default.
+- Se si usa *Brew* per cancellare la cache di installazione che si riempie facilmente.
 Possibile soluzione 1:
 
-```c#
-    // codice di esempio 1
+```sh
+    brew clean cache --prune=all     
 ```
-
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
-
 </details>

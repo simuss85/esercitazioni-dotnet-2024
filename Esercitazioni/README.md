@@ -4332,42 +4332,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        // percorso del file con @
-        string path = @"test.txt"; //  il file deve essere nella stessa cartella del programma
-        string[] nomi = File.ReadAllLines(path);
-
-        Random random = new Random();
-        int index = random.Next(nomi.Length);
-        Console.WriteLine(nomi[index]);
-        // creazione secondo file
-        string path2 = @"prova.txt";
-        if (!File.Exists(path2))    // se non esiste, lo crea
-        {
-            File.Create(path2).Close();
-        }
-        if (!File.ReadAllLines(path2).Contains(nomi[index]))   //
-        {
-            File.AppendAllText(path2, nomi[index] + "\n");
-            // File.AppendAllText(path2, $"{nomi[index]}\n");   //con interpolazione di stringhe
-        }
-        else
-        {
-            Console.WriteLine("Il nome è gia presente nel file");
-        }
-    }
-}
-```
-</details>
-
-### 83 - File: 61 - Indovina il numero 'THE GAME' con salvataggio dei punteggi:
-<details>
-    <summary> codice </summary>
-
-```c#
-class Program
-{
-    static void Main(string[] args)
-    {
         // programma che genera un numero tra 1 e N e chiede di indivinare il numero.
         // Ee sbaglio esce, se indovino mi avvisa con un output. Ho a disposizione 
         // X tentativi. N e X sono chiesti in input al giocatore mendiante selezione e input.
@@ -4415,13 +4379,19 @@ class Program
         string[] listaGiocatori = File.ReadAllLines(path);
 
 
+        Console.Clear();
+        
         Console.WriteLine("Inserisci il tuo nome");
         string nomeGiocatore = Console.ReadLine()!;
-        string punteggioGiocatore = $"Punteggio: {punteggioTotale}";
+
+
+        string punteggioGiocatore; 
         string saluto = $"Ciao {nomeGiocatore}";
 
+        // verifico se è un nuovo giocatore
         if (!listaGiocatori.Any(linea => linea.StartsWith(nomeGiocatore)))   //salvo il nome del nuovo giocatore e il punteggio subito sotto
-        {
+        {   
+            punteggioGiocatore = $"Punteggio: {punteggioTotale}";
             //stampa della prima riga di asterischi
             for (int i = 0; i < 18; i++)
             {
@@ -4481,8 +4451,17 @@ class Program
             }
 
         }
-        else
+        else    // se è un vecchio giocatore
         {
+            listaGiocatori = File.ReadAllLines(path);    // copio il file aggiornato nell'array del file aggiornato
+
+            for (int i = 0; i < listaGiocatori.Length; i++)
+            {
+                if (listaGiocatori[i].StartsWith(nomeGiocatore))
+                {
+                    punteggioTotale = double.Parse(listaGiocatori[i + 1].Substring(11));
+                }
+            }
             saluto = $"Bentornato {nomeGiocatore}";
         }
 
@@ -4492,8 +4471,11 @@ class Program
 
             // inserimento dell'input
             Console.WriteLine($"{saluto}");
+            Thread.Sleep(1000);
             Console.WriteLine("Prova ad indovinare il numero segreto");
+            Thread.Sleep(700);
             Console.WriteLine($"Punteggio attuale: {punteggioTotale} punti");
+            Thread.Sleep(700);
 
             Console.WriteLine("\nScegli la difficoltà: ");
             Console.WriteLine("f - facile (numeri da 1 a 10)");
@@ -4754,20 +4736,19 @@ class Program
         while (continua);
 
         // salvataggio sul file del punteggio
-        // salvo l'array del file aggiornato
-        listaGiocatori = File.ReadAllLines(path);
+        listaGiocatori = File.ReadAllLines(path);    // copio il file aggiornato nell'array del file aggiornato
 
         for (int i = 0; i < listaGiocatori.Length; i++)
-        {   
-            Console.WriteLine($"{listaGiocatori[i]}");
-            
+        {
+            // Console.WriteLine($"{listaGiocatori[i]}"); ######debug
+
             if (listaGiocatori[i].StartsWith(nomeGiocatore))
             {
-                listaGiocatori[i+1] = $"Punteggio: {punteggioTotale}";
+                listaGiocatori[i + 1] = $"Punteggio: {punteggioTotale}";  // modifico il punteggio
             }
-            
+
         }
-        File.WriteAllLines(path, listaGiocatori);
+        File.WriteAllLines(path, listaGiocatori);   //ripristino il file con i dati aggiornati
 
 
         Console.WriteLine($"Hai accumulato {punteggioTotale} punti\n");

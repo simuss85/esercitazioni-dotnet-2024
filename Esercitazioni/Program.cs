@@ -49,13 +49,19 @@
         string[] listaGiocatori = File.ReadAllLines(path);
 
 
+        Console.Clear();
+        
         Console.WriteLine("Inserisci il tuo nome");
         string nomeGiocatore = Console.ReadLine()!;
-        string punteggioGiocatore = $"Punteggio: {punteggioTotale}";
+
+
+        string punteggioGiocatore; 
         string saluto = $"Ciao {nomeGiocatore}";
 
+        // verifico se è un nuovo giocatore
         if (!listaGiocatori.Any(linea => linea.StartsWith(nomeGiocatore)))   //salvo il nome del nuovo giocatore e il punteggio subito sotto
-        {
+        {   
+            punteggioGiocatore = $"Punteggio: {punteggioTotale}";
             //stampa della prima riga di asterischi
             for (int i = 0; i < 18; i++)
             {
@@ -115,19 +121,31 @@
             }
 
         }
-        else
+        else    // se è un vecchio giocatore
         {
+            listaGiocatori = File.ReadAllLines(path);    // copio il file aggiornato nell'array del file aggiornato
+
+            for (int i = 0; i < listaGiocatori.Length; i++)
+            {
+                if (listaGiocatori[i].StartsWith(nomeGiocatore))
+                {
+                    punteggioTotale = double.Parse(listaGiocatori[i + 1].Substring(11));
+                }
+            }
             saluto = $"Bentornato {nomeGiocatore}";
         }
 
         do
         {
             Console.Clear();
-
+            
             // inserimento dell'input
             Console.WriteLine($"{saluto}");
+            Thread.Sleep(1000);
             Console.WriteLine("Prova ad indovinare il numero segreto");
+            Thread.Sleep(700);
             Console.WriteLine($"Punteggio attuale: {punteggioTotale} punti");
+            Thread.Sleep(700);
 
             Console.WriteLine("\nScegli la difficoltà: ");
             Console.WriteLine("f - facile (numeri da 1 a 10)");
@@ -388,21 +406,19 @@
         while (continua);
 
         // salvataggio sul file del punteggio
-        // salvo l'array del file aggiornato
-        listaGiocatori = File.ReadAllLines(path);
+        listaGiocatori = File.ReadAllLines(path);    // copio il file aggiornato nell'array del file aggiornato
 
         for (int i = 0; i < listaGiocatori.Length; i++)
-        {   
-            Console.WriteLine($"{listaGiocatori[i]}");
-            
+        {
+            // Console.WriteLine($"{listaGiocatori[i]}"); ######debug
+
             if (listaGiocatori[i].StartsWith(nomeGiocatore))
             {
-                listaGiocatori[i+1] = $"Punteggio: {punteggioTotale}";
+                listaGiocatori[i + 1] = $"Punteggio: {punteggioTotale}";  // modifico il punteggio
             }
-            
-        }
-        File.WriteAllLines(path, listaGiocatori);
 
+        }
+        File.WriteAllLines(path, listaGiocatori);   //ripristino il file con i dati aggiornati
 
         Console.WriteLine($"Hai accumulato {punteggioTotale} punti\n");
         Console.WriteLine("Hai vinto il premio seguente...");
