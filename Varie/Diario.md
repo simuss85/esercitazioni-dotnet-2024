@@ -538,6 +538,14 @@ Possibile soluzione :
     if (!listaGiocatori.Any(linea => linea.StartsWith(nomeGiocatore)))
     .....
 ```
+- Utilizzare il carattere `^` per poter poter selezionare l'indice a partire dall'ultimo
+codice:
+
+```c#
+    int[] numeri = [0,1,2,3,4,5];
+    Console.WriteLine($"{numeri[^2]}"); //visualizza l'indice 4
+```
+
 ### Note per il Mac
 - Utilizza "OpenCore Legacy Patcher" per installare i MacOS più recenti non supportti di default.
 - Se si usa *Brew* per cancellare la cache di installazione che si riempie facilmente.
