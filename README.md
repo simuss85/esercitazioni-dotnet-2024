@@ -4,7 +4,7 @@
 
 ## Beta_testing
 
-> Programma di test e prove varie
+> Cartella di test e prove varie
 
 ## Esercitazioni
 
