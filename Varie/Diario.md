@@ -1,11 +1,11 @@
 # Corso di programmazione dotNet 2024
 
-<small>Lezioni seguite  ✔️. Lezioni perse in ❌.
+<small>Lezioni seguite  ✔️. Lezioni perse in ❌. Lezioni annullate ⚠️
 </small>  
 
 <!-- ***************   08 gen 2024   ******************** -->
 <details>
-    <summary><h2>08 gen 2024 ✔️</h2></summary>
+    <summary><h3>08 gen 2024 ✔️</h3></summary>
 
 Breve introduzione al corso, presentazione dei colleghi. Raccolta del materiale su github. 
 
@@ -22,7 +22,7 @@ Argomenti:
 > Password pc 'aula'. Password admin '!Aula'.  
 > Estensioni VSCode: C# Dev Kit, Intellicode for C#, C# Snippets, Italiano pack.
 
-### Note
+### 💡 Tip
 Domande da fare per i colloqui aziendali:
 >1. *Utilizzate JS per il vostro tipo di lavoro?*
 >2. *QUale hub utilizzate per il versionamento?*
@@ -56,7 +56,7 @@ Domande da fare per i colloqui aziendali:
 
 <!-- ***************   09 gen 2024   ******************** -->
 <details>
-    <summary><h2>09 gen 2024 ✔️</h2></summary>
+    <summary><h3>09 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - ....
@@ -86,10 +86,10 @@ Possibile soluzione 2:
 </details>
 
 <!-- ***************   10 gen 2024   ******************** -->
-## 10 gen 2024 ❌
-
-> [!WARNING]  
-> Lezione annullata!!!
+<details>
+    <summary><h2>10 gen 2024 ⚠️</h2></summary>
+    > Lezione annullata!!!
+</details>
 
 <!-- ***************   11 gen 2024   ******************** -->
 <details>
