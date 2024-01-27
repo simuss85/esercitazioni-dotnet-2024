@@ -2,7 +2,17 @@
 {
     static void Main(string[] args)
     {
-       int[] numeri = [0,1,2,3,4,5];
-       Console.WriteLine($"{numeri[^3]}");
+        Dictionary<string, string> nomi = [];
+        nomi.Add("Ussi", "Simone");
+        nomi.Add("Xxxx", "Fabio");
+        nomi.Add("Gigante", "Emanuela");
+
+        foreach (string cognome in nomi.Keys)
+        {   
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.Write(cognome);
+            Console.ResetColor();
+            Console.WriteLine(" - colore ripristinato!");
+        }
     }
 }
