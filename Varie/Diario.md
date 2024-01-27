@@ -1,13 +1,38 @@
 # Corso di programmazione dotNet 2024
+<!-- ******************************************  grafico gantt   ****************************************** -->
+```mermaid
+gantt
+    title Avanzamento del corso
+    dateFormat  YYYY-MM-DD
+
+    %% modificata l'etichetta in basso
+    axisFormat  %m-%d
+
+    %% cambiato colore e dimensione del marker giornaliero
+    todaymarker stroke:magenta, stroke-width:3px
+
+    %% a1 - prima parte del corso
+    section Fase 1
+    DotNet          :active, a1, 2024-01-08, 2024-04-16
+
+    %% a2 - stage in azienda
+    section Fase 2
+    Stage           :crit, done, a2, after a1, 2024-05-18
+    
+    %% esame
+    section Fine
+    Esame           :milestone, after a2, 3d
+
+```
 
 <small>Lezioni seguite  ✔️. Lezioni perse in ❌. Lezioni annullate ⚠️
 </small>  
 
-<!-- ***************   08 gen 2024   ******************** -->
+<!-- ******************************************  08 gen 2024   ****************************************** -->
 <details>
     <summary><h3>08 gen 2024 ✔️</h3></summary>
 
-Breve introduzione al corso, presentazione dei colleghi. Raccolta del materiale su github. 
+Breve introduzione al corso, presentazione dei colleghi. Raccolta del materiale su github.  
 
 Argomenti:
 - Installare l'ambiente di lavoro sul pc (VSCode, Git, SDK.net, estensioni VSCode).
@@ -54,205 +79,208 @@ Domande da fare per i colloqui aziendali:
 ```
 </details>
 
-<!-- ***************   09 gen 2024   ******************** -->
+<!-- ******************************************  09 gen 2024   ****************************************** -->
 <details>
     <summary><h3>09 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
+- Dichiarare variabili *string*, *int*, *bool*, *double*.
+- Utilizzo oggetto di tipo **data**.
+- Operazioni tra numeri int, double.
+- Operatori di confronto "==", "!=", "<", ">".
+- Come si cancella ultimo commit.
+- Utilizzo del comando `git log` per visualizzare la history dei commit.
+
 
 ### Info
-> .... 
-> .... 
-> .... 
+> Utilizzo dei **backtick** `````` per l'inserimento di linee di codice nella documentazione.  
+> Ricreare il file *sln* con il comando `dotnet new sln`.
 
 ### Note
-- attenzione a ........
-Possibile soluzione 1:
+- Procedura di invio commit:
 
-```c#
-    // codice di esempio 1
+```sh
+    git add #[nomeFile.ext]
+    git commit -m "Messaggio del commit"
+    git push -u origin main     #origin = indirizzo del server; 
+                                #main = il branch attuale
+
 ```
-
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.1** a **n.12**
 
 </details>
 
-<!-- ***************   10 gen 2024   ******************** -->
+<!-- ******************************************  10 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>10 gen 2024 ⚠️</h2></summary>
-    > Lezione annullata!!!
+    <summary><h3>10 gen 2024 ⚠️</h3></summary>
+
+> :information_source: **Info**  
+> Lezione annullata!!!  
+
+### Note
+Prove di versionamento da casa su pc window e mac.
+
 </details>
 
-<!-- ***************   11 gen 2024   ******************** -->
+<!-- ******************************************  11 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>11 gen 2024 ✔️</h2></summary>
+    <summary><h3>11 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
+- Dichiarare array di tipo *string* e di tipo *int*.
+- Utilizzare i metodi degli array.
+- Dichiarare lista di string e di int con la classe *List*.
+- Utilizzare i metodi della classe List.
+- Dichiarare una pila di string con la classe *Stack*.
+- Dichiarare una coda di string con la clase *Queue*.
+- Riordino di una lista con il metodo *Sort*.
+- Jetbrains.com.
 
 ### Info
-> .... 
-> .... 
-> .... 
+> Risolvere il problema dell'autocompletamento IntelliCode.
 
 ### Note
-- attenzione a ........
-Possibile soluzione 1:
+- Rimuovere i file appena aggiunti allo stage di git.
 
-```c#
-    // codice di esempio 1
+```sh
+    git restore --staged "path del file"    #rimuove il file dallo stage
 ```
 
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.13** a **n.22**
 
 </details>
 
-<!-- ***************   12 gen 2024   ******************** -->
+<!-- ******************************************  12 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>12 gen 2024 ✔️</h2></summary>
+    <summary><h3>12 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
-
-### Info
-> .... 
-> .... 
-> .... 
+- Istruzioni di controllo *if*, *switch*, *for*, *while*.
+- Creare dizionari "chiave, valore" con la classe *Dictionary*.
+- Utilizzare i metodi di Dictionary.
+- Utilizzare il metodo *foreach* per leggere liste, array, dictionary, code, stack.
 
 ### Note
-- attenzione a ........
-Possibile soluzione 1:
+- Visualizzare i key di un dictionary e stamparli a video con il metodo `oggetto.Keys`:
 
 ```c#
-    // codice di esempio 1
+    //creo oggetto dizionario di tipo <string,string>
+    Dictionary<string, string> nomi = [];
+    //aggiunto 3 valori
+    nomi.Add("Ussi", "Simone");
+    nomi.Add("Ussi", "Fabio");
+    nomi.Add("Gigante", "Emanuela");
+ƒ
+    foreach (string cognome in nomi.Keys)
+    {
+        Console.WriteLine(cognome);
+    }
 ```
 
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.23** a **n.33**
 
 </details>
 
-<!-- ***************   15 gen 2024   ******************** -->
+<!-- ******************************************  15 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>15 gen 2024 ✔️</h2></summary>
+    <summary><h3>15 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
-
-### Info
-> .... 
-> .... 
-> .... 
+- Creare menu di selezione per input da console.
+- Utilizzo della classe *ConsoleKeyInfo* per la gestione dei tasti premuti in input da tastiera.
+- Creazione del file **.gitignore**.
+- Drag & Drop di un file di testo nel terminale.
 
 ### Note
-- attenzione a ........
-Possibile soluzione 1:
+- Premi il tasto `N` per terminare l'esecuzione.  
+Possibile soluzione :
 
 ```c#
-    // codice di esempio 1
+    //output per l'utente
+    Console.WriteLine("Premi 'N' per terminare...");
+
+    //ciclo che termina quando si preme il tasto corretto
+    while (true)
+    {   
+        //creo oggetto keyInfo che memorizza il tasto premuto
+        ConsoleKeyInfo keyInfo = Console.ReadKey();
+        if (keyInfo.Key == ConsoleKey.N) //confronto con il tasto N
+        {
+            return; // esce dal programma se viene premuto N
+        }  
+    }
 ```
 
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.34** a **n.41**
 
 </details>
 
-<!-- ***************   16 gen 2024   ******************** -->
+<!-- ******************************************  16 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>16 gen 2024 ✔️</h2></summary>
+    <summary><h3>16 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
+- Metodo ***asincrono*** per creare un timeout di input.
+- Metodo normale per creare un timeout di input.
 
 ### Info
-> .... 
-> .... 
-> .... 
+> Creata lista della spesa nel programma con selezione multipla.
+> Per utilizzare i metodi asincroni dobbiamo cambiare la definizione del main da `void` a `async Task`.
 
-### Note
-- attenzione a ........
-Possibile soluzione 1:
-
-```c#
-    // codice di esempio 1
-```
-
-- attenzione a ........
-Possibile soluzione 2:
-
-```c#
-    // codice di esempio 2
-```
+### :white_check_mark: Commit program status
+- Inserito commit **n.43**
 
 </details>
 
-<!-- ***************   17 gen 2024   ******************** -->
+<!-- ******************************************  17 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>17 gen 2024 ✔️</h2></summary>
+    <summary><h3>17 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ....
-- ....
-- ....
+- Generare numeri random con la classe *Random*
+- Cambiare i colori di output della console.
+- Fizz Buzz.
+- Accenno funzione *Lambda*.
 
 ### Info
-> .... 
-> .... 
+> Cambiato lo snippet `cw` e personalizato.
+> Provata una creazione di matrice 2x2.
 > .... 
 
 ### Note
-- attenzione a ........
-Possibile soluzione 1:
+- Per cambiare colore del carattere dell'output da console usare `ForegroundColor`:
 
 ```c#
-    // codice di esempio 1
+    //cambio il colore del testo 
+    Console.ForegroundColor = ConsoleColor.DarkCyan;
+    Console.WriteLine(cognome);
+    //ripristino il colore di default
+    Console.ResetColor();
 ```
 
-- attenzione a ........
-Possibile soluzione 2:
+- Per cambiare colore del carattere dell'output da console usare `BackgroundColor`:
 
 ```c#
-    // codice di esempio 2
+    //cambio il colore dello sfondo 
+    Console.BackgroundColor = ConsoleColor.DarkCyan;
+    Console.WriteLine(cognome);
+    //ripristino il colore di default
+    Console.ResetColor();
 ```
 
-    Argomenti:  
-- Fizz Buzz
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.44** a **n.51**
 
 </details>
 
 
-<!-- ***************   18 gen 2024   ******************** -->
+<!-- ******************************************  18 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>18 gen 2024 ✔️</h2></summary>
+    <summary><h3>18 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - Creazione prima calcolatrice.
@@ -285,11 +313,15 @@ Possibile soluzione:
     ConsoleKeyInfo key = Console.ReadKey(true);
     string selezione = key.keyChar.ToString();
 ```
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.52** a **n.55**
+
 </details>
 
-<!-- ***************   19 gen 2024   ******************** -->
+<!-- ******************************************  19 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>19 gen 2024 ✔️</h2></summary>
+    <summary><h3>19 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - Indovina il numero con i suggerimenti e 10 tentativi.  
@@ -333,17 +365,27 @@ Argomenti:
         resto /= 10;
     }
 ```
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.56** a **n.60**
+
 </details>
 
-<!-- ***************   22 gen 2024   ******************** -->
-## 22 gen 2024 ❌
-
-> [!WARNING]  
-> Lezione annullata!!!
-
-<!-- ***************   23 gen 2024   ******************** -->
+<!-- ******************************************  22 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>23 gen 2024 ✔️</h2></summary>
+    <summary><h3>22 gen 2024 ⚠️</h3></summary>
+
+> :information_source: **Info**  
+> Lezione annullata!!!  
+
+### :white_check_mark: Commit program status
+- Inserito commit **n.61**
+
+</details>
+
+<!-- ******************************************  23 gen 2024   ****************************************** -->
+<details>
+    <summary><h3>23 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - Verifica del programma svolto nella lezione precedente
@@ -410,11 +452,14 @@ Codice:
 
 ```
 
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.62** a **n.70**
+
 </details>
 
-<!-- ***************   24 gen 2024   ******************** -->
+<!-- ******************************************  24 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>24 gen 2024 ✔️</h2></summary>
+    <summary><h3>24 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - Finire le modifiche della gestione errori (lezione precedente).  
@@ -460,11 +505,14 @@ Possibile soluzione 1:
     }
 ```
 
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.71** a **n.72**
+
 </details>
 
-<!-- ***************   25 gen 2024   ******************** -->
+<!-- ******************************************  25 gen 2024   ****************************************** -->
 <details>
-    <summary><h2>25 gen 2024 ✔️</h2></summary>
+    <summary><h3>25 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - Creazione documentazione beta-test e post beta-test.
@@ -511,23 +559,25 @@ esempio
         return s.StartsWith("a");
     }
 ```
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.73** a **n.80**
+
 </details>
 
-<!-- ***************   26 gen 2024   ******************** -->
-<details open>
-    <summary><h2>26 gen 2024 ✔️</h2></summary>
+<!-- ******************************************  26 gen 2024   ****************************************** -->
+<details>
+    <summary><h3>26 gen 2024 ✔️</h3></summary>
 
 Argomenti:
 - Utilizzo, creazione, gestione dei *file*.
 - Implementa la gestione dei file nel gioco *indovina il numero THE GAME*.
 
 ### Info
-> Salva il punteggio ad ogni sessione di gioco in modo cumulativo.
-> .... 
-> .... 
+> Salva il punteggio ad ogni sessione di gioco in modo cumulativo.  
 
 ### Note 
-- Verificare se un giocatore è gia nel file
+- Verificare se un giocatore è gia nel file  
 
 Possibile soluzione :
 
@@ -552,6 +602,115 @@ codice:
 Possibile soluzione 1:
 
 ```sh
-    brew clean cache --prune=all     
+    brew cleanup  
 ```
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.83** a **n.82**
+
+</details>
+
+<!-- ******************************************  29 gen 2024   ****************************************** -->
+<details>
+    <summary><h3>29 gen 2024 </h3></summary>
+
+Argomenti:
+- ...  
+
+### Info
+> ..  
+
+### Note 
+- ..  
+
+Possibile soluzione :
+
+```c#
+
+```
+
+</details>
+
+<!-- ******************************************  30 gen 2024   ****************************************** -->
+<details>
+    <summary><h3>30 gen 2024 </h3></summary>
+
+Argomenti:
+- ...  
+
+### Info
+> ..  
+
+### Note 
+- ..  
+
+Possibile soluzione :
+
+```c#
+
+```
+
+</details>
+
+<!-- ******************************************  31 gen 2024   ****************************************** -->
+<details>
+    <summary><h3>31 gen 2024 </h3></summary>
+
+Argomenti:
+- ...  
+
+### Info
+> ..  
+
+### Note 
+- ..  
+
+Possibile soluzione :
+
+```c#
+
+```
+
+</details>
+
+<!-- ******************************************  01 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>01 feb 2024 </h3></summary>
+
+Argomenti:
+- ...  
+
+### Info
+> ..  
+
+### Note 
+- ..  
+
+Possibile soluzione :
+
+```c#
+
+```
+
+</details>
+
+<!-- ******************************************  02 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>02 feb 2024 </h3></summary>
+
+Argomenti:
+- ...  
+
+### Info
+> ..  
+
+### Note 
+- ..  
+
+Possibile soluzione :
+
+```c#
+
+```
+
 </details>
