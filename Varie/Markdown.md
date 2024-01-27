@@ -141,7 +141,9 @@ Ecco un [elenco delle emoji](https://github.com/ikatyang/emoji-cheat-sheet/blob/
 
 ## 9. Grafici Mermaid
 Per creare grafici e diagrammi nella documentazione, utilizzare il codice *Mermaid*.  
-Segui la guida a questo [link](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/).  
+Segui la guida a questo [link](https://jojozhuang.github.io/tutorial/mermaid-cheat-sheet/), oppure 
+[link2](https://mermaid.js.org/syntax/gantt.html).  
+
 
 esempio:
 
