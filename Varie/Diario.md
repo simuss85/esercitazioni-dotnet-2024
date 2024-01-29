@@ -611,14 +611,18 @@ Possibile soluzione 1:
 </details>
 
 <!-- ******************************************  29 gen 2024   ****************************************** -->
-<details>
-    <summary><h3>29 gen 2024 </h3></summary>
+<details open>
+    <summary><h3>29 gen 2024 ✔️</h3></summary>
+
+>:warning: Colloquio presso **Nextage** ore 12:00.
 
 Argomenti:
-- ...  
+- Progettare un gioco di dati, senza l'utilizzo di classi, metodi e funzioni.  
+- Metodologie e best-practices applicate alla creazione di un programma.  
+- Esempio di documentazione sulle specifiche.  
 
 ### Info
-> ..  
+> Creare della documentazione su specifiche del programma e interazione con l'utente.
 
 ### Note 
 - ..  
