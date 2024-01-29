@@ -6,9 +6,8 @@
         string benvenuto = "Benvenuto a MiniRisiko";
         string? input;
         string pathSave = @"save.txt";
-        string pathPlayer = @"map.txt";
-        string[] player1 = ["Nome", "green"];
-        string[] palyer2 = ["PC", "Colore"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
+        string[] player1 = ["Nome", "black"];
+        string[] palyer2 = ["PC", "default"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
         bool giocoInCorso = true;
 
         #endregion
@@ -16,9 +15,11 @@
         Console.Clear();
         //messaggio di benvenuto
         Console.WriteLine($"{benvenuto}\n");
-        ColoreUtente(player1);
         FingiDiPensare(5, 600);
 
+        // ColoreUtente(player1);      //DEBUG 
+        // ColoreUtente(palyer2);      //DEBUG
+        // Console.ReadKey();          //DEBUG
 
         //visualizzo il menù iniziale del gioco
         CreaMenuSelezionePrincipale();
@@ -27,19 +28,18 @@
         {
             input = Console.ReadLine();
 
-
             switch (input)
             {
                 case "1":
-
+                    GiocaVsPc();
                     break;
 
                 case "2":
-
+                    GiocaVsUtente();
                     break;
 
                 case "3":
-
+                    CaricaPartita(pathSave);
                     break;
 
                 case "4":
@@ -51,7 +51,7 @@
                     break;
 
                 default:
-
+                    Console.WriteLine("Errore di digitazione");
                     break;
             }
 
@@ -129,22 +129,51 @@
       player. Scrive il nome del colore selezionato e resetta il colore di default
     
       Input: string[] player ---> array di due elementi ["nome","colore"]
-
+      
     */
     static void ColoreUtente(string[] player)
-    {   
-        var colore = ConsoleColor.Red;
+    {
+        // salvataggio colore corrente
+        var currentColor = Console.ForegroundColor;
+        var playerColor = currentColor;
+        var currentBackground = Console.BackgroundColor;
+
         switch (player[1])
         {
+            case "red":
+                playerColor = ConsoleColor.Red;
+                break;
+
+            case "blue":
+                playerColor = ConsoleColor.Blue;
+                Console.BackgroundColor = ConsoleColor.White;
+                break;
+
+            case "black":
+                playerColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.White;
+                break;
+
+            case "yellow":
+                playerColor = ConsoleColor.Yellow;
+                break;
+
             case "green":
-                colore = ConsoleColor.Green;
+                playerColor = ConsoleColor.Green;
+                break;
+
+            case "default":
+                break;
+
+            default:
+                Console.WriteLine("Errore di runtime!!!");
                 break;
 
         }
-        Console.ForegroundColor = colore;
-        Console.WriteLine($"{player[1]}");
-        Console.ResetColor();
-
+        Console.ForegroundColor = playerColor;
+        Console.WriteLine($"{player[0]}");
+        Console.ForegroundColor = currentColor;
+        Console.BackgroundColor = currentBackground;
     }
 
     #endregion
@@ -161,8 +190,29 @@
 
     }
 
-    static void CaricaPartita()
+    /*Visualizza l'elenco delle partite in corso e permette la selezione di 
+    una di esse ripristinando lo stato del gioco fino a quel momento. 
+    Gestisce le eccezioni sui file
+
+    
+    INPUT: string pathSave ---> il path del file di salvataggio 
+    */
+    static void CaricaPartita(string path)
     {
+        try
+        {
+            string[] file = File.ReadAllLines(path);
+            foreach (string linea in file)
+            {
+                Console.WriteLine(linea);
+            }
+
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Problema di accesso al file!");
+            return;
+        }
 
     }
 
