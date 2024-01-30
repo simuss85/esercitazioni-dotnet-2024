@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Security.Cryptography;
+
+class Program
 {
     static void Main(string[] args)
     {
@@ -50,6 +52,18 @@
             switch (input)
             {
                 case "1":
+                    Console.Clear();
+
+                    Console.WriteLine("Il tuo avversario sarà il PC");
+                    Console.Write("Inserisci il tuo nome: ");
+                    player1[0] = Console.ReadLine()!;
+                    Console.WriteLine("Seleziona il colore della tua armata");
+                    MenuSelezioneColoreUtente();
+                    Console.ReadKey();
+                    
+
+                    
+
                     GiocaVsPc();
                     break;
 
@@ -97,12 +111,19 @@
 
     static void MenuSelezioneColoreUtente()
     {
+        var currentBackground = Console.BackgroundColor;    //memorizza il colore attuale
+        Console.BackgroundColor = ConsoleColor.Red;
         Console.WriteLine("r. Rosso");
+        Console.BackgroundColor = ConsoleColor.Blue;
         Console.WriteLine("b. Blu");
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.WriteLine("n. Nero");
+        Console.BackgroundColor = ConsoleColor.Yellow;
         Console.WriteLine("g. Giallo");
+        Console.BackgroundColor = ConsoleColor.Green;
         Console.WriteLine("v. Verde");
-    }
+        Console.BackgroundColor = currentBackground;        //ripristina il colore attuale
+            }
 
     static void MenuDiGioco()
     {
@@ -159,9 +180,8 @@
     static void ColoreUtente(string[] player)
     {
         // salvataggio colore corrente
-        var currentColor = Console.ForegroundColor;
-        var playerColor = currentColor;
-        var currentBackground = Console.BackgroundColor;
+        var currentBackground = Console.BackgroundColor;    //memorizzo il colore attuale
+        var playerColor = currentBackground;
 
         switch (player[1])
         {
@@ -171,12 +191,10 @@
 
             case "blue":
                 playerColor = ConsoleColor.Blue;
-                Console.BackgroundColor = ConsoleColor.White;
                 break;
 
             case "black":
                 playerColor = ConsoleColor.Black;
-                Console.BackgroundColor = ConsoleColor.White;
                 break;
 
             case "yellow":
@@ -195,9 +213,8 @@
                 break;
 
         }
-        Console.ForegroundColor = playerColor;
+        Console.BackgroundColor = playerColor;
         Console.WriteLine($"{player[0]}");
-        Console.ForegroundColor = currentColor;
         Console.BackgroundColor = currentBackground;
     }
 
@@ -211,6 +228,11 @@
     }
 
     static void GiocaVsUtente()
+    {
+
+    }
+
+    private static void AvvioGioco()
     {
 
     }
