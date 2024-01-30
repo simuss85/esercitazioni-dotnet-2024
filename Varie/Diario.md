@@ -611,7 +611,7 @@ Possibile soluzione 1:
 </details>
 
 <!-- ******************************************  29 gen 2024   ****************************************** -->
-<details open>
+<details>
     <summary><h3>29 gen 2024 ✔️</h3></summary>
 
 >:warning: Colloquio presso **Nextage** ore 12:00.
@@ -624,34 +624,36 @@ Argomenti:
 ### Info
 > Creare della documentazione su specifiche del programma e interazione con l'utente.
 
-### Note 
-- ..  
-
-Possibile soluzione :
-
-```c#
-
-```
-
 </details>
 
 <!-- ******************************************  30 gen 2024   ****************************************** -->
 <details>
-    <summary><h3>30 gen 2024 </h3></summary>
+    <summary><h3>30 gen 2024 ✔️</h3></summary>
+
+>:warning: Colloquio presso **Aitek** ore 14:30.
 
 Argomenti:
-- ...  
-
-### Info
-> ..  
+- Introduzione ai file *csv*.
+- Riprendiamo il programma dei dadi.
 
 ### Note 
-- ..  
-
-Possibile soluzione :
+- Per scrivere in un file di testo o visualizzare in output sul terminale, utilizzo un array di string.  
+  Si può semplificare l'inizializzazione del suo contenuto nel seguente modo:
 
 ```c#
+    //metodo classico esteso
+    string[] testo = new string[3];
+    testo[0] = "Contenuto prima riga";
+    testo[1] = "Contenuto seconda riga";
+    testo[2] = "Contenuto terza riga";
 
+    //metodo compatto 
+    string[] testo = 
+    [
+        "Contenuto prima riga",
+        "Contenuto seconda riga",
+        "Contenuto terza riga"
+    ]
 ```
 
 </details>
@@ -679,22 +681,10 @@ Possibile soluzione :
 
 <!-- ******************************************  01 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>01 feb 2024 </h3></summary>
+    <summary><h3>01 feb 2024 ⚠️</h3></summary>
 
-Argomenti:
-- ...  
-
-### Info
-> ..  
-
-### Note 
-- ..  
-
-Possibile soluzione :
-
-```c#
-
-```
+> :information_source: **Info**  
+> Lezione annullata!!!  
 
 </details>
 
