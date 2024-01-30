@@ -32,8 +32,6 @@
         // Console.ReadKey();     //ferma l'esecuzuone     
         #endregion
 
-
-
         do
         { 
             Console.Clear();
@@ -71,8 +69,7 @@
 
                 case "5":   //funzionante e testato
                     SchermataLoading('°', 20, 50);
-                    Console.Clear();
-                    Console.WriteLine("Alla prossima partita!!!");
+                    Console.WriteLine("\nAlla prossima partita!!!");
                     return;
 
                 default:
