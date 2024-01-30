@@ -1,10 +1,10 @@
-# PROGETTO GIOCO DI DADI
+# PROGETTO MINI-RISIKO
 
 ### Descrizone del gioco:
-Gioco *stile Risiko* versione super semplificata, con la mappa costituita dai soli 7 continenti (piu i due poli) senza la suddivisione delle varie nazioni. L'obiettivo finale è quello di conquistare tutti i continenti utilizzando le modalita seguenti: 
->**Lanciando i dadi**: ottenendo il punteggio maggiore contro l'avversario.  
+Gioco *stile Risiko* versione super semplificata, con la mappa costituita da 8 continenti (piu i due poli). L'obiettivo finale è quello di conquistare tutti i continenti utilizzando il lancio di due dadi. Il gioco prevede anche una *modalità rischio*, attivabile solo 1 volta per giocatore.
 
-Il gioco prevede anche una *modalità rischio*, attivabile solo 1 volta per giocatore, con le due modalità seguenti:  
+#### Regole
+>**Lanciando i dadi**: ottenendo il punteggio maggiore contro l'avversario si vince 1 continente a scelta sulla mappa.
 
 >**Pari o dispari:** viene lanciato un dado a 36 facce. Ogni utente mette in palio 1 continente in suo possesso, in caso di vittoria se ne ottengono 2 (1 in palio e 1 a scelta). A turno ogni giocatore chiede all'altro la predizione e poi lancia il dado. Il primo che sbaglia nel corso di un turno, perde.  
 
@@ -14,10 +14,10 @@ Nel caso uno dei due utenti non sia in possesso di 2 continenti, l'opzione non �
 
 
 
-### Specifiche generali:
+### DEFINIZIONE DEI REQUISITI E ANALISI:
 
-- [x] L'applicazione deve permettere di insiere il nome utente e fargli scegliere un colore per le sue armate.
-- [x] L'applicazione deve creare di volta in volta la mappa dei continenti di tipo testuale, aggiornata ad ogni turno di gioco.  
+- [x] L'applicazione permette di insiere il nome utente e fargli scegliere un colore per le sue armate.
+- [x] L'applicazione deve creare di volta in volta la mappa dei continenti di tipo testuale e colorata, aggiornata ad ogni turno di gioco.  
 - [x] Il gioco prevede l'utilizzo di due dadi a 6 facce per turno.
 - [x] Una volta per gioco un utente può decidere se scommettere anche su "Pari o dispari" oppure "Numero esatto".
 - [x] Possibilità di giocare sia contro il pc che contro un altro utente umano.  
@@ -27,7 +27,7 @@ Nel caso uno dei due utenti non sia in possesso di 2 continenti, l'opzione non �
 
 
 
-### Interazione con l'utente e Design dell'Architettura:
+### PIANIFICAZIONE E DESIGN DELL'ARCHITETTURA
 - [x] Menu di selezione iniziale con 5 opzioni:   
     >1.gioca contro pc,  
     >2.gioca contro giocatore 2  
