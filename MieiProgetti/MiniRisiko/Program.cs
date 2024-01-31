@@ -1,18 +1,17 @@
-﻿using System.Security.Cryptography;
-
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
         #region Tipi di dati e variabili
         string benvenuto = "Benvenuto a MiniRisiko";
         string? input;
-        string pathSave = @"save.txt";
-        string pathRules = @".rules.txt";
+        string pathSave = @"./files/save.csv";
+        string pathRules = @"./files/rules.txt";
         string[] player1 = ["Nome", "black"];
         string[] palyer2 = ["PC", "default"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
         bool giocoInCorso = true;
         bool primoAvvio = true;
+        Random random = new Random();
 
         #endregion
 
@@ -31,20 +30,29 @@ class Program
         //metodo RegoleGioco
         // RegoleGioco(pathRules);
 
+        //metodo SimulaLancioDadi
+        // for (int i = 0; i < 5; i++)
+        // {
+        //     int x = random.Next(1, 7);
+        //     int y = random.Next(1, 7);
+        //     SimulaLancioDadi(x, y);
+        //     Console.ReadLine();
+        // }
+
         // Console.ReadKey();     //ferma l'esecuzuone     
         #endregion
 
         do
-        { 
+        {
             Console.Clear();
             //messaggio di benvenuto
             Console.WriteLine($"{benvenuto}\n");
             if (primoAvvio)
             {
-                SchermataLoading('.', 6, 100);
+                SchermataLoading('.', 10, 100);
                 primoAvvio = false;
             }
-            
+
             //visualizzo il menù iniziale del gioco
             CreaMenuSelezionePrincipale();
             input = Console.ReadLine();
@@ -60,9 +68,6 @@ class Program
                     Console.WriteLine("Seleziona il colore della tua armata");
                     MenuSelezioneColoreUtente();
                     Console.ReadKey();
-                    
-
-                    
 
                     GiocaVsPc();
                     break;
@@ -98,7 +103,9 @@ class Program
 
     }
 
-    #region "Metodi interfaccia l'utente"
+    #region "Metodi interfaccia utente e grafica"
+
+    //Visualizza il menu di selezione principale
     static void CreaMenuSelezionePrincipale()
     {
         Console.WriteLine("Seleziona l'opzione:\n");
@@ -109,6 +116,7 @@ class Program
         Console.WriteLine("5. Esci");
     }
 
+    //Visualizza il menu per la selezione del colore giocatore
     static void MenuSelezioneColoreUtente()
     {
         var currentBackground = Console.BackgroundColor;    //memorizza il colore attuale
@@ -123,8 +131,9 @@ class Program
         Console.BackgroundColor = ConsoleColor.Green;
         Console.WriteLine("v. Verde");
         Console.BackgroundColor = currentBackground;        //ripristina il colore attuale
-            }
+    }
 
+    //Visualizza le opzioni di gioco nel turno di ogni giocatore
     static void MenuDiGioco()
     {
         Console.WriteLine("1. Lancia i dadi");
@@ -133,6 +142,7 @@ class Program
         Console.WriteLine("'ctrl'+'M' Visualizza mappa");
     }
 
+    //Visualizza una breve sintesi della mappa aggiornata con i colori
     static void DisegnaMappa()
     {
         Console.WriteLine("           Mappa del mondo");
@@ -141,6 +151,7 @@ class Program
 
     }
 
+    //Visualizza le opzioni per la scelta della modalità di rischio
     static void MenuModalitaRischio()
     {
         Console.WriteLine("1. Scommetti su pari o dispari (costo 1 continente)");
@@ -149,7 +160,7 @@ class Program
     }
     #endregion
 
-    #region "Metodi accessori"
+    #region "Metodi accessori o utility"
 
     /*Simula un caricamento del programma mediante l'utilizzo del separatore scelto
       dall'utente di tipo char.
@@ -216,6 +227,191 @@ class Program
         Console.BackgroundColor = playerColor;
         Console.WriteLine($"{player[0]}");
         Console.BackgroundColor = currentBackground;
+    }
+
+    //Simula un lancio di dadi con grafica da terminale
+    static void SimulaLancioDadi(int x, int y)
+    {
+        #region SEI
+        string[] dadoSei =
+        [
+            " _______",
+            "| *   * |",
+            "| *   * |",
+            "|_*___*_|",
+        ];
+        #endregion
+
+        #region CINQUE
+        string[] dadoCinque =
+        [
+            " _______",
+            "| *   * |",
+            "|   *   |",
+            "|_*___*_|",
+        ];
+        #endregion
+
+        #region QUATTRO
+        string[] dadoQuattro =
+        [
+            " _______",
+            "| *   * |",
+            "|       |",
+            "|_*___*_|",
+        ];
+        #endregion
+
+        #region TRE
+        string[] dadoTre =
+        [
+            " _______",
+            "|     * |",
+            "|   *   |",
+            "|_*_____|",
+        ];
+        #endregion
+
+        #region DUE
+        string[] dadoDue =
+        [
+            " _______",
+            "|     * |",
+            "|       |",
+            "|_*_____|",
+        ];
+        #endregion
+
+        #region UNO
+        string[] dadoUno =
+        [
+            " _______",
+            "|       |",
+            "|   *   |",
+            "|_______|",
+        ];
+        #endregion
+
+        string[][] dadi = [dadoSei, dadoCinque, dadoQuattro, dadoTre, dadoDue, dadoUno];
+
+        for (int i = 0; i < 2; i++) //cicla 5 volte scrivi e cancella 
+        {
+            StampaDueDadi(dadi, true);
+        }
+
+        string[] dadoX = dadoUno, dadoY = dadoUno;
+        string[][] risultato;
+
+        //salvo il primo dado
+        switch (x)
+        {
+            case 1:
+                dadoX = dadoUno;
+                break;
+
+            case 2:
+                dadoX = dadoDue;
+                break;
+
+            case 3:
+                dadoX = dadoTre;
+                break;
+
+            case 4:
+                dadoX = dadoQuattro;
+                break;
+
+            case 5:
+                dadoX = dadoCinque;
+                break;
+
+            case 6:
+                dadoX = dadoSei;
+                break;
+
+            default:
+                Console.WriteLine("Errore di runtime! SimulaLancioDadi");
+                return;
+        }
+
+        //salvo il primo dado
+        switch (y)
+        {
+            case 1:
+                dadoY = dadoUno;
+                break;
+
+            case 2:
+                dadoY = dadoDue;
+                break;
+
+            case 3:
+                dadoY = dadoTre;
+                break;
+
+            case 4:
+                dadoY = dadoQuattro;
+                break;
+
+            case 5:
+                dadoY = dadoCinque;
+                break;
+
+            case 6:
+                dadoY = dadoSei;
+                break;
+
+            default:
+                Console.WriteLine("Errore di runtime! SimulaLancioDadi");
+                return;
+        }
+
+        risultato = [dadoX, dadoY];
+        Console.Clear();
+        for (int i = 0; i < risultato.Length; i++)
+        {
+            for (int j = 0; j < risultato[i].Length; j++)
+            {
+                try
+                {
+                    Console.WriteLine($" {risultato[i][j]}\t{risultato[i + 1][j]}");
+                }
+                catch (Exception)
+                {
+                    //non fa niente
+                }
+            }
+
+        }
+        Console.WriteLine($"\nHai ottenuto {x} + {y} = {x + y}");
+    }
+
+    /*Metodo accessorio che visualizza a schermo i dadi simulando il lancio
+    
+      Input: string[][] dadi ---> contiene elementi di tipo array che rappresentano i dadi
+             bool ciclo --------> se true effettua una simulazione del rotolamento dei dadi
+    */
+
+
+    private static void StampaDueDadi(string[][] dadi, bool ciclo)
+    {
+        foreach (string[] n in dadi)
+        {
+            if (ciclo)
+            {
+                Console.Clear();
+            }
+
+            foreach (string dado in n)
+            {
+                Console.WriteLine($" {dado}\t{dado}");
+            }
+            if (ciclo)
+            {
+                Thread.Sleep(100);
+            }
+
+        }
     }
 
     #endregion

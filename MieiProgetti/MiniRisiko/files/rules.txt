@@ -1,0 +1,24 @@
+                               Descrizione del gioco:
+********************************************************************************************
+|Gioco stile Risiko versione super semplificata, con la mappa costituita da 8 continenti.  |
+|L'obiettivo finale è quello di conquistare tutti i continenti lanciando i due dadi.       |
+|Il gioco prevede anche una 'modalità rischio' attivabile solo 1 volta per giocatore.      |
+********************************************************************************************
+|Regole:                                                                                   |
+|1.Lancio dadi: con il punteggio maggiore 1 continente libero a scelta sulla mappa.        |
+|2.Pari o dispari(costa 1 continente): si scommette 1 proprio territorio e si utilizza un  |
+|  dado a 36 facce. Prima del lancio a turno si scommette se il numero che uscirà sarà pari|
+|  o dispari. Si scommette ad oltranza fino a quando uno dei due non sbaglia la predizione.|
+|  Si vince il continente scommesso dall'avversario più uno a scelta tra quelli liberi solo|
+|  se presenti.                                                                            |
+|3.Numero esatto(costa 2 continenti): si scommettono 2 propri continenti e si utilizza un  |
+|  dado a 50 facce. Prima del lancio entrambi i giocatori fanno una previsione sul numero  |
+|  che potrebbe uscire. Chi si avvicina di più entro un range minimo di 3 numeri vince la  |
+|  scommessa. In caso di parità si procede ad oltranza. Per range di 3 numeri si intende ad|
+|  esempio se il numero segreto è 23 un utente può vincere se il numero scommesso è uno tra|
+|  questi (21,22,23,24,25) e l'utente avversario scommette un numero più distante.         |
+|  Esempio: il numero segreto uscito è il 23                                               |
+|           utente1 sceglie 20; utente2 sceglie 22; VITTORIA utente2                       |
+|           utente1 sceglie 22; utente2 sceglie 24; PAREGGIO (stessa distanza nel range)   |
+|           utente1 sceglie 20; utente2 sceglie 40; PAREGGIO (entrambi fuori dal range)    |
+********************************************************************************************
