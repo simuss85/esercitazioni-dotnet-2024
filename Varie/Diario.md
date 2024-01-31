@@ -606,7 +606,7 @@ Possibile soluzione 1:
 ```
 
 ### :white_check_mark: Commit program status
-- Inseriti commit da **n.83** a **n.82**
+- Inseriti commit da **n.80** a **n.82**
 
 </details>
 
@@ -656,26 +656,32 @@ Argomenti:
     ]
 ```
 
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.83** a **n.84**
+
 </details>
 
 <!-- ******************************************  31 gen 2024   ****************************************** -->
 <details>
-    <summary><h3>31 gen 2024 </h3></summary>
+    <summary><h3>31 gen 2024 ✔️</h3></summary>
 
 Argomenti:
-- ...  
+- Esercitazioni con i file csv.
 
 ### Info
-> ..  
+> Utilizza l'iterpolazione di stringhe con il carattere `$`.
+> Installata estensione per i csv **Rainbow CSV**.
 
 ### Note 
-- ..  
-
-Possibile soluzione :
+- Utilizzata la funzione Lambda
 
 ```c#
-
+    if (!File.ReadAllLines(path).Any(riga => riga.StartsWith(nome)))
+    //Legge ogni riga del file. Per ogni riga controlla se esiste un 
+    //elemento che inizia con il nome selezionato
 ```
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.85** a **n.92**
 
 </details>
 
