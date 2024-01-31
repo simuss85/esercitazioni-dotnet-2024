@@ -6,13 +6,6 @@ Ecco alcune esercitazioni base su C# .NET Core senza l'utilizzo di namespaces.
 
 **dotnet run >> eseguire il progetto console.**
 
-- 01 - Tipi di dato e variabili
-- 02 - Operatori
-- 03 - Strutture di dati
-- 04 - Condizioni
-- 05 - Cicli
-
-
 ### 01 - Dichiarare una variabile di tipo stringa:
 <details>
     <summary> codice </summary>
@@ -4839,3 +4832,335 @@ class Program
 }
 ```
 </details>
+
+### 85 - CSV: legge 3 input da tastiera e li salva in un file csv:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string path = @"./test.csv";
+        File.Create(path).Close();
+        while (true)
+        {
+            Console.WriteLine("Inserici nome, cognome, eta");
+            string nome = Console.ReadLine()!;
+            string cognome = Console.ReadLine()!;
+            string eta = Console.ReadLine()!;
+            File.AppendAllText(path,$"{nome},{cognome},{eta}\n");
+            Console.WriteLine("Vuoi inserire un altro nome?(s/n)");
+            string risposta = Console.ReadLine()!;
+            if (risposta == "n")
+            {
+                break;
+            }
+        }
+    }
+}
+```
+</details>
+
+### 86 - CSV: legge 3 input da tastiera e li salva in un file csv solo se il nome non è gia presente nel file:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string path = @"./test.csv";
+        File.Create(path).Close();
+        while (true)
+        {
+            Console.WriteLine("Inserici nome, cognome, eta");
+            string nome = Console.ReadLine()!;
+            string cognome = Console.ReadLine()!;
+            string eta = Console.ReadLine()!;
+            string[] righe = File.ReadAllLines(path);
+            bool trovato = false;
+            foreach (string riga in righe)
+            {
+                if (riga.StartsWith(nome))
+                {
+                    trovato = true;
+                    break;
+                }
+            }
+            if (!trovato)
+            {
+                File.AppendAllText(path,$"{nome},{cognome},{eta}\n");
+            }
+            else
+            {
+                Console.WriteLine("Nome gia presente nel file");
+            }
+            
+            Console.WriteLine("Vuoi inserire un altro nome?(s/n)");
+            string risposta = Console.ReadLine()!;
+            if (risposta == "n")
+            {
+                break;
+            }
+        }
+    }
+}
+```
+</details>
+
+### 87 - CSV: legge 3 input da tastiera e li salva in un file csv anche se è gia presente un alto nome:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string path = @"./test.csv";
+        File.Create(path).Close();
+        while (true)
+        {
+            Console.WriteLine("Inserici nome, cognome, eta");
+            string nome = Console.ReadLine()!;
+            string cognome = Console.ReadLine()!;
+            string eta = Console.ReadLine()!;
+            //utilizzo la lambda questa volta
+            if (!File.ReadAllLines(path).Any(riga => riga.StartsWith(nome)))
+            {
+                File.AppendAllText(path, $"{nome},{cognome},{eta}\n");
+            }
+            else
+            {
+                string[] righe = File.ReadAllLines(path);
+                string[][] nomi = new string[righe.Length][];
+                for (int i = 0; i < righe.Length; i++)
+                {
+                    nomi[i] = righe[i].Split(',');
+                }
+                for (int i = 0; i < nomi.Length; i++)
+                {
+                    if (nomi[i][0] == nome)
+                    {
+                        nomi[i][2] = eta;
+                    }
+                }
+                File.Delete(path);
+                File.Create(path).Close();
+                foreach (string[] n in nomi)
+                {
+                    File.AppendAllText(path,$"{n[0]},{n[1]},{n[2]}");
+                }
+
+            }
+            Console.WriteLine("Vuoi inserire un altro nome?(s/n)");
+            string risposta = Console.ReadLine()!;
+            if (risposta == "n")
+            {
+                break;
+            }
+        }
+    }
+}
+```
+</details>
+
+### 88 - CSV: legge i file contenuti in una cartella e stampa il contenuto a video:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.csv");
+
+        foreach (string file in files)
+        {
+            Console.WriteLine(file);    //stampa i nomi dei file presenti nella cartella attuale
+        }
+        Console.WriteLine("Quale file vuoi leggere?");
+        string fileSelezionato = Console.ReadLine()!;
+        string[] righe = File.ReadAllLines(fileSelezionato);
+
+        foreach (string riga in righe)
+        {
+            Console.WriteLine(riga);
+        }
+    }
+}
+```
+</details>
+
+### 89 - CSV: legge i file contenuti in una cartella e chiede se vuoi eliminarlo, controlla se il file esiste o no:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.csv");
+
+        foreach (string file in files)
+        {
+            Console.WriteLine(file);    //stampa i nomi dei file presenti nella cartella attuale
+        }
+        Console.WriteLine("Quale file vuoi eliminare?");
+        string fileSelezionato = Console.ReadLine()!;
+        if (File.Exists(fileSelezionato))
+        {
+            File.Delete(fileSelezionato);
+        }
+        else
+        {
+            Console.WriteLine("Il file non esiste");
+        }
+    }
+}
+```
+</details>
+
+### 90 - CSV: legge i file contenuti in una cartella,li visualizza sotto forma di menu di scelta e visualizza il contenuto:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.csv");
+
+        foreach (string file in files)
+        {
+            Console.WriteLine(Path.GetFileName(file));    //stampa i nomi dei file presenti nella cartella attuale
+        }
+        Console.WriteLine("Quale file vuoi leggere?");
+        string fileSelezionato = Console.ReadLine()!;
+        if (File.Exists(fileSelezionato))
+        {
+            string[] righe = File.ReadAllLines(fileSelezionato);
+            foreach (string riga in righe)
+            {
+                Console.WriteLine(riga);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Il file non esiste");
+        }
+    }
+}
+```
+</details>
+
+### 91 - CSV: legge i file contenuti in una cartella, visualizza menu di scelta per leggere o eliminare:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.csv");
+
+        foreach (string file in files)
+        {
+            Console.WriteLine(Path.GetFileName(file));    //stampa i nomi dei file presenti nella cartella attuale
+        }
+        Console.WriteLine("Vuoi leggere o eliminare un file? (l/e)");
+        string risposta = Console.ReadLine()!;
+        if (risposta == "l")
+        {
+            Console.WriteLine("Quale file vuoi leggere?");
+            string fileSelezionato = Console.ReadLine()!;
+            if (File.Exists(fileSelezionato))
+            {
+                string[] righe =  File.ReadAllLines(fileSelezionato);
+                foreach (string riga in righe)
+                {
+                    Console.WriteLine(riga);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Il file selezionato non esiste");
+            }
+        }
+        else if (risposta == "e")
+        {
+            Console.WriteLine("Quale file vuoi eliminare?");
+            string fileSelezionato = Console.ReadLine()!;
+            if (File.Exists(fileSelezionato))
+            {
+                File.Delete(fileSelezionato);
+                Console.WriteLine("File eliminato");
+            }
+            else
+            {
+                Console.WriteLine("Il file non esiste");
+            }
+        }          
+    }
+}
+```
+</details>
+
+### 92 - CSV: uso del try e catch e seleziona l'opzione con dei menu:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.csv");
+
+        foreach (string file in files)
+        {
+            Console.WriteLine(Path.GetFileName(file));    //stampa i nomi dei file presenti nella cartella attuale
+        }
+        Console.WriteLine("Vuoi leggere o eliminare un file? (l/e)");
+        string risposta = Console.ReadLine()!;
+        if (risposta == "l")
+        {
+            Console.WriteLine("Quale file vuoi leggere?");
+            string fileSelezionato = Console.ReadLine()!;
+            try
+            {
+                string[] righe =  File.ReadAllLines(fileSelezionato);
+                foreach (string riga in righe)
+                {
+                    Console.WriteLine(riga);
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Il file selezionato non esiste");
+            }
+        }
+        else if (risposta == "e")
+        {
+            Console.WriteLine("Quale file vuoi eliminare?");
+            string fileSelezionato = Console.ReadLine()!;
+            try
+            {
+                File.Delete(fileSelezionato);
+                Console.WriteLine("File eliminato");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Il file non esiste");
+            }
+        }          
+    }
+}
+```
