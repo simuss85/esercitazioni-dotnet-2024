@@ -31,13 +31,13 @@
         // RegoleGioco(pathRules);
 
         //metodo SimulaLancioDadi
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     int x = random.Next(1, 7);
-        //     int y = random.Next(1, 7);
-        //     SimulaLancioDadi(x, y);
-        //     Console.ReadLine();
-        // }
+        for (int i = 0; i < 5; i++)
+        {
+            int x = random.Next(1, 7);
+            int y = random.Next(1, 7);
+            SimulaLancioDadi(x, y);
+            Console.ReadLine();
+        }
 
         // Console.ReadKey();     //ferma l'esecuzuone     
         #endregion
@@ -49,7 +49,7 @@
             Console.WriteLine($"{benvenuto}\n");
             if (primoAvvio)
             {
-                SchermataLoading('.', 10, 100);
+                SchermataLoading('.', 15, 100);
                 primoAvvio = false;
             }
 
@@ -296,7 +296,8 @@
 
         for (int i = 0; i < 2; i++) //cicla 5 volte scrivi e cancella 
         {
-            StampaDueDadi(dadi, true);
+            SimulaRotazioneDadi(dadi);
+
         }
 
         string[] dadoX = dadoUno, dadoY = dadoUno;
@@ -334,7 +335,7 @@
                 return;
         }
 
-        //salvo il primo dado
+        //salvo il secondo dado
         switch (y)
         {
             case 1:
@@ -368,49 +369,47 @@
 
         risultato = [dadoX, dadoY];
         Console.Clear();
-        for (int i = 0; i < risultato.Length; i++)
+        StampaDueDadi(risultato);
+        Console.WriteLine($"\nHai ottenuto {x} + {y} = {x + y}");
+    }
+
+    /*Metodo accessorio a SimulaLancioDadi che visualizza a schermo una coppia di dadi
+    
+      Input: string[][] dadi ---> contiene elementi di tipo array che rappresentano i dadi
+    */
+    private static void StampaDueDadi(string[][] dadi)
+    {
+        for (int i = 0; i < dadi.Length; i++)
         {
-            for (int j = 0; j < risultato[i].Length; j++)
+            for (int j = 0; j < dadi[i].Length; j++)
             {
                 try
                 {
-                    Console.WriteLine($" {risultato[i][j]}\t{risultato[i + 1][j]}");
+                    Console.WriteLine($" {dadi[i][j]}\t{dadi[i + 1][j]}");
                 }
                 catch (Exception)
                 {
                     //non fa niente
                 }
             }
-
         }
-        Console.WriteLine($"\nHai ottenuto {x} + {y} = {x + y}");
     }
+    /*Metodo accessorio a SimulaLancioDadi che crea un animazione dei dadi
 
-    /*Metodo accessorio che visualizza a schermo i dadi simulando il lancio
-    
       Input: string[][] dadi ---> contiene elementi di tipo array che rappresentano i dadi
-             bool ciclo --------> se true effettua una simulazione del rotolamento dei dadi
     */
-
-
-    private static void StampaDueDadi(string[][] dadi, bool ciclo)
+    private static void SimulaRotazioneDadi(string[][] dadi)
     {
         foreach (string[] n in dadi)
         {
-            if (ciclo)
-            {
-                Console.Clear();
-            }
+
+            Console.Clear();
 
             foreach (string dado in n)
             {
                 Console.WriteLine($" {dado}\t{dado}");
             }
-            if (ciclo)
-            {
-                Thread.Sleep(100);
-            }
-
+            Thread.Sleep(100);
         }
     }
 
