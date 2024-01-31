@@ -2,26 +2,44 @@
 {
     static void Main(string[] args)
     {
-        string path = @"./test.csv";
-        string[] lines = File.ReadAllLines(path);
-        string[][] nomi = new string[lines.Length][];
-        
-        //salvo ogni riga della matrice in un array in modo da poterlo manipolare in seguito
-        for (int i = 0; i < lines.Length; i++)
+        string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.csv");
+
+        foreach (string file in files)
         {
-            nomi[i] = lines[i].Split(","); // inserisco in ogni riga gli elementi 
+            Console.WriteLine(Path.GetFileName(file));    //stampa i nomi dei file presenti nella cartella attuale
         }
-        
-        //stampa con il doppio ciclo righe colonne
-        foreach (string[] nome in nomi)
+        Console.WriteLine("Vuoi leggere o eliminare un file? (l/e)");
+        string risposta = Console.ReadLine()!;
+        if (risposta == "l")
         {
-            string path2 = $"./{nome[0]}.csv";
-            File.Create(path2).Close();
-            for (int i = 1; i < nome.Length; i++)
+            Console.WriteLine("Quale file vuoi leggere?");
+            string fileSelezionato = Console.ReadLine()!;
+            try
             {
-                File.AppendAllText(path2,$"{nome[i]}\n");
+                string[] righe =  File.ReadAllLines(fileSelezionato);
+                foreach (string riga in righe)
+                {
+                    Console.WriteLine(riga);
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Il file selezionato non esiste");
             }
         }
-        File.Delete("nome.csv");
+        else if (risposta == "e")
+        {
+            Console.WriteLine("Quale file vuoi eliminare?");
+            string fileSelezionato = Console.ReadLine()!;
+            try
+            {
+                File.Delete(fileSelezionato);
+                Console.WriteLine("File eliminato");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Il file non esiste");
+            }
+        }          
     }
 }
