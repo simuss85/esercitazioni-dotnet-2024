@@ -9,8 +9,8 @@
         string pathRules = @"./files/rules.txt";
 
         //varibili giocatore [nome,colore,lista dei continenti da index 3 a 10 (max 8 continenti)]
-        string[] player1 = ["ID", "Nome", "black", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
-        string[] player2 = ["ID", "PC", "default", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
+        string[] player1 = ["ID", "Nome", "1", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+        string[] player2 = ["ID", "PC", "2", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
 
         bool giocoInCorso = true;
         bool primoAvvio = true;
@@ -57,7 +57,7 @@
         ID = CalcolaID(ID);
         player1[0] = ID;
         player2[0] = ID;
-        
+
         do
         {
             Console.Clear();
@@ -70,49 +70,65 @@
             }
 
             //visualizzo il menù iniziale del gioco
-            CreaMenuSelezionePrincipale();
+            MenuSelezionePrincipale();
             input = Console.ReadLine();
 
             switch (input)
             {
                 case "1":
-                    Console.Clear();
 
                     //creo player1
+                    Console.Clear();
                     player1 = CreaGiocatore(player1);
+                    Console.WriteLine("premi invio...");
                     Console.ReadKey();
-                    
+
+                    //creo player2
+                    player2 = CreaGiocatore(player2, player1[2]);
+
+                    //messaggio di sfida
+                    Console.Clear();
+                    Console.Write("Si sfideranno ");
+                    CambiaColoreUtente(player1);
+                    Console.Write(" vs ");
+                    CambiaColoreUtente(player2);
+                    Thread.Sleep(100);
+                    Console.ReadKey();
+
                     SalvaPartita(pathSave, player1, player2);
-                    
+
                     GiocaVsPc();
                     break;
 
                 case "2":
-                    Console.Clear();
-                    
+
                     //creo player1
+                    Console.Clear();
                     Console.WriteLine("Giocatore 1");
-                    Thread.Sleep(100);
+                    Thread.Sleep(150);
                     player1 = CreaGiocatore(player1);
-                    Thread.Sleep(100);
+                    Console.WriteLine("premi invio...");
+                    Console.ReadKey();
 
                     //creo player2
-                    Console.WriteLine("Giocatore 2");
-                    Thread.Sleep(100);
                     Console.Clear();
-                    player2 = CreaGiocatore(player2);
-                    Thread.Sleep(100);
-                    
-                    //
+                    Console.WriteLine("Giocatore 2");
+                    Thread.Sleep(150);
+                    player2 = CreaGiocatore(player2, player1[2]);
+                    Console.WriteLine("premi invio...");
+                    Console.ReadKey();
+
+                    //messaggio di sfida
+                    Console.Clear();
                     Console.Write("Si sfideranno ");
                     CambiaColoreUtente(player1);
-                    Console.Write(" e ");
+                    Console.Write(" vs ");
                     CambiaColoreUtente(player2);
                     Thread.Sleep(100);
                     Console.ReadKey();
-                    
+
                     SalvaPartita(pathSave, player1, player2);
-                    
+
                     GiocaVsUtente();
                     break;
 
@@ -128,7 +144,7 @@
 
                 case "5":   //funzionante e testato
                     SchermataLoading('°', 20, 50);
-                    Console.WriteLine("\nAlla prossima partita!!!");
+                    Console.WriteLine("\nAlla prossima partita!!!\n");
                     return;
 
                 default:
@@ -146,7 +162,7 @@
     #region "Metodi interfaccia utente e grafica"
 
     //Visualizza il menu di selezione principale
-    static void CreaMenuSelezionePrincipale()
+    static void MenuSelezionePrincipale()
     {
         Console.WriteLine("Seleziona l'opzione:\n");
         Console.WriteLine("1. Gioca contro il pc");
@@ -156,20 +172,87 @@
         Console.WriteLine("5. Esci");
     }
 
-    //Visualizza il menu per la selezione del colore giocatore
-    static void MenuSelezioneColoreUtente()
+    /*Visualizza il menu per la selezione del colore giocatore, nel caso
+      tocchi al secondo giocatore il menù esclude il colore gia scelto.
+
+      Input: string c -----> contiene il carattere del colore gia scelto
+    */
+
+    static void MenuSelezioneColoreUtente(string c)
     {
         var currentBackground = Console.BackgroundColor;    //memorizza il colore attuale
-        Console.BackgroundColor = ConsoleColor.Red;
-        Console.WriteLine("r. Rosso");
-        Console.BackgroundColor = ConsoleColor.Blue;
-        Console.WriteLine("b. Blu");
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.WriteLine("n. Nero");
-        Console.BackgroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("g. Giallo");
-        Console.BackgroundColor = ConsoleColor.Green;
-        Console.WriteLine("v. Verde");
+        // Console.WriteLine($"Valore passato : {c}\n");     //DEBUG
+        Console.WriteLine("Seleziona il colore della tua armata");
+        switch (c.ToLower())
+        {
+            case "r":
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.WriteLine("b. Blu");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("g. Giallo");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("v. Verde");
+                break;
+
+            case "b":
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("r. Rosso");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("g. Giallo");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("v. Verde");
+                break;
+
+            case "n":
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("r. Rosso");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.WriteLine("b. Blu");
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("g. Giallo");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("v. Verde");
+                break;
+
+            case "g":
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("r. Rosso");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.WriteLine("b. Blu");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("v. Verde");
+                break;
+
+            case "v":
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("r. Rosso");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.WriteLine("b. Blu");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("g. Giallo");
+                break;
+
+            default:
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("r. Rosso");
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.WriteLine("b. Blu");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("g. Giallo");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.WriteLine("v. Verde");
+                break;
+        }
         Console.BackgroundColor = currentBackground;        //ripristina il colore attuale
     }
 
@@ -254,23 +337,23 @@
 
         switch (player[2])
         {
-            case "red":
+            case "rosso":
                 playerColor = ConsoleColor.Red;
                 break;
 
-            case "blue":
+            case "blu":
                 playerColor = ConsoleColor.Blue;
                 break;
 
-            case "black":
+            case "nero":
                 playerColor = ConsoleColor.Black;
                 break;
 
-            case "yellow":
+            case "giallo":
                 playerColor = ConsoleColor.Yellow;
                 break;
 
-            case "green":
+            case "verde":
                 playerColor = ConsoleColor.Green;
                 break;
 
@@ -278,7 +361,7 @@
                 break;
 
             default:
-                Console.WriteLine("Errore di runtime!!!");
+                Console.WriteLine("Errore [CambiaColoreUtente]!!!");
                 break;
 
         }
@@ -288,45 +371,49 @@
     }
 
     /*Metodo che assegna il colore all'utente in base alla sua scelta.
-      Scrive il risultato nell array player[2] = "colore"
+      Scrive il risultato nell array player[2] = "colore"; player2[2] = "colore"
 
+      Input: string[] g -----> array del giocatore player1 o player2
+              string c --------> indica il colore che è gia stato preso
     */
-    static void SceltaColore(string[] g1)
+    static void SceltaColore(string[] g, string c)
     {
         bool corretto = false;
         do  //controlla finche l'inserimento non è corretto
         {
-            Console.WriteLine("Scegli: ");
+            Console.Write("\nScegli: ");
             string input = Console.ReadLine()!.ToLower();
             switch (input)
             {
-                case "r":
-                    g1[2] = "red";
+                case "r" when c != input:
+                    g[2] = "rosso";
                     corretto = true;
                     break;
 
-                case "b":
-                    g1[2] = "blue";
+                case "b" when c != input:
+                    g[2] = "blu";
                     corretto = true;
                     break;
 
-                case "n":
-                    g1[2] = "black";
+                case "n" when c != input:
+                    g[2] = "nero";
                     corretto = true;
                     break;
 
-                case "g":
-                    g1[2] = "yellow";
+                case "g" when c != input:
+                    g[2] = "giallo";
                     corretto = true;
                     break;
 
-                case "v":
-                    g1[2] = "green";
+                case "v" when c != input:
+                    g[2] = "verde";
                     corretto = true;
                     break;
 
                 default:
-                    Console.WriteLine("Errore di scelta");
+                    //caso digitazione errata
+                    Console.Clear();
+                    MenuSelezioneColoreUtente(c);
                     corretto = false;
                     break;
             }
@@ -524,12 +611,12 @@
 
     static void GiocaVsPc()
     {
-        Console.WriteLine("Il tuo avversario sarà il PC");
+
     }
 
     static void GiocaVsUtente()
     {
-        Console.WriteLine("Il tuo avversario sarà utente2");
+
     }
 
     private static void AvvioGioco()
@@ -660,30 +747,83 @@
 
     /*Metodo che permette di creare un gioctore. Scelta del nome, del colore e
       messaggio di benvenuto.
+      giocatore
 
-      Input: string[] g -----> array del giocatore player1 o player2
+      Input: string[] player -----> array del giocatore player1
       colore
     */
-    static string[] CreaGiocatore(string[] g)
+    static string[] CreaGiocatore(string[] player)
     {
         //iserisci il nome
         Console.Write("Inserisci il tuo nome: ");
-        g[1] = Console.ReadLine()!;
+        player[1] = Console.ReadLine()!;
         Console.Clear();
 
         //seleziona il colore
-        Console.WriteLine("Seleziona il colore della tua armata");
-        MenuSelezioneColoreUtente();
-        Console.WriteLine();
-        SceltaColore(g);
+        MenuSelezioneColoreUtente(player[2][..1]);   //invia il primo carattere del colore 
+        SceltaColore(player, player[2][..1]);  //invia array e primo carattere del colore 
         Console.Clear();
 
         //messaggio di saluto
         Console.Write($"Benvenuto ");
-        CambiaColoreUtente(g);
+        CambiaColoreUtente(player);
         Console.WriteLine();
 
-        return g;
+        return player;
+    }
+    /*Metodo che permette di creare un gioctore. Scelta del nome, del colore e
+      messaggio di benvenuto.
+      giocatore
+
+      Input: string[] player2 -----> array del giocatore player2
+      colore
+    */
+    static string[] CreaGiocatore(string[] player2, string colorePlayer1)
+    {
+        if (player2[1] == "PC")
+        {
+            switch (colorePlayer1)
+            {
+                case "rosso":
+                    player2[2] = "verde";
+                    break;
+
+                case "blu":
+                    player2[2] = "yellow";
+                    break;
+
+                case "nero":
+                    player2[2] = "verde";
+                    break;
+
+                case "giallo":
+                    player2[2] = "nero";
+                    break;
+
+                case "verde":
+                    player2[2] = "rosso";
+                    break;
+            }
+        }
+        else
+        {
+            //iserisci il nome
+            Console.Write("Inserisci il tuo nome: ");
+            player2[1] = Console.ReadLine()!;
+            Console.Clear();
+
+            //seleziona il colore
+            MenuSelezioneColoreUtente(colorePlayer1[..1]);   //invia il primo carattere del colore 
+            SceltaColore(player2, colorePlayer1[..1]);  //invia array e primo carattere del colore 
+            Console.Clear();
+
+            //messaggio di saluto
+            Console.Write($"Benvenuto ");
+            CambiaColoreUtente(player2);
+            Console.WriteLine();
+        }
+
+        return player2;
     }
 
     #endregion
