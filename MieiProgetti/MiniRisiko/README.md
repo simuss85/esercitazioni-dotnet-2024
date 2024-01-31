@@ -17,6 +17,7 @@ Nel caso uno dei due utenti non sia in possesso di 2 continenti, l'opzione non √
 ### DEFINIZIONE DEI REQUISITI E ANALISI:
 
 - [x] L'applicazione permette di insiere il nome utente e fargli scegliere un colore per le sue armate.
+- [x] L'applicazione deve informare l'utente che un colore non √® selezionabile.
 - [x] L'applicazione permette di visualizzare una mini mappa testuale e colorata sempre aggiornata in ogni turno.  
 - [x] L'applicazione permette di utilizzare due dadi a 6 facce per turno.
 - [x] Una volta per gioco un utente pu√≤ decidere se scommettere anche su "Pari o dispari" oppure "Numero esatto".
@@ -27,6 +28,7 @@ Nel caso uno dei due utenti non sia in possesso di 2 continenti, l'opzione non √
 - [x] L'applicazione permette di salvare la mappa in un file txt
 - [x] L'applicazione permette di salvare i dati di gioco in un file csv.
 - [ ] L'applicazione permette di selezionare ogni voce di menu con le frecce su/giu.
+
 
 
 
