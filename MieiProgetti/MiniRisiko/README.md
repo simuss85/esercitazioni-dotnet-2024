@@ -17,12 +17,16 @@ Nel caso uno dei due utenti non sia in possesso di 2 continenti, l'opzione non �
 ### DEFINIZIONE DEI REQUISITI E ANALISI:
 
 - [x] L'applicazione permette di insiere il nome utente e fargli scegliere un colore per le sue armate.
-- [x] L'applicazione deve creare di volta in volta la mappa dei continenti di tipo testuale e colorata, aggiornata ad ogni turno di gioco.  
-- [x] Il gioco prevede l'utilizzo di due dadi a 6 facce per turno.
+- [x] L'applicazione permette di visualizzare una mini mappa testuale e colorata sempre aggiornata in ogni turno.  
+- [x] L'applicazione permette di utilizzare due dadi a 6 facce per turno.
 - [x] Una volta per gioco un utente può decidere se scommettere anche su "Pari o dispari" oppure "Numero esatto".
 - [x] Possibilità di giocare sia contro il pc che contro un altro utente umano.  
 - [x] Possibilità di salvare la partita e riprenderla successivamente utilizzando file.txt.
 - [x] Possibilità di visualizzare ad ogni turno la situazione attuale della mappa mediante una combinazione di tasti "ctrl"+"m".
+- [x] L'applicazione permette di visualizzare a schermo una simulazione del lancio dei dadi.
+- [x] L'applicazione permette di salvare la mappa in un file txt
+- [x] L'applicazione permette di salvare i dati di gioco in un file csv.
+- [ ] L'applicazione permette di selezionare ogni voce di menu con le frecce su/giu.
 
 
 
