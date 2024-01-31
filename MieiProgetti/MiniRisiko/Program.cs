@@ -7,11 +7,15 @@
         string? input;
         string pathSave = @"./files/save.csv";
         string pathRules = @"./files/rules.txt";
-        string[] player1 = ["Nome", "black"];
-        string[] palyer2 = ["PC", "default"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
+
+        //varibili giocatore [nome,colore,lista dei continenti da index 3 a 10 (max 8 continenti)]
+        string[] player1 = ["ID", "Nome", "black", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
+        string[] player2 = ["ID", "PC", "default", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
+
         bool giocoInCorso = true;
         bool primoAvvio = true;
         Random random = new Random();
+        string ID = DateTime.Now.ToString();
 
         #endregion
 
@@ -31,17 +35,29 @@
         // RegoleGioco(pathRules);
 
         //metodo SimulaLancioDadi
-        for (int i = 0; i < 5; i++)
-        {
-            int x = random.Next(1, 7);
-            int y = random.Next(1, 7);
-            SimulaLancioDadi(x, y);
-            Console.ReadLine();
-        }
+        // for (int i = 0; i < 5; i++)
+        // {
+        //     int x = random.Next(1, 7);
+        //     int y = random.Next(1, 7);
+        //     SimulaLancioDadi(x, y);
+        //     Console.ReadLine();
+        // }
+
+        //metodo SalvaPartita
+        // SalvaPartita(pathSave,player1,palyer2);
+
+        //metodo SceltaColore
+        // SceltaColore(player1);
+        // Console.WriteLine($"{player1[1]},{player1[2]}");
 
         // Console.ReadKey();     //ferma l'esecuzuone     
         #endregion
 
+        //calcola ID della partita attuale e lo memorizzo nell 'utente
+        ID = CalcolaID(ID);
+        player1[0] = ID;
+        player2[0] = ID;
+        
         do
         {
             Console.Clear();
@@ -49,7 +65,7 @@
             Console.WriteLine($"{benvenuto}\n");
             if (primoAvvio)
             {
-                SchermataLoading('.', 15, 100);
+                SchermataLoading('°', 15, 80);
                 primoAvvio = false;
             }
 
@@ -62,17 +78,41 @@
                 case "1":
                     Console.Clear();
 
-                    Console.WriteLine("Il tuo avversario sarà il PC");
-                    Console.Write("Inserisci il tuo nome: ");
-                    player1[0] = Console.ReadLine()!;
-                    Console.WriteLine("Seleziona il colore della tua armata");
-                    MenuSelezioneColoreUtente();
+                    //creo player1
+                    player1 = CreaGiocatore(player1);
                     Console.ReadKey();
-
+                    
+                    SalvaPartita(pathSave, player1, player2);
+                    
                     GiocaVsPc();
                     break;
 
                 case "2":
+                    Console.Clear();
+                    
+                    //creo player1
+                    Console.WriteLine("Giocatore 1");
+                    Thread.Sleep(100);
+                    player1 = CreaGiocatore(player1);
+                    Thread.Sleep(100);
+
+                    //creo player2
+                    Console.WriteLine("Giocatore 2");
+                    Thread.Sleep(100);
+                    Console.Clear();
+                    player2 = CreaGiocatore(player2);
+                    Thread.Sleep(100);
+                    
+                    //
+                    Console.Write("Si sfideranno ");
+                    CambiaColoreUtente(player1);
+                    Console.Write(" e ");
+                    CambiaColoreUtente(player2);
+                    Thread.Sleep(100);
+                    Console.ReadKey();
+                    
+                    SalvaPartita(pathSave, player1, player2);
+                    
                     GiocaVsUtente();
                     break;
 
@@ -162,6 +202,24 @@
 
     #region "Metodi accessori o utility"
 
+    /*Metodo che calcola un ID univoco per la partita in corso, utile per i salvataggi.
+      Utilizza la data attuale in formato DD/MM/YYYY hh:mm:ss, estrae la parte numerica, 
+      la somma e restituisce un numero di tipo intero.
+
+      Input: string ID -----> una stringa che contiene la data attuale 
+
+    */
+    static string CalcolaID(string ID)
+    {
+        string[] valoriSingoli = ID.Split(['/', ':', ' ']);
+        int totale = 0;
+        foreach (string n in valoriSingoli)
+        {
+            totale += int.Parse(n);
+        }
+        return totale.ToString();
+    }
+
     /*Simula un caricamento del programma mediante l'utilizzo del separatore scelto
       dall'utente di tipo char.
       Stampa i puntini in base al numero inserito in input e ritorna con il cursore
@@ -185,16 +243,16 @@
     /*Cambia il colore del carattere in base all'utente attuale, prendere i dati dall'array 
       player. Scrive il nome del colore selezionato e resetta il colore di default
     
-      Input: string[] player ---> array di due elementi ["nome","colore"]
+      Input: string[] player ---> array di giocatore; si utilizza player[2] = "Colore"
       
     */
-    static void ColoreUtente(string[] player)
+    static void CambiaColoreUtente(string[] player)
     {
         // salvataggio colore corrente
         var currentBackground = Console.BackgroundColor;    //memorizzo il colore attuale
         var playerColor = currentBackground;
 
-        switch (player[1])
+        switch (player[2])
         {
             case "red":
                 playerColor = ConsoleColor.Red;
@@ -225,10 +283,58 @@
 
         }
         Console.BackgroundColor = playerColor;
-        Console.WriteLine($"{player[0]}");
+        Console.Write($"{player[1]}");
         Console.BackgroundColor = currentBackground;
     }
 
+    /*Metodo che assegna il colore all'utente in base alla sua scelta.
+      Scrive il risultato nell array player[2] = "colore"
+
+    */
+    static void SceltaColore(string[] g1)
+    {
+        bool corretto = false;
+        do  //controlla finche l'inserimento non è corretto
+        {
+            Console.WriteLine("Scegli: ");
+            string input = Console.ReadLine()!.ToLower();
+            switch (input)
+            {
+                case "r":
+                    g1[2] = "red";
+                    corretto = true;
+                    break;
+
+                case "b":
+                    g1[2] = "blue";
+                    corretto = true;
+                    break;
+
+                case "n":
+                    g1[2] = "black";
+                    corretto = true;
+                    break;
+
+                case "g":
+                    g1[2] = "yellow";
+                    corretto = true;
+                    break;
+
+                case "v":
+                    g1[2] = "green";
+                    corretto = true;
+                    break;
+
+                default:
+                    Console.WriteLine("Errore di scelta");
+                    corretto = false;
+                    break;
+            }
+        }
+        while (!corretto);
+
+
+    }
     //Simula un lancio di dadi con grafica da terminale
     static void SimulaLancioDadi(int x, int y)
     {
@@ -402,7 +508,6 @@
     {
         foreach (string[] n in dadi)
         {
-
             Console.Clear();
 
             foreach (string dado in n)
@@ -419,12 +524,12 @@
 
     static void GiocaVsPc()
     {
-
+        Console.WriteLine("Il tuo avversario sarà il PC");
     }
 
     static void GiocaVsUtente()
     {
-
+        Console.WriteLine("Il tuo avversario sarà utente2");
     }
 
     private static void AvvioGioco()
@@ -456,8 +561,33 @@
         }
     }
 
-    static void SalvaPartita()
+    /*Metodo che salva in un file csv i dati della partita attuali che sono
+      presenti nell'array di ogni giocatore (player1 e player2). 
+      Se il file non esiste lo crea da zero includendo le varie etichette.
+
+      Input: string path -----> il percorso del file di salvataggio
+             string[] g1 -----> array del player1
+             string[] g2 -----> array del player2
+    */
+    static void SalvaPartita(string path, string[] g1, string[] g2)
     {
+        if (!File.Exists(path))
+        {
+            File.Create(path).Close();
+            File.WriteAllText(path, "ID,Giocatori,Colori,[continenti],\n");
+        }
+        string[] righe = File.ReadAllLines(path);
+
+        foreach (string valore in g1)
+        {
+            File.AppendAllText(path, $"{valore},");
+        }
+        File.AppendAllText(path, "\n");
+        foreach (string valore in g2)
+        {
+            File.AppendAllText(path, $"{valore},");
+        }
+        File.AppendAllText(path, "\n");
 
     }
 
@@ -527,6 +657,35 @@
 
         return regole;
     }
+
+    /*Metodo che permette di creare un gioctore. Scelta del nome, del colore e
+      messaggio di benvenuto.
+
+      Input: string[] g -----> array del giocatore player1 o player2
+      colore
+    */
+    static string[] CreaGiocatore(string[] g)
+    {
+        //iserisci il nome
+        Console.Write("Inserisci il tuo nome: ");
+        g[1] = Console.ReadLine()!;
+        Console.Clear();
+
+        //seleziona il colore
+        Console.WriteLine("Seleziona il colore della tua armata");
+        MenuSelezioneColoreUtente();
+        Console.WriteLine();
+        SceltaColore(g);
+        Console.Clear();
+
+        //messaggio di saluto
+        Console.Write($"Benvenuto ");
+        CambiaColoreUtente(g);
+        Console.WriteLine();
+
+        return g;
+    }
+
     #endregion
 
 }
