@@ -1,0 +1,11 @@
+*** FIX ***
+
+*** NUOVI ***
+
+
+*** DA FARE ***
+- modifica output punteggio, deve essere formattato con il nome inserito
+- CaricaPartita deve ricreare le liste e l'array giocatori. (o solo le liste)
+- modificare il SalvaPartita per includere le liste nell array
+- elimina il numero in output quando si seleziona un menu
+- inserici i suoni
