@@ -1,23 +1,39 @@
-﻿using System.Drawing;
+﻿
+using System.Net.NetworkInformation;
 
 class Program
 {
     static void Main(string[] args)
     {
         #region Tipi di dati e variabili
-        string benvenuto = "Benvenuto a MiniRisiko";
-        char opzScelta;
+        //variabili di inizializzazione file e sessione
         string pathSave = @"./files/save.csv";
         string pathRules = @"./files/rules.txt";
+        string ID = DateTime.Now.ToString();
 
-        //varibili giocatore [nome,colore,lista dei continenti da index 3 a 10 (max 8 continenti)]
-        string[] player1 = ["ID", "Nome", "1", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
-        string[] player2 = ["ID", "PC", "2", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
+        //varibili giocatore [nome,colore,lista dei territori da index 3 a 10 (max 8 territori)]
+        string[] player1 = ["ID", "Nome", "1", "_", "_", "_", "_", "_", "_", "_", "_"];
+        string[] player2 = ["ID", "PC", "2", "_", "_", "_", "_", "_", "_", "_", "_"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
 
+        List<string> territoriP1 = [];  //contiene i territori del player1
+        List<string> territoriP2 = [];  //contiene i territori del player2
+        List<string> territori =    //elenco di tutti i territori
+        [
+            "AMERICA",
+            "SUD AMERICA",
+            "EUROPA",
+            "AFRICA",
+            "ASIA",
+            "OCEANIA",
+            "POLO NORD",
+            "POLO SUD"
+        ];
+
+        string benvenuto = "Benvenuto a MiniRisiko";
         bool primoAvvio = true;     //per la prima schermata di loading
         bool fine = false;      //decreta la fine del gioco
-        Random random = new Random();
-        string ID = DateTime.Now.ToString();
+        char opzScelta;
+
 
         #endregion
 
@@ -52,6 +68,9 @@ class Program
         // SceltaColore(player1);
         // Console.WriteLine($"{player1[1]},{player1[2]}");
 
+        //metodo VisualizzaListaNumerata
+        // VisualizzaListaNumerata(territori);
+
         // Console.ReadKey();     //ferma l'esecuzuone     
         #endregion
 
@@ -67,7 +86,7 @@ class Program
             Console.WriteLine($"{benvenuto}\n");
             if (primoAvvio)
             {
-                SchermataLoading('°', 15, 80);
+                SchermataLoading('°', 20, 50);
                 primoAvvio = false;
             }
 
@@ -91,9 +110,9 @@ class Program
                     //messaggio di sfida
                     Console.Clear();
                     Console.Write("Si sfideranno ");
-                    MessaggioAColori(player1[1], player1[2],'b');
+                    MessaggioAColori(player1[1], player1[2], 'b');
                     Console.Write(" vs ");
-                    MessaggioAColori(player2[1], player2[2],'b');
+                    MessaggioAColori(player2[1], player2[2], 'b');
                     Console.WriteLine("\n\npremi invio....");
                     Console.ReadKey();
 
@@ -101,7 +120,7 @@ class Program
 
                     while (!fine)
                     {
-                        fine = GiocaVsPc(player1, player2, pathSave);
+                        fine = GiocaVsPc(player1, player2, pathSave, territoriP1, territoriP2, territori);
                     }
 
                     break;
@@ -127,9 +146,9 @@ class Program
                     //messaggio di sfida
                     Console.Clear();
                     Console.Write("Si sfideranno ");
-                    MessaggioAColori(player1[1], player1[2],'b');
+                    MessaggioAColori(player1[1], player1[2], 'b');
                     Console.Write(" vs ");
-                    MessaggioAColori(player2[1], player2[2],'b');
+                    MessaggioAColori(player2[1], player2[2], 'b');
                     Console.WriteLine("\n\npremi invio....");
                     Console.ReadKey();
 
@@ -143,7 +162,16 @@ class Program
                     break;
 
                 case '3':
-                    CaricaPartita(pathSave);
+                    List<string>[] listeGiocatori = CaricaPartita(pathSave, territoriP1, territoriP2);
+                    territoriP1 = listeGiocatori[0];
+                    territoriP2 = listeGiocatori[1];
+                    
+                    Console.WriteLine("Lista giocatore1");  //DEBUG
+                    VisualizzaListaNumerata(territoriP1);   //DEBUG
+                    Console.WriteLine("Lista giocatore1");  //DEBUG
+                    VisualizzaListaNumerata(territoriP2);   //DEBUG
+                    Console.ReadKey();
+
                     break;
 
                 case '4':   //funzionante e testato
@@ -154,7 +182,7 @@ class Program
 
                 case '5':   //funzionante e testato
                     SchermataLoading('°', 20, 50);
-                    MessaggioAColori("Arrivederci alla prossima partita!!!", "blu",'f');
+                    MessaggioAColori("Arrivederci alla prossima partita!!!", "blu", 'f');
                     fine = true;
                     break;
 
@@ -291,13 +319,24 @@ class Program
     //Visualizza le opzioni per la scelta della modalità di rischio
     static void MenuModalitaRischio()
     {
-        Console.WriteLine("1. Scommetti su pari o dispari (costo 1 continente)");
-        Console.WriteLine("2. Scommetti sul numero esatto (costo 2 continenti)");
+        Console.WriteLine("1. Scommetti su pari o dispari (costo 1 territorio)");
+        Console.WriteLine("2. Scommetti sul numero esatto (costo 2 territori)");
         Console.WriteLine("r. Ritorna alla schermata precedente");
     }
     #endregion
 
     #region "Metodi accessori o utility"
+
+    //Stampa a video il contenuto della lista
+    static void VisualizzaListaNumerata(List<string> lista)
+    {
+        int count = 1;
+        foreach (string elemento in lista)
+        {
+            Console.WriteLine($"{count}. {elemento}");
+            count++;
+        }
+    }
 
     /*Metodo che calcola un ID univoco per la partita in corso, utile per i salvataggi.
       Utilizza la data attuale in formato DD/MM/YYYY hh:mm:ss, estrae la parte numerica, 
@@ -335,6 +374,7 @@ class Program
             Thread.Sleep(ms);
         }
         Console.Write("\r");
+        Console.Write("                   \r");
     }
 
     /*Cambia il colore del carattere in base all'utente attuale, prendere i dati dall'array 
@@ -388,7 +428,7 @@ class Program
     */
     static void MessaggioTurno(string[] player)
     {
-        MessaggioAColori(player[1], player[2],'b');
+        MessaggioAColori(player[1], player[2], 'b');
         Console.WriteLine(" è il tuo turno");
     }
 
@@ -397,9 +437,9 @@ class Program
 
       Input: string[] player -----> array player giocatore attuale
     */
-    static void Messaggiofine(string[] player)
+    static void MessaggioVittoria(string[] player)
     {
-        MessaggioAColori(player[1], player[2],'b');
+        MessaggioAColori(player[1], player[2], 'b');
         Console.WriteLine(" hai vinto la sfida");
     }
 
@@ -410,7 +450,7 @@ class Program
     */
     static void MessaggioSconfitta(string[] player)
     {
-        MessaggioAColori(player[1], player[2],'b');
+        MessaggioAColori(player[1], player[2], 'b');
         Console.WriteLine(" hai perso la sfida");
     }
 
@@ -426,6 +466,36 @@ class Program
              string colore --------> il colore scelto per la stampa
              char opzione ---------> f cambia il testo; b cambia lo sfondo
     
+    */
+
+    /*Scrive nel formato del player attuale il messaggio di conquista
+      del territorio. 
+      Va a capo dopo il messaggio
+
+      Input: string[] player ------> array giocatore attuale
+             string territorio ----> il territorio appena conquistato/selezionato
+    */
+    static void MessaggioTerritorioConquistato(string[] player, string territorio)
+    {
+        MessaggioAColori(player[1], player[2], 'b');
+        Console.Write(" hai conquistato il seguente territorio: ");
+        MessaggioAColori(territorio, player[2], 'f');
+        Console.WriteLine();
+    }
+
+    /*Stampa un messaggio a colori. Possibilità di decidere se cambiare il:
+      - colore del carattere con opzione 'f' 
+      - colore dello sfondo con opzione 'b'
+      I colori disponibili sono: 
+                                    - "rosso"
+                                    - "verde"
+                                    - "magenta"
+                                    - "blu"
+                                    - "giallo"
+
+      Input: string messaggio -----> il testo da stampare
+             string colore --------> il colore scelto
+             char opzione ---------> 'f' o 'b'
     */
     static void MessaggioAColori(string messaggio, string colore, char opzione)
     {
@@ -540,7 +610,7 @@ class Program
 
                 default:
                     //caso digitazione errata
-                    MessaggioAColori("Selezione errata", "rosso",'f');
+                    MessaggioAColori("Selezione errata", "rosso", 'f');
                     Thread.Sleep(800);
                     Console.Clear();
                     MenuSelezioneColoreUtente(c);
@@ -745,7 +815,10 @@ class Program
 
     #region "Metodi di gioco"
 
-    static bool GiocaVsPc(string[] player1, string[] player2, string path)
+    /*Avvia il gioco contro il pc 
+    */
+    static bool GiocaVsPc(string[] player1, string[] player2, string path,
+                        List<string> listaP1, List<string> listaP2, List<string> territori)
     {
         Console.Clear();
         MessaggioTurno(player1);
@@ -757,15 +830,77 @@ class Program
             case '1':
                 if (LanciaDadi(player1, player2) == 1)
                 {
-                    Messaggiofine(player1);
+                    MessaggioVittoria(player1);
                     Console.WriteLine("\npremi invio.....");
                     Console.ReadKey();
+                    Console.Clear();
+
+                    //se c'è ancora un territorio libero
+                    if (territori.Count > 0)
+                    {
+                        if (territori.Count == 1)
+                        {
+                            MessaggioTerritorioConquistato(player1, territori.First());
+                            Console.ReadKey();
+
+                            SceltaTerritorio(listaP1, territori.First(), territori);
+                            Console.ReadKey();
+
+                        }
+                        else
+                        {
+                            int n = 0;
+                            bool corretto = false;
+                            string? input;
+                            do
+                            {
+                                Console.Clear();
+
+                                MessaggioAColori(player1[1], player1[2], 'b');
+                                Console.WriteLine(" scegli il territorio:\n");
+                                VisualizzaListaNumerata(territori);
+                                Console.Write("\nScegli: ");
+
+                                input = Console.ReadLine()!;
+                                if (!int.TryParse(input, out n))
+                                {
+                                    MessaggioAColori("Seleziona correttamente il territorio\r", "rosso", 'f');
+                                    Thread.Sleep(800);
+                                }
+                                else if (n < 1 || n > territori.Count)
+                                {
+                                    MessaggioAColori("Seleziona correttamente il territorio\r", "rosso", 'f');
+                                    Thread.Sleep(800);
+                                }
+                                else
+                                {
+                                    n--;
+                                    corretto = true;
+                                }
+                            }
+                            while (!corretto);
+
+                            Console.Clear();
+                            MessaggioTerritorioConquistato(player1, territori.ElementAt(n));
+                            SceltaTerritorio(listaP1, territori.ElementAt(n), territori);
+                            Console.WriteLine("\nLista aggiornata:\n");
+                            VisualizzaListaNumerata(territori);
+                            Console.ReadKey();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("DEVI CONQUISTARE DAL GIOCATORE AVVERSARIO");
+                        Console.ReadKey();
+
+                    }
                 }
                 else
                 {
                     MessaggioSconfitta(player1);
                     Console.WriteLine("\npremi invio.....");
                     Console.ReadKey();
+                    Console.Clear();
                 }
                 break;
 
@@ -774,7 +909,7 @@ class Program
                 break;
 
             case 's':
-                fine = SalvaPartita(path, player1, player2); //se va tutto bene, torna il valore true
+                fine = SalvaPartita(path, player1, player2, listaP1, listaP2); //se va tutto bene, torna il valore true
                 break;
 
             default:
@@ -818,9 +953,6 @@ class Program
         Console.ReadKey();
         Console.Clear();
 
-
-
-
         //tira i dadi player2
         dadoX = random.Next(1, 7);
         dadoY = random.Next(1, 7);
@@ -836,41 +968,122 @@ class Program
         //riga del titolo
         Console.WriteLine("Risultato turno:\n");
         //riga dei nomi
-        MessaggioAColori(player1[1],player1[2],'b');    //nome1
+        MessaggioAColori(player1[1], player1[2], 'b');    //nome1
         Console.Write("   vs   ");   //spazio tra i nomi
-        MessaggioAColori(player2[1],player2[2],'b');    //nome2
+        MessaggioAColori(player2[1], player2[2], 'b');    //nome2
         //riga dei punteggi
         Console.Write($"\n  {risultato1}    |");
         Console.Write($"   {risultato2}\n\n");
 
-        
-
-
         return risultato2 >= risultato1 ? 2 : 1;
+    }
+
+    /*Prende un territorio dal giocatore avversario
+        
+    */
+    static void Conquista(List<string> player1, List<string> player2)
+    {
+
+    }
+
+    /*Esegue il salvataggio del territorio nell'array player, elimina il territorio dalla lista
+      
+      Input: List<string> player -------------> array del giocatore che effettua la scelta
+             string territorioScelto -----> il nome del territorio selezionato 
+             List<string> territori ------> elenco aggiornato dei territori liberi
+    */
+    static void SceltaTerritorio(List<string> player1, string territorioScelto, List<string> territori)
+    {
+        //aggiunge il territorio nella lista utente
+        if (player1.Contains(territorioScelto))
+        {
+            MessaggioAColori("Errore [SceltaTerritorio]!!!", "rosso", 'f');
+        }
+        else
+        {
+            player1.Add(territorioScelto);
+            territori.Remove(territorioScelto);
+        }
+        // Console.WriteLine("Eseguito");  //DEBUG
+        // Console.ReadKey();              //DEBUG
+    }
+
+    /*Copia i territori conquistati dal giocatore nel suo array in modo da
+      essere pronto per il salvataggio sul file csv.
+
+      Input: string[] player ------> array del giocatore 
+             List<string> listaP --> lista dei suoi territori
+    */
+    static string[] MemorizzaSuArray(string[] player, List<string> listaP)
+    {
+        int n = 3;
+        foreach (string territorio in listaP)   //per ogni elemento della lista
+        {
+            player[n] = territorio;
+            n++;
+        }
+        return player;
     }
 
     /*Visualizza l'elenco delle partite in corso e permette la selezione di 
     una di esse ripristinando lo stato del gioco fino a quel momento. 
     Gestisce le eccezioni sui file
 
-    
     INPUT: string pathSave ---> il path del file di salvataggio 
     */
-    static void CaricaPartita(string path)
+    static List<string>[] CaricaPartita(string path, List<string> listaP1, List<string> listaP2)
     {
+        string ID = "2124";
+        List<string>[] value = [listaP1, listaP2];
+        string[] p1 = new string[11];
+        string[] p2 = new string[11];
         try
         {
             string[] file = File.ReadAllLines(path);
-            foreach (string linea in file)
+            Console.Clear();
+            Console.WriteLine("Lettura del file in corso");
+            SchermataLoading('°',15,80);
+
+            int contaRighe = 1;
+            foreach (string riga in file)
             {
-                Console.WriteLine(linea);
+                if (!riga.StartsWith(ID))
+                {
+                    contaRighe++;
+                }
+            }
+
+            if (contaRighe < file.Length)
+            {
+                p1 = file[contaRighe].Split(",");
+                p2 = file[contaRighe - 1].Split(",");
+            }
+            else
+            {
+                MessaggioAColori("Codice salvataggio errato o inesistente", "rosso", 'f');
+            }
+
+            //trasferisco dagli array temporanei alle liste giocatori
+            //i valori corretti dei territori
+            for (int i = 3; i < 11; i++)
+            {
+                if (p1[i] != "_")   //salto l'elemento segnaposto
+                {
+                    listaP1.Add(p1[i]);
+                }
+                if (p2[i] != "_")   //salto l'elemento segnaposto
+                {
+                    listaP2.Add(p2[i]);
+                }
             }
         }
         catch (Exception)
         {
-            Console.WriteLine("Problema di accesso al file!");
-            return;
+            // Console.WriteLine(e.Message);
+            MessaggioAColori("\nNessun salvataggio trovato", "rosso", 'f');
+            Thread.Sleep(800);
         }
+        return value;
     }
 
     /*Metodo che salva in un file csv i dati della partita attuali che sono
@@ -880,8 +1093,11 @@ class Program
       Input: string path -----> il percorso del file di salvataggio
              string[] player1 -----> array del player1
              string[] player2 -----> array del player2
+             List<string> listaP1--> territori attuali player1
+             List<string> listaP2--> territori attuali player2
     */
-    static bool SalvaPartita(string path, string[] player1, string[] player2)
+    static bool SalvaPartita(string path, string[] player1, string[] player2,
+                    List<string> listaP1, List<string> listaP2)
     {
         Console.Clear();
 
@@ -890,10 +1106,14 @@ class Program
             Console.WriteLine("Il file di salvataggio non è presente.");
             Console.WriteLine("Creo un nuovo file");
             File.Create(path).Close();
-            File.WriteAllText(path, "ID,Giocatori,Colori,c,o,n,t,i,n,e,n,\n");
+            File.WriteAllText(path, "ID,Giocatori,Colori,t,e,r,r,i,t,o,r,\n");
             Console.WriteLine("\nFile creato e inizializzato.");
         }
         string[] righe = File.ReadAllLines(path);
+
+        //aggiorno gli array dei giocatori
+        player1 = MemorizzaSuArray(player1, listaP1);
+        player2 = MemorizzaSuArray(player2, listaP2);
 
         foreach (string valore in player1)
         {
@@ -914,13 +1134,11 @@ class Program
         Console.WriteLine($"Memorizza il seguente codice per caricare la partita: ");
 
         //stampa il codice di salvataggio
-        MessaggioAColori("\n\t" + player1[0] + "\n", "magenta",'f');
+        MessaggioAColori("\n\t" + player1[0] + "\n", "magenta", 'f');
         Console.WriteLine("\npremi invio....\n");
         Console.ReadKey();
-        MessaggioAColori("Arrivederci alla prossima partita!!!\n", "blu",'f');
+        MessaggioAColori("Arrivederci alla prossima partita!!!\n", "blu", 'f');
         return true;
-
-
     }
 
     /*Visualizza a schermo le regole del gioco presenti nel file rules.txt.
@@ -963,18 +1181,18 @@ class Program
         [
             "                               Descrizione del gioco:",
             "********************************************************************************************",
-            "|Gioco stile Risiko versione super semplificata, con la mappa costituita da 8 continenti.  |",
-            "|L'obiettivo finale è quello di conquistare tutti i continenti lanciando i due dadi.       |",
+            "|Gioco stile Risiko versione super semplificata, con la mappa costituita da 8 territori.  |",
+            "|L'obiettivo finale è quello di conquistare tutti i territori lanciando i due dadi.       |",
             "|Il gioco prevede anche una 'modalità rischio' attivabile solo 1 volta per giocatore.      |",
             "********************************************************************************************",
             "|Regole:                                                                                   |",
-            "|1.Lancio dadi: con il punteggio maggiore 1 continente libero a scelta sulla mappa.        |",
-            "|2.Pari o dispari(costa 1 continente): si scommette 1 proprio territorio e si utilizza un  |",
+            "|1.Lancio dadi: con il punteggio maggiore 1 territorio libero a scelta sulla mappa.        |",
+            "|2.Pari o dispari(costa 1 territorio): si scommette 1 proprio territorio e si utilizza un  |",
             "|  dado a 36 facce. Prima del lancio a turno si scommette se il numero che uscirà sarà pari|",
             "|  o dispari. Si scommette ad oltranza fino a quando uno dei due non sbaglia la predizione.|",
-            "|  Si vince il continente scommesso dall'avversario più uno a scelta tra quelli liberi solo|",
+            "|  Si vince il territorio scommesso dall'avversario più uno a scelta tra quelli liberi solo|",
             "|  se presenti.                                                                            |",
-            "|3.Numero esatto(costa 2 continenti): si scommettono 2 propri continenti e si utilizza un  |",
+            "|3.Numero esatto(costa 2 territori): si scommettono 2 propri territori e si utilizza un  |",
             "|  dado a 50 facce. Prima del lancio entrambi i giocatori fanno una previsione sul numero  |",
             "|  che potrebbe uscire. Chi si avvicina di più entro un range minimo di 3 numeri vince la  |",
             "|  scommessa. In caso di parità si procede ad oltranza. Per range di 3 numeri si intende ad|",
@@ -1015,7 +1233,7 @@ class Program
             }
             else
             {
-                MessaggioAColori("Il nome deve essere di almeno 3 caratteri\n", "rosso",'f');
+                MessaggioAColori("Il nome deve essere di almeno 3 caratteri\n", "rosso", 'f');
                 Thread.Sleep(1000);
             }
         }
@@ -1029,7 +1247,7 @@ class Program
 
         //messaggio di saluto
         Console.Write("Ciao ");
-        MessaggioAColori(player[1], player[2],'b');
+        MessaggioAColori(player[1], player[2], 'b');
         Console.WriteLine();
 
         return player;
@@ -1082,7 +1300,7 @@ class Program
 
             //messaggio di saluto
             Console.Write("Ciao ");
-            MessaggioAColori(player2[1], player2[2],'b');
+            MessaggioAColori(player2[1], player2[2], 'b');
             Console.WriteLine();
         }
 
@@ -1120,44 +1338,50 @@ class Program
 
                 }
             }
-            switch (keyInfo.KeyChar)
+            else
             {
-                case '1':
-                    // LanciaDadi(player1, player2);
+                switch (keyInfo.KeyChar)
+                {
+                    case '1':
+                        // LanciaDadi(player1, player2);
 
-                    Console.WriteLine("lancio dadi");   //breve messaggio dopo la selezione
-                    Thread.Sleep(800);                  //della durata di 800ms
-                    Console.Clear();                    //poi si cancella lo schermo
+                        Console.Write("lancio dadi");   //breve messaggio dopo la selezione
+                        Thread.Sleep(800);                  //della durata di 800ms
+                        Console.Clear();                    //poi si cancella lo schermo
 
-                    c = '1';
-                    break;
+                        c = '1';
+                        break;
 
-                case '2':
-                    // PariDispari(player1, player2);
-                    Console.WriteLine("rischio");       //breve messaggio dopo la selezione
-                    Thread.Sleep(800);                  //della durata di 800ms
-                    Console.Clear();                    //poi si cancella lo schermo
+                    case '2':
+                        // PariDispari(player1, player2);
+                        Console.Write("rischio");       //breve messaggio dopo la selezione
+                        Thread.Sleep(800);                  //della durata di 800ms
+                        Console.Clear();                    //poi si cancella lo schermo
 
-                    c = '2';
-                    break;
+                        c = '2';
+                        break;
 
-                case 's':
-                    //NumeroEsatto(player1, player2);
-                    Console.WriteLine("salvataggio");   //breve messaggio dopo la selezione
-                    Thread.Sleep(800);                  //della durata di 800ms
-                    Console.Clear();                    //poi si cancella lo schermo
+                    case 's':
+                        //NumeroEsatto(player1, player2);
+                        Console.Write("salvataggio");   //breve messaggio dopo la selezione
+                        Thread.Sleep(800);                  //della durata di 800ms
+                        Console.Clear();                    //poi si cancella lo schermo
 
-                    c = 's';
-                    break;
+                        c = 's';
+                        break;
 
-                default:
-                    //caso digitazione 
-                    Console.Clear();
-                    MessaggioTurno(player1);
-                    MenuDiGioco();
-                    corretto = false;
-                    break;
+                    default:
+                        //caso digitazione errata
+                        MessaggioAColori("Selezione errata", "rosso", 'f');
+                        Thread.Sleep(800);
+                        Console.Clear();
+                        MessaggioTurno(player1);
+                        MenuDiGioco();
+                        corretto = false;
+                        break;
+                }
             }
+
             return c;
 
         }
