@@ -32,7 +32,6 @@ class Program
         string benvenuto = "Benvenuto a MiniRisiko";
         bool primoAvvio = true;     //per la prima schermata di loading
         bool fine = false;      //decreta la fine del gioco
-        char opzScelta;
 
 
         #endregion
@@ -92,9 +91,9 @@ class Program
 
             //visualizzo il menù iniziale del gioco
             MenuSelezionePrincipale();
-            opzScelta = Console.ReadKey(false).KeyChar;
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
-            switch (opzScelta)
+            switch (keyInfo.KeyChar)
             {
                 case '1':
 
@@ -117,7 +116,7 @@ class Program
                     Console.ReadKey();
 
                     //SalvaPartita(pathSave, player1, player2); //DEBUG
-
+                    GiocaVsPc:
                     while (!fine)
                     {
                         fine = GiocaVsPc(player1, player2, pathSave, territoriP1, territoriP2, territori);
@@ -153,7 +152,7 @@ class Program
                     Console.ReadKey();
 
                     //SalvaPartita(pathSave, player1, player2);   //DEBUG
-
+                    GiocaVsUtente:
                     while (!fine)
                     {
                         GiocaVsUtente(player1, player2, pathSave, fine);
@@ -162,17 +161,35 @@ class Program
                     break;
 
                 case '3':
-                    List<string>[] listeGiocatori = CaricaPartita(pathSave, territoriP1, territoriP2);
-                    territoriP1 = listeGiocatori[0];
-                    territoriP2 = listeGiocatori[1];
-                    
-                    Console.WriteLine("Lista giocatore1");  //DEBUG
-                    VisualizzaListaNumerata(territoriP1);   //DEBUG
-                    Console.WriteLine("Lista giocatore1");  //DEBUG
-                    VisualizzaListaNumerata(territoriP2);   //DEBUG
+                    string[][] caricaPlayers = CaricaPartita(pathSave);
+                    player2 = caricaPlayers[0];
+                    player1 = caricaPlayers[1];
+                    MessaggioAColori("Caricamento completato!","verde",'f');
                     Console.ReadKey();
 
-                    break;
+                    if (player2[1] == "PC")
+                    {
+                        goto GiocaVsPc;
+                    }
+                    else
+                    {
+                        goto GiocaVsUtente;
+                    }
+                    
+                    //DEBUG
+                    #region DEBUG CARICA GIOCATORI
+                    // foreach (string valore in player1)      //DEBUG
+                    // {
+                    //     Console.Write($"{valore},");
+                    // }
+                    // Console.WriteLine();
+                    // foreach (string valore in player2)      //DEBUG
+                    // {
+                    //     Console.Write($"{valore},");
+                    // }
+                    // Console.ReadKey();
+                    #endregion DEBUG   
+
 
                 case '4':   //funzionante e testato
                     RegoleGioco(pathRules);
@@ -377,50 +394,6 @@ class Program
         Console.Write("                   \r");
     }
 
-    /*Cambia il colore del carattere in base all'utente attuale, prendere i dati dall'array 
-      player. Scrive il nome del colore selezionato e resetta il colore di default
-    
-      Input: string[] player ---> array di giocatore; si utilizza player[2] = "Colore"
-      
-    */
-    // static void CambiaColoreUtente(string[] player)
-    // {
-    //     // salvataggio colore corrente
-    //     var currentBackground = Console.BackgroundColor;    //memorizzo il colore attuale
-    //     var playerColor = currentBackground;
-
-    //     switch (player[2])
-    //     {
-    //         case "rosso":
-    //             playerColor = ConsoleColor.Red;
-    //             break;
-
-    //         case "blu":
-    //             playerColor = ConsoleColor.Blue;
-    //             break;
-
-    //         case "magenta":
-    //             playerColor = ConsoleColor.Magenta;
-    //             break;
-
-    //         case "giallo":
-    //             playerColor = ConsoleColor.Yellow;
-    //             break;
-
-    //         case "verde":
-    //             playerColor = ConsoleColor.Green;
-    //             break;
-
-    //         default:
-    //             Console.WriteLine("Errore [CambiaColoreUtente]!!!");
-    //             break;
-
-    //     }
-    //     Console.BackgroundColor = playerColor;
-    //     Console.Write($"{player[1]}");
-    //     Console.BackgroundColor = currentBackground;
-    // }
-
     /*Stampa sullo schermo la scritta "Giocatore è il tuo turno"
       con il colore del nome scelto dall'utente
 
@@ -454,20 +427,6 @@ class Program
         Console.WriteLine(" hai perso la sfida");
     }
 
-    /*Esegue la stampa a video di un messaggio a colori scelto dall'utente
-      tra i seguenti: -rosso
-                      -verde
-                      -magenta
-                      -blu
-                      -giallo
-      Il messaggio non prevede il ritorno a capo.
-
-      Input: string messaggio -----> il messaggio da stampare a schermo
-             string colore --------> il colore scelto per la stampa
-             char opzione ---------> f cambia il testo; b cambia lo sfondo
-    
-    */
-
     /*Scrive nel formato del player attuale il messaggio di conquista
       del territorio. 
       Va a capo dopo il messaggio
@@ -483,19 +442,18 @@ class Program
         Console.WriteLine();
     }
 
-    /*Stampa un messaggio a colori. Possibilità di decidere se cambiare il:
-      - colore del carattere con opzione 'f' 
-      - colore dello sfondo con opzione 'b'
-      I colori disponibili sono: 
-                                    - "rosso"
-                                    - "verde"
-                                    - "magenta"
-                                    - "blu"
-                                    - "giallo"
+    /*Esegue la stampa a video di un messaggio a colori scelto dall'utente
+      tra i seguenti: -rosso
+                      -verde
+                      -magenta
+                      -blu
+                      -giallo
+      Il messaggio non prevede il ritorno a capo.
 
-      Input: string messaggio -----> il testo da stampare
-             string colore --------> il colore scelto
-             char opzione ---------> 'f' o 'b'
+      Input: string messaggio -----> il messaggio da stampare a schermo
+             string colore --------> il colore scelto per la stampa
+             char opzione ---------> f cambia il testo; b cambia lo sfondo
+    
     */
     static void MessaggioAColori(string messaggio, string colore, char opzione)
     {
@@ -936,7 +894,6 @@ class Program
       
       Output: int -------> 1 se vince player1;  2 se vince player2
     */
-
     static int LanciaDadi(string[] player1, string[] player2)
     {
         int dadoX, dadoY;
@@ -1025,24 +982,39 @@ class Program
         return player;
     }
 
+    /*Permette di creare la copia corretta di 11 elementi dell'array player
+      prendendo la copia del file che è invece di 12 elementi (quello vuoto)
+
+      INPUT: string[] copiaDaFile ------> copia del file 
+      OUTPUT: string[] player ----------> array del giocatore corretto
+    */
+    static string[] CopiaSuArray(string[] copiaDaFile)
+    {   
+        string[] player = new string[11];
+        for (int i = 0; i < 11; i++)
+        {
+            player[i] = copiaDaFile[i];
+        }
+        return player;
+    }
     /*Visualizza l'elenco delle partite in corso e permette la selezione di 
     una di esse ripristinando lo stato del gioco fino a quel momento. 
     Gestisce le eccezioni sui file
 
     INPUT: string pathSave ---> il path del file di salvataggio 
     */
-    static List<string>[] CaricaPartita(string path, List<string> listaP1, List<string> listaP2)
+    static string[][] CaricaPartita(string path)
     {
         string ID = "2124";
-        List<string>[] value = [listaP1, listaP2];
-        string[] p1 = new string[11];
-        string[] p2 = new string[11];
+        string[] p1 = new string[1];
+        string[] p2 = new string[1];
+        string[][] values = new string[2][];
         try
         {
             string[] file = File.ReadAllLines(path);
             Console.Clear();
             Console.WriteLine("Lettura del file in corso");
-            SchermataLoading('°',15,80);
+            SchermataLoading('°', 15, 80);
 
             int contaRighe = 1;
             foreach (string riga in file)
@@ -1062,20 +1034,6 @@ class Program
             {
                 MessaggioAColori("Codice salvataggio errato o inesistente", "rosso", 'f');
             }
-
-            //trasferisco dagli array temporanei alle liste giocatori
-            //i valori corretti dei territori
-            for (int i = 3; i < 11; i++)
-            {
-                if (p1[i] != "_")   //salto l'elemento segnaposto
-                {
-                    listaP1.Add(p1[i]);
-                }
-                if (p2[i] != "_")   //salto l'elemento segnaposto
-                {
-                    listaP2.Add(p2[i]);
-                }
-            }
         }
         catch (Exception)
         {
@@ -1083,7 +1041,9 @@ class Program
             MessaggioAColori("\nNessun salvataggio trovato", "rosso", 'f');
             Thread.Sleep(800);
         }
-        return value;
+        values[0] = CopiaSuArray(p1);
+        values[1] = CopiaSuArray(p2);
+        return values;
     }
 
     /*Metodo che salva in un file csv i dati della partita attuali che sono
