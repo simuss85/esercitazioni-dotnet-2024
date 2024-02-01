@@ -1,10 +1,12 @@
-﻿class Program
+﻿using System.Drawing;
+
+class Program
 {
     static void Main(string[] args)
     {
         #region Tipi di dati e variabili
         string benvenuto = "Benvenuto a MiniRisiko";
-        string? input;
+        char opzScelta;
         string pathSave = @"./files/save.csv";
         string pathRules = @"./files/rules.txt";
 
@@ -12,9 +14,8 @@
         string[] player1 = ["ID", "Nome", "1", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"];
         string[] player2 = ["ID", "PC", "2", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]; //in caso di gioco vs altro utente il nome verrà sovrascritto
 
-        bool giocoInCorso = true;
-        bool primoAvvio = true;
-        bool vittoria = false;
+        bool primoAvvio = true;     //per la prima schermata di loading
+        bool fine = false;      //decreta la fine del gioco
         Random random = new Random();
         string ID = DateTime.Now.ToString();
 
@@ -72,16 +73,16 @@
 
             //visualizzo il menù iniziale del gioco
             MenuSelezionePrincipale();
-            input = Console.ReadLine();
+            opzScelta = Console.ReadKey(false).KeyChar;
 
-            switch (input)
+            switch (opzScelta)
             {
-                case "1":
+                case '1':
 
                     //creo player1
                     Console.Clear();
                     player1 = CreaGiocatore(player1);
-                    Console.WriteLine("premi invio...");
+                    Console.WriteLine("\npremi invio...");
                     Console.ReadKey();
 
                     //creo player2
@@ -90,29 +91,29 @@
                     //messaggio di sfida
                     Console.Clear();
                     Console.Write("Si sfideranno ");
-                    CambiaColoreUtente(player1);
+                    MessaggioAColori(player1[1], player1[2],'b');
                     Console.Write(" vs ");
-                    CambiaColoreUtente(player2);
-                    Thread.Sleep(100);
+                    MessaggioAColori(player2[1], player2[2],'b');
+                    Console.WriteLine("\n\npremi invio....");
                     Console.ReadKey();
 
-                    SalvaPartita(pathSave, player1, player2);
+                    //SalvaPartita(pathSave, player1, player2); //DEBUG
 
-                    while (!vittoria)
+                    while (!fine)
                     {
-                        GiocaVsPc(player1, player2);
+                        fine = GiocaVsPc(player1, player2, pathSave);
                     }
-                    
+
                     break;
 
-                case "2":
+                case '2':
 
                     //creo player1
                     Console.Clear();
                     Console.WriteLine("Giocatore 1");
                     Thread.Sleep(150);
                     player1 = CreaGiocatore(player1);
-                    Console.WriteLine("premi invio...");
+                    Console.WriteLine("\npremi invio...");
                     Console.ReadKey();
 
                     //creo player2
@@ -120,37 +121,42 @@
                     Console.WriteLine("Giocatore 2");
                     Thread.Sleep(150);
                     player2 = CreaGiocatore(player2, player1[2]);
-                    Console.WriteLine("premi invio...");
+                    Console.WriteLine("\npremi invio...");
                     Console.ReadKey();
 
                     //messaggio di sfida
                     Console.Clear();
                     Console.Write("Si sfideranno ");
-                    CambiaColoreUtente(player1);
+                    MessaggioAColori(player1[1], player1[2],'b');
                     Console.Write(" vs ");
-                    CambiaColoreUtente(player2);
-                    Thread.Sleep(100);
+                    MessaggioAColori(player2[1], player2[2],'b');
+                    Console.WriteLine("\n\npremi invio....");
                     Console.ReadKey();
 
-                    SalvaPartita(pathSave, player1, player2);
+                    //SalvaPartita(pathSave, player1, player2);   //DEBUG
 
-                    GiocaVsUtente(player1, player2);
+                    while (!fine)
+                    {
+                        GiocaVsUtente(player1, player2, pathSave, fine);
+                    }
+
                     break;
 
-                case "3":
+                case '3':
                     CaricaPartita(pathSave);
                     break;
 
-                case "4":   //funzionante e testato
+                case '4':   //funzionante e testato
                     RegoleGioco(pathRules);
                     Console.WriteLine("Premi un tasto per tornare indietro...");
                     Console.ReadKey();
                     break;
 
-                case "5":   //funzionante e testato
+                case '5':   //funzionante e testato
                     SchermataLoading('°', 20, 50);
-                    Console.WriteLine("\nAlla prossima partita!!!\n");
-                    return;
+                    MessaggioAColori("Arrivederci alla prossima partita!!!", "blu",'f');
+                    fine = true;
+                    break;
 
                 default:
                     Console.WriteLine("Errore di digitazione");
@@ -159,7 +165,7 @@
             }
 
         }
-        while (giocoInCorso);
+        while (!fine);
 
 
     }
@@ -193,8 +199,8 @@
             case "r":
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.WriteLine("b. Blu");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("m. magenta");
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("g. Giallo");
                 Console.BackgroundColor = ConsoleColor.Green;
@@ -204,15 +210,15 @@
             case "b":
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine("r. Rosso");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("m. magenta");
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("g. Giallo");
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.WriteLine("v. Verde");
                 break;
 
-            case "n":
+            case "m":
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.WriteLine("r. Rosso");
                 Console.BackgroundColor = ConsoleColor.Blue;
@@ -228,8 +234,8 @@
                 Console.WriteLine("r. Rosso");
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.WriteLine("b. Blu");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("m. magenta");
                 Console.BackgroundColor = ConsoleColor.Green;
                 Console.WriteLine("v. Verde");
                 break;
@@ -239,8 +245,8 @@
                 Console.WriteLine("r. Rosso");
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.WriteLine("b. Blu");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("m. magenta");
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("g. Giallo");
                 break;
@@ -250,8 +256,8 @@
                 Console.WriteLine("r. Rosso");
                 Console.BackgroundColor = ConsoleColor.Blue;
                 Console.WriteLine("b. Blu");
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.WriteLine("n. Nero");
+                Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("m. magenta");
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("g. Giallo");
                 Console.BackgroundColor = ConsoleColor.Green;
@@ -337,43 +343,43 @@
       Input: string[] player ---> array di giocatore; si utilizza player[2] = "Colore"
       
     */
-    static void CambiaColoreUtente(string[] player)
-    {
-        // salvataggio colore corrente
-        var currentBackground = Console.BackgroundColor;    //memorizzo il colore attuale
-        var playerColor = currentBackground;
+    // static void CambiaColoreUtente(string[] player)
+    // {
+    //     // salvataggio colore corrente
+    //     var currentBackground = Console.BackgroundColor;    //memorizzo il colore attuale
+    //     var playerColor = currentBackground;
 
-        switch (player[2])
-        {
-            case "rosso":
-                playerColor = ConsoleColor.Red;
-                break;
+    //     switch (player[2])
+    //     {
+    //         case "rosso":
+    //             playerColor = ConsoleColor.Red;
+    //             break;
 
-            case "blu":
-                playerColor = ConsoleColor.Blue;
-                break;
+    //         case "blu":
+    //             playerColor = ConsoleColor.Blue;
+    //             break;
 
-            case "nero":
-                playerColor = ConsoleColor.Black;
-                break;
+    //         case "magenta":
+    //             playerColor = ConsoleColor.Magenta;
+    //             break;
 
-            case "giallo":
-                playerColor = ConsoleColor.Yellow;
-                break;
+    //         case "giallo":
+    //             playerColor = ConsoleColor.Yellow;
+    //             break;
 
-            case "verde":
-                playerColor = ConsoleColor.Green;
-                break;
+    //         case "verde":
+    //             playerColor = ConsoleColor.Green;
+    //             break;
 
-            default:
-                Console.WriteLine("Errore [CambiaColoreUtente]!!!");
-                break;
+    //         default:
+    //             Console.WriteLine("Errore [CambiaColoreUtente]!!!");
+    //             break;
 
-        }
-        Console.BackgroundColor = playerColor;
-        Console.Write($"{player[1]}");
-        Console.BackgroundColor = currentBackground;
-    }
+    //     }
+    //     Console.BackgroundColor = playerColor;
+    //     Console.Write($"{player[1]}");
+    //     Console.BackgroundColor = currentBackground;
+    // }
 
     /*Stampa sullo schermo la scritta "Giocatore è il tuo turno"
       con il colore del nome scelto dall'utente
@@ -382,7 +388,7 @@
     */
     static void MessaggioTurno(string[] player)
     {
-        CambiaColoreUtente(player);
+        MessaggioAColori(player[1], player[2],'b');
         Console.WriteLine(" è il tuo turno");
     }
 
@@ -391,9 +397,9 @@
 
       Input: string[] player -----> array player giocatore attuale
     */
-    static void MessaggioVittoria(string[] player)
+    static void Messaggiofine(string[] player)
     {
-        CambiaColoreUtente(player);
+        MessaggioAColori(player[1], player[2],'b');
         Console.WriteLine(" hai vinto la sfida");
     }
 
@@ -404,10 +410,92 @@
     */
     static void MessaggioSconfitta(string[] player)
     {
-        CambiaColoreUtente(player);
+        MessaggioAColori(player[1], player[2],'b');
         Console.WriteLine(" hai perso la sfida");
     }
 
+    /*Esegue la stampa a video di un messaggio a colori scelto dall'utente
+      tra i seguenti: -rosso
+                      -verde
+                      -magenta
+                      -blu
+                      -giallo
+      Il messaggio non prevede il ritorno a capo.
+
+      Input: string messaggio -----> il messaggio da stampare a schermo
+             string colore --------> il colore scelto per la stampa
+             char opzione ---------> f cambia il testo; b cambia lo sfondo
+    
+    */
+    static void MessaggioAColori(string messaggio, string colore, char opzione)
+    {
+        var currentColor = Console.ForegroundColor;         //salvo il carattere attuale
+        var currentBackground = Console.BackgroundColor;    //salvo lo sfondo attuale
+        switch (colore)
+        {
+            case "rosso":
+                if (opzione == 'f')
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                break;
+
+            case "verde":
+                if (opzione == 'f')
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                }
+                break;
+
+            case "magenta":
+                if (opzione == 'f')
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                }
+                break;
+
+            case "blu":
+                if (opzione == 'f')
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                }
+                break;
+
+            case "giallo":
+                if (opzione == 'f')
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                }
+                break;
+
+            default:
+                Console.WriteLine("Errore [MessaggioAColori]!!!");
+                break;
+        }
+        Console.Write(messaggio);
+        Console.ForegroundColor = currentColor;         //ripristino colore testo
+        Console.BackgroundColor = currentBackground;    //ripristimo colore sfondo
+    }
 
 
     /*Metodo che assegna il colore all'utente in base alla sua scelta.
@@ -435,8 +523,8 @@
                     corretto = true;
                     break;
 
-                case "n" when c != input:
-                    g[2] = "nero";
+                case "m" when c != input:
+                    g[2] = "magenta";
                     corretto = true;
                     break;
 
@@ -452,6 +540,8 @@
 
                 default:
                     //caso digitazione errata
+                    MessaggioAColori("Selezione errata", "rosso",'f');
+                    Thread.Sleep(800);
                     Console.Clear();
                     MenuSelezioneColoreUtente(c);
                     corretto = false;
@@ -655,26 +745,27 @@
 
     #region "Metodi di gioco"
 
-    static void GiocaVsPc(string[] player1, string[] player2)
+    static bool GiocaVsPc(string[] player1, string[] player2, string path)
     {
         Console.Clear();
         MessaggioTurno(player1);
         MenuDiGioco();
         char rispostaPlayer1 = SceltaGioco(player1);
+        bool fine = false;
         switch (rispostaPlayer1)
         {
             case '1':
                 if (LanciaDadi(player1, player2) == 1)
                 {
-                    MessaggioVittoria(player1);
-                    Console.ReadLine();
-                    
+                    Messaggiofine(player1);
+                    Console.WriteLine("\npremi invio.....");
+                    Console.ReadKey();
                 }
                 else
                 {
                     MessaggioSconfitta(player1);
-                    Console.ReadLine();
-                    
+                    Console.WriteLine("\npremi invio.....");
+                    Console.ReadKey();
                 }
                 break;
 
@@ -682,11 +773,19 @@
                 MenuModalitaRischio();
                 break;
 
+            case 's':
+                fine = SalvaPartita(path, player1, player2); //se va tutto bene, torna il valore true
+                break;
+
+            default:
+                Console.WriteLine("Errore [GiocaVsPC]!!!");
+                break;
         }
+        return fine;
 
     }
 
-    static void GiocaVsUtente(string[] player1, string[] player2)
+    static void GiocaVsUtente(string[] player1, string[] player2, string path, bool fine)
     {
         Console.Clear();
         MessaggioTurno(player1);
@@ -694,27 +793,57 @@
         Console.ReadKey();
 
     }
+    /*Esegue il calcolo dei numeri random, simula graficamente la rotazione
+      dei dadi e visualizza a schermo il vincitore del turno.
+
+      Input: string[] player1 -----> array player1
+             string[] player2 -----> array player2
+      
+      Output: int -------> 1 se vince player1;  2 se vince player2
+    */
 
     static int LanciaDadi(string[] player1, string[] player2)
     {
         int dadoX, dadoY;
         Random random = new();
+
         //tira i dadi player1
         dadoX = random.Next(1, 7);
         dadoY = random.Next(1, 7);
         MessaggioTurno(player1);
+        Console.WriteLine("\npremi invio per lanciare i dadi...");
+        Console.ReadKey();
         int risultato1 = SimulaLancioDadi(dadoX, dadoY);
         Console.WriteLine("\npremi invio...");
         Console.ReadKey();
-        
+        Console.Clear();
+
+
 
 
         //tira i dadi player2
         dadoX = random.Next(1, 7);
         dadoY = random.Next(1, 7);
         MessaggioTurno(player2);
+        Console.WriteLine("\npremi invio per lanciare i dadi...");
+        Console.ReadKey();
         int risultato2 = SimulaLancioDadi(dadoX, dadoY);
+        Console.WriteLine("\npremi invio...");
+        Console.ReadKey();
+        Console.Clear();
 
+        //risultati a schermo
+        //riga del titolo
+        Console.WriteLine("Risultato turno:\n");
+        //riga dei nomi
+        MessaggioAColori(player1[1],player1[2],'b');    //nome1
+        Console.Write("   vs   ");   //spazio tra i nomi
+        MessaggioAColori(player2[1],player2[2],'b');    //nome2
+        //riga dei punteggi
+        Console.Write($"\n  {risultato1}    |");
+        Console.Write($"   {risultato2}\n\n");
+
+        
 
 
         return risultato2 >= risultato1 ? 2 : 1;
@@ -749,28 +878,48 @@
       Se il file non esiste lo crea da zero includendo le varie etichette.
 
       Input: string path -----> il percorso del file di salvataggio
-             string[] g1 -----> array del player1
-             string[] g2 -----> array del player2
+             string[] player1 -----> array del player1
+             string[] player2 -----> array del player2
     */
-    static void SalvaPartita(string path, string[] g1, string[] g2)
+    static bool SalvaPartita(string path, string[] player1, string[] player2)
     {
+        Console.Clear();
+
         if (!File.Exists(path))
         {
+            Console.WriteLine("Il file di salvataggio non è presente.");
+            Console.WriteLine("Creo un nuovo file");
             File.Create(path).Close();
-            File.WriteAllText(path, "ID,Giocatori,Colori,[continenti],\n");
+            File.WriteAllText(path, "ID,Giocatori,Colori,c,o,n,t,i,n,e,n,\n");
+            Console.WriteLine("\nFile creato e inizializzato.");
         }
         string[] righe = File.ReadAllLines(path);
 
-        foreach (string valore in g1)
+        foreach (string valore in player1)
         {
             File.AppendAllText(path, $"{valore},");
         }
         File.AppendAllText(path, "\n");
-        foreach (string valore in g2)
+        foreach (string valore in player2)
         {
             File.AppendAllText(path, $"{valore},");
         }
         File.AppendAllText(path, "\n");
+
+        Console.WriteLine("Salvataggio partita in corso");
+        SchermataLoading('°', 28, 80);    //simula attesa
+        Console.Clear();
+
+        Console.WriteLine("Partita salvata correttamente.");
+        Console.WriteLine($"Memorizza il seguente codice per caricare la partita: ");
+
+        //stampa il codice di salvataggio
+        MessaggioAColori("\n\t" + player1[0] + "\n", "magenta",'f');
+        Console.WriteLine("\npremi invio....\n");
+        Console.ReadKey();
+        MessaggioAColori("Arrivederci alla prossima partita!!!\n", "blu",'f');
+        return true;
+
 
     }
 
@@ -832,7 +981,7 @@
             "|  esempio se il numero segreto è 23 un utente può vincere se il numero scommesso è uno tra|",
             "|  questi (21,22,23,24,25) e l'utente avversario scommette un numero più distante.         |",
             "|  Esempio: il numero segreto uscito è il 23                                               |",
-            "|           utente1 sceglie 20; utente2 sceglie 22; VITTORIA utente2                       |",
+            "|           utente1 sceglie 20; utente2 sceglie 22; fine utente2                       |",
             "|           utente1 sceglie 22; utente2 sceglie 24; PAREGGIO (stessa distanza nel range)   |",
             "|           utente1 sceglie 20; utente2 sceglie 40; PAREGGIO (entrambi fuori dal range)    |",
             "********************************************************************************************"
@@ -850,9 +999,27 @@
     */
     static string[] CreaGiocatore(string[] player)
     {
-        //iserisci il nome
-        Console.Write("Inserisci il tuo nome: ");
-        player[1] = Console.ReadLine()!;
+        bool corretto = false;
+
+        //previene l'inserimento nullo del nome o nome troppo corti
+        //il nome deve essere almeno di 3 caratteri
+        while (!corretto)
+        {
+            Console.Clear();
+            //iserisci il nome
+            Console.Write("Inserisci il tuo nome: ");
+            player[1] = Console.ReadLine()!;
+            if (player[1].Length > 2)
+            {
+                corretto = true;
+            }
+            else
+            {
+                MessaggioAColori("Il nome deve essere di almeno 3 caratteri\n", "rosso",'f');
+                Thread.Sleep(1000);
+            }
+        }
+
         Console.Clear();
 
         //seleziona il colore
@@ -861,8 +1028,8 @@
         Console.Clear();
 
         //messaggio di saluto
-        Console.Write($"Benvenuto ");
-        CambiaColoreUtente(player);
+        Console.Write("Ciao ");
+        MessaggioAColori(player[1], player[2],'b');
         Console.WriteLine();
 
         return player;
@@ -888,12 +1055,12 @@
                     player2[2] = "giallo";
                     break;
 
-                case "nero":
+                case "magenta":
                     player2[2] = "verde";
                     break;
 
                 case "giallo":
-                    player2[2] = "nero";
+                    player2[2] = "magenta";
                     break;
 
                 case "verde":
@@ -914,19 +1081,23 @@
             Console.Clear();
 
             //messaggio di saluto
-            Console.Write($"Benvenuto ");
-            CambiaColoreUtente(player2);
+            Console.Write("Ciao ");
+            MessaggioAColori(player2[1], player2[2],'b');
             Console.WriteLine();
         }
 
         return player2;
     }
 
-    /**/
+    /*Memorizza la scelta fatta nel menu di gioco per ogni giocatore 
+      restituendo il carattere digitato dall'utente dell'opzione scelta.
+
+      Input: string[] player1 ----> array del giocatore
+    */
     static char SceltaGioco(string[] player1)
     {
         bool corretto = false;
-        char c = '0';
+        char c = '0'; //valore di default
         do  //controlla finche l'inserimento non è corretto
         {
             Console.Write("\nScegli: ");
@@ -953,19 +1124,29 @@
             {
                 case '1':
                     // LanciaDadi(player1, player2);
-                    Console.WriteLine("lancio dadi");
+
+                    Console.WriteLine("lancio dadi");   //breve messaggio dopo la selezione
+                    Thread.Sleep(800);                  //della durata di 800ms
+                    Console.Clear();                    //poi si cancella lo schermo
+
                     c = '1';
                     break;
 
                 case '2':
                     // PariDispari(player1, player2);
-                    Console.WriteLine("rischio");
+                    Console.WriteLine("rischio");       //breve messaggio dopo la selezione
+                    Thread.Sleep(800);                  //della durata di 800ms
+                    Console.Clear();                    //poi si cancella lo schermo
+
                     c = '2';
                     break;
 
                 case 's':
                     //NumeroEsatto(player1, player2);
-                    Console.WriteLine("salvataggio");
+                    Console.WriteLine("salvataggio");   //breve messaggio dopo la selezione
+                    Thread.Sleep(800);                  //della durata di 800ms
+                    Console.Clear();                    //poi si cancella lo schermo
+
                     c = 's';
                     break;
 
@@ -980,8 +1161,8 @@
             return c;
 
         }
-        while (!corretto);
-        
+        while (!corretto); //controlla finche l'inserimento non è corretto
+
     }
 
     #endregion
