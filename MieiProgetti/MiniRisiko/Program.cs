@@ -165,12 +165,12 @@
                     MessaggioAColori("Caricamento completato!", "verde", 'f');
 
                     //aggiorno le liste dei territori con i dati caricati
-                    Console.Clear();                                    //DEBUG
-                    Console.WriteLine("Memorizzo p1");                  //DEBUG
-                    MemorizzaSuLista(player1,territoriP1,territori);
-                    Console.ReadKey();
-                    Console.WriteLine("Memorizzo p1");                  //DEBUG
-                    MemorizzaSuLista(player2,territoriP2,territori);
+                    // Console.Clear();                                    //DEBUG
+                    // Console.WriteLine("Memorizzo p1");                  //DEBUG
+                    MemorizzaSuLista(player1, territoriP1, territori);
+                    // Console.ReadKey();                                  //DEBUG
+                    // Console.WriteLine("Memorizzo p2");                  //DEBUG
+                    MemorizzaSuLista(player2, territoriP2, territori);
                     Console.ReadKey();
                     Console.Clear();
 
@@ -741,7 +741,6 @@
         risultato = [dadoX, dadoY];
         Console.Clear();
         StampaDueDadi(risultato);
-        Console.WriteLine($"\nHai ottenuto {x} + {y} = {x + y}");
         return x + y;
     }
 
@@ -791,98 +790,81 @@
     /*Avvia il gioco contro il pc 
     */
     static bool Gioca(string[] player1, string[] player2, string path,
-                        List<string> listaP1, List<string> listaP2, List<string> territori)
+                        List<string> territoriP1, List<string> territoriP2, List<string> territori)
     {
+        char rispostaPlayer;
+        int vincitore;    //int[0] = il numero del vincitore, 
+        bool cambioTurno = false;   //utilizzata nel ciclo per ripetere il gioco
         Console.Clear();
-        MessaggioTurno(player1);
-        MenuDiGioco();
-        char rispostaPlayer1 = SceltaGioco(player1);
-        bool fine = false;
-        switch (rispostaPlayer1)
+        if (!cambioTurno)
         {
-            case '1':
-                if (LanciaDadi(player1, player2) == 1)
+            MessaggioTurno(player1);
+            MenuDiGioco();
+            rispostaPlayer = SceltaGioco(player1);
+        }
+        else
+        {
+            MessaggioTurno(player2);
+            MenuDiGioco();
+            rispostaPlayer = SceltaGioco(player2);
+        }
+
+        bool fine = false;
+        switch (rispostaPlayer)
+        {
+            case '1':   //lancio dadi
+                if (!cambioTurno)
                 {
-                    MessaggioVittoria(player1);
-                    Console.WriteLine("\npremi invio.....");
-                    Console.ReadKey();
-                    Console.Clear();
+                    vincitore = LanciaDadi(player1, player2);   //turno player1
 
-                    //se c'è ancora un territorio libero
-                    if (territori.Count > 0)
+                    if (vincitore == 1)
                     {
-                        if (territori.Count == 1)
-                        {
-                            MessaggioTerritorioConquistato(player1, territori.First());
-                            Console.ReadKey();
+                        MessaggioVittoria(player1);
+                        Console.WriteLine("\npremi invio.....");
+                        Console.ReadKey();
+                        Console.Clear();
 
-                            SceltaTerritorio(listaP1, territori.First(), territori);
-                            Console.ReadKey();
-
-                        }
-                        else
-                        {
-                            int n = 0;
-                            bool corretto = false;
-                            string? input;
-                            do
-                            {
-                                Console.Clear();
-
-                                MessaggioAColori(player1[1], player1[2], 'b');
-                                Console.WriteLine(" scegli il territorio:\n");
-                                VisualizzaListaNumerata(territori);
-                                Console.Write("\nScegli: ");
-
-                                input = Console.ReadLine()!;
-                                if (!int.TryParse(input, out n))
-                                {
-                                    MessaggioAColori("Seleziona correttamente il territorio\r", "rosso", 'f');
-                                    Thread.Sleep(800);
-                                }
-                                else if (n < 1 || n > territori.Count)
-                                {
-                                    MessaggioAColori("Seleziona correttamente il territorio\r", "rosso", 'f');
-                                    Thread.Sleep(800);
-                                }
-                                else
-                                {
-                                    n--;
-                                    corretto = true;
-                                }
-                            }
-                            while (!corretto);
-
-                            Console.Clear();
-                            MessaggioTerritorioConquistato(player1, territori.ElementAt(n));
-                            SceltaTerritorio(listaP1, territori.ElementAt(n), territori);
-                            Console.WriteLine("\nLista aggiornata:\n");
-                            VisualizzaListaNumerata(territori);
-                            Console.ReadKey();
-                        }
+                        //se player1 vince può scegliere i territori
+                        ConquistaTerritorio(player1, territoriP1, territori);
                     }
                     else
                     {
-                        Console.WriteLine("DEVI CONQUISTARE DAL GIOCATORE AVVERSARIO");
+                        MessaggioSconfitta(player1);
+                        Console.WriteLine("\npremi invio.....");
                         Console.ReadKey();
-
+                        Console.Clear();
                     }
+
                 }
                 else
                 {
-                    MessaggioSconfitta(player1);
-                    Console.WriteLine("\npremi invio.....");
-                    Console.ReadKey();
-                    Console.Clear();
+                    vincitore = LanciaDadi(player2, player1);   //turno player2
+                    if (vincitore == 1)
+                    {
+                        MessaggioVittoria(player2);
+                        Console.WriteLine("\npremi invio.....");
+                        Console.ReadKey();
+                        Console.Clear();
+
+                        //se player2 vince può scegliere i territori
+                        ConquistaTerritorio(player2, territoriP2, territori);
+                    }
+                    else
+                    {
+                        MessaggioSconfitta(player2);
+                        Console.WriteLine("\npremi invio.....");
+                        Console.ReadKey();
+                        Console.Clear();
+                    }
                 }
                 break;
 
-            case '2':
+            case '2':   //rischio
                 MenuModalitaRischio();
                 break;
 
-            case 's':
-                fine = SalvaPartita(path, player1, player2, listaP1, listaP2); //se va tutto bene, torna il valore true
+            case 's':   //salva
+                fine = SalvaPartita(path, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
                 break;
 
             default:
@@ -890,43 +872,85 @@
                 break;
         }
         return fine;
-
     }
 
     /*Esegue il calcolo dei numeri random, simula graficamente la rotazione
-      dei dadi e visualizza a schermo il vincitore del turno.
+      dei dadi e visualizza a schermo il vincitore del turno alla meglio di 5,
+      ovvero il primo che arriva a 3 vittorie vince il turno.
 
       Input: string[] player1 -----> array player1
              string[] player2 -----> array player2
-      
+
       Output: int -------> 1 se vince player1;  2 se vince player2
     */
     static int LanciaDadi(string[] player1, string[] player2)
     {
+        int vittorieP1 = 0, vittorieP2 = 0;  //il primo che arriva a 3 vince
+        int vincitore;   //1 o 2 in caso di vittoria player1 o player2
+        int risultato1, risultato2;
+        string[] risultati = new string[5]; //memorizzo i lanci fatti di ogni giocatore 
+        bool cambioTurno = false;
+        int turno = 0;
         int dadoX, dadoY;
         Random random = new();
 
-        //tira i dadi player1
-        dadoX = random.Next(1, 7);
-        dadoY = random.Next(1, 7);
-        MessaggioTurno(player1);
-        Console.WriteLine("\npremi invio per lanciare i dadi...");
-        Console.ReadKey();
-        int risultato1 = SimulaLancioDadi(dadoX, dadoY);
-        Console.WriteLine("\npremi invio...");
-        Console.ReadKey();
-        Console.Clear();
+        do
+        {
+            //tira i dadi player1
+            dadoX = random.Next(1, 7);
+            dadoY = random.Next(1, 7);
+            MessaggioTurno(player1);
+            Console.WriteLine("\npremi invio per lanciare i dadi...");
+            Console.ReadKey();
+            risultato1 = SimulaLancioDadi(dadoX, dadoY);
+            Console.WriteLine();
+            MessaggioAColori(player1[1],player1[2],'b');
+            Console.WriteLine($" ha ottenuto {dadoX} + {dadoY} = {risultato1}\n");
+            Console.Write(" premi invio...");
+            Console.ReadKey();
+            Console.Clear();
 
-        //tira i dadi player2
-        dadoX = random.Next(1, 7);
-        dadoY = random.Next(1, 7);
-        MessaggioTurno(player2);
-        Console.WriteLine("\npremi invio per lanciare i dadi...");
-        Console.ReadKey();
-        int risultato2 = SimulaLancioDadi(dadoX, dadoY);
-        Console.WriteLine("\npremi invio...");
-        Console.ReadKey();
-        Console.Clear();
+            //tira i dadi player2
+            dadoX = random.Next(1, 7);
+            dadoY = random.Next(1, 7);
+            MessaggioTurno(player2);
+            Console.WriteLine("\npremi invio per lanciare i dadi...");
+            Console.ReadKey();
+            risultato2 = SimulaLancioDadi(dadoX, dadoY);
+            Console.WriteLine();
+            MessaggioAColori(player2[1],player2[2],'b');
+            Console.WriteLine($" ha ottenuto {dadoX} + {dadoY} = {risultato1}\n");
+
+            risultati[turno] = $"{risultato1}\t   {risultato2}";
+            turno++;
+
+            if (risultato1 < risultato2)
+            {   //vince player1
+                vincitore = 2;
+                vittorieP1++;
+                if (vittorieP1 == 3)
+                {
+                    cambioTurno = true;
+                }
+                MessaggioAColori(player2[1],player2[2],'b');
+            }
+            else
+            {   //vince player2
+                vincitore = 1;
+                vittorieP2++;
+                if (vittorieP2 == 3)
+                {
+                    cambioTurno = true;
+                }
+                MessaggioAColori(player1[1],player1[2],'b');
+            }
+            Console.Write($" vince il round {turno}\n");
+            Console.WriteLine("premi invio...");
+            Console.ReadKey();
+            Console.Clear();
+            
+        }
+        while (!cambioTurno);
 
         //risultati a schermo
         //riga del titolo
@@ -935,15 +959,81 @@
         MessaggioAColori(player1[1], player1[2], 'b');    //nome1
         Console.Write("   vs   ");   //spazio tra i nomi
         MessaggioAColori(player2[1], player2[2], 'b');    //nome2
+        Console.WriteLine();
         //riga dei punteggi
-        Console.Write($"\n  {risultato1}    |");
-        Console.Write($"   {risultato2}\n\n");
+        foreach (string risultato in risultati)
+        {
+            Console.WriteLine(risultato);
+        }
+        return vincitore;
+    }
 
-        return risultato2 >= risultato1 ? 2 : 1;
+    /**/
+    static void ConquistaTerritorio(string[] player, List<string> territoriP, List<string> territori)
+    {
+        //se c'è ancora un territorio libero
+        if (territori.Count > 0)
+        {
+            if (territori.Count == 1)
+            {
+                MessaggioTerritorioConquistato(player, territori.First());
+                Console.ReadKey();
+
+                SceltaTerritorio(territoriP, territori.First(), territori);
+                Console.ReadKey();
+
+            }
+            else
+            {
+                int n = 0;
+                bool corretto = false;
+                string? input;
+                do
+                {
+                    Console.Clear();
+
+                    MessaggioAColori(player[1], player[2], 'b');
+                    Console.WriteLine(" scegli il territorio:\n");
+                    VisualizzaListaNumerata(territori);
+                    Console.Write("\nScegli: ");
+
+                    input = Console.ReadLine()!;
+                    if (!int.TryParse(input, out n))
+                    {
+                        MessaggioAColori("Seleziona correttamente il territorio\r", "rosso", 'f');
+                        Thread.Sleep(800);
+                    }
+                    else if (n < 1 || n > territori.Count)
+                    {
+                        MessaggioAColori("Seleziona correttamente il territorio\r", "rosso", 'f');
+                        Thread.Sleep(800);
+                    }
+                    else
+                    {
+                        n--;
+                        corretto = true;
+                    }
+                }
+                while (!corretto);
+
+                Console.Clear();
+                MessaggioTerritorioConquistato(player, territori.ElementAt(n));
+                SceltaTerritorio(territoriP, territori.ElementAt(n), territori);
+                Console.WriteLine("\nLista aggiornata:\n");
+                VisualizzaListaNumerata(territori);
+                Console.WriteLine("\npremi invio....");
+                Console.ReadKey();
+            }
+        }
+        else
+        {
+            Console.WriteLine("DEVI CONQUISTARE DAL GIOCATORE AVVERSARIO");
+            Console.ReadKey();
+        }
     }
 
     /*Esegue il salvataggio del territorio nell'array player, elimina il territorio dalla lista
-      
+
       Input: List<string> player -------------> array del giocatore che effettua la scelta
              string territorioScelto -----> il nome del territorio selezionato 
              List<string> territori ------> elenco aggiornato dei territori liberi
@@ -989,25 +1079,25 @@
              List<string> listaP --> lista vuota dei suoi territori
     */
     static void MemorizzaSuLista(string[] player, List<string> territoriP, List<string> territori)
-    {   
+    {
         for (int i = 3; i < player.Length; i++)
         {
             if (player[i] == "_")
             {
-                Console.WriteLine("DEBUG FINE TERRITORI!!!");   //DEBUG
-                Console.ReadKey();                              //DEBUG
+                // Console.WriteLine("DEBUG FINE TERRITORI!!!");   //DEBUG
+                // Console.ReadKey();                              //DEBUG
             }
-            else 
+            else
             {
                 territoriP.Add(player[i]);
-                Console.WriteLine("DEBUG: aggiunto alla lista " + player[i]);   //DEBUG
-                VisualizzaListaNumerata(territoriP);                           //DEBUG
-                Console.WriteLine();                                           //DEBUG
-                Console.ReadKey();                                             //DEBUG
+                // Console.WriteLine("DEBUG: aggiunto alla lista " + player[i]);   //DEBUG
+                // VisualizzaListaNumerata(territoriP);                           //DEBUG
+                // Console.WriteLine();                                           //DEBUG
+                // Console.ReadKey();                                             //DEBUG
                 territori.Remove(player[i]);
-                Console.WriteLine("DEBUG: rimosso dalla lista " + player[i]);   //DEBUG
-                VisualizzaListaNumerata(territori);                //DEBUG
-                Console.ReadKey();                                 //DEBUG
+                // Console.WriteLine("DEBUG: rimosso dalla lista " + player[i]);   //DEBUG
+                // VisualizzaListaNumerata(territori);                //DEBUG
+                // Console.ReadKey();                                 //DEBUG
             }
         }
     }
@@ -1054,7 +1144,7 @@
                 Console.WriteLine("Lettura del file in corso");
                 SchermataLoading('°', 15, 80);
 
-                int contaRighe = 1;
+                int contaRighe = 0;
                 foreach (string riga in file)   //controllo se presente nel file
                 {
                     if (!riga.StartsWith(ID))
@@ -1064,13 +1154,14 @@
                     else
                     {
                         trovato = true;
+                        break;
                     }
                 }
 
                 if (trovato)        //se è nella lista eseguo la copia
                 {
-                    p2 = file[contaRighe].Split(",");
-                    p1 = file[contaRighe - 1].Split(",");
+                    p1 = file[contaRighe].Split(",");
+                    p2 = file[contaRighe + 1].Split(",");
 
                     values[0] = CopiaSuArray(p1);   //formatto a 11 index
                     values[1] = CopiaSuArray(p2);   //formatto a 11 index
@@ -1098,7 +1189,7 @@
     /*Metodo accessorio al metodo CaricaPartita. Chiede l'input del codice di
       4 cifre in formato string. Restituisce un valore string di 4 caratteri
       numerici
-    
+
       OUTPUT: restituisce una stringa di un numero a 4 cifre
     */
     static string InputCodiceID()
@@ -1226,8 +1317,8 @@
         [
             "                               Descrizione del gioco:",
             "********************************************************************************************",
-            "|Gioco stile Risiko versione super semplificata, con la mappa costituita da 8 territori.  |",
-            "|L'obiettivo finale è quello di conquistare tutti i territori lanciando i due dadi.       |",
+            "|Gioco stile Risiko versione super semplificata, con la mappa costituita da 8 territori.   |",
+            "|L'obiettivo finale è quello di conquistare tutti i territori lanciando i due dadi.        |",
             "|Il gioco prevede anche una 'modalità rischio' attivabile solo 1 volta per giocatore.      |",
             "********************************************************************************************",
             "|Regole:                                                                                   |",
@@ -1237,14 +1328,14 @@
             "|  o dispari. Si scommette ad oltranza fino a quando uno dei due non sbaglia la predizione.|",
             "|  Si vince il territorio scommesso dall'avversario più uno a scelta tra quelli liberi solo|",
             "|  se presenti.                                                                            |",
-            "|3.Numero esatto(costa 2 territori): si scommettono 2 propri territori e si utilizza un  |",
+            "|3.Numero esatto(costa 2 territori): si scommettono 2 propri territori e si utilizza un    |",
             "|  dado a 50 facce. Prima del lancio entrambi i giocatori fanno una previsione sul numero  |",
             "|  che potrebbe uscire. Chi si avvicina di più entro un range minimo di 3 numeri vince la  |",
             "|  scommessa. In caso di parità si procede ad oltranza. Per range di 3 numeri si intende ad|",
             "|  esempio se il numero segreto è 23 un utente può vincere se il numero scommesso è uno tra|",
             "|  questi (21,22,23,24,25) e l'utente avversario scommette un numero più distante.         |",
             "|  Esempio: il numero segreto uscito è il 23                                               |",
-            "|           utente1 sceglie 20; utente2 sceglie 22; fine utente2                       |",
+            "|           utente1 sceglie 20; utente2 sceglie 22; fine utente2                           |",
             "|           utente1 sceglie 22; utente2 sceglie 24; PAREGGIO (stessa distanza nel range)   |",
             "|           utente1 sceglie 20; utente2 sceglie 40; PAREGGIO (entrambi fuori dal range)    |",
             "********************************************************************************************"
