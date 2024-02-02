@@ -5164,3 +5164,94 @@ class Program
     }
 }
 ```
+</details>
+
+### 93 - Funzioni: legge un numero e scrive se è pari o dispari utilizzando una funzione:
+<details>
+    <summary> codice </summary>
+
+```c#
+using System.Runtime.Intrinsics.Arm;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Inserisci un numero");
+        int numero = int.Parse(Console.ReadLine()!);
+        if (Pari(numero))
+        {
+            Console.WriteLine("Il numero è pari");
+        }
+        else
+        {
+            Console.WriteLine("Il numero è dispari");
+        }
+    }
+
+    static bool Pari(int numero)
+    {
+        return numero % 2 == 0;
+    }
+}
+```
+</details>
+
+### 94 - Funzioni: legge un numero e scrive se è pari o dispari utilizzando due funzioni:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Inserisci un numero");
+        int numero = int.Parse(Console.ReadLine()!);
+        StampaPariDispari(numero);
+        Console.WriteLine("Inserisci un altro numero");
+        numero = int.Parse(Console.ReadLine()!);
+        StampaPariDispari(numero);
+    }
+
+    static bool Pari(int numero)
+    {
+        return numero % 2 == 0;
+    }
+
+    static void StampaPariDispari(int numero)
+    {
+        if (Pari(numero))
+        {
+            Console.WriteLine("Il numero è pari");
+        }
+        else
+        {
+            Console.WriteLine("Il numero è dispari");
+        }
+    }
+}
+```
+</details>
+
+### 95 - Funzioni: stampa n volte un messaggio. Default stampa 5 volte:
+<details>
+    <summary> codice </summary>
+
+```c#
+class Program
+{
+    static void Main(string[] args)
+    {
+        Stampa("Ciao");
+    }
+    static void Stampa(string messaggio, int volte = 5)
+    {
+        for (int i = 0; i < volte; i++)
+        {
+            Console.WriteLine(messaggio);
+        }
+    }
+}
+```
+</details>
