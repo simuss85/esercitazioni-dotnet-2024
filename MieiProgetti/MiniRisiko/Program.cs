@@ -1,7 +1,4 @@
-﻿
-using System.Net.NetworkInformation;
-
-class Program
+﻿class Program
 {
     static void Main(string[] args)
     {
@@ -85,7 +82,7 @@ class Program
             Console.WriteLine($"{benvenuto}\n");
             if (primoAvvio)
             {
-                SchermataLoading('°', 20, 50);
+                SchermataLoading();
                 primoAvvio = false;
             }
 
@@ -95,7 +92,7 @@ class Program
 
             switch (keyInfo.KeyChar)
             {
-                case '1':
+                case '1':   //GIOCA VS PC: 
 
                     //creo player1
                     Console.Clear();
@@ -103,8 +100,8 @@ class Program
                     Console.WriteLine("\npremi invio...");
                     Console.ReadKey();
 
-                    //creo player2
-                    player2 = CreaGiocatore(player2, player1[2]);
+                    //creo  PC
+                    player2 = CreaGiocatoreDue(player2, player1[2]);
 
                     //messaggio di sfida
                     Console.Clear();
@@ -115,16 +112,16 @@ class Program
                     Console.WriteLine("\n\npremi invio....");
                     Console.ReadKey();
 
-                    //SalvaPartita(pathSave, player1, player2); //DEBUG
-                    GiocaVsPc:
+                //SalvaPartita(pathSave, player1, player2); //DEBUG
+                GiocaVsPc:
                     while (!fine)
                     {
-                        fine = GiocaVsPc(player1, player2, pathSave, territoriP1, territoriP2, territori);
+                        fine = Gioca(player1, player2, pathSave, territoriP1, territoriP2, territori);
                     }
 
                     break;
 
-                case '2':
+                case '2':   //GIOCA VS UTENTE: 
 
                     //creo player1
                     Console.Clear();
@@ -138,7 +135,7 @@ class Program
                     Console.Clear();
                     Console.WriteLine("Giocatore 2");
                     Thread.Sleep(150);
-                    player2 = CreaGiocatore(player2, player1[2]);
+                    player2 = CreaGiocatoreDue(player2, player1[2]);
                     Console.WriteLine("\npremi invio...");
                     Console.ReadKey();
 
@@ -150,55 +147,73 @@ class Program
                     MessaggioAColori(player2[1], player2[2], 'b');
                     Console.WriteLine("\n\npremi invio....");
                     Console.ReadKey();
+                //SalvaPartita(pathSave, player1, player2);   //DEBUG
 
-                    //SalvaPartita(pathSave, player1, player2);   //DEBUG
-                    GiocaVsUtente:
+                GiocaVsUtente:
                     while (!fine)
                     {
-                        GiocaVsUtente(player1, player2, pathSave, fine);
+                        fine = Gioca(player1, player2, pathSave, territoriP1, territoriP2, territori);
                     }
 
                     break;
 
-                case '3':
+                case '3':   //CARICAMENTO: funzionante
+
                     string[][] caricaPlayers = CaricaPartita(pathSave);
-                    player2 = caricaPlayers[0];
-                    player1 = caricaPlayers[1];
-                    MessaggioAColori("Caricamento completato!","verde",'f');
+                    player1 = caricaPlayers[0];
+                    player2 = caricaPlayers[1];
+                    MessaggioAColori("Caricamento completato!", "verde", 'f');
+
+                    //aggiorno le liste dei territori con i dati caricati
+                    Console.Clear();                                    //DEBUG
+                    Console.WriteLine("Memorizzo p1");                  //DEBUG
+                    MemorizzaSuLista(player1,territoriP1,territori);
                     Console.ReadKey();
+                    Console.WriteLine("Memorizzo p1");                  //DEBUG
+                    MemorizzaSuLista(player2,territoriP2,territori);
+                    Console.ReadKey();
+                    Console.Clear();
 
                     if (player2[1] == "PC")
                     {
+                        Console.Write("Bentornato ");
+                        MessaggioAColori(player1[1], player1[2], 'b');
+                        Thread.Sleep(1200);
                         goto GiocaVsPc;
                     }
                     else
                     {
+                        Console.Write("Bentornati ");
+                        MessaggioAColori(player1[1], player1[2], 'b');
+                        Console.Write(" e ");
+                        MessaggioAColori(player2[1], player2[2], 'b');
+                        Thread.Sleep(1200);
                         goto GiocaVsUtente;
                     }
-                    
-                    //DEBUG
-                    #region DEBUG CARICA GIOCATORI
-                    // foreach (string valore in player1)      //DEBUG
-                    // {
-                    //     Console.Write($"{valore},");
-                    // }
-                    // Console.WriteLine();
-                    // foreach (string valore in player2)      //DEBUG
-                    // {
-                    //     Console.Write($"{valore},");
-                    // }
-                    // Console.ReadKey();
-                    #endregion DEBUG   
+
+                //DEBUG
+                #region DEBUG CARICA GIOCATORI
+                // foreach (string valore in player1)      //DEBUG
+                // {
+                //     Console.Write($"{valore},");
+                // }
+                // Console.WriteLine();
+                // foreach (string valore in player2)      //DEBUG
+                // {
+                //     Console.Write($"{valore},");
+                // }
+                // Console.ReadKey();
+                #endregion DEBUG   
 
 
-                case '4':   //funzionante e testato
+                case '4':   //REGOLE DI GIOCO: funzionante e testato
                     RegoleGioco(pathRules);
                     Console.WriteLine("Premi un tasto per tornare indietro...");
                     Console.ReadKey();
                     break;
 
-                case '5':   //funzionante e testato
-                    SchermataLoading('°', 20, 50);
+                case '5':   //EXIT: funzionante e testato
+                    SchermataLoading();
                     MessaggioAColori("Arrivederci alla prossima partita!!!", "blu", 'f');
                     fine = true;
                     break;
@@ -319,7 +334,7 @@ class Program
         Console.WriteLine("1. Lancia i dadi");
         Console.WriteLine("2. Modalità rischio");
         Console.WriteLine("s. Salva il gioco ed esci");
-        Console.WriteLine("'ctrl'+'V' Visualizza mappa");
+        Console.WriteLine("'ctrl'+'Y' Visualizza mappa");
     }
 
     //Visualizza una breve sintesi della mappa aggiornata con i colori
@@ -383,7 +398,7 @@ class Program
              int punti --> numero di caratteri da visualizzare a schermo
              int ms -----> tempo di attesa in ms per la funzione Sleep
     */
-    static void SchermataLoading(char c, int punti, int ms)
+    static void SchermataLoading(char c = '°', int punti = 20, int ms = 50)
     {
         for (int i = 0; i < punti; i++)
         {
@@ -775,7 +790,7 @@ class Program
 
     /*Avvia il gioco contro il pc 
     */
-    static bool GiocaVsPc(string[] player1, string[] player2, string path,
+    static bool Gioca(string[] player1, string[] player2, string path,
                         List<string> listaP1, List<string> listaP2, List<string> territori)
     {
         Console.Clear();
@@ -878,14 +893,6 @@ class Program
 
     }
 
-    static void GiocaVsUtente(string[] player1, string[] player2, string path, bool fine)
-    {
-        Console.Clear();
-        MessaggioTurno(player1);
-        MenuDiGioco();
-        Console.ReadKey();
-
-    }
     /*Esegue il calcolo dei numeri random, simula graficamente la rotazione
       dei dadi e visualizza a schermo il vincitore del turno.
 
@@ -935,14 +942,6 @@ class Program
         return risultato2 >= risultato1 ? 2 : 1;
     }
 
-    /*Prende un territorio dal giocatore avversario
-        
-    */
-    static void Conquista(List<string> player1, List<string> player2)
-    {
-
-    }
-
     /*Esegue il salvataggio del territorio nell'array player, elimina il territorio dalla lista
       
       Input: List<string> player -------------> array del giocatore che effettua la scelta
@@ -950,6 +949,7 @@ class Program
              List<string> territori ------> elenco aggiornato dei territori liberi
     */
     static void SceltaTerritorio(List<string> player1, string territorioScelto, List<string> territori)
+
     {
         //aggiunge il territorio nella lista utente
         if (player1.Contains(territorioScelto))
@@ -982,6 +982,36 @@ class Program
         return player;
     }
 
+    /*Copia i territori conquistati dal giocatore nel suo array in modo da
+      essere pronto per il salvataggio sul file csv.
+
+      Input: string[] player ------> array del giocatore caricato
+             List<string> listaP --> lista vuota dei suoi territori
+    */
+    static void MemorizzaSuLista(string[] player, List<string> territoriP, List<string> territori)
+    {   
+        for (int i = 3; i < player.Length; i++)
+        {
+            if (player[i] == "_")
+            {
+                Console.WriteLine("DEBUG FINE TERRITORI!!!");   //DEBUG
+                Console.ReadKey();                              //DEBUG
+            }
+            else 
+            {
+                territoriP.Add(player[i]);
+                Console.WriteLine("DEBUG: aggiunto alla lista " + player[i]);   //DEBUG
+                VisualizzaListaNumerata(territoriP);                           //DEBUG
+                Console.WriteLine();                                           //DEBUG
+                Console.ReadKey();                                             //DEBUG
+                territori.Remove(player[i]);
+                Console.WriteLine("DEBUG: rimosso dalla lista " + player[i]);   //DEBUG
+                VisualizzaListaNumerata(territori);                //DEBUG
+                Console.ReadKey();                                 //DEBUG
+            }
+        }
+    }
+
     /*Permette di creare la copia corretta di 11 elementi dell'array player
       prendendo la copia del file che è invece di 12 elementi (quello vuoto)
 
@@ -989,7 +1019,7 @@ class Program
       OUTPUT: string[] player ----------> array del giocatore corretto
     */
     static string[] CopiaSuArray(string[] copiaDaFile)
-    {   
+    {
         string[] player = new string[11];
         for (int i = 0; i < 11; i++)
         {
@@ -1005,45 +1035,97 @@ class Program
     */
     static string[][] CaricaPartita(string path)
     {
-        string ID = "2124";
         string[] p1 = new string[1];
         string[] p2 = new string[1];
-        string[][] values = new string[2][];
-        try
-        {
-            string[] file = File.ReadAllLines(path);
-            Console.Clear();
-            Console.WriteLine("Lettura del file in corso");
-            SchermataLoading('°', 15, 80);
+        string[][] values = new string[2][];    //per il valore di ritorno
+        bool trovato = false;
 
-            int contaRighe = 1;
-            foreach (string riga in file)
+        do
+        {
+            Console.WriteLine("Inserisci codice del salvataggio: ");
+            string ID = InputCodiceID();
+            //Console.WriteLine("DEBUG ID: " + ID);   //DEBUG
+            //Console.ReadKey();
+
+            try
             {
-                if (!riga.StartsWith(ID))
+                string[] file = File.ReadAllLines(path);
+                Console.Clear();
+                Console.WriteLine("Lettura del file in corso");
+                SchermataLoading('°', 15, 80);
+
+                int contaRighe = 1;
+                foreach (string riga in file)   //controllo se presente nel file
                 {
-                    contaRighe++;
+                    if (!riga.StartsWith(ID))
+                    {
+                        contaRighe++;   //indica l'ultima riga in cui compare ID (quella del player2 )
+                    }
+                    else
+                    {
+                        trovato = true;
+                    }
+                }
+
+                if (trovato)        //se è nella lista eseguo la copia
+                {
+                    p2 = file[contaRighe].Split(",");
+                    p1 = file[contaRighe - 1].Split(",");
+
+                    values[0] = CopiaSuArray(p1);   //formatto a 11 index
+                    values[1] = CopiaSuArray(p2);   //formatto a 11 index
+                }
+                else
+                {
+                    MessaggioAColori("Codice salvataggio errato o inesistente\r", "rosso", 'f');
+                    Thread.Sleep(800);
                 }
             }
-
-            if (contaRighe < file.Length)
+            catch (Exception)
             {
-                p1 = file[contaRighe].Split(",");
-                p2 = file[contaRighe - 1].Split(",");
+                // Console.WriteLine(e.Message);
+                MessaggioAColori("\nNessun salvataggio trovato", "rosso", 'f');
+                Thread.Sleep(800);
+            }
+        }
+        while (!trovato);
+        // Console.WriteLine("DEBUG VALUES: " + values.Length);    //DEBUG
+        // Console.ReadKey();                                      //DEBUG
+
+        return values;
+    }
+
+    /*Metodo accessorio al metodo CaricaPartita. Chiede l'input del codice di
+      4 cifre in formato string. Restituisce un valore string di 4 caratteri
+      numerici
+    
+      OUTPUT: restituisce una stringa di un numero a 4 cifre
+    */
+    static string InputCodiceID()
+    {
+        bool corretto = false;
+        string value = "";
+        do
+        {
+            Console.Clear();
+            MessaggioAColori("Carica ultima partita", "verde", 'f');
+            Console.WriteLine();
+            Console.Write("Inserisci codice salvataggio: ");
+            value = Console.ReadLine()!;
+
+            if (!int.TryParse(value, out int n))
+            {
+                MessaggioAColori("Il codice deve essere di 4 numeri\r", "rosso", 'f');
+                Thread.Sleep(800);
             }
             else
             {
-                MessaggioAColori("Codice salvataggio errato o inesistente", "rosso", 'f');
+                corretto = true;
             }
         }
-        catch (Exception)
-        {
-            // Console.WriteLine(e.Message);
-            MessaggioAColori("\nNessun salvataggio trovato", "rosso", 'f');
-            Thread.Sleep(800);
-        }
-        values[0] = CopiaSuArray(p1);
-        values[1] = CopiaSuArray(p2);
-        return values;
+        while (!corretto);
+
+        return value;
     }
 
     /*Metodo che salva in un file csv i dati della partita attuali che sono
@@ -1063,8 +1145,11 @@ class Program
 
         if (!File.Exists(path))
         {
-            Console.WriteLine("Il file di salvataggio non è presente.");
-            Console.WriteLine("Creo un nuovo file");
+            MessaggioAColori("Il file di salvataggio non è presente", "rosso", 'f');
+            MessaggioAColori("Creo un file di salvataggio", "verde", 'f');
+            SchermataLoading('°', 28, 80);
+            Console.Clear();
+
             File.Create(path).Close();
             File.WriteAllText(path, "ID,Giocatori,Colori,t,e,r,r,i,t,o,r,\n");
             Console.WriteLine("\nFile creato e inizializzato.");
@@ -1212,14 +1297,13 @@ class Program
 
         return player;
     }
-    /*Metodo che permette di creare un gioctore. Scelta del nome, del colore e
-      messaggio di benvenuto.
-      giocatore
+    /*Metoro che crea il secondo giocatore prendendo il colore gia scelto
+      dall'altro giocatore.
 
       Input: string[] player2 -----> array del giocatore player2
-      colore
+             string colorePlayer1--> colore del giocatore player1
     */
-    static string[] CreaGiocatore(string[] player2, string colorePlayer1)
+    static string[] CreaGiocatoreDue(string[] player2, string colorePlayer1)
     {
         if (player2[1] == "PC")
         {
@@ -1287,7 +1371,7 @@ class Program
             if ((keyInfo.Modifiers & ConsoleModifiers.Control) != 0)
             {
                 // controlla se il tasto premuto è N
-                if (keyInfo.Key == ConsoleKey.V)
+                if (keyInfo.Key == ConsoleKey.Y)
                 {
                     Console.Clear();
                     MessaggioTurno(player1);
