@@ -695,22 +695,55 @@ Argomenti:
 </details>
 
 <!-- ******************************************  02 feb 2024   ****************************************** -->
-<details>
-    <summary><h3>02 feb 2024 </h3></summary>
+<details details>
+    <summary><h3>02 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- ...  
+- Funzioni e metodi
 
 ### Info
-> ..  
+> RIpreso il codice del MiniRisiko
 
 ### Note 
-- ..  
+- Possiamo usare la *keyword* `ref` nelle funzioni per poter passare il riferimento del parametro, ovvero
+  il puntatore stesso di quell'oggetto o variabile.
 
-Possibile soluzione :
+esempio:
 
 ```c#
-
+    static void Main(string[] args)
+    {
+        int a = 1, b = 3;
+        int somma = 0;
+    }
+    //negli argomenti si utilizza il ref
+    static void SommaNumeri(int a, int b, ref int tot)
+    {
+        tot = a + b;
+        Console.WriteLine(tot);
+    }
 ```
+
+### Note 
+- Quando creo una funzione, posso inizializzare un argomento nella dichiarazione stessa della funzione
+
+esempio:
+
+```c#
+    /*Funzione che stampa un messaggio int volte.
+      Nel caso un utente non inserisca il valore, si usa quello di default
+    */
+    static void Stampa(string messaggio, int volte = 5)
+    {
+        for (int i = 0; i < volte; i++)
+        {
+            Console.WriteLine(messaggio);
+        }
+    }
+```
+
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.93** a **n.95**
 
 </details>
