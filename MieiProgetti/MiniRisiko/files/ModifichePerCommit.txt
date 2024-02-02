@@ -1,11 +1,13 @@
 Modifica:
-
+LancioDadi ora è piu snello
 Fixa:
 
 Aggiunge:
+ConquistaTerritorio
 
 Elimina:
 
 *** DA FARE ***
 - modifica output punteggio, deve essere formattato con il nome inserito
 - inserici i suoni
+- modificare le funzioni con il ref??
