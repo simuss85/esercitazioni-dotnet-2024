@@ -1,12 +1,10 @@
-*** FIX ***
-Cambiato il tasto per la selezione dalla mappa da V a Y
-CaricaPartita ora funzionante
-Messaggio di bentornato dopo un caricamento cartita
-Eliminato metodo GocaVSUtente
-Rinominamto metodo GiocaVsPC in GiocaVsPC
+Modifica:
 
-*** NUOVI ***
-InputCodiceID gestisce inserimento corretto input ID
+Fixa:
+
+Aggiunge:
+
+Elimina:
 
 *** DA FARE ***
 - modifica output punteggio, deve essere formattato con il nome inserito
