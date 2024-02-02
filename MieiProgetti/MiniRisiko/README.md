@@ -4,7 +4,7 @@
 Gioco *stile Risiko* versione super semplificata, con la mappa costituita da 8 continenti (piu i due poli). L'obiettivo finale è quello di conquistare tutti i continenti utilizzando il lancio di due dadi. Il gioco prevede anche una *modalità rischio*, attivabile solo 1 volta per giocatore.
 
 #### Regole
->**Lanciando i dadi**: ottenendo il punteggio maggiore contro l'avversario si vince 1 continente a scelta sulla mappa.
+>**Lanciando i dadi**: ottenendo il punteggio maggiore contro l'avversario si vince 1 continente a scelta sulla mappa. Il turno si vince al meglio di 3, dopo di che si cambia turno.
 
 >**Pari o dispari:** viene lanciato un dado a 36 facce. Ogni utente mette in palio 1 continente in suo possesso, in caso di vittoria se ne ottengono 2 (1 in palio e 1 a scelta). A turno ogni giocatore chiede all'altro la predizione e poi lancia il dado. Il primo che sbaglia nel corso di un turno, perde.  
 
