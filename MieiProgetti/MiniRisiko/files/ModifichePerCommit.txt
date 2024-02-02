@@ -1,9 +1,9 @@
 Modifica:
-LancioDadi ora è piu snello
+
 Fixa:
 
 Aggiunge:
-ConquistaTerritorio
+
 
 Elimina:
 
