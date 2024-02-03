@@ -5,6 +5,7 @@
         #region Tipi di dati e variabili
         //variabili di inizializzazione file e sessione
         string pathSave = @"./files/save.csv";
+        string pathCopia = @"./files/temp/copiaSave.csv"; //in caso di errore
         string pathRules = @"./files/rules.txt";
         string ID = DateTime.Now.ToString();
 
@@ -28,7 +29,7 @@
 
         string benvenuto = "Benvenuto a MiniRisiko";
         bool primoAvvio = true;     //per la prima schermata di loading
-        bool fine = false;      //decreta la fine del gioco
+        bool vittoria = false;      //decreta la fine del gioco
 
 
         #endregion
@@ -104,7 +105,7 @@
                     Console.ReadKey();
 
                     //creo  PC
-                    CreaGiocatoreDue(player2, player1[2]);
+                    CreaGiocatorePC(player2, player1[2]);
 
                     //messaggio di sfida
                     Console.Clear();
@@ -117,10 +118,9 @@
 
                 //SalvaPartita(pathSave, player1, player2); //DEBUG
                 GiocaVsPc:
-                    while (!fine)
-                    {
-                        fine = Gioca(player1, player2, pathSave, territoriP1, territoriP2, territori);
-                    }
+
+                    vittoria = Gioca(player1, player2, pathSave, territoriP1, territoriP2, territori);
+
 
                     break;
 
@@ -128,17 +128,13 @@
 
                     //creo player1
                     Console.Clear();
-                    Console.WriteLine("Giocatore 1");
-                    Thread.Sleep(150);
                     CreaGiocatore(player1);
                     Console.Write("\npremi invio...");
                     Console.ReadKey();
 
                     //creo player2
                     Console.Clear();
-                    Console.WriteLine("Giocatore 2");
-                    Thread.Sleep(150);
-                    CreaGiocatoreDue(player2, player1[2]);
+                    CreaGiocatore(player2, player1[2]);
                     Console.Write("\npremi invio...");
                     Console.ReadKey();
 
@@ -153,16 +149,15 @@
                 //SalvaPartita(pathSave, player1, player2);   //DEBUG
 
                 GiocaVsUtente:
-                    while (!fine)
-                    {
-                        fine = Gioca(player1, player2, pathSave, territoriP1, territoriP2, territori);
-                    }
+
+                    vittoria = Gioca(player1, player2, pathSave, territoriP1, territoriP2, territori);
+
 
                     break;
 
                 case '3':   //CARICAMENTO: funzionante
 
-                    CaricaPartita(pathSave, player1, player2);
+                    CaricaPartita(pathSave, pathCopia, player1, player2);
                     MessaggioAColori("Caricamento completato!", "verde", 'f');
 
                     //aggiorno le liste dei territori con i dati caricati
@@ -216,7 +211,7 @@
                 case '5':   //EXIT: funzionante e testato
                     SchermataLoading();
                     MessaggioAColori("Arrivederci alla prossima partita!!!", "blu", 'f');
-                    fine = true;
+                    vittoria = true;
                     break;
 
                 default:
@@ -226,7 +221,7 @@
             }
 
         }
-        while (!fine);
+        while (!vittoria);
 
 
     }
@@ -439,7 +434,7 @@
              string p1--------- ---> i risultati del lancio dei dadi di player1
              string p2--------- ---> i risultati del lancio dei dadi di player2
     */
-    static void MessaggioSfida(string[] player1, string[] player2, string? p1 = null, string? p2 = null)
+    static void MessaggioRoundDadi(string[] player1, string[] player2, string? p1 = null, string? p2 = null)
     {
         int spazi;
         string messaggio = "";
@@ -464,15 +459,32 @@
         MessaggioAColori(player2[1], player2[2], 'b');
         Console.WriteLine(messaggio + p2 + "\n");
     }
+
     /*Stampa sullo schermo la scritta "Giocatore hai vinto la sfida"
       con il colore del nome scelto dall'utente
 
       Input: string[] player -----> array player giocatore attuale
+             bool fineGioco ------> se true stampa il messaggio finale
     */
-    static void MessaggioVittoria(string[] player)
+    static void MessaggioVittoria(string[] player, bool fineGioco = false)
     {
-        MessaggioAColori(player[1], player[2], 'b');
-        Console.WriteLine(" hai vinto la sfida");
+        if (fineGioco)
+        {
+            MessaggioAColori("VITTORIA!!!", "verde", 'f');
+            Thread.Sleep(1000);
+            Console.Clear();
+
+            MessaggioAColori(player[1], player[2], 'b');
+            Console.WriteLine(" hai vinto la partita.");
+            Console.WriteLine("\n premi invio per uscire!");
+            Console.ReadKey();
+        }
+        else
+        {
+            MessaggioAColori(player[1], player[2], 'b');
+            Console.WriteLine(" hai vinto la sfida");
+        }
+
     }
 
     /*Stampa sullo schermo la scritta "Giocatore hai vinto la sfida"
@@ -585,7 +597,7 @@
     }
 
     /*Metodo che assegna il colore all'utente in base alla sua scelta.
-      Scrive il risultato nell array player[2] = "colore"; player2[2] = "colore"
+      Scrive il risultato nell array player1[2] = "colore"; player2[2] = "colore"
 
       Input: string[] player -----> array del giocatore player1 o player2
               string c --------> indica il colore che è gia stato preso
@@ -830,7 +842,7 @@
                     Console.WriteLine($" {dado}\t{dado}\t\t{dado}\t{dado}");
                 }
                 Console.WriteLine();
-                MessaggioSfida(player1, player2);
+                MessaggioRoundDadi(player1, player2);
                 Thread.Sleep(100);  //default 100
             }
         }
@@ -847,11 +859,11 @@
     {
         char rispostaPlayer;
         int vincitore;    //int[0] = il numero del vincitore, 
-        bool cambioTurno = false;   //utilizzata nel ciclo per ripetere il gioco
-        bool partitaInCorso = true;
+        bool cambioTurno = false;   //se true si cambia l'ordine dei giocatori attivi
+        bool vittoria = false; //finchè true si può giocare 
         Console.Clear();
 
-        while (partitaInCorso)
+        while (!vittoria)
         {
             if (!cambioTurno)   //inizia player1
             {
@@ -880,6 +892,12 @@
 
                             //se player1 vince può scegliere i territori
                             ConquistaTerritorio(player1, territoriP1, territori);
+
+                            if (territoriP1.Count == 8) //vince il gioco player1
+                            {
+                                MessaggioVittoria(player1, true);
+                                vittoria = true;
+                            }
                         }
                         else        //se vince player2
                         {
@@ -905,6 +923,12 @@
 
                             //se player2 vince può scegliere i territori
                             ConquistaTerritorio(player2, territoriP2, territori);
+
+                            if (territoriP2.Count == 8) //vince il gioco player1
+                            {
+                                MessaggioVittoria(player2, true);
+                                vittoria = true;
+                            }
                         }
                         else
                         {
@@ -921,7 +945,7 @@
                     break;
 
                 case 's':   //salva
-                    partitaInCorso = SalvaPartita(path, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
+                    vittoria = SalvaPartita(path, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
                     break;
 
                 default:
@@ -929,7 +953,7 @@
                     break;
             }
         }
-        return partitaInCorso;
+        return vittoria;
     }
 
     /*Esegue il calcolo dei numeri random, simula graficamente la rotazione
@@ -965,7 +989,7 @@
             SimulaLancioDadi(dado1P1, dado2P1, dado1P2, dado2P2, player1, player2);
             Console.WriteLine();
 
-            MessaggioSfida(player1,player2,risultatoP1.ToString(),risultatoP2.ToString());
+            MessaggioRoundDadi(player1, player2, risultatoP1.ToString(), risultatoP2.ToString());
 
             risultati[turno] = $"{risultatoP1}\t   {risultatoP2}";
             turno++;
@@ -1030,12 +1054,10 @@
                 Console.Clear();
 
                 MessaggioTerritorioConquistato(player, territori.First());
+                AssegnaTerritorio(territoriP, territori.First(), territori);
+                Console.WriteLine("\npremi invio...");
                 Console.ReadKey();
                 Console.Clear();
-
-                AssegnaTerritorio(territoriP, territori.First(), territori);
-                Console.ReadKey();
-
             }
             else            //permette la scelta dalla lista territori aggiornata
             {
@@ -1180,9 +1202,12 @@
            string[] player1 ---> array del player1
            string[] player2 ---> array del player2
     */
-    static void CaricaPartita(string path, string[] player1, string[] player2)
+    static void CaricaPartita(string path, string pathCopia, string[] player1, string[] player2)
     {
         bool trovato = false;
+
+        //eseguo una copia del file in caso di errore durante l'esecuzione.
+        GestisciCopiaCSV(path, pathCopia);
 
         do
         {
@@ -1267,7 +1292,49 @@
             }
         }
         File.WriteAllLines(path, copia);    //eseguo la copia del file aggiornata
+    }
 
+    /*Metodo ausiliario dei metodi CaricaPartita e SalvaPartita. Crea o elimina
+      una copia del file di salvataggio per prevenire la perdita durante errori
+      di esecuzione del programma. 
+      Cartella di destinazione ./files/temp
+
+      INPUT: char azione -------> 'c' crea copia, 'r' ripristina salvataggio perso
+             string pathCopia --> path del file per la copia
+
+    */
+    static void GestisciCopiaCSV(string path, string pathCopia)
+    {
+        char azione = 'c';
+
+        //se la copia è piu grande dell'originale allora ho perso dei dati e li ripristino
+        if(File.Exists(pathCopia) & File.ReadAllLines(path).Length < File.ReadAllLines(pathCopia).Length)
+        {
+            azione = 'r';
+        }
+
+        switch (azione)
+        {
+            case 'c':   //copia il file originale su una copia
+                if (!File.Exists(pathCopia))
+                {
+                    File.Create(pathCopia).Close();
+                }
+                File.Copy(path, pathCopia);
+                break;
+
+            case 'r':   //ripristina
+
+                if (!File.Exists(path))     //se non esiste il file lo creo
+                {
+                    File.Create(path).Close();
+                }
+                File.Copy(pathCopia, path);
+                break;
+
+            default:
+                break;
+        }
     }
 
     /*Metodo accessorio al metodo CaricaPartita. Chiede l'input del codice di
@@ -1434,10 +1501,11 @@
       messaggio di benvenuto.
       giocatore
 
-      Input: string[] player -----> array del giocatore player1
-      colore
+      Input: string[] player --------> array del giocatore player1 o player2
+             string? colorePlayer1 --> colore gia scelto dal player1
+      
     */
-    static void CreaGiocatore(string[] player)
+    static void CreaGiocatore(string[] player, string? colorePlayer1 = null)
     {
         bool corretto = false;
 
@@ -1457,8 +1525,8 @@
                 }
                 else
                 {
-                MessaggioAColori("Il nome deve essere di massimo 20 caratteri\n", "rosso", 'f');
-                Thread.Sleep(1000);
+                    MessaggioAColori("Il nome deve essere di massimo 20 caratteri\n", "rosso", 'f');
+                    Thread.Sleep(1000);
                 }
             }
             else
@@ -1471,7 +1539,15 @@
         Console.Clear();
 
         //seleziona il colore
-        SceltaColore(player, player[2][..1]);  //invia array e primo carattere del colore 
+        if (colorePlayer1 == null) //se è il player1 non ci sono restrizioni
+        {
+            SceltaColore(player, player[2][..1]);  //invia array e primo carattere del colore 
+        }
+        else //il player2 ha una scelta di meno 
+        {
+            SceltaColore(player, colorePlayer1[..1]);  //invia array e primo carattere del colore 
+        }
+
         Console.Clear();
 
         //messaggio di saluto
@@ -1479,13 +1555,14 @@
         MessaggioAColori(player[1], player[2], 'b');
         Console.WriteLine();
     }
+
     /*Metoro che crea il secondo giocatore prendendo il colore gia scelto
       dall'altro giocatore.
 
       Input: string[] player2 -----> array del giocatore player2
              string colorePlayer1--> colore del giocatore player1
     */
-    static void CreaGiocatoreDue(string[] player2, string colorePlayer1)
+    static void CreaGiocatorePC(string[] player2, string colorePlayer1)
     {
         if (player2[1] == "PC")
         {
@@ -1511,23 +1588,6 @@
                     player2[2] = "rosso";
                     break;
             }
-        }
-        else
-        {
-            //iserisci il nome
-            Console.Write("Inserisci il tuo nome: ");
-            player2[1] = Console.ReadLine()!;
-            Console.Clear();
-
-            //seleziona il colore
-            MenuSelezioneColoreUtente(colorePlayer1[..1]);   //invia il primo carattere del colore 
-            SceltaColore(player2, colorePlayer1[..1]);  //invia array e primo carattere del colore 
-            Console.Clear();
-
-            //messaggio di saluto
-            Console.Write("Ciao ");
-            MessaggioAColori(player2[1], player2[2], 'b');
-            Console.WriteLine();
         }
     }
 
