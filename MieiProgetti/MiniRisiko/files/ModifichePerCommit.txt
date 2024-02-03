@@ -4,10 +4,10 @@ Fixa:
 
 Aggiunge:
 
-
 Elimina:
 
 *** DA FARE ***
-- modifica output punteggio, deve essere formattato con il nome inserito
-- inserici i suoni
-- modificare le funzioni con il ref??
+- inserici i suoni.
+- chi perde perde il territorio (sceglie l'utente dalla lista, se PC fa da solo prende random).
+- gestire i file csv in caso di fine programma inaspettata (crea una copia ad ogni caricamento eliminala ad ogni save).
+- SceltaColore messaggio errore sulla stessa linea input
