@@ -159,9 +159,7 @@
 
                 case '3':   //CARICAMENTO: funzionante
 
-                    string[][] caricaPlayers = CaricaPartita(pathSave);
-                    player1 = caricaPlayers[0];
-                    player2 = caricaPlayers[1];
+                    CaricaPartita(pathSave, player1, player2);
                     MessaggioAColori("Caricamento completato!", "verde", 'f');
 
                     //aggiorno le liste dei territori con i dati caricati
@@ -1058,18 +1056,18 @@
     /*Copia i territori conquistati dal giocatore nel suo array in modo da
       essere pronto per il salvataggio sul file csv.
 
-      Input: string[] player ------> array del giocatore 
-             List<string> listaP --> lista dei suoi territori
+      Input: string[] player ------------> array del player
+             List<string> territoriP ----> lista dei suoi territori
+
     */
-    static string[] MemorizzaSuArray(string[] player, List<string> listaP)
+    static void MemorizzaSuArray(string[] player, List<string> territoriP)
     {
         int n = 3;
-        foreach (string territorio in listaP)   //per ogni elemento della lista
-        {
-            player[n] = territorio;
+        foreach (string territorio in territoriP)   //salvo i territori del player
+        {                                           //nel suo array personale 
+            player[n] = territorio;                 //a partire dall'indice 3 
             n++;
         }
-        return player;
     }
 
     /*Copia i territori conquistati dal giocatore nel suo array in modo da
@@ -1102,32 +1100,29 @@
         }
     }
 
-    /*Permette di creare la copia corretta di 11 elementi dell'array player
-      prendendo la copia del file che è invece di 12 elementi (quello vuoto)
+    /*Permette di aggiornare array player con i dati caricati e presenti
+      nell array copiaDaFile
 
-      INPUT: string[] copiaDaFile ------> copia del file 
-      OUTPUT: string[] player ----------> array del giocatore corretto
+      INPUT: string[] copiaDaFile ------> copia dei dati caricati
+             string[] player -----------> array player da aggiornare
     */
-    static string[] CopiaSuArray(string[] copiaDaFile)
+    static void CaricaPlayer(string[] copiaDaFile, string[] player)
     {
-        string[] player = new string[11];
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < player.Length; i++)
         {
             player[i] = copiaDaFile[i];
         }
-        return player;
     }
-    /*Visualizza l'elenco delle partite in corso e permette la selezione di 
-    una di esse ripristinando lo stato del gioco fino a quel momento. 
-    Gestisce le eccezioni sui file
+    /*Carica una partita salvata e riptistina gli array players con i dati
+      contenuti nel file save.csv
+      Gestisce le eccezioni sui file
 
-    INPUT: string pathSave ---> il path del file di salvataggio 
+      INPUT: string pathSave ----> il path del file di salvataggio 
+           string[] player1 ---> array del player1
+           string[] player2 ---> array del player2
     */
-    static string[][] CaricaPartita(string path)
+    static void CaricaPartita(string path, string[] player1, string[] player2)
     {
-        string[] p1 = new string[1];
-        string[] p2 = new string[1];
-        string[][] values = new string[2][];    //per il valore di ritorno
         bool trovato = false;
 
         do
@@ -1142,7 +1137,7 @@
                 string[] file = File.ReadAllLines(path);
                 Console.Clear();
                 Console.WriteLine("Lettura del file in corso");
-                SchermataLoading('°', 15, 80);
+                SchermataLoading('°', 15, 60);
 
                 int contaRighe = 0;
                 foreach (string riga in file)   //controllo se presente nel file
@@ -1158,15 +1153,12 @@
                     }
                 }
 
-                if (trovato)        //se è nella lista eseguo la copia ed elimino dal file
-                {
-                    p1 = file[contaRighe].Split(",");
-                    p2 = file[contaRighe + 1].Split(",");
+                if (trovato)        
+                {                           //se è nella lista eseguo la copia ed elimino dal file e
+                    CaricaPlayer(file[contaRighe].Split(","), player1);       //formatto a 11 index
+                    CaricaPlayer(file[contaRighe + 1].Split(","), player2);   //formatto a 11 index
 
                     EliminaRigaDalFile(contaRighe, path);    //aggiorno il file 
-
-                    values[0] = CopiaSuArray(p1);   //formatto a 11 index
-                    values[1] = CopiaSuArray(p2);   //formatto a 11 index
                 }
                 else
                 {
@@ -1182,10 +1174,6 @@
             }
         }
         while (!trovato);
-        // Console.WriteLine("DEBUG VALUES: " + values.Length);    //DEBUG
-        // Console.ReadKey();                                      //DEBUG
-
-        return values;
     }
 
     /*Metodo accessorio che prende il file dopo essere stato caricato 
@@ -1204,14 +1192,14 @@
         // Console.WriteLine("righe file originale: " + righe.Length); //DEBUG
         // Console.WriteLine("righe file aggiornato: " + copia.Length);//DEBUG
         // Console.ReadKey();                                          //DEBUG
-        
+
         int count = 0;
 
         foreach (string riga in righe)      //copio tutto l'array del file tranne le 2 righe vuote
-        {   
+        {
             // Console.WriteLine(riga);        //DEBUG
             // Console.ReadKey();              //DEBUG
-            
+
             if (riga != "_")
             {
                 copia[count] = riga;
@@ -1260,14 +1248,14 @@
       presenti nell'array di ogni giocatore (player1 e player2). 
       Se il file non esiste lo crea da zero includendo le varie etichette.
 
-      Input: string path -----> il percorso del file di salvataggio
-             string[] player1 -----> array del player1
-             string[] player2 -----> array del player2
-             List<string> listaP1--> territori attuali player1
-             List<string> listaP2--> territori attuali player2
+      Input: string path --------------> il percorso del file di salvataggio
+             string[] player1 ---------> array del player1
+             string[] player2 ---------> array del player2
+             List<string> territoriP1--> territori attuali player1
+             List<string> territoriP2--> territori attuali player2
     */
     static bool SalvaPartita(string path, string[] player1, string[] player2,
-                    List<string> listaP1, List<string> listaP2)
+                    List<string> territoriP1, List<string> territoriP2)
     {
         Console.Clear();
 
@@ -1276,7 +1264,7 @@
             MessaggioAColori("Il file di salvataggio non è presente", "rosso", 'f');
             Thread.Sleep(600);
             MessaggioAColori("Creo un file di salvataggio", "verde", 'f');
-            SchermataLoading('°', 28, 80);
+            SchermataLoading('°', 28, 60);
             Console.Clear();
 
             File.Create(path).Close();
@@ -1286,8 +1274,8 @@
         string[] righe = File.ReadAllLines(path);
 
         //aggiorno gli array dei giocatori coi i territori nelle liste
-        player1 = MemorizzaSuArray(player1, listaP1);
-        player2 = MemorizzaSuArray(player2, listaP2);
+        MemorizzaSuArray(player1, territoriP1);
+        MemorizzaSuArray(player2, territoriP2);
 
 
         foreach (string valore in player1)
