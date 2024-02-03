@@ -49,11 +49,14 @@
         // RegoleGioco(pathRules);
 
         //metodo SimulaLancioDadi
+        // Random random = new();
         // for (int i = 0; i < 5; i++)
         // {
-        //     int x = random.Next(1, 7);
-        //     int y = random.Next(1, 7);
-        //     SimulaLancioDadi(x, y);
+        //     int x1 = random.Next(1, 7);
+        //     int y1 = random.Next(1, 7);
+        //     int x2 = random.Next(1, 7);
+        //     int y2 = random.Next(1, 7);
+        //     SimulaLancioDadi(x1, y1, x2, y2, player1, player2);
         //     Console.ReadLine();
         // }
 
@@ -96,12 +99,12 @@
 
                     //creo player1
                     Console.Clear();
-                    player1 = CreaGiocatore(player1);
-                    Console.WriteLine("\npremi invio...");
+                    CreaGiocatore(player1);
+                    Console.Write("\npremi invio...");
                     Console.ReadKey();
 
                     //creo  PC
-                    player2 = CreaGiocatoreDue(player2, player1[2]);
+                    CreaGiocatoreDue(player2, player1[2]);
 
                     //messaggio di sfida
                     Console.Clear();
@@ -109,7 +112,7 @@
                     MessaggioAColori(player1[1], player1[2], 'b');
                     Console.Write(" vs ");
                     MessaggioAColori(player2[1], player2[2], 'b');
-                    Console.WriteLine("\n\npremi invio....");
+                    Console.Write("\n\npremi invio...");
                     Console.ReadKey();
 
                 //SalvaPartita(pathSave, player1, player2); //DEBUG
@@ -127,16 +130,16 @@
                     Console.Clear();
                     Console.WriteLine("Giocatore 1");
                     Thread.Sleep(150);
-                    player1 = CreaGiocatore(player1);
-                    Console.WriteLine("\npremi invio...");
+                    CreaGiocatore(player1);
+                    Console.Write("\npremi invio...");
                     Console.ReadKey();
 
                     //creo player2
                     Console.Clear();
                     Console.WriteLine("Giocatore 2");
                     Thread.Sleep(150);
-                    player2 = CreaGiocatoreDue(player2, player1[2]);
-                    Console.WriteLine("\npremi invio...");
+                    CreaGiocatoreDue(player2, player1[2]);
+                    Console.Write("\npremi invio...");
                     Console.ReadKey();
 
                     //messaggio di sfida
@@ -145,7 +148,7 @@
                     MessaggioAColori(player1[1], player1[2], 'b');
                     Console.Write(" vs ");
                     MessaggioAColori(player2[1], player2[2], 'b');
-                    Console.WriteLine("\n\npremi invio....");
+                    Console.Write("\n\npremi invio...");
                     Console.ReadKey();
                 //SalvaPartita(pathSave, player1, player2);   //DEBUG
 
@@ -418,6 +421,29 @@
         Console.WriteLine(" è il tuo turno");
     }
 
+    /*Stampa il messaggio in rosso e attende 800 ms. Non va a capo
+    */
+    static void SelezioneErrata()
+    {
+        //caso digitazione errata
+        MessaggioAColori("Selezione errata", "rosso", 'f');
+        Thread.Sleep(800);
+    }
+
+    /*Visualizza la frase sopra il lancio dei dadi e va a capo.
+      
+      INPUT: string[] player1 -----> array del giocatore che attacca
+             string[] player2 -----> array del giocatore che difende
+    */
+    static void MessaggioSfida(string[] player1, string[] player2)
+    {
+        Console.Write(" ");
+        MessaggioAColori(player1[1], player1[2], 'b');
+        Console.Write("\t\t\t\t");
+        MessaggioAColori(player2[1], player2[2], 'b');
+        Console.WriteLine();
+
+    }
     /*Stampa sullo schermo la scritta "Giocatore hai vinto la sfida"
       con il colore del nome scelto dall'utente
 
@@ -538,68 +564,65 @@
         Console.BackgroundColor = currentBackground;    //ripristimo colore sfondo
     }
 
-
     /*Metodo che assegna il colore all'utente in base alla sua scelta.
       Scrive il risultato nell array player[2] = "colore"; player2[2] = "colore"
 
-      Input: string[] g -----> array del giocatore player1 o player2
+      Input: string[] player -----> array del giocatore player1 o player2
               string c --------> indica il colore che è gia stato preso
     */
-    static void SceltaColore(string[] g, string c)
+    static void SceltaColore(string[] player, string c)
     {
         bool corretto = false;
         do  //controlla finche l'inserimento non è corretto
         {
+            Console.Clear();
+            MenuSelezioneColoreUtente(c);
             Console.Write("\nScegli: ");
             string input = Console.ReadLine()!.ToLower();
             switch (input)
             {
                 case "r" when c != input:
-                    g[2] = "rosso";
+                    player[2] = "rosso";
                     corretto = true;
                     break;
 
                 case "b" when c != input:
-                    g[2] = "blu";
+                    player[2] = "blu";
                     corretto = true;
                     break;
 
                 case "m" when c != input:
-                    g[2] = "magenta";
+                    player[2] = "magenta";
                     corretto = true;
                     break;
 
                 case "g" when c != input:
-                    g[2] = "giallo";
+                    player[2] = "giallo";
                     corretto = true;
                     break;
 
                 case "v" when c != input:
-                    g[2] = "verde";
+                    player[2] = "verde";
                     corretto = true;
                     break;
 
                 default:
                     //caso digitazione errata
-                    MessaggioAColori("Selezione errata", "rosso", 'f');
-                    Thread.Sleep(800);
-                    Console.Clear();
-                    MenuSelezioneColoreUtente(c);
+                    SelezioneErrata();
                     corretto = false;
                     break;
             }
         }
         while (!corretto);
-
-
     }
+
     /*Simula un lancio di dadi con grafica da terminale
       Restituisce la somma dei dadi 
 
       Input: int x ------> valore random dadoX
              int y ------> valore random dadoY
     */
-    static int SimulaLancioDadi(int x, int y)
+    static void SimulaLancioDadi(int x1, int y1, int x2, int y2, string[] player1, string[] player2)
     {
         #region SEI
         string[] dadoSei =
@@ -661,100 +684,38 @@
         ];
         #endregion
 
-        string[][] dadi = [dadoSei, dadoCinque, dadoQuattro, dadoTre, dadoDue, dadoUno];
+        string[][] dadi = [dadoUno, dadoDue, dadoTre, dadoQuattro, dadoCinque, dadoSei];
 
-        for (int i = 0; i < 2; i++) //cicla 5 volte scrivi e cancella 
-        {
-            SimulaRotazioneDadi(dadi);
+        SimulaRotazioneDadi(dadi, player1, player2, 2);
 
-        }
+        //creo i contenitori per i 4 dadi da stampare
+        string[] dado1P1, dado2P1, dado1P2, dado2P2;
 
-        string[] dadoX = dadoUno, dadoY = dadoUno;
-        string[][] risultato;
+        //salvo i pattern dei numeri usciti 
+        dado1P1 = AssegnaPatternDado(x1, dadi);
+        dado2P1 = AssegnaPatternDado(y1, dadi);
+        dado1P2 = AssegnaPatternDado(x2, dadi);
+        dado2P2 = AssegnaPatternDado(y2, dadi);
 
-        //salvo il primo dado
-        switch (x)
-        {
-            case 1:
-                dadoX = dadoUno;
-                break;
-
-            case 2:
-                dadoX = dadoDue;
-                break;
-
-            case 3:
-                dadoX = dadoTre;
-                break;
-
-            case 4:
-                dadoX = dadoQuattro;
-                break;
-
-            case 5:
-                dadoX = dadoCinque;
-                break;
-
-            case 6:
-                dadoX = dadoSei;
-                break;
-
-            default:
-                Console.WriteLine("Errore di runtime! SimulaLancioDadi");
-                break;
-        }
-
-        //salvo il secondo dado
-        switch (y)
-        {
-            case 1:
-                dadoY = dadoUno;
-                break;
-
-            case 2:
-                dadoY = dadoDue;
-                break;
-
-            case 3:
-                dadoY = dadoTre;
-                break;
-
-            case 4:
-                dadoY = dadoQuattro;
-                break;
-
-            case 5:
-                dadoY = dadoCinque;
-                break;
-
-            case 6:
-                dadoY = dadoSei;
-                break;
-
-            default:
-                Console.WriteLine("Errore di runtime! SimulaLancioDadi");
-                break;
-        }
-
-        risultato = [dadoX, dadoY];
+        string[][] risultato = [dado1P1, dado2P1, dado1P2, dado2P2];
         Console.Clear();
-        StampaDueDadi(risultato);
-        return x + y;
+        Stampa4Dadi(risultato);
     }
 
     /*Metodo accessorio a SimulaLancioDadi che visualizza a schermo una coppia di dadi
     
-      Input: string[][] dadi ---> contiene elementi di tipo array che rappresentano i dadi
+      Input: string[][] totDadi ---> contiene elementi di tipo array che rappresentano i dadi
     */
-    private static void StampaDueDadi(string[][] dadi)
+    static void Stampa4Dadi(string[][] totDadi)
     {
-        for (int i = 0; i < dadi.Length; i++)
+        for (int i = 0; i < 1; i++)
         {
-            for (int j = 0; j < dadi[i].Length; j++)
+            for (int j = 0; j < totDadi[i].Length; j++)
             {
                 try
                 {
-                    Console.WriteLine($" {dadi[i][j]}\t{dadi[i + 1][j]}");
+                    Console.WriteLine($" {totDadi[i][j]}\t{totDadi[i + 1][j]}" + "\t\t" +
+                                      $"{totDadi[i + 2][j]}\t{totDadi[i + 3][j]}");
                 }
                 catch (Exception)
                 {
@@ -763,21 +724,95 @@
             }
         }
     }
-    /*Metodo accessorio a SimulaLancioDadi che crea un animazione dei dadi
 
-      Input: string[][] dadi ---> contiene elementi di tipo array che rappresentano i dadi
+    /* Metodo accessorio di SimulaLancioDadi che assegna il pattern corretto al numero uscito
     */
-    private static void SimulaRotazioneDadi(string[][] dadi)
+    static string[] AssegnaPatternDado(int n, string[][] dadi)
     {
-        foreach (string[] n in dadi)
-        {
-            Console.Clear();
+        string[] dado = new string[4];
 
-            foreach (string dado in n)
+        switch (n)
+        {
+            case 1:
+                for (int j = 0; j < dado.Length; j++)
+                {
+                    dado[j] = dadi[n - 1][j];
+                }
+                break;
+
+            case 2:
+                for (int j = 0; j < dado.Length; j++)
+                {
+                    dado[j] = dadi[n - 1][j];
+                }
+                break;
+
+            case 3:
+                for (int j = 0; j < dado.Length; j++)
+                {
+                    dado[j] = dadi[n - 1][j];
+                }
+                break;
+
+            case 4:
+                for (int j = 0; j < dado.Length; j++)
+                {
+                    dado[j] = dadi[n - 1][j];
+                }
+                break;
+
+            case 5:
+                for (int j = 0; j < dado.Length; j++)
+                {
+                    dado[j] = dadi[n - 1][j];
+                }
+                break;
+
+            case 6:
+                for (int j = 0; j < dado.Length; j++)
+                {
+                    dado[j] = dadi[n - 1][j];
+                }
+                break;
+
+            default:
+                MessaggioAColori("Errore [AssegnaPatternDado]!!!", "rosso", 'f');
+                break;
+        }
+        // Console.WriteLine("Numero dado: " + n);  //DEBUG
+        // Console.ReadKey();                              //DEBUG
+        // foreach (string linea in dado)      //DEBUG
+        // {
+        //     Console.WriteLine(linea);
+        // }
+        // Console.ReadKey();                  //DEBUG
+        return dado;
+    }
+
+
+    /*Metodo accessorio di SimulaLancioDadi che crea un animazione di 4 dadi 
+
+      Input: string[][] dadi ----> contiene elementi di tipo array che rappresentano i dadi
+             string[] player1 ---> array del giocatore player1 (usa il nome)
+             string[] player2 ---> array del giocatore player2 (usa il nome)
+             int xRotazioni -----> 6 * xRotazioni = totale rotazioni dado
+    */
+    private static void SimulaRotazioneDadi(string[][] dadi, string[] player1, string[] player2, int xRotazioni)
+    {
+        for (int i = 0; i < xRotazioni; i++)
+        {
+            foreach (string[] n in dadi)
             {
-                Console.WriteLine($" {dado}\t{dado}");
+                Console.Clear();
+                foreach (string dado in n)
+                {
+
+                    Console.WriteLine($" {dado}\t{dado}\t\t{dado}\t{dado}");
+                }
+                Console.WriteLine();
+                MessaggioSfida(player1, player2);
+                Thread.Sleep(100);  //default 100
             }
-            Thread.Sleep(100);
         }
     }
 
@@ -793,83 +828,88 @@
         char rispostaPlayer;
         int vincitore;    //int[0] = il numero del vincitore, 
         bool cambioTurno = false;   //utilizzata nel ciclo per ripetere il gioco
+        bool partitaInCorso = true;
         Console.Clear();
-        if (!cambioTurno)
-        {
-            MessaggioTurno(player1);
-            MenuDiGioco();
-            rispostaPlayer = SceltaGioco(player1);
-        }
-        else
-        {
-            MessaggioTurno(player2);
-            MenuDiGioco();
-            rispostaPlayer = SceltaGioco(player2);
-        }
 
-        bool fine = false;
-        switch (rispostaPlayer)
+        while (partitaInCorso)
         {
-            case '1':   //lancio dadi
-                if (!cambioTurno)
-                {
-                    vincitore = LanciaDadi(player1, player2);   //turno player1
+            if (!cambioTurno)   //inizia player1
+            {
+                rispostaPlayer = SceltaGioco(player1);
+            }
+            else        //inizia player2
+            {
+                rispostaPlayer = SceltaGioco(player2);
+            }
 
-                    if (vincitore == 1)
+            switch (rispostaPlayer)
+            {
+                case '1':   //lancio dadi
+                    if (!cambioTurno)
                     {
-                        MessaggioVittoria(player1);
-                        Console.WriteLine("\npremi invio.....");
-                        Console.ReadKey();
-                        Console.Clear();
+                        vincitore = LanciaDadi(player1, player2);   //turno player1
 
-                        //se player1 vince può scegliere i territori
-                        ConquistaTerritorio(player1, territoriP1, territori);
+                        cambioTurno = true;
+
+                        if (vincitore == 1) //se vince plauyer1
+                        {
+                            MessaggioVittoria(player1);
+                            Console.Write("\npremi invio...");
+                            Console.ReadKey();
+                            Console.Clear();
+
+                            //se player1 vince può scegliere i territori
+                            ConquistaTerritorio(player1, territoriP1, territori);
+                        }
+                        else        //se vince player2
+                        {
+                            MessaggioSconfitta(player1);
+                            Console.Write("\npremi invio...");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+
                     }
                     else
                     {
-                        MessaggioSconfitta(player1);
-                        Console.WriteLine("\npremi invio.....");
-                        Console.ReadKey();
-                        Console.Clear();
+                        vincitore = LanciaDadi(player2, player1);   //turno player2
+
+                        cambioTurno = false;
+
+                        if (vincitore == 1)
+                        {
+                            MessaggioVittoria(player2);
+                            Console.Write("\npremi invio...");
+                            Console.ReadKey();
+                            Console.Clear();
+
+                            //se player2 vince può scegliere i territori
+                            ConquistaTerritorio(player2, territoriP2, territori);
+                        }
+                        else
+                        {
+                            MessaggioSconfitta(player2);
+                            Console.Write("\npremi invio...");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
                     }
+                    break;
 
-                }
-                else
-                {
-                    vincitore = LanciaDadi(player2, player1);   //turno player2
-                    if (vincitore == 1)
-                    {
-                        MessaggioVittoria(player2);
-                        Console.WriteLine("\npremi invio.....");
-                        Console.ReadKey();
-                        Console.Clear();
+                case '2':   //rischio
+                    MenuModalitaRischio();
+                    break;
 
-                        //se player2 vince può scegliere i territori
-                        ConquistaTerritorio(player2, territoriP2, territori);
-                    }
-                    else
-                    {
-                        MessaggioSconfitta(player2);
-                        Console.WriteLine("\npremi invio.....");
-                        Console.ReadKey();
-                        Console.Clear();
-                    }
-                }
-                break;
+                case 's':   //salva
+                    partitaInCorso = SalvaPartita(path, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
+                    break;
 
-            case '2':   //rischio
-                MenuModalitaRischio();
-                break;
-
-            case 's':   //salva
-                fine = SalvaPartita(path, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
-                break;
-
-            default:
-                Console.WriteLine("Errore [GiocaVsPC]!!!");
-                break;
+                default:
+                    Console.WriteLine("Errore [Gioca]!!!");
+                    break;
+            }
         }
-        return fine;
+        return partitaInCorso;
     }
 
     /*Esegue il calcolo dei numeri random, simula graficamente la rotazione
@@ -885,44 +925,38 @@
     {
         int vittorieP1 = 0, vittorieP2 = 0;  //il primo che arriva a 3 vince
         int vincitore;   //1 o 2 in caso di vittoria player1 o player2
-        int risultato1, risultato2;
+        int risultatoP1, risultatoP2;
         string[] risultati = new string[5]; //memorizzo i lanci fatti di ogni giocatore 
-        bool cambioTurno = false;
         int turno = 0;
-        int dadoX, dadoY;
+        int dado1P1, dado2P1, dado1P2, dado2P2;
         Random random = new();
+        bool cambioTurno = false;
 
         do
         {
-            //tira i dadi player1
-            dadoX = random.Next(1, 7);
-            dadoY = random.Next(1, 7);
-            MessaggioTurno(player1);
-            Console.WriteLine("\npremi invio per lanciare i dadi...");
-            Console.ReadKey();
-            risultato1 = SimulaLancioDadi(dadoX, dadoY);
+            //valore dadi player1
+            dado1P1 = random.Next(1, 7);
+            dado2P1 = random.Next(1, 7);
+            risultatoP1 = dado1P1 + dado2P1;
+            //valore dadi player2
+            dado1P2 = random.Next(1, 7);
+            dado2P2 = random.Next(1, 7);
+            risultatoP2 = dado1P2 + dado2P2;
+            SimulaLancioDadi(dado1P1, dado2P1, dado1P2, dado2P2, player1, player2);
             Console.WriteLine();
+
+
+            Console.Write(" ");
             MessaggioAColori(player1[1], player1[2], 'b');
-            Console.WriteLine($" ha ottenuto {risultato1}\n");
-            Console.Write(" premi invio...");
-            Console.ReadKey();
-            Console.Clear();
-
-            //tira i dadi player2
-            dadoX = random.Next(1, 7);
-            dadoY = random.Next(1, 7);
-            MessaggioTurno(player2);
-            Console.WriteLine("\npremi invio per lanciare i dadi...");
-            Console.ReadKey();
-            risultato2 = SimulaLancioDadi(dadoX, dadoY);
-            Console.WriteLine();
+            Console.Write($" ha ottenuto {risultatoP1}\t\t\t");
             MessaggioAColori(player2[1], player2[2], 'b');
-            Console.WriteLine($" ha ottenuto {risultato1}\n");
+            Console.WriteLine($" ha ottenuto {risultatoP2}\n");
 
-            risultati[turno] = $"{risultato1}\t   {risultato2}";
+            risultati[turno] = $"{risultatoP1}\t   {risultatoP2}";
             turno++;
 
-            if (risultato1 < risultato2)
+            Console.Write(" ");
+            if (risultatoP1 < risultatoP2)
             {   //vince player1
                 vincitore = 2;
                 vittorieP1++;
@@ -943,7 +977,7 @@
                 MessaggioAColori(player1[1], player1[2], 'b');
             }
             Console.Write($" vince il round {turno}\n");
-            Console.WriteLine("premi invio...");
+            Console.Write("\n premi invio...");
             Console.ReadKey();
             Console.Clear();
 
@@ -966,22 +1000,29 @@
         return vincitore;
     }
 
-    /**/
+    /* Permette di selezionare il territorio dalla lista dei territori disponibili
+       Se c'è solo 1 territorio nella lista allora lo assegna in automatico
+    */
     static void ConquistaTerritorio(string[] player, List<string> territoriP, List<string> territori)
     {
         //se c'è ancora un territorio libero
         if (territori.Count > 0)
         {
-            if (territori.Count == 1)
+            if (territori.Count == 1)   //se rimane solo 1 lo assegna in automatico
             {
+                MessaggioAColori("E' rimasto un solo territorio libero\n", "verde", 'f');
+                Thread.Sleep(1500);
+                Console.Clear();
+
                 MessaggioTerritorioConquistato(player, territori.First());
                 Console.ReadKey();
+                Console.Clear();
 
-                SceltaTerritorio(territoriP, territori.First(), territori);
+                AssegnaTerritorio(territoriP, territori.First(), territori);
                 Console.ReadKey();
 
             }
-            else
+            else            //permette la scelta dalla lista territori aggiornata
             {
                 int n = 0;
                 bool corretto = false;
@@ -1016,17 +1057,20 @@
 
                 Console.Clear();
                 MessaggioTerritorioConquistato(player, territori.ElementAt(n));
-                SceltaTerritorio(territoriP, territori.ElementAt(n), territori);
+                AssegnaTerritorio(territoriP, territori.ElementAt(n), territori);
                 Console.WriteLine("\nLista aggiornata:\n");
                 VisualizzaListaNumerata(territori);
-                Console.WriteLine("\npremi invio....");
+                Console.Write("\npremi invio...");
                 Console.ReadKey();
+                Console.Clear();
+
             }
         }
         else
         {
             Console.WriteLine("DEVI CONQUISTARE DAL GIOCATORE AVVERSARIO");
             Console.ReadKey();
+            Console.Clear();
         }
     }
 
@@ -1036,7 +1080,7 @@
              string territorioScelto -----> il nome del territorio selezionato 
              List<string> territori ------> elenco aggiornato dei territori liberi
     */
-    static void SceltaTerritorio(List<string> player1, string territorioScelto, List<string> territori)
+    static void AssegnaTerritorio(List<string> player1, string territorioScelto, List<string> territori)
 
     {
         //aggiunge il territorio nella lista utente
@@ -1153,7 +1197,7 @@
                     }
                 }
 
-                if (trovato)        
+                if (trovato)
                 {                           //se è nella lista eseguo la copia ed elimino dal file e
                     CaricaPlayer(file[contaRighe].Split(","), player1);       //formatto a 11 index
                     CaricaPlayer(file[contaRighe + 1].Split(","), player2);   //formatto a 11 index
@@ -1298,10 +1342,10 @@
 
         //stampa il codice di salvataggio
         MessaggioAColori("\n\t" + player1[0] + "\n", "magenta", 'f');
-        Console.WriteLine("\npremi invio....\n");
+        Console.Write("\npremi invio...\n");
         Console.ReadKey();
         MessaggioAColori("Arrivederci alla prossima partita!!!\n", "blu", 'f');
-        return true;
+        return false;
     }
 
     /*Visualizza a schermo le regole del gioco presenti nel file rules.txt.
@@ -1378,7 +1422,7 @@
       Input: string[] player -----> array del giocatore player1
       colore
     */
-    static string[] CreaGiocatore(string[] player)
+    static void CreaGiocatore(string[] player)
     {
         bool corretto = false;
 
@@ -1404,7 +1448,6 @@
         Console.Clear();
 
         //seleziona il colore
-        MenuSelezioneColoreUtente(player[2][..1]);   //invia il primo carattere del colore 
         SceltaColore(player, player[2][..1]);  //invia array e primo carattere del colore 
         Console.Clear();
 
@@ -1412,8 +1455,6 @@
         Console.Write("Ciao ");
         MessaggioAColori(player[1], player[2], 'b');
         Console.WriteLine();
-
-        return player;
     }
     /*Metoro che crea il secondo giocatore prendendo il colore gia scelto
       dall'altro giocatore.
@@ -1421,7 +1462,7 @@
       Input: string[] player2 -----> array del giocatore player2
              string colorePlayer1--> colore del giocatore player1
     */
-    static string[] CreaGiocatoreDue(string[] player2, string colorePlayer1)
+    static void CreaGiocatoreDue(string[] player2, string colorePlayer1)
     {
         if (player2[1] == "PC")
         {
@@ -1465,8 +1506,6 @@
             MessaggioAColori(player2[1], player2[2], 'b');
             Console.WriteLine();
         }
-
-        return player2;
     }
 
     /*Memorizza la scelta fatta nel menu di gioco per ogni giocatore 
@@ -1474,12 +1513,15 @@
 
       Input: string[] player1 ----> array del giocatore
     */
-    static char SceltaGioco(string[] player1)
+    static char SceltaGioco(string[] player)
     {
         bool corretto = false;
-        char c = '0'; //valore di default
+        char c = '0';
         do  //controlla finche l'inserimento non è corretto
         {
+            Console.Clear();
+            MessaggioTurno(player);
+            MenuDiGioco();
             Console.Write("\nScegli: ");
 
             // aspetta finche non viene premuto un tasto
@@ -1492,15 +1534,14 @@
                 if (keyInfo.Key == ConsoleKey.Y)
                 {
                     Console.Clear();
-                    MessaggioTurno(player1);
+                    MessaggioTurno(player);
                     DisegnaMappa();
-                    Console.WriteLine("premi invio.......");
+                    Console.Write("\npremi invio...");
                     Console.ReadKey();
-                    Console.Clear();
 
                 }
             }
-            else
+            else    //controlla se l'utente ha inserito l'opzione corretta
             {
                 switch (keyInfo.KeyChar)
                 {
@@ -1512,6 +1553,7 @@
                         Console.Clear();                    //poi si cancella lo schermo
 
                         c = '1';
+                        corretto = true;
                         break;
 
                     case '2':
@@ -1521,6 +1563,7 @@
                         Console.Clear();                    //poi si cancella lo schermo
 
                         c = '2';
+                        corretto = true;
                         break;
 
                     case 's':
@@ -1530,25 +1573,20 @@
                         Console.Clear();                    //poi si cancella lo schermo
 
                         c = 's';
+                        corretto = true;
                         break;
 
                     default:
                         //caso digitazione errata
-                        MessaggioAColori("Selezione errata", "rosso", 'f');
-                        Thread.Sleep(800);
-                        Console.Clear();
-                        MessaggioTurno(player1);
-                        MenuDiGioco();
+                        SelezioneErrata();
                         corretto = false;
                         break;
                 }
             }
-
-            return c;
-
         }
         while (!corretto); //controlla finche l'inserimento non è corretto
 
+        return c;
     }
 
     #endregion
