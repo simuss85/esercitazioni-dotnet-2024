@@ -904,8 +904,8 @@
             Console.ReadKey();
             risultato1 = SimulaLancioDadi(dadoX, dadoY);
             Console.WriteLine();
-            MessaggioAColori(player1[1],player1[2],'b');
-            Console.WriteLine($" ha ottenuto {dadoX} + {dadoY} = {risultato1}\n");
+            MessaggioAColori(player1[1], player1[2], 'b');
+            Console.WriteLine($" ha ottenuto {risultato1}\n");
             Console.Write(" premi invio...");
             Console.ReadKey();
             Console.Clear();
@@ -918,8 +918,8 @@
             Console.ReadKey();
             risultato2 = SimulaLancioDadi(dadoX, dadoY);
             Console.WriteLine();
-            MessaggioAColori(player2[1],player2[2],'b');
-            Console.WriteLine($" ha ottenuto {dadoX} + {dadoY} = {risultato1}\n");
+            MessaggioAColori(player2[1], player2[2], 'b');
+            Console.WriteLine($" ha ottenuto {risultato1}\n");
 
             risultati[turno] = $"{risultato1}\t   {risultato2}";
             turno++;
@@ -932,7 +932,7 @@
                 {
                     cambioTurno = true;
                 }
-                MessaggioAColori(player2[1],player2[2],'b');
+                MessaggioAColori(player2[1], player2[2], 'b');
             }
             else
             {   //vince player2
@@ -942,13 +942,13 @@
                 {
                     cambioTurno = true;
                 }
-                MessaggioAColori(player1[1],player1[2],'b');
+                MessaggioAColori(player1[1], player1[2], 'b');
             }
             Console.Write($" vince il round {turno}\n");
             Console.WriteLine("premi invio...");
             Console.ReadKey();
             Console.Clear();
-            
+
         }
         while (!cambioTurno);
 
@@ -1158,10 +1158,12 @@
                     }
                 }
 
-                if (trovato)        //se è nella lista eseguo la copia
+                if (trovato)        //se è nella lista eseguo la copia ed elimino dal file
                 {
                     p1 = file[contaRighe].Split(",");
                     p2 = file[contaRighe + 1].Split(",");
+
+                    EliminaRigaDalFile(contaRighe, path);    //aggiorno il file 
 
                     values[0] = CopiaSuArray(p1);   //formatto a 11 index
                     values[1] = CopiaSuArray(p2);   //formatto a 11 index
@@ -1184,6 +1186,41 @@
         // Console.ReadKey();                                      //DEBUG
 
         return values;
+    }
+
+    /*Metodo accessorio che prende il file dopo essere stato caricato 
+      ed elimina le righe del salvatagio
+
+      INPUT: int index -----------> indice della riga da cancellare
+             string path ---------> il file da cui eliminare le righe
+    */
+    static void EliminaRigaDalFile(int index, string path)
+    {
+        string[] righe = File.ReadAllLines(path);
+        string[] copia = new string[righe.Length - 2]; //creo una copia con 2 elementi in meno
+        righe[index] = "_";
+        righe[index + 1] = "_";
+
+        // Console.WriteLine("righe file originale: " + righe.Length); //DEBUG
+        // Console.WriteLine("righe file aggiornato: " + copia.Length);//DEBUG
+        // Console.ReadKey();                                          //DEBUG
+        
+        int count = 0;
+
+        foreach (string riga in righe)      //copio tutto l'array del file tranne le 2 righe vuote
+        {   
+            // Console.WriteLine(riga);        //DEBUG
+            // Console.ReadKey();              //DEBUG
+            
+            if (riga != "_")
+            {
+                copia[count] = riga;
+                // Console.WriteLine("copia: " + copia[count]);    //DEBUG
+                count++;
+            }
+        }
+        File.WriteAllLines(path, copia);    //eseguo la copia del file aggiornata
+
     }
 
     /*Metodo accessorio al metodo CaricaPartita. Chiede l'input del codice di
@@ -1234,9 +1271,10 @@
     {
         Console.Clear();
 
-        if (!File.Exists(path))
+        if (!File.Exists(path))     //se non esiste il file lo creo
         {
             MessaggioAColori("Il file di salvataggio non è presente", "rosso", 'f');
+            Thread.Sleep(600);
             MessaggioAColori("Creo un file di salvataggio", "verde", 'f');
             SchermataLoading('°', 28, 80);
             Console.Clear();
@@ -1247,9 +1285,10 @@
         }
         string[] righe = File.ReadAllLines(path);
 
-        //aggiorno gli array dei giocatori
+        //aggiorno gli array dei giocatori coi i territori nelle liste
         player1 = MemorizzaSuArray(player1, listaP1);
         player2 = MemorizzaSuArray(player2, listaP2);
+
 
         foreach (string valore in player1)
         {
