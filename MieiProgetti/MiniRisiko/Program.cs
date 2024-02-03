@@ -430,19 +430,39 @@
         Thread.Sleep(800);
     }
 
-    /*Visualizza la frase sopra il lancio dei dadi e va a capo.
+    /*Visualizza la frase sopra il lancio dei dadi e va a capo. Formatta
+      gli spazi tra i nomi in base alla lunghezza del primo nome. A seconda
+      degli inpunt esegue una stampa dei soli nomi oppure dei nomi con il risultato
       
       INPUT: string[] player1 -----> array del giocatore che attacca
              string[] player2 -----> array del giocatore che difende
+             string p1--------- ---> i risultati del lancio dei dadi di player1
+             string p2--------- ---> i risultati del lancio dei dadi di player2
     */
-    static void MessaggioSfida(string[] player1, string[] player2)
+    static void MessaggioSfida(string[] player1, string[] player2, string? p1 = null, string? p2 = null)
     {
+        int spazi;
+        string messaggio = "";
         Console.Write(" ");
-        MessaggioAColori(player1[1], player1[2], 'b');
-        Console.Write("\t\t\t\t");
-        MessaggioAColori(player2[1], player2[2], 'b');
-        Console.WriteLine();
+        if (p1 != null)
+        {
+            //levo il nome, il messaggio di base, il numero di caratteri del risultato (1 o 2)
+            spazi = 26 - player1[1].Length - p1.Length;
+            messaggio = " ha ottenuto ";
+        }
+        else
+        {
+            spazi = 39 - player1[1].Length;
+        }
 
+        MessaggioAColori(player1[1], player1[2], 'b');
+        Console.Write(messaggio + p1);
+        for (int i = 0; i < spazi; i++)
+        {
+            Console.Write(" ");
+        }
+        MessaggioAColori(player2[1], player2[2], 'b');
+        Console.WriteLine(messaggio + p2 + "\n");
     }
     /*Stampa sullo schermo la scritta "Giocatore hai vinto la sfida"
       con il colore del nome scelto dall'utente
@@ -945,12 +965,7 @@
             SimulaLancioDadi(dado1P1, dado2P1, dado1P2, dado2P2, player1, player2);
             Console.WriteLine();
 
-
-            Console.Write(" ");
-            MessaggioAColori(player1[1], player1[2], 'b');
-            Console.Write($" ha ottenuto {risultatoP1}\t\t\t");
-            MessaggioAColori(player2[1], player2[2], 'b');
-            Console.WriteLine($" ha ottenuto {risultatoP2}\n");
+            MessaggioSfida(player1,player2,risultatoP1.ToString(),risultatoP2.ToString());
 
             risultati[turno] = $"{risultatoP1}\t   {risultatoP2}";
             turno++;
@@ -1426,8 +1441,8 @@
     {
         bool corretto = false;
 
-        //previene l'inserimento nullo del nome o nome troppo corti
-        //il nome deve essere almeno di 3 caratteri
+        //previene l'inserimento nullo del nome o nome troppo corti o lunghi:
+        //il nome deve essere almeno di 3 caratteri e massimo 20
         while (!corretto)
         {
             Console.Clear();
@@ -1436,7 +1451,15 @@
             player[1] = Console.ReadLine()!;
             if (player[1].Length > 2)
             {
-                corretto = true;
+                if (player[1].Length < 21)
+                {
+                    corretto = true;
+                }
+                else
+                {
+                MessaggioAColori("Il nome deve essere di massimo 20 caratteri\n", "rosso", 'f');
+                Thread.Sleep(1000);
+                }
             }
             else
             {
