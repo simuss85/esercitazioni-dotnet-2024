@@ -322,16 +322,60 @@ class Program
     }
 
     //Visualizza una breve sintesi della mappa aggiornata con i colori
-    static void DisegnaMappa()
+    static void DisegnaMappa(string[] player1, string[] player2)
     {
 
         Console.WriteLine("\n           Mappa del mondo");
-        Console.WriteLine("   |AMERICA|EUROPA|ASIA|POLO NORD|");
-        Console.WriteLine("|SUD AMERICA|AFRICA|OCEANIA|POLO SUD|");
+        Console.Write("   |");
+        DisegnaTerritorio("AMERICA", player1, player2);
+        DisegnaTerritorio("EUROPA", player1, player2);
+        DisegnaTerritorio("ASIA", player1, player2);
+        DisegnaTerritorio("POLO NORD", player1, player2);
+        Console.Write("\n");
+        DisegnaTerritorio("SUD AMERICA", player1, player2);
+        DisegnaTerritorio("AFRICA", player1, player2);
+        DisegnaTerritorio("OCEANIA", player1, player2);
+        DisegnaTerritorio("POLO SUD", player1, player2);
         Console.WriteLine();
 
     }
 
+    /*Metodo accessorio a DisegnaMappa che colora i territori in base al colore del giocatore
+      in suo possesso.
+
+      INPUT: string territorio -----> il nome del territorio da controllare
+             string[] player1 ------> array del giocatore player1
+             string[] player2 ------> array del giocatore player2
+
+    */
+    static void DisegnaTerritorio(string territorio, string[] player1, string[] player2)
+    {   
+        bool trovato = false;
+
+        for (int i = 3; i < 11; i++)
+        {
+            if (player1[i] == territorio)
+            {
+                MessaggioAColori(territorio, player1[2], 'f');
+                Console.Write("|");
+                trovato = true;
+                break;
+            }
+            else if (player2[i] == territorio)
+            {
+                MessaggioAColori(territorio, player2[2], 'f');
+                Console.Write("|");
+                trovato = true;
+                break;
+            }
+        }
+
+        if (!trovato)
+        {
+            Console.Write(territorio + "|");
+        }
+
+    }
     //Visualizza le opzioni per la scelta della modalità di rischio
     static void MenuModalitaRischio()
     {
@@ -936,14 +980,14 @@ class Program
         {
             if (!cambioTurno)   //inizia player1
             {
-                rispostaPlayer = SceltaGioco(player1);
+                rispostaPlayer = SceltaGioco(player1, player2);
                 // Console.WriteLine("Risposta player1: " + rispostaPlayer);   //DEBUG
                 // Console.ReadKey();                                          //DEBUG
 
             }
             else        //inizia player2
             {
-                rispostaPlayer = SceltaGioco(player2);
+                rispostaPlayer = SceltaGioco(player2, player1);
                 // Console.WriteLine("Risposta player2: " + rispostaPlayer);   //DEBUG
                 // Console.ReadKey();                                          //DEBUG
             }
@@ -1693,14 +1737,14 @@ class Program
 
       Input: string[] player ----> array del giocatore player attuale
     */
-    static char SceltaGioco(string[] player)
+    static char SceltaGioco(string[] player1, string[] player2)
     {
         bool corretto = false;
         char c = '0';
         do  //controlla finche l'inserimento non è corretto
         {
             Console.Clear();
-            MessaggioTurno(player);
+            MessaggioTurno(player1);
             MenuDiGioco();
             Console.Write("\nScegli: ");
 
@@ -1714,8 +1758,8 @@ class Program
                 if (keyInfo.Key == ConsoleKey.Y)
                 {
                     Console.Clear();
-                    MessaggioTurno(player);
-                    DisegnaMappa();
+                    MessaggioTurno(player1);
+                    DisegnaMappa(player1, player2);
                     Console.Write("\npremi invio...");
                     Console.ReadKey();
 
@@ -1738,7 +1782,7 @@ class Program
 
                     case '2':
                         // Modalità rischio (necessita di almeno 1 territorio per accedere)
-                        if (player[3] == "_")
+                        if (player1[3] == "_")
                         {
                             MessaggioAColori("devi avere almento 1 territorio", "rosso", 'f');
                             Thread.Sleep(800);
