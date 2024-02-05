@@ -7,9 +7,7 @@ class Program
         #region Tipi di dati e variabili
 
         bool finito = false;
-        bool corretto = false;
         char opz;
-
 
         #endregion
 
@@ -28,13 +26,9 @@ class Program
 
                     MenuInserisci();
                     opz = SelezioneInserimento();
-                    if (opz == 'r')
+                    if (opz != 'r')
                     {
-                        corretto = true;
-                    }
-                    else
-                    {
-                        InserisciAlimento(opz);
+                        Inserisci(opz);
                     }
                     // InserisciCSV();
                     break;
@@ -104,33 +98,97 @@ class Program
 
 
     */
-    static bool InserisciAlimento(char opzione)
+    static bool Inserisci(char opzione)
     {
-        bool eseguito = false;
-        string nome, quantita, data;
+        bool eseguito;
         //inserisci da file csv
         if (opzione == 'f')
         {
             //lettura del file csv
-            eseguito = InserisciCSV();
+            eseguito = InserisciDaCSV();
         }
         else     //inserisci da tastiera
         {
-            ScriviAColori("Inserisci gli alimenti:", "verde");
-            Console.WriteLine("\n");
-            nome = InserisciNome();
-            quantita = InserisciQuantita();
-            data = InserisciData();
+            Console.Clear();
+            eseguito = InserisciDaTastiera();
         }
-       
+
         return eseguito;
+    }
+
+    /*Gestisce l'inserimento dei dati mediante i metodi di controllo input:
+      - InserisciNome() ---> verifica il formato del nome
+      - InserisciQuantita--> verifica il formato quantita
+      - InserisciData------> verifica la data di scadenza
+      
+      */
+    static bool InserisciDaTastiera()
+    {
+        bool corretto = false;
+        string nome, quantita, data;
+
+        while (!corretto)
+        {
+            ScriviAColori("Inserisci gli alimenti", "verde");
+            Console.WriteLine("\n");
+            Console.Write("Alimento: ");
+            nome = FormatoNome();
+            Console.Write("Quantità: ");
+            quantita = FormatoQuantita();
+            Console.Write("Data gg/mm/aaaa: ");
+            data = FormatoData();
+
+            //se i controlli vanno a buon fine procedo con l'inserimento
+            //inserisci i dati nel file JSON
+            corretto = CreaAlimentoJSON(nome, quantita, data);
+        }
+
+
+        return corretto;
+
+
+
+    }
+
+    /*Metodo accessorio, crea un file JSON per ogni alimento, nel caso fosse 
+      gia presente lo rinomina.
+      
+      INPUT: string nome -------> nome alimento 
+             string quantita ---> quantita alimento
+             string data -------> data di scadenza
+      
+      OUTPUT: true se tutto è andato a buon fine; 
+    */
+    static bool CreaAlimentoJSON(string nome, string quantita, string data)
+    {
+        string pathJson = @"./files/JSON/" + nome + ".json";
+        int count = 1;
+        try
+        {
+            if (!File.Exists(pathJson)) //se non c'è alcun prodotto lo creo
+            {
+                File.Create(pathJson).Close();
+            }
+            else    //se c'è gia quell'alimento ne creo uno nuovo
+            {
+                pathJson = @"./files/JASON/" + nome + count + ".json";
+            }
+            //inserisco i dati nel file JSON
+            File.AppendAllText(pathJson, JsonConvert.SerializeObject(new { nome, quantita, data }));
+            return true;
+        }
+        catch
+        {
+            ScriviAColori("Errore [InserisciJSON]!!!", "rosso");
+            return false;
+        }
 
     }
 
     /* Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
 
     */
-    static bool InserisciCSV()
+    static bool InserisciDaCSV()
     {
         string pathCSV = @"./files/inserisci.csv";
         if (!File.Exists(pathCSV))
@@ -154,7 +212,7 @@ class Program
             {
                 //prova a creare il file json, se gia presente ne crea uno con stesso nome
                 //piu un numero sequenziale, esempio: file.json   file2.json  file3.json
-                string pathJson = "./files/" + alimenti[i][0] + ".json";
+                string pathJson = "./files/JSON/" + alimenti[i][0] + ".json";
 
                 if (!File.Exists(pathJson))
                 {
@@ -162,7 +220,7 @@ class Program
                 }
                 else
                 {
-                    pathJson = "./files/" + alimenti[i][0] + count + ".json";
+                    pathJson = "./files/JSON/" + alimenti[i][0] + count + ".json";
                     count++;
                     File.Create(pathJson).Close();
                 }
@@ -183,11 +241,11 @@ class Program
       OUTPUT: string nome ---> contiene l'input dell'utente
 
     */
-    static string InserisciNome()
+    static string FormatoNome()
     {
         bool corretto = false;
         string nome = "";
-        Console.Write("Alimento: ");
+
         while (!corretto)
         {
             nome = Console.ReadLine()!;
@@ -195,8 +253,8 @@ class Program
             {
                 ScriviAColori("Errore di digitazione\r", "rosso");
                 Thread.Sleep(1000);
-                Console.Write("                    \rAlimento: ");
-
+                Console.Write("                     ");
+                Console.SetCursorPosition(10,2);
             }
             else
             {
@@ -211,11 +269,11 @@ class Program
       OUTPUT: string quantita ---> contiene l'input dell'utente
 
     */
-    static string InserisciQuantita()
+    static string FormatoQuantita()
     {
         bool corretto = false;
         short quantita = 0;
-        Console.Write("Quantità: ");
+
         while (!corretto)
         {
             try
@@ -227,7 +285,8 @@ class Program
             {
                 ScriviAColori("deve essere un numero\r", "rosso");
                 Thread.Sleep(1000);
-                Console.Write("                      \rQuantità: ");
+                Console.Write("                      ");
+                Console.SetCursorPosition(10,3);
             }
         }
         return quantita.ToString();
@@ -238,7 +297,7 @@ class Program
       OUTPUT: string data ---> contiene l'input dell'utente 
 
     */
-    static string InserisciData()
+    static string FormatoData()
     {
         bool corretto = false;
         string input = "";
@@ -247,7 +306,6 @@ class Program
         var meseInCorso = DateTime.Now.Month;
         var oggi = DateTime.Now.Day;
 
-        Console.Write("Data gg/mm/aaaa: ");
         while (!corretto)
         {
             input = Console.ReadLine()!;
@@ -315,7 +373,7 @@ class Program
     static char SelezioneInserimento()
     {
         bool corretto = false;
-        char opz = ' ';
+        char opz = '0';
         do
         {
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
