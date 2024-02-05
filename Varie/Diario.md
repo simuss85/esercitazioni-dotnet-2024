@@ -695,7 +695,7 @@ Argomenti:
 </details>
 
 <!-- ******************************************  02 feb 2024   ****************************************** -->
-<details details>
+<details>
     <summary><h3>02 feb 2024 ✔️</h3></summary>
 
 Argomenti:
@@ -745,5 +745,119 @@ esempio:
 
 ### :white_check_mark: Commit program status
 - Inseriti commit da **n.93** a **n.95**
+
+</details>
+
+<!-- ******************************************  05 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>05 feb 2024 ✔️</h3></summary>
+
+Argomenti:
+- Persistenza dei file con il formato *JSON*, per gestire più livelli di informazione.
+- Json: crare, leggere, modificare, copiare su csv.
+- Crare nuovo progetto: TracciaAlimentiFrigorifero.
+
+### Info
+> JSON deve essere formattato in un certo modo.
+> Dobbiamo prima importare il pacchetto **NuGet Newtonsoft.Json**.
+> Non li posso trattare nativamente, ma dobbiamo importare una libreria con lo **using**.
+
+### Note 
+- Importare il pacchetto NuGet Newtonsoft.Json da terminale nella directory del programma dove lo vogliamo utilizzare.  
+  Ua volta importato, il file progetto.csproj conterrà il codice con le sue dipendenze JSON.
+
+```sh
+    dotnet add package Newtonsoft.Json
+```
+```c#
+    using Newtonsoft.Json;
+```
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.96** a **n.101**
+
+</details>
+
+<!-- ******************************************  06 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>06 feb 2024 </h3></summary>
+
+Argomenti:
+- ...
+
+### Info
+> ...
+
+### Note 
+- ...
+
+esempio:
+
+```c#
+  
+```
+
+</details>
+
+<!-- ******************************************  07 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>07 feb 2024 </h3></summary>
+
+Argomenti:
+- ...
+
+### Info
+> ...
+
+### Note 
+- ...
+
+esempio:
+
+```c#
+  
+```
+
+</details>
+
+<!-- ******************************************  08 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>08 feb 2024 </h3></summary>
+
+Argomenti:
+- ...
+
+### Info
+> ...
+
+### Note 
+- ...
+
+esempio:
+
+```c#
+  
+```
+
+</details>
+
+<!-- ******************************************  09 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>09 feb 2024 </h3></summary>
+
+Argomenti:
+- ...
+
+### Info
+> ...
+
+### Note 
+- ...
+
+esempio:
+
+```c#
+  
+```
 
 </details>
