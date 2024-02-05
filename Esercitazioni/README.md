@@ -5255,3 +5255,246 @@ class Program
 }
 ```
 </details>
+
+### 96 - JSON: programma che legge un file json:
+<details>
+    <summary> codice </summary>
+
+```json
+    {
+        "nome": "antonio",
+        "cognome": "rossi",
+        "eta": 20
+    }
+```
+
+```c#
+    using Newtonsoft.Json;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        string path = @"test.json";
+        string json = File.ReadAllText(path);
+        Console.WriteLine(json);
+        }
+    }
+```
+</details>
+
+### 97 - JSON: programma che legge un file json e deserializza il file:
+<details>
+    <summary> codice </summary>
+
+```json
+    {
+        "nome": "antonio",
+        "cognome": "rossi",
+        "eta": 20
+    }
+```
+
+```c#
+    using Newtonsoft.Json;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        string path = @"test.json";
+        string json = File.ReadAllText(path);
+        dynamic obj = JsonConvert.DeserializeObject(json)!;
+        Console.WriteLine($"nome: {obj.nome}\ncognome: {obj.cognome}\neta: {obj.eta}");
+        }
+    }
+```
+</details>
+
+### 98 - JSON: programma che legge un file json con un sottolivello e deserializza il file:
+<details>
+    <summary> codice </summary>
+
+```json
+    {
+        "nome": "antonio",
+        "cognome": "rossi",
+        "eta": 20,
+        "indirizzo": {
+            "via": "via roma",
+            "citta": "roma"
+        }
+    }
+```
+
+```c#
+    using Newtonsoft.Json;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        string path = @"test.json";
+        string json = File.ReadAllText(path);
+        dynamic obj = JsonConvert.DeserializeObject(json)!;
+        Console.WriteLine($"nome: {obj.nome}\ncognome: {obj.cognome}\neta: {obj.eta}");
+        Console.WriteLine("Indirizzo: ");
+        Console.WriteLine($"via: {obj.indirizzo.via}\ncitta: {obj.indirizzo.citta}");
+        }
+    }
+```
+</details>
+
+### 99 - JSON: programma che legge un file json con due oggetti e salvo in un file csv:
+<details>
+    <summary> codice </summary>
+
+```json
+    [
+        {
+            "nome": "antonio",
+            "cognome": "rossi",
+            "eta": 20,
+            "indirizzo": {
+                "via": "via roma",
+                "n": 21,
+                "citta": "roma",
+                "cap": 12345
+            }
+        },
+        {
+            "nome": "mario",
+            "cognome": "verdi",
+            "eta": 20,
+            "indirizzo": {
+                "via": "via milano",
+                "n": 21,
+                "citta": "milano",
+                "cap": 12666
+            }
+        }
+    ]
+```
+
+```c#
+    using Newtonsoft.Json;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"test.json";
+            string json = File.ReadAllText(path);
+            dynamic obj = JsonConvert.DeserializeObject(json)!;
+            string path2 = @"test.csv";
+            File.Create(path2).Close();
+            File.AppendAllText(path2, "nome,cognome,eta,via,citta\n");
+
+            for (int i = 0; i < obj.Count; i++)
+            {
+                File.AppendAllText(path2, $"{obj[i].nome},{obj[i].cognome},{obj[i].eta},{obj[i].indirizzo.via},{obj[i].indirizzo.citta}\n");
+            }
+
+        }
+    }
+```
+</details>
+
+### 100 - JSON: programma che legge un file csv con due record e li salvo in due file JSON:
+<details>
+    <summary> codice </summary>
+
+```c#
+    using Newtonsoft.Json;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"test.csv";
+            string[] righe = File.ReadAllLines(path);
+            string[][] nomi = new string[righe.Length][];
+
+            for (int i = 0; i < righe.Length; i++)
+            {
+                nomi[i] = righe[i].Split(",");
+            }
+
+            for (int i = 1; i < nomi.Length; i++)   //salto la riga delle etichette
+            {
+                string path2 = nomi[i][0] + ".json";
+                File.Create(path2).Close();
+                File.AppendAllText(path2, JsonConvert.SerializeObject(new {nome = nomi[i][0],
+                                                                        cognome = nomi[i][1], 
+                                                                        citta = nomi[i][4]}));
+            }
+
+        }
+    }
+```
+risultato mario.json:
+
+```json
+    {
+        "nome": "mario",
+        "cognome": "verdi",
+        "citta": "milano"
+    }
+```
+
+risultato antonio.json:
+
+```json
+    {
+    "nome": "antonio",
+    "cognome": "rossi",
+    "citta": "roma"
+    }
+```
+</details>
+
+### 101 - JSON: programma che legge degli input e li salvo in un file JSON:
+<details>
+    <summary> codice </summary>
+
+```c#
+    using Newtonsoft.Json;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string path = @"test.json";
+            File.Create(path).Close();
+            File.AppendAllText(path, "[\n");
+
+            while (true)
+            {
+                Console.WriteLine("Inserisci nome e prezzo");
+                string nome = Console.ReadLine()!;
+                string prezzo = Console.ReadLine()!;
+                File.AppendAllText(path, JsonConvert.SerializeObject(new { nome, prezzo }) + ",\n");
+                Console.WriteLine("vuoi inserire un altro prodotto? (s/n)");
+                string risposta = Console.ReadLine()!;
+                if (risposta == "n")
+                {
+                    break;
+                }
+            }
+            //togli l'ultima virgola
+            string file = File.ReadAllText(path);
+            file = file.Remove(file.Length - 2, 1);
+            File.WriteAllText(path, file);
+            File.AppendAllText(path, "]");
+        }
+    }
+```
+possibile risultato test.json:
+
+```json
+    [
+        {
+            "nome": "samsung",
+            "prezzo": "900"
+        },
+        {
+            "nome": "iphone",
+            "prezzo": "1200"
+        }
+    ]
+```
+</details>
