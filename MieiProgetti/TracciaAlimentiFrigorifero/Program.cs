@@ -32,7 +32,7 @@ class Program
                     Console.Clear();
 
                     MenuInserisci();
-                    opz = SelezioneInserimento();
+                    opz = SelezioneInserisci();
                     if (opz != 'r')
                     {
                         Inserisci(opz);
@@ -50,14 +50,14 @@ class Program
                 case '3':
                     // VisualizzaAlimenti(opzione);
                     Console.Clear();
-                    StampaElenco(pathDirJson, false);
+                    //StampaElenco(pathDirJson, false);  DA SISTEMARE!!!
 
                     break;
 
                 case '4':
                     // EliminaAlimenti();
                     Console.Clear();
-                    // EliminaAlimento(); da fare
+                    Elimina(pathDirJson);
 
                     break;
 
@@ -171,14 +171,18 @@ class Program
     /*Visualizza l'elenco completo di tutti gli alimenti nel frigo con quantita e data
       sotto forma di tabella. 
 
-      INPUT: bool scadeEsaurisce ----> default false; se true visualizzo solo prodotti 
+      Opzioni: - all ----> visualizza tutti
+               - exp ----> visualizza solo exp
+               - del ----> elimina elemento
+
+      INPUT: string opz ----> default "all"; se true visualizzo solo prodotti 
                                                             in scadenza o in esaurimento
       
      */
-    static void StampaElenco(string pathDirJson, bool tutti = true)
+    static void StampaElenco(string pathDirJson, string opz = "all")
     {
         int conta = 1;
-        if (tutti)
+        if (opz == "all")
         {
             ScriviAColori("Elenco alimenti\n", "blu");
         }
@@ -215,7 +219,7 @@ class Program
             }
             else    //stampa normale
             {
-                if (tutti)
+                if (opz == "all")
                 {
                     Console.WriteLine($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza}");
                 }
@@ -228,13 +232,26 @@ class Program
 
     }
 
-    /*Metodo che elimna un alimento se presente il file JSON di quel prodotto
-    
+    /*Metodo che elimina un alimento se è presente il suo file JSON.
+
     
     */
-    static bool EliminaAlimento()
+    static void Elimina(string pathDirJson)
     {
-        return true;
+        bool ripetiOperazione = true;
+        bool eliminato = false;
+
+        do
+        {
+            ScriviAColori("Elimina alimento", "magenta");
+            Console.WriteLine("\n");
+            StampaElenco(pathDirJson);
+            Console.WriteLine("\nr. Torna indietro");
+            Console.Write("Seleziona: ");
+
+
+        }
+        while (ripetiOperazione);
     }
 
     /*Metodo accessorio, crea un file JSON per ogni alimento, nel caso fosse 
@@ -269,6 +286,15 @@ class Program
             ScriviAColori("Errore [CreaAlimentoJSON]!!!", "rosso");
             return false;
         }
+    }
+
+    /*Conta tutti gli elementi nella directory JSON
+    
+    */
+    static short ContaJson(string pathDirJson)
+    {
+        string[] files = Directory.GetFiles(pathDirJson);
+        return (short)files.Length;
     }
 
     /* Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
@@ -527,7 +553,7 @@ class Program
 
       OUTPUT: char opz ---> opzione scelta dall'utente
     */
-    static char SelezioneInserimento()
+    static char SelezioneInserisci()
     {
         bool corretto = false;
         char opz = '0';
@@ -555,6 +581,53 @@ class Program
                     ScriviAColori("Selezione errata\r", "rosso");
                     Thread.Sleep(1000);
                     Console.Write("                 \r");
+                    break;
+            }
+        }
+        while (!corretto);
+
+        return opz;
+    }
+
+    /*Gestisce la scelta del menu di inserimento
+
+      OUTPUT: char opz ---> opzione scelta dall'utente
+    */
+    static char SelezioneElimina(string pathDirJson)
+    {
+        bool corretto = false;
+        char opz = '0';
+        do
+        {
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.KeyChar)
+            {
+                case 'r':   //torna indietro
+                    opz = 'r';
+                    corretto = true;
+                    break;
+
+                default:
+
+                    try //prova a convertire in numero
+                    {
+                        short alimentoN = Int16.Parse(keyInfo.ToString()!);
+                        if (alimentoN > ContaJson(pathDirJson) || alimentoN < 1)
+                        {
+                            throw new Exception();
+                        }
+                        else
+                        {
+                            corretto = true;
+                        }
+                    }
+                    catch
+                    {
+                        ScriviAColori("Selezione errata\r", "rosso");
+                        Thread.Sleep(1000);
+                        Console.Write("                 \r");
+                    }
+
                     break;
             }
         }
