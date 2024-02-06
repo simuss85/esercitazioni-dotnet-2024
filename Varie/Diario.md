@@ -780,22 +780,15 @@ Argomenti:
 
 <!-- ******************************************  06 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>06 feb 2024 </h3></summary>
+    <summary><h3>06 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- ...
-
-### Info
-> ...
-
-### Note 
-- ...
-
-esempio:
-
-```c#
-  
-```
+- Presentazione documentazione dei nostri progetti sull'utilizzo dei file JSON. 
+- Introduzione ASP.NET CORE per full stack in dotnet:
+    > Pattern MVC.  
+    > Razor e Blazor.  
+    > Entity framework e Identity framework.  
+    > Docker e Kubernetes.  
 
 </details>
 
