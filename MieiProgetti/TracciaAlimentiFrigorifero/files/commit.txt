@@ -1,0 +1,15 @@
+Modifica:
+Inserisci ora avvisa con un messaggio se l'operazione è andata a buon fine.
+
+Fixa:
+Risolto bug path errato
+
+Aggiunge:
+ControllaScadenza
+StampaElenco
+PuisciRiga
+
+Elimina:
+
+*** DA FARE ***
+- controllo fine delle date inserite (mesi con 30 e 28/29 giorni)

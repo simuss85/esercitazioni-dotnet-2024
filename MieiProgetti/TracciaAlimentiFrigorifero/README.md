@@ -4,9 +4,13 @@ Programma che tiene traccia di tutti gli alimenti inseriti nel frigorifero. Si p
 Avvisa ad ogni avvio gli alimenti prossimi alla scadenza o quelli che stanno per finire (ad esempio ne rimane solo 1).  
 Si tiene traccia del nome prodotto, quantità e data di scadenza.
 
+## PUBBLICO TARGET
+- L'applicazione è pensata per chiunque possieda un frigorifero.
+
 ## DEFINIZIONE DEI REQUISITI E ANALISI
 
 - [x] L'applicazione deve consentire all'utente di inserire un prodotto da tastiera.
+- [x] L'applicazione deve poter cancellare un alimento.
 - [x] L'applicazione deve mostrare un messaggio di errore in caso di inserimento quantita nel formato errato.
 - [x] L'applicazione deve mostrare un messaggio di errore in caso di inserimento data scadenza nel formato errata.
 - [x] L'applicazione deve permettere di aggiungere uno stesso prodotto incrementando la quantità ma solo con stessa data di scadenza.
@@ -14,6 +18,7 @@ Si tiene traccia del nome prodotto, quantità e data di scadenza.
 - [x] L'applicazione deve poter mostrare una tabella aggiornata di tutti i prodotti nel frigorifero.
 - [x] L'applicazione deve poter mostrare un elenco di prodotti prossimi alla scadenza.
 - [x] L'applicazione deve poter mostrare un elenco di prodotti in esaurimento (ne rimane solo 1).
+
 
 
 ## PIANIFICAZIONE E DESIGN DELL'ARCHITETTURA
@@ -27,6 +32,7 @@ Si tiene traccia del nome prodotto, quantità e data di scadenza.
     > - 1.Inserisci alimento
     > - 2.Visualizza tutti 
     > - 3.Alimenti in scadenza/esaurimento
+    > - 4.Elimina alimento
     > - e.Esci
 - [x] L'applicazione utilizza un sotto menu per l'opzione 1:
     > **INSERISCI ALIMENTO**
@@ -57,10 +63,7 @@ Si tiene traccia del nome prodotto, quantità e data di scadenza.
 
 ## DOCUMENTAZIONE
 
-Ora che abbiamo testato e risolto i bug dell'applicazione, dobbiamo documentare il codice e l'architettura.
-In questo caso, documenteremo il codice e l'architettura dell'applicazione.
 - [x] Documentare il codice e l'architettura dell'applicazione.
 - [ ] Documentare i test unitari.
 - [ ] Documentare la fase di Beta Testing.
-
 - [ ] Documentare la fase di post Beta Testing.

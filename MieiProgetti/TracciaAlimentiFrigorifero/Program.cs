@@ -8,8 +8,15 @@ class Program
 
         bool finito = false;
         char opz;
+        //per utilizzare il percorso relativo delle cartelle
+        string pathDirJson = @"./files/JSON";
 
         #endregion
+
+        if (!Directory.Exists(pathDirJson))
+        {
+            Directory.CreateDirectory(pathDirJson);
+        }
 
         do
         {
@@ -36,12 +43,21 @@ class Program
                 case '2':
                     // VisualizzaAlimenti();
                     Console.Clear();
+                    StampaElenco(pathDirJson);
 
                     break;
 
                 case '3':
                     // VisualizzaAlimenti(opzione);
                     Console.Clear();
+                    StampaElenco(pathDirJson, false);
+
+                    break;
+
+                case '4':
+                    // EliminaAlimenti();
+                    Console.Clear();
+                    EliminaAlimento();
 
                     break;
 
@@ -72,7 +88,7 @@ class Program
         Console.WriteLine("1. Inserisci alimento");
         Console.WriteLine("2. Visualizza tutti");
         Console.WriteLine("3. Alimenti in scadenza/esaurimento");
-        Console.WriteLine();
+        Console.WriteLine("4. Elimina alimento");
         Console.WriteLine("e. Esci");
     }
 
@@ -95,10 +111,8 @@ class Program
                'f'  inserisci da file csv
 
       INPUT: char opzione -----> default 't'
-
-
     */
-    static bool Inserisci(char opzione)
+    static void Inserisci(char opzione)
     {
         bool eseguito;
         //inserisci da file csv
@@ -106,14 +120,22 @@ class Program
         {
             //lettura del file csv
             eseguito = InserisciDaCSV();
+            if (eseguito)
+            {
+                ScriviAColori("\nCopia del file completata", "verde");
+                Thread.Sleep(1200);
+            }
         }
         else     //inserisci da tastiera
         {
             Console.Clear();
             eseguito = InserisciDaTastiera();
+            if (eseguito)
+            {
+                ScriviAColori("\nInserimento completato", "verde");
+                Thread.Sleep(1200);
+            }
         }
-
-        return eseguito;
     }
 
     /*Gestisce l'inserimento dei dati mediante i metodi di controllo input:
@@ -125,29 +147,94 @@ class Program
     static bool InserisciDaTastiera()
     {
         bool corretto = false;
-        string nome, quantita, data;
+        string alimento, quantita, scadenza;
 
         while (!corretto)
         {
             ScriviAColori("Inserisci gli alimenti", "verde");
             Console.WriteLine("\n");
             Console.Write("Alimento: ");
-            nome = FormatoNome();
+            alimento = FormatoNome();
             Console.Write("Quantità: ");
             quantita = FormatoQuantita();
             Console.Write("Data gg/mm/aaaa: ");
-            data = FormatoData();
+            scadenza = FormatoData();
 
             //se i controlli vanno a buon fine procedo con l'inserimento
             //inserisci i dati nel file JSON
-            corretto = CreaAlimentoJSON(nome, quantita, data);
+            corretto = CreaAlimentoJSON(alimento, quantita, scadenza);
         }
 
-
         return corretto;
+    }
 
+    /*Visualizza l'elenco completo di tutti gli alimenti nel frigo con quantita e data
+      sotto forma di tabella. 
 
+      INPUT: bool scadeEsaurisce ----> default false; se true visualizzo solo prodotti 
+                                                            in scadenza o in esaurimento
+      
+     */
+    static void StampaElenco(string pathDirJson, bool tutti = true)
+    {
+        int conta = 1;
+        if (tutti)
+        {
+            ScriviAColori("Elenco alimenti\n", "blu");
+        }
+        else
+        {
+            ScriviAColori("Elenco scadenza/esaurimento\n", "blu");
+        }
 
+        Console.WriteLine();
+
+        string[] files = Directory.GetFiles(pathDirJson);
+        if (files.Length == 0)
+        {
+            ScriviAColori("frigo vuoto", "verde");
+        }
+        foreach (string file in files)
+        {
+            string jsonFile = File.ReadAllText(file);
+            dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
+            string scadenza = obj.scadenza;
+            short quantita = obj.quantita;
+
+            if (ControllaScadenza(scadenza))    //se scaduto scrive in rosso
+            {
+                ScriviAColori($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza} --scaduto--\n", "rosso");
+            }
+            else if (ControllaScadenza(scadenza, 3))   //se in scadenza entro 2 giorni 
+            {
+                ScriviAColori($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza} --in scadenza--\n", "magenta");
+            }
+            else if (quantita < 2)    //se ne rimangono meno di 2 scrive in giallo
+            {
+                ScriviAColori($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza} --in esaurimento--\n", "giallo");
+            }
+            else    //stampa normale
+            {
+                if (tutti)
+                {
+                    Console.WriteLine($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza}");
+                }
+
+            }
+
+            conta++;
+        }
+        Console.ReadKey();
+
+    }
+
+    /*Metodo che elimna un alimento se presente il file JSON di quel prodotto
+    
+    
+    */
+    static bool EliminaAlimento()
+    {
+        return true;
     }
 
     /*Metodo accessorio, crea un file JSON per ogni alimento, nel caso fosse 
@@ -159,9 +246,9 @@ class Program
       
       OUTPUT: true se tutto è andato a buon fine; 
     */
-    static bool CreaAlimentoJSON(string nome, string quantita, string data)
+    static bool CreaAlimentoJSON(string alimento, string quantita, string scadenza)
     {
-        string pathJson = @"./files/JSON/" + nome + ".json";
+        string pathJson = @"./files/JSON/" + alimento + ".json";
         int count = 1;
         try
         {
@@ -171,18 +258,17 @@ class Program
             }
             else    //se c'è gia quell'alimento ne creo uno nuovo
             {
-                pathJson = @"./files/JASON/" + nome + count + ".json";
+                pathJson = @"./files/JSON/" + alimento + count + ".json";
             }
             //inserisco i dati nel file JSON
-            File.AppendAllText(pathJson, JsonConvert.SerializeObject(new { nome, quantita, data }));
+            File.AppendAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
             return true;
         }
         catch
         {
-            ScriviAColori("Errore [InserisciJSON]!!!", "rosso");
+            ScriviAColori("Errore [CreaAlimentoJSON]!!!", "rosso");
             return false;
         }
-
     }
 
     /* Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
@@ -254,7 +340,7 @@ class Program
                 ScriviAColori("Errore di digitazione\r", "rosso");
                 Thread.Sleep(1000);
                 Console.Write("                     ");
-                Console.SetCursorPosition(10,2);
+                Console.SetCursorPosition(10, 2);
             }
             else
             {
@@ -273,6 +359,7 @@ class Program
     {
         bool corretto = false;
         short quantita = 0;
+        string erroreFormato = "deve essere un numero";
 
         while (!corretto)
         {
@@ -283,10 +370,9 @@ class Program
             }
             catch (Exception)
             {
-                ScriviAColori("deve essere un numero\r", "rosso");
-                Thread.Sleep(1000);
-                Console.Write("                      ");
-                Console.SetCursorPosition(10,3);
+                ScriviAColori(erroreFormato + "\r", "rosso");
+                PulisciRiga(erroreFormato.Length, 10, 3);
+
             }
         }
         return quantita.ToString();
@@ -301,6 +387,8 @@ class Program
     {
         bool corretto = false;
         string input = "";
+        string erroreScaduto = "alimento gia scaduto";
+        string erroreFormato = "formato data errato";
         string[] data = new string[3];
         var annoInCorso = DateTime.Now.Year;    //memorizzo l anno in corso
         var meseInCorso = DateTime.Now.Month;
@@ -317,21 +405,29 @@ class Program
                 short anno = Int16.Parse(data[2]);
                 short mese = Int16.Parse(data[1]);
                 short giorno = Int16.Parse(data[0]);
+                // Console.WriteLine("anno: " + anno); //DEBUG
+                // Console.WriteLine("mese: " + mese); //DEBUG
+                // Console.WriteLine("giorno: " + giorno); //DEBUG
+                // Console.ReadKey();                      //DEBUG
+
 
                 if (anno < annoInCorso) //anno precedente quindi scaduto
                 {
-                    ScriviAColori("alimento gia scaduto\r", "rosso");
-                    Thread.Sleep(1000);
-                    Console.Write("                    \rData gg/mm/aaaa: ");
+                    if (anno < 2000)
+                    {
+                        throw new Exception();
+                    }
+
+                    ScriviAColori(erroreScaduto + "\r", "rosso");
+                    PulisciRiga(erroreScaduto.Length, 17, 4);
                     continue;
                 }
                 else if (anno == annoInCorso)      //anno attuale verifico mese e giorno
                 {
                     if (mese < meseInCorso) //mese
                     {
-                        ScriviAColori("alimento gia scaduto\r", "rosso");
-                        Thread.Sleep(1000);
-                        Console.Write("                    \rData gg/mm/aaaa: ");
+                        ScriviAColori(erroreScaduto + "\r", "rosso");
+                        PulisciRiga(erroreScaduto.Length, 17, 4);
                         continue;
                     }
                     else if (mese > 13) //mese inserito errato
@@ -342,9 +438,8 @@ class Program
                     {
                         if (giorno < oggi)
                         {
-                            ScriviAColori("alimento gia scaduto\r", "rosso");
-                            Thread.Sleep(1000);
-                            Console.Write("                    \rData gg/mm/aaaa: ");
+                            ScriviAColori(erroreScaduto + "\r", "rosso");
+                            PulisciRiga(erroreScaduto.Length, 17, 4);
                             continue;
                         }
                         else if (giorno > 31)   //giorno inserito errato
@@ -353,17 +448,79 @@ class Program
                         }
                     }
                 }
+                else //caso corretto 
+                {
+                    //correggo il formato dell'output
+                    if (data[1].Length < 2)
+                    {
+                        data[1] = "0" + data[1];    //mese formattato a 2 cifre
+                    }
+                    if (data[0].Length < 2)
+                    {
+                        data[0] = "0" + data[0];    //giorno formattato a 2 cifre
+                    }
+                    input = $"{data[0]}/{data[1]}/{data[2]}";
+                }
+
             }
             catch (Exception)
             {
-                ScriviAColori("formato data errato\r", "rosso");
-                Thread.Sleep(1000);
-                Console.Write("                    \rData gg/mm/aaaa: ");
+                ScriviAColori(erroreFormato + "\r", "rosso");
+                PulisciRiga(erroreFormato.Length, 17, 4);
                 continue;
             }
             corretto = true;
         }
         return input;
+    }
+
+    /*Verifica se il prodotto è prossimo alla scadenza controllando la data di oggi e
+      quella del prodotto 
+      
+      INPUT: string scadenza -----> data di scadenza dell'alimento da controlare
+             int offset ----------> entro quanti giorni verificare la scadenza;  default = 0
+
+    */
+    static bool ControllaScadenza(string scadenza, int offset = 0)
+    {
+        var annoInCorso = DateTime.Now.Year;    //memorizzo l anno in corso
+        var meseInCorso = DateTime.Now.Month;
+        var oggi = DateTime.Now.Day;
+        bool scade = false;
+
+        string[] data = scadenza.Split("/");
+
+        try
+        {
+            //converto in valore numerico per facilitare i controlli
+            short anno = Int16.Parse(data[2]);
+            short mese = Int16.Parse(data[1]);
+            short giorno = Int16.Parse(data[0]);
+
+            if (anno < annoInCorso)
+            {
+                scade = true;
+            }
+            else if (anno == annoInCorso)
+            {
+                if (mese < meseInCorso)
+                {
+                    scade = true;
+                }
+                else if (mese == meseInCorso)
+                {
+                    if (giorno - offset < oggi)
+                    {
+                        scade = true;
+                    }
+                }
+            }
+        }
+        catch
+        {
+            ScriviAColori("Errore [ControllaScadenza]!!!", "rosso");
+        }
+        return scade;
     }
 
     /*Gestisce la scelta del menu di inserimento
@@ -409,6 +566,36 @@ class Program
     #endregion
 
     #region Metodi di utility
+
+    /*Metodo accessorio che cancella il contenuto della riga dopo l'inserimento
+      dell' input da parte dell' utente.
+
+      INPUT: int lunghezzaErrore -----> numero di caratteri dell'errore 
+             int posizioneX ----------> posizione cursore ascisse variabile data dalla 
+                                        lunghezza del messaggio di inserimento
+                                         es (Inserisci: ) = 11 caratteri
+             int posizioneY ----------> posizione cursore ordinate fissato a priori
+      
+    */
+    static void PulisciRiga(int lunghezzaErrore, int posizioneX, int posizioneY)
+    {
+        Thread.Sleep(1000);  //attende la lettura del messaggio
+
+        //cancella il  messaggio di errore 
+        for (int i = 0; i < lunghezzaErrore; i++)
+        {
+            Console.Write(" ");
+        }
+
+        //sposto il cursore al punto in cui l'utente ha inserito l'input
+        //cancello il testo e mi riposiziono al punto corretto
+        Console.SetCursorPosition(posizioneX, posizioneY);
+        for (int i = 0; i < 20; i++)
+        {
+            Console.Write(" ");
+        }
+        Console.SetCursorPosition(posizioneX, posizioneY);
+    }
 
     /*Metodo accessorio che permette di scrivere un testo a colori.
       Scrive il contenuto di 'messaggio' nel colore scelto e reimposta
@@ -474,6 +661,17 @@ class Program
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
+                }
+                break;
+
+            case "giallo":
+                if (opz == 'b')
+                {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                 }
                 break;
 
