@@ -57,7 +57,7 @@ class Program
                 case '4':
                     // EliminaAlimenti();
                     Console.Clear();
-                    EliminaAlimento();
+                    // EliminaAlimento(); da fare
 
                     break;
 
