@@ -43,14 +43,16 @@ class Program
                 case '2':
                     // VisualizzaAlimenti();
                     Console.Clear();
-                    StampaElenco(pathDirJson);
+                    StampaOElimina(pathDirJson);
+                    Console.ReadKey();
 
                     break;
 
                 case '3':
                     // VisualizzaAlimenti(opzione);
                     Console.Clear();
-                    //StampaElenco(pathDirJson, false);  DA SISTEMARE!!!
+                    StampaOElimina(pathDirJson, "exp");
+                    Console.ReadKey();
 
                     break;
 
@@ -173,27 +175,34 @@ class Program
 
       Opzioni: - all ----> visualizza tutti
                - exp ----> visualizza solo exp
-               - del ----> elimina elemento
+               - del ----> visualizza tutti con titolo diverso
 
-      INPUT: string opz ----> default "all"; se true visualizzo solo prodotti 
-                                                            in scadenza o in esaurimento
+      INPUT: string opz ----------> default "all"; se true visualizzo solo prodotti 
+                                                in scadenza o in esaurimento
+             string pathDirJson ---> path della cartella JSON
       
      */
-    static void StampaElenco(string pathDirJson, string opz = "all")
+    static void StampaOElimina(string pathDirJson, string opz = "all")
     {
-        int conta = 1;
         if (opz == "all")
         {
             ScriviAColori("Elenco alimenti\n", "blu");
         }
-        else
+        else if (opz == "exp")
         {
             ScriviAColori("Elenco scadenza/esaurimento\n", "blu");
+        }
+        else if (opz == "del")
+        {
+            ScriviAColori("Elimina alimento\n", "blu");
         }
 
         Console.WriteLine();
 
+        //memorizzo il path di tutti i files JSON
         string[] files = Directory.GetFiles(pathDirJson);
+        int conta = 1;  //conta il numero degli elementi
+
         if (files.Length == 0)
         {
             ScriviAColori("frigo vuoto", "verde");
@@ -203,7 +212,7 @@ class Program
             string jsonFile = File.ReadAllText(file);
             dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
             string scadenza = obj.scadenza;
-            short quantita = obj.quantita;
+            int quantita = obj.quantita;
 
             if (ControllaScadenza(scadenza))    //se scaduto scrive in rosso
             {
@@ -219,17 +228,109 @@ class Program
             }
             else    //stampa normale
             {
-                if (opz == "all")
+                if (opz == "all" || opz == "del")
                 {
                     Console.WriteLine($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza}");
                 }
 
             }
-
             conta++;
         }
-        Console.ReadKey();
+        //nel caso di eliminazione
+        if (opz == "del")
+        {
+            Console.WriteLine("\nCosa vuoi eliminare? ");
+            conta = files.Length;
+            try
+            {
+                //memorizzo il numero scelto dall'utente che corrisponde 
+                //all'elemento N-esimo della lista visualizzata a schermo
+                int selezionato = int.Parse(Console.ReadLine()!);
 
+                if (selezionato < 1 || selezionato > conta)
+                {
+                    throw new Exception(); //se non rientra nel range corretto
+                }
+
+                string file = files[selezionato - 1]; //path del file da modificare/cancellare
+                string jsonFile = File.ReadAllText(file);   //il contenuto del file JSON
+                dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
+                int quantita = obj.quantita;
+
+                //se ne rimane 1 solo alimento di quel tipo chiedo se eliminare
+                if (quantita == 1)
+                {
+                    Console.Write("Vuoi eliminare ");
+                    ScriviAColori($"{obj.alimento}", "verde");
+                    Console.Write(" ? (s/n)");
+                    string risposta = Console.ReadLine()!.ToLower();
+
+                    if (risposta == "s")
+                    {
+                        File.Delete(file);
+                    }
+                }
+                else
+                {
+                    bool corretto = false;
+                    do
+                    {
+                        Console.Clear();
+
+                        Console.WriteLine($"Ci sono {quantita} alimenti del tipo ");
+                        ScriviAColori($"{obj.alimento}", "verde");
+                        Console.Write("\nQuanti ne vuoi eliminare? ");
+                        try
+                        {
+                            int quantitaDaEliminare = int.Parse(Console.ReadLine()!);
+                            if (quantitaDaEliminare > quantita)
+                            {
+                                throw new Exception();
+                            }
+                            else if (quantitaDaEliminare == quantita)
+                            {
+                                Console.Write("Vuoi eliminare ");
+                                ScriviAColori($"{obj.alimento}", "verde");
+                                Console.Write(" ? (s/n)");
+                                string risposta = Console.ReadLine()!.ToLower();
+
+                                if (risposta == "s")
+                                {
+                                    File.Delete(file);
+                                    ScriviAColori("Alimento eliminato", "verde");
+                                    Thread.Sleep(800);
+                                    corretto = true;
+                                }
+                            }
+                            else
+                            {
+                                quantita -= quantitaDaEliminare;
+                                Console.WriteLine("DEBUG prima di inviare il codice" + quantita);   //DEBUG
+                                CreaAlimentoJSON(obj.alimento, quantita.ToString(), obj.scadenza, 's');
+                                ScriviAColori("Aggiornato", "verde");
+                                Thread.Sleep(800);
+                                Console.ReadKey();
+                                corretto = true;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            ScriviAColori("Selezione quantita errata", "rosso");
+                            Thread.Sleep(800);
+                        }
+
+
+                    }
+                    while (!corretto);
+
+                }
+            }
+            catch (Exception)
+            {
+                ScriviAColori("Selezione errata", "rosso");
+                Thread.Sleep(800);
+            }
+        }
     }
 
     /*Metodo che elimina un alimento se è presente il suo file JSON.
@@ -239,32 +340,36 @@ class Program
     static void Elimina(string pathDirJson)
     {
         bool ripetiOperazione = true;
-        bool eliminato = false;
+        //memorizzo il path di tutti i files JSON
+        string[] files = Directory.GetFiles(pathDirJson);
 
         do
         {
-            ScriviAColori("Elimina alimento", "magenta");
-            Console.WriteLine("\n");
-            StampaElenco(pathDirJson);
-            Console.WriteLine("\nr. Torna indietro");
-            Console.Write("Seleziona: ");
+            Console.Clear();
 
-
+            StampaOElimina(pathDirJson, "del");
         }
         while (ripetiOperazione);
     }
 
-    /*Metodo accessorio, crea un file JSON per ogni alimento, nel caso fosse 
-      gia presente lo rinomina.
+    /*Metodo accessorio che crea un file JSON per ogni alimento inserito, nomina il file
+      con il nome dell'alimento. 
+      Se il file non esiste ne crea uno nuovo.
+      Se il file esiste gia, ne crea una copia con nome diverso oppure lo sovrascrive.
       
       INPUT: string nome -------> nome alimento 
              string quantita ---> quantita alimento
              string data -------> data di scadenza
+             char opz ----------> 'c' crea copia; 's' sovrascrive
       
       OUTPUT: true se tutto è andato a buon fine; 
     */
-    static bool CreaAlimentoJSON(string alimento, string quantita, string scadenza)
-    {
+    static bool CreaAlimentoJSON(string alimento, string quantita, string scadenza, char opz = 'c')
+    {   
+        //DEBUG
+        Console.WriteLine($"Debug CreaAlimento: alimento: {alimento}, quantita: {quantita}, scadenza: {scadenza}");
+        //DEBUG
+
         string pathJson = @"./files/JSON/" + alimento + ".json";
         int count = 1;
         try
@@ -273,12 +378,16 @@ class Program
             {
                 File.Create(pathJson).Close();
             }
-            else    //se c'è gia quell'alimento ne creo uno nuovo
+            else if (opz == 'c')    //crea una copia rinominando il file
             {
                 pathJson = @"./files/JSON/" + alimento + count + ".json";
             }
+            else if (opz == 's')    //sovrascrive il file
+            {
+                pathJson = @"./files/JSON/" + alimento + ".json";
+            }
             //inserisco i dati nel file JSON
-            File.AppendAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
+            File.WriteAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
             return true;
         }
         catch
@@ -291,10 +400,10 @@ class Program
     /*Conta tutti gli elementi nella directory JSON
     
     */
-    static short ContaJson(string pathDirJson)
+    static int ContaJson(string pathDirJson)
     {
         string[] files = Directory.GetFiles(pathDirJson);
-        return (short)files.Length;
+        return files.Length;
     }
 
     /* Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
@@ -384,7 +493,7 @@ class Program
     static string FormatoQuantita()
     {
         bool corretto = false;
-        short quantita = 0;
+        int quantita = 0;
         string erroreFormato = "deve essere un numero";
 
         while (!corretto)
@@ -428,9 +537,9 @@ class Program
             {
                 data = input.Split("/");
                 //converto in valore numerico per facilitare i controlli
-                short anno = Int16.Parse(data[2]);
-                short mese = Int16.Parse(data[1]);
-                short giorno = Int16.Parse(data[0]);
+                int anno = int.Parse(data[2]);
+                int mese = int.Parse(data[1]);
+                int giorno = int.Parse(data[0]);
                 // Console.WriteLine("anno: " + anno); //DEBUG
                 // Console.WriteLine("mese: " + mese); //DEBUG
                 // Console.WriteLine("giorno: " + giorno); //DEBUG
@@ -519,9 +628,9 @@ class Program
         try
         {
             //converto in valore numerico per facilitare i controlli
-            short anno = Int16.Parse(data[2]);
-            short mese = Int16.Parse(data[1]);
-            short giorno = Int16.Parse(data[0]);
+            int anno = int.Parse(data[2]);
+            int mese = int.Parse(data[1]);
+            int giorno = int.Parse(data[0]);
 
             if (anno < annoInCorso)
             {
@@ -581,53 +690,6 @@ class Program
                     ScriviAColori("Selezione errata\r", "rosso");
                     Thread.Sleep(1000);
                     Console.Write("                 \r");
-                    break;
-            }
-        }
-        while (!corretto);
-
-        return opz;
-    }
-
-    /*Gestisce la scelta del menu di inserimento
-
-      OUTPUT: char opz ---> opzione scelta dall'utente
-    */
-    static char SelezioneElimina(string pathDirJson)
-    {
-        bool corretto = false;
-        char opz = '0';
-        do
-        {
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-            switch (keyInfo.KeyChar)
-            {
-                case 'r':   //torna indietro
-                    opz = 'r';
-                    corretto = true;
-                    break;
-
-                default:
-
-                    try //prova a convertire in numero
-                    {
-                        short alimentoN = Int16.Parse(keyInfo.ToString()!);
-                        if (alimentoN > ContaJson(pathDirJson) || alimentoN < 1)
-                        {
-                            throw new Exception();
-                        }
-                        else
-                        {
-                            corretto = true;
-                        }
-                    }
-                    catch
-                    {
-                        ScriviAColori("Selezione errata\r", "rosso");
-                        Thread.Sleep(1000);
-                        Console.Write("                 \r");
-                    }
-
                     break;
             }
         }
