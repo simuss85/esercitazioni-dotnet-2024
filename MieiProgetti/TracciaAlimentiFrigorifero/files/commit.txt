@@ -1,14 +1,10 @@
 Modifica:
-Inserisci ora avvisa con un messaggio se l'operazione è andata a buon fine.
-
+InserisciDaCSV ora richiama il metodo CreaAlimentoJson.
+StampaOElimina rinominato in StampaAlimento.
 Fixa:
-Risolto bug path errato
-
+Risolto il problema dei file JSON con lo stesso nome.
 Aggiunge:
-ControllaScadenza
-StampaElenco
-PuisciRiga
-
+SelezioneElimina gestisce l'eliminazione degli alimenti
 Elimina:
 
 *** DA FARE ***
