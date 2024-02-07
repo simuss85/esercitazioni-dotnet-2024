@@ -1,0 +1,20 @@
+Il messaggio di benvenuto sparisce subito non si riesce a leggere.
+
+Inserendo input diversi da quelli richiesti per la selezione dei menu non si viene avvisati di alcun tipo di errore di scelta
+-----------------------------
+1.Ricerca di un articolo.
+*****
+Opzione 1: "Ricerca diretta"  
+- l'input dell'utente si va ad aggiungere al messaggio "Dimmi il nome specifico dello strumento che cerchi";
+- inserendo una stringa qualsiasi il programma va in crash;
+*****
+Opzione 2: "Ricerca di un tag" 
+- è poco chiara, non si capisce a cosa ci si riferisce;
+- l'input dell'utente si va ad aggiungere al messaggio "Dimmi che caratteristica stai cercando"
+
+----------------------------
+2. Aggiunta di un articolo
+*****
+Non funziona
+*****
+--------------------------
