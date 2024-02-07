@@ -327,13 +327,12 @@ class Program
         while (!ripetiOperazione);
     }
 
-    /*Metodo accessorio che elimina o modifica i file JSON a seconda della selezione
-      dell'utente.
-    
-      INPUT: string pathDirJson -----> il path della directory JSON
-
-      OUTPUT: bool eseguito ---------> true torna al menu principale;
-    */
+    /// <summary>
+    /// Metodo accessorio che permette di eliminare alimenti (file JSON) o di modificare <br/>
+    /// la quantita di uno di essi (modifica il campo quantita nel file JSON).
+    /// </summary>
+    /// <param name="pathDirJson"></param>
+    /// <returns><b>true</b> se non voglio più inserire alimenti, <b>false</b> se continuo a eliminare</returns>
     static bool SelezioneElimina(string pathDirJson)
     {
         //seleziono tutti i file della cartella JSON
@@ -442,17 +441,16 @@ class Program
         return eseguito;
     }
 
-    /*Metodo accessorio che crea un file JSON per ogni alimento inserito, nomina il file
-      con il nome dell'alimento e parte della data: 
-      esempio alimento_gg_mm.json 
-      Se il file non esiste ne crea uno nuovo.
-      
-      INPUT: string nome -------> nome alimento 
-             string quantita ---> quantita alimento
-             string data -------> data di scadenza
-      
-      OUTPUT: true se tutto è andato a buon fine; 
-    */
+    /// <summary>
+    /// Metodo accessorio che crea un file JSON per ogni alimento inserito nel formato: <br/>
+    /// - alimento_gg_mm.json <br/>
+    /// Se il file non esiste lo crea.
+    /// 
+    /// </summary>
+    /// <param name="alimento">Il nome dell'alimento da inserire nel JSON</param>
+    /// <param name="quantita">La quantita dell'alimento da inserire nel JSON</param>
+    /// <param name="scadenza">La data di scadenza dell'alimento da inseire nel JSON</param>
+    /// <returns><b>true</b> se la serializzazione va a buon fine, <b>false</b> in caso di errore</returns>
     static bool CreaAlimentoJSON(string alimento, int quantita, string scadenza)
     {
         // Console.WriteLine($"alimento: {alimento} quantita: {quantita} scadenza: {scadenza}");   //DEBUG
@@ -479,22 +477,21 @@ class Program
         }
     }
 
-    /*Conta tutti gli elementi nella directory JSON
-    
-      INPUT: string pathDirJson -----> il path della directory JSON.
-
-      OUTPUT: il numero dei files contenuti nella cartella JSON.
-    */
+    /// <summary>
+    /// Metodo accessorio che conta tutti i file nella cartella JSON
+    /// </summary>
+    /// <param name="pathDirJson">Il path della directory JSON</param>
+    /// <returns>Il numero dei files contenuti nella cartella JSON</returns>
     static int ContaJson(string pathDirJson)
     {
         string[] files = Directory.GetFiles(pathDirJson);
         return files.Length;
     }
 
-    /* Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
-       
-       OUTPUT: false se non è presente il file csv; true se è presente
-    */
+    /// <summary>
+    /// Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
+    /// </summary>
+    /// <returns><b>false</b> se non è presente il file csv, <b>true</b> altrimenti</returns>
     static bool InserisciDaCSV()
     {
         string pathCSV = @"./files/inserisci.csv";
@@ -538,10 +535,10 @@ class Program
         return true;
     }
 
-    /*Gestisce l'iserimento del nome dell'alimento, controlla l'input inserito.
-
-      OUTPUT: string nome ---> contiene l'input dell'utente
-    */
+    /// <summary>
+    /// Gestisce l'iserimento del nome dell'alimento, controlla l'input inserito.
+    /// </summary>
+    /// <returns>Il nome dell'alimento inserito dall'utente.</returns>
     static string FormatoNome()
     {
         bool corretto = false;
@@ -565,10 +562,11 @@ class Program
         return nome;
     }
 
-    /*Gestisce l'iserimento della quantita dell'alimento, controlla l'input inserito.
-
-      OUTPUT: int quantita ---> contiene l'input dell'utente
-    */
+    /// <summary>
+    /// Gestisce l'iserimento della quantita dell'alimento, controlla l'input inserito.
+    /// 
+    /// </summary>
+    /// <returns>La quantita dell'alimento inserito dall'utente (verifica l'input)</returns>
     static int FormatoQuantita()
     {
         bool corretto = false;
@@ -592,10 +590,10 @@ class Program
         return quantita;
     }
 
-    /*Gestisce l'iserimento della data_scadenza dell'alimento, controlla l'input inserito.
-
-      OUTPUT: string data ---> contiene l'input dell'utente 
-    */
+    /// <summary>
+    /// Gestisce l'iserimento della data di scadenza dell'alimento, controlla l'input inserito.
+    /// </summary>
+    /// <returns>La data di scadenza inserita dall'utente, formattata e verificata</returns>
     static string FormatoData()
     {
         bool corretto = false;
@@ -686,14 +684,13 @@ class Program
         return input;
     }
 
-    /*Verifica se il prodotto è prossimo alla scadenza controllando la data di oggi e
-      quella del prodotto 
-      
-      INPUT: string scadenza -----> data di scadenza dell'alimento da controlare
-             int offset ----------> entro quanti giorni verificare la scadenza;  default = 0
-      
-      OUTPUT: bool scade ---------> true se sta per scadere; false se ancora buono
-    */
+    /// <summary>
+    /// Verifica se il prodotto è prossimo alla scadenza controllando la data di oggi e quella del prodotto.
+    /// 
+    /// </summary>
+    /// <param name="scadenza">Data di scadenza dell'alimento da controllare</param>
+    /// <param name="offset">Entro quanti giorni verificare se un alimento sta per scadere</param>
+    /// <returns><b>true</b> se l'alimento sta per scadere, <b>false</b> se ancora valido</returns>
     static bool ControllaScadenza(string scadenza, int offset = 0)
     {
         var annoInCorso = DateTime.Now.Year;    //memorizzo l anno in corso
@@ -736,10 +733,10 @@ class Program
         return scade;
     }
 
-    /*Gestisce la scelta del menu di inserimento
-
-      OUTPUT: char opz ---> opzione scelta dall'utente
-    */
+    /// <summary>
+    /// Gestisce l'input dell'utente alla richiesta di selezione nel menu inserimento alimenti.
+    /// </summary>
+    /// <returns>opzione scelta dell'utente in formato char</returns>
     static char SelezioneInserisci()
     {
         bool corretto = false;
@@ -780,15 +777,14 @@ class Program
 
     #region Metodi di utility
 
-    /*Metodo accessorio che cancella il contenuto della riga dopo l'inserimento
-      dell' input da parte dell' utente.
-
-      INPUT: int lunghezzaErrore -----> numero di caratteri dell'errore 
-             int posizioneX ----------> posizione cursore ascisse variabile data dalla 
-                                        lunghezza del messaggio di inserimento
-                                         es (Inserisci: ) = 11 caratteri
-             int posizioneY ----------> posizione cursore ordinate fissato a priori
-    */
+    /// <summary>
+    /// Metodo accessorio che cancella il contenuto della riga dopo l'inserimento 
+    /// dell' input <br/> da parte dell' utente e posiziona il cursore nella corretta posizione. <br/>
+    /// </summary>
+    /// <param name="lunghezzaErrore">Numero di caratteri del messaggio di errore</param>
+    /// <param name="posizioneX">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
+    /// del messaggio di richiesta inserimento dato.</param>
+    /// <param name="posizioneY">Posizione verticale del cursore</param>
     static void PulisciRiga(int lunghezzaErrore, int posizioneX, int posizioneY)
     {
         Thread.Sleep(1000);  //attende la lettura del messaggio
@@ -809,21 +805,21 @@ class Program
         Console.SetCursorPosition(posizioneX, posizioneY);
     }
 
-    /*Metodo accessorio che permette di scrivere un testo a colori.
-      Scrive il contenuto di 'messaggio' nel colore scelto e reimposta
-      il colore di default alla fine. 
-      Non va a capo.
-      Utilizza l'opzione 'f' per cambiare colore del font
-      Utilizza l'opzione .b per cambiare il colore dello sfondo.
-      Colori: - rosso
-              - blu
-              - magenta
-              - verde
-
-      INPUT: string messaggio ----> il messaggio da stampare
-             string colore -------> il colore scelto
-             char opz ------------> default 'f'
-    */
+    /// <summary>
+    /// Metodo accessorio che permette di scrivere un testo a colori.<br/>
+    /// Scrive il contenuto di 'messaggio' nel colore scelto e reimposta <br/>
+    /// il colore di default alla fine. Non va a capo. <br/><br/>
+    /// Colori disponibili: <br/>
+    /// - "rosso" <br/>
+    /// - "blu" <br/>
+    /// - "magenta" <br/>
+    /// - "verde" <br/>
+    /// - "giallo" <br/>
+    /// 
+    /// </summary>
+    /// <param name="messaggio">Il messaggio da stampare a colori</param>
+    /// <param name="colore">Il colore in formato string es. "rosso"</param>
+    /// <param name="opz">Opzione: 'f' default; 'b per lo sfondo</param>
     static void ScriviAColori(string messaggio, string colore, char opz = 'f')
     {
         //memorizzo i colori attuali
