@@ -454,6 +454,7 @@ class Program
     static bool InserisciDaCSV()
     {
         string pathCSV = @"./files/inserisci.csv";
+        string pathTemp = @"./files/temp/";
         if (!File.Exists(pathCSV))
         {
             ScriviAColori("Nessun file csv trovato", "rosso");
@@ -483,6 +484,12 @@ class Program
             {
                 ScriviAColori("Errore [InserisciDaCSV]", "rosso");
             }
+            if (!Directory.Exists(pathTemp))
+            {
+                Directory.CreateDirectory(pathTemp);
+
+            }
+            File.Move(pathCSV,$"{pathTemp}inserito.csv");
         }
         return true;
     }
