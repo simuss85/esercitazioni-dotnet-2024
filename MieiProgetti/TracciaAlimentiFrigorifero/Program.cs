@@ -43,7 +43,7 @@ class Program
                 case '2':
                     // VisualizzaAlimenti();
                     Console.Clear();
-                    StampaOElimina(pathDirJson);
+                    StampaAlimento(pathDirJson);
                     Console.ReadKey();
 
                     break;
@@ -51,7 +51,7 @@ class Program
                 case '3':
                     // VisualizzaAlimenti(opzione);
                     Console.Clear();
-                    StampaOElimina(pathDirJson, "exp");
+                    StampaAlimento(pathDirJson, "exp");
                     Console.ReadKey();
 
                     break;
@@ -149,7 +149,8 @@ class Program
     static bool InserisciDaTastiera()
     {
         bool corretto = false;
-        string alimento, quantita, scadenza;
+        string alimento, scadenza;
+        int quantita;
 
         while (!corretto)
         {
@@ -182,7 +183,7 @@ class Program
              string pathDirJson ---> path della cartella JSON
       
      */
-    static void StampaOElimina(string pathDirJson, string opz = "all")
+    static bool StampaAlimento(string pathDirJson, string opz = "all")
     {
         if (opz == "all")
         {
@@ -202,45 +203,100 @@ class Program
         //memorizzo il path di tutti i files JSON
         string[] files = Directory.GetFiles(pathDirJson);
         int conta = 1;  //conta il numero degli elementi
+        bool frigoVuoto;
 
         if (files.Length == 0)
         {
-            ScriviAColori("frigo vuoto", "verde");
+            frigoVuoto = true;
+            ScriviAColori("frigo vuoto\n", "verde");
         }
-        foreach (string file in files)
+        else
         {
-            string jsonFile = File.ReadAllText(file);
-            dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
-            string scadenza = obj.scadenza;
-            int quantita = obj.quantita;
+            frigoVuoto = false;
 
-            if (ControllaScadenza(scadenza))    //se scaduto scrive in rosso
+            foreach (string file in files)
             {
-                ScriviAColori($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza} --scaduto--\n", "rosso");
-            }
-            else if (ControllaScadenza(scadenza, 3))   //se in scadenza entro 2 giorni 
-            {
-                ScriviAColori($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza} --in scadenza--\n", "magenta");
-            }
-            else if (quantita < 2)    //se ne rimangono meno di 2 scrive in giallo
-            {
-                ScriviAColori($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza} --in esaurimento--\n", "giallo");
-            }
-            else    //stampa normale
-            {
-                if (opz == "all" || opz == "del")
+                string jsonFile = File.ReadAllText(file);
+                dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
+                string scadenza = obj.scadenza;
+                int quantita = obj.quantita;
+                string alimento = obj.alimento;
+
+                if (ControllaScadenza(scadenza))    //se scaduto scrive in rosso
                 {
-                    Console.WriteLine($"{conta}. {obj.alimento} {obj.quantita} {obj.scadenza}");
+                    ScriviAColori($"{conta}. {alimento} {quantita} {scadenza} --scaduto--\n", "rosso");
                 }
-
+                else if (ControllaScadenza(scadenza, 3))   //se in scadenza entro 2 giorni 
+                {
+                    ScriviAColori($"{conta}. {alimento} {quantita} {scadenza} --in scadenza--\n", "magenta");
+                }
+                else if (quantita < 2)    //se ne rimangono meno di 2 scrive in giallo
+                {
+                    ScriviAColori($"{conta}. {alimento} {quantita} {scadenza} --in esaurimento--\n", "giallo");
+                }
+                else    //stampa normale
+                {
+                    if (opz == "all" || opz == "del")
+                    {
+                        Console.Write($"{conta}. {alimento} {quantita} {scadenza}\n");
+                    }
+                }
+                conta++;
             }
-            conta++;
+
         }
-        //nel caso di eliminazione
-        if (opz == "del")
+        if (opz != "del")
         {
-            Console.WriteLine("\nCosa vuoi eliminare? ");
-            conta = files.Length;
+            Console.Write("\npremi invio...");
+        }
+
+        return frigoVuoto;
+    }
+
+    /*Metodo che elimina un alimento se è presente il suo file JSON.
+
+    
+    */
+    static void Elimina(string pathDirJson)
+    {
+        bool ripetiOperazione = false;
+
+        do
+        {
+            Console.Clear();
+            //visualizza lista alimenti, opz = "del" scrive il titolo corretto del menu elimina
+            ripetiOperazione = StampaAlimento(pathDirJson, "del");
+
+            if (!ripetiOperazione)
+            {
+                ripetiOperazione = SelezioneElimina(pathDirJson);
+            }
+            else
+            {
+                Console.ReadKey();
+            }
+
+        }
+        while (!ripetiOperazione);
+    }
+
+    /**/
+    static bool SelezioneElimina(string pathDirJson)
+    {
+        //seleziono tutti i file della cartella JSON
+        string[] files = Directory.GetFiles(pathDirJson);
+        int conta = files.Length;   // conto i file
+        bool eseguito = false;
+
+        Console.WriteLine("\nVuoi eliminare qualcosa? (s/n) ");
+        string input = Console.ReadLine()!;
+        if (input == "n")
+        {
+            eseguito = true;    //se non voglio piu inserire torno al menu principale
+        }
+        else if (input == "s")
+        {
+            Console.WriteLine("\nCosa vuoi eliminare?");
             try
             {
                 //memorizzo il numero scelto dall'utente che corrisponde 
@@ -255,7 +311,9 @@ class Program
                 string file = files[selezionato - 1]; //path del file da modificare/cancellare
                 string jsonFile = File.ReadAllText(file);   //il contenuto del file JSON
                 dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
+                string alimento = obj.alimento;
                 int quantita = obj.quantita;
+                string scadenza = obj.scadenza;
 
                 //se ne rimane 1 solo alimento di quel tipo chiedo se eliminare
                 if (quantita == 1)
@@ -305,8 +363,8 @@ class Program
                             else
                             {
                                 quantita -= quantitaDaEliminare;
-                                Console.WriteLine("DEBUG prima di inviare il codice" + quantita);   //DEBUG
-                                CreaAlimentoJSON(obj.alimento, quantita.ToString(), obj.scadenza, 's');
+                                // Console.WriteLine("DEBUG prima di inviare il codice" + quantita);   //DEBUG
+                                CreaAlimentoJSON(alimento, quantita, scadenza);    //modifico e sovrascrivo
                                 ScriviAColori("Aggiornato", "verde");
                                 Thread.Sleep(800);
                                 Console.ReadKey();
@@ -318,11 +376,8 @@ class Program
                             ScriviAColori("Selezione quantita errata", "rosso");
                             Thread.Sleep(800);
                         }
-
-
                     }
                     while (!corretto);
-
                 }
             }
             catch (Exception)
@@ -331,25 +386,7 @@ class Program
                 Thread.Sleep(800);
             }
         }
-    }
-
-    /*Metodo che elimina un alimento se è presente il suo file JSON.
-
-    
-    */
-    static void Elimina(string pathDirJson)
-    {
-        bool ripetiOperazione = true;
-        //memorizzo il path di tutti i files JSON
-        string[] files = Directory.GetFiles(pathDirJson);
-
-        do
-        {
-            Console.Clear();
-
-            StampaOElimina(pathDirJson, "del");
-        }
-        while (ripetiOperazione);
+        return eseguito;
     }
 
     /*Metodo accessorio che crea un file JSON per ogni alimento inserito, nomina il file
@@ -360,32 +397,25 @@ class Program
       INPUT: string nome -------> nome alimento 
              string quantita ---> quantita alimento
              string data -------> data di scadenza
-             char opz ----------> 'c' crea copia; 's' sovrascrive
+             char opz ----------> 'c' cancella; 0 default
       
       OUTPUT: true se tutto è andato a buon fine; 
     */
-    static bool CreaAlimentoJSON(string alimento, string quantita, string scadenza, char opz = 'c')
-    {   
-        //DEBUG
-        Console.WriteLine($"Debug CreaAlimento: alimento: {alimento}, quantita: {quantita}, scadenza: {scadenza}");
-        //DEBUG
+    static bool CreaAlimentoJSON(string alimento, int quantita, string scadenza)
+    {
+        // Console.WriteLine($"alimento: {alimento} quantita: {quantita} scadenza: {scadenza}");   //DEBUG
+        // Console.ReadKey();                                                                      //DEBUG
 
-        string pathJson = @"./files/JSON/" + alimento + ".json";
-        int count = 1;
+        string nomeFile = alimento + "_" + scadenza[..2] + "_" + scadenza.Substring(3, 2);
+
+        string pathJson = @"./files/JSON/" + nomeFile + ".json";
         try
         {
             if (!File.Exists(pathJson)) //se non c'è alcun prodotto lo creo
             {
                 File.Create(pathJson).Close();
             }
-            else if (opz == 'c')    //crea una copia rinominando il file
-            {
-                pathJson = @"./files/JSON/" + alimento + count + ".json";
-            }
-            else if (opz == 's')    //sovrascrive il file
-            {
-                pathJson = @"./files/JSON/" + alimento + ".json";
-            }
+
             //inserisco i dati nel file JSON
             File.WriteAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
             return true;
@@ -425,34 +455,24 @@ class Program
 
             for (int i = 0; i < righe.Length; i++)
             {
-                alimenti[i] = righe[i].Split(",");
+                alimenti[i] = righe[i].Split(",");  //per ogni riga del file csv creo un array alimento
             }
 
-            int count = 1; //per inserire prodotti dello stesso tipo ma con scadenza diversa
-            for (int i = 1; i < alimenti.Length; i++)
+            try
             {
-                //prova a creare il file json, se gia presente ne crea uno con stesso nome
-                //piu un numero sequenziale, esempio: file.json   file2.json  file3.json
-                string pathJson = "./files/JSON/" + alimenti[i][0] + ".json";
-
-                if (!File.Exists(pathJson))
+                for (int i = 1; i < alimenti.Length; i++)
                 {
-                    File.Create(pathJson).Close();
+                    int quantita = int.Parse(alimenti[i][1]);
+                    CreaAlimentoJSON(alimenti[i][0], quantita, alimenti[i][2]);
                 }
-                else
-                {
-                    pathJson = "./files/JSON/" + alimenti[i][0] + count + ".json";
-                    count++;
-                    File.Create(pathJson).Close();
-                }
-                File.AppendAllText(pathJson, JsonConvert.SerializeObject(new
-                {
-                    alimento = alimenti[i][0],
-                    quantita = alimenti[i][1],
-                    scadenza = alimenti[i][2]
-                }));
 
             }
+            catch (Exception)
+            {
+                ScriviAColori("Errore [InserisciDaCSV]", "rosso");
+            }
+
+
         }
         return true;
     }
@@ -490,7 +510,7 @@ class Program
       OUTPUT: string quantita ---> contiene l'input dell'utente
 
     */
-    static string FormatoQuantita()
+    static int FormatoQuantita()
     {
         bool corretto = false;
         int quantita = 0;
@@ -510,7 +530,7 @@ class Program
 
             }
         }
-        return quantita.ToString();
+        return quantita;
     }
 
     /*Gestisce l'iserimento della data_scadenza dell'alimento, controlla l'input inserito.
@@ -557,45 +577,44 @@ class Program
                     PulisciRiga(erroreScaduto.Length, 17, 4);
                     continue;
                 }
-                else if (anno == annoInCorso)      //anno attuale verifico mese e giorno
+                else if (anno >= annoInCorso)      //anno attuale verifico mese e giorno
                 {
-                    if (mese < meseInCorso) //mese
+                    if (mese > 13 || mese < 1)  //mese errato
+                    {
+                        throw new Exception();
+                    }
+                    if (giorno > 31 || giorno < 1)  //giorno errato
+                    {
+                        throw new Exception();
+                    }
+
+                    if (anno == annoInCorso && mese < meseInCorso) //anno in  corso ma scaduto
                     {
                         ScriviAColori(erroreScaduto + "\r", "rosso");
                         PulisciRiga(erroreScaduto.Length, 17, 4);
                         continue;
                     }
-                    else if (mese > 13) //mese inserito errato
+                    else if (anno == annoInCorso && mese == meseInCorso)   //anno in corso e mese in corso
                     {
-                        throw new Exception();
-                    }
-                    else if (mese == meseInCorso)   //mese in corso
-                    {
-                        if (giorno < oggi)
+                        if (giorno < oggi)  //scaduto
                         {
                             ScriviAColori(erroreScaduto + "\r", "rosso");
                             PulisciRiga(erroreScaduto.Length, 17, 4);
                             continue;
                         }
-                        else if (giorno > 31)   //giorno inserito errato
-                        {
-                            throw new Exception();
-                        }
                     }
                 }
-                else //caso corretto 
+
+                //correggo il formato dell'output
+                if (data[1].Length < 2)
                 {
-                    //correggo il formato dell'output
-                    if (data[1].Length < 2)
-                    {
-                        data[1] = "0" + data[1];    //mese formattato a 2 cifre
-                    }
-                    if (data[0].Length < 2)
-                    {
-                        data[0] = "0" + data[0];    //giorno formattato a 2 cifre
-                    }
-                    input = $"{data[0]}/{data[1]}/{data[2]}";
+                    data[1] = "0" + data[1];    //mese formattato a 2 cifre
                 }
+                if (data[0].Length < 2)
+                {
+                    data[0] = "0" + data[0];    //giorno formattato a 2 cifre
+                }
+                input = $"{data[0]}/{data[1]}/{data[2]}";
 
             }
             catch (Exception)
