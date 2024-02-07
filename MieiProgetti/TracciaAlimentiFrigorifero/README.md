@@ -19,8 +19,6 @@ Si tiene traccia del nome prodotto, quantità e data di scadenza.
 - [x] L'applicazione deve poter mostrare un elenco di prodotti prossimi alla scadenza.
 - [x] L'applicazione deve poter mostrare un elenco di prodotti in esaurimento (ne rimane solo 1).
 
-
-
 ## PIANIFICAZIONE E DESIGN DELL'ARCHITETTURA
 
 - [x] L'applicazione deve poter leggere da una lista di prodotti in un file csv (prodotto,quantità,data_scadenza).
