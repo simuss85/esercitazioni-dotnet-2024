@@ -794,22 +794,12 @@ Argomenti:
 
 <!-- ******************************************  07 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>07 feb 2024 </h3></summary>
+    <summary><h3>07 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- ...
-
-### Info
-> ...
-
-### Note 
-- ...
-
-esempio:
-
-```c#
-  
-```
+- Finire il programma che utilizza i file JSON.
+- Creato repository dei nostri progetti e caricati i files.md.
+- Beta-Testing app Dylann.
 
 </details>
 
