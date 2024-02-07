@@ -338,6 +338,7 @@
 
                             Console.Write($"La somma delle cifre è ");
                             Console.WriteLine($"{somma}");
+                            somma = 0; //resetto la somma
                             break;
 
                         case 3:     // suggerimento prima cifra è
