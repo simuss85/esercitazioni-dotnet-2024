@@ -215,6 +215,10 @@
     #region "Metodi interfaccia utente e grafica"
 
     //Visualizza il menu di selezione principale
+
+    /// <summary>
+    /// 
+    /// </summary>
     static void MenuSelezionePrincipale()
     {
         Console.WriteLine("Seleziona l'opzione:\n");
@@ -231,6 +235,10 @@
       Input: string c -----> contiene il carattere del colore gia scelto
     */
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="c"></param>
     static void MenuSelezioneColoreUtente(string c)
     {
         var currentBackground = Console.BackgroundColor;    //memorizza il colore attuale
@@ -310,6 +318,10 @@
     }
 
     //Visualizza le opzioni di gioco nel turno di ogni giocatore
+
+    /// <summary>
+    /// 
+    /// </summary>
     static void MenuDiGioco()
     {
         Console.WriteLine("Cosa vuoi fare?\n");
@@ -320,6 +332,12 @@
     }
 
     //Visualizza una breve sintesi della mappa aggiornata con i colori
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
     static void DisegnaMappa(string[] player1, string[] player2)
     {
 
@@ -346,6 +364,13 @@
              string[] player2 ------> array del giocatore player2
 
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="territorio">Il nome del territorio da controllare</param>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
     static void DisegnaTerritorio(string territorio, string[] player1, string[] player2)
     {
         bool trovato = false;
@@ -375,6 +400,10 @@
 
     }
     //Visualizza le opzioni per la scelta della modalità di rischio
+
+    /// <summary>
+    /// 
+    /// </summary>
     static void MenuModalitaRischio()
     {
         ScriviAColori("MODALITA' RISCHIO", "magenta", 'f');
@@ -388,6 +417,11 @@
     #region "Metodi accessori o utility"
 
     //Stampa a video il contenuto della lista
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="lista">Lista da visualizzare come elenco numerato</param>
     static void VisualizzaListaNumerata(List<string> lista)
     {
         int count = 1;
@@ -405,6 +439,12 @@
       Input: string ID -----> una stringa che contiene la data attuale 
 
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
     static string CalcolaID(string ID)
     {
         string[] valoriSingoli = ID.Split(['/', ':', ' ']);
@@ -426,6 +466,13 @@
              int punti --> numero di caratteri da visualizzare a schermo
              int ms -----> tempo di attesa in ms per la funzione Sleep
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="c"></param>
+    /// <param name="punti"></param>
+    /// <param name="ms"></param>
     static void SchermataLoading(char c = '°', int punti = 19, int ms = 50)
     {
         for (int i = 0; i < punti; i++)
@@ -450,6 +497,13 @@
                string[] player2 ------> array giocatore player2
                string[] risultati ----> formattati nel modo n1,n2
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="risultati"></param>
     static void StampaPunteggioRound(string[] player1, string[] player2, string[] risultati)
     {
         string[] risultatiFormattati = new string[risultati.Length];
@@ -520,6 +574,11 @@
 
       Input: string[] player -----> array player giocatore attuale
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
     static void MessaggioTurno(string[] player)
     {
         ScriviAColori(player[1], player[2], 'b');
@@ -544,6 +603,14 @@
              string p1--------- ---> i risultati del lancio dei dadi di player1
              string p2--------- ---> i risultati del lancio dei dadi di player2
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="p1"></param>
+    /// <param name="p2"></param>
     static void MessaggioRoundDadi(string[] player1, string[] player2, string? p1 = null, string? p2 = null)
     {
         int spazi;
@@ -576,6 +643,12 @@
       Input: string[] player -----> array player giocatore attuale
              bool fineGioco ------> se true stampa il messaggio finale
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="fineGioco"></param>
     static void MessaggioVittoria(string[] player, bool fineGioco = false)
     {
         if (fineGioco)
@@ -603,6 +676,11 @@
 
       Input: string[] player -----> array player giocatore attuale
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
     static void MessaggioSconfitta(string[] player)
     {
         ScriviAColori(player[1], player[2], 'b');
@@ -616,6 +694,12 @@
       Input: string[] player ------> array giocatore attuale
              string territorio ----> il territorio appena conquistato/selezionato
     */
+
+    /// <summary>
+    /// /
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="territorio">Il territorio selezionato/conquistato</param>
     static void MessaggioTerritorioConquistato(string[] player, string territorio)
     {
         ScriviAColori(player[1], player[2], 'b');
@@ -637,6 +721,13 @@
              char opzione ---------> f cambia il testo; b cambia lo sfondo
     
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="messaggio"></param>
+    /// <param name="colore"></param>
+    /// <param name="opzione"></param>
     static void ScriviAColori(string messaggio, string colore, char opzione = 'f')
     {
         var currentColor = Console.ForegroundColor;         //salvo il carattere attuale
@@ -713,6 +804,12 @@
       Input: string[] player -----> array del giocatore player1 o player2
               string c --------> indica il colore che è gia stato preso
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="c"></param>
     static void SceltaColore(string[] player, string c)
     {
         bool corretto = false;
@@ -765,6 +862,16 @@
       Input: int x ------> valore random dadoX
              int y ------> valore random dadoY
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="x1"></param>
+    /// <param name="y1"></param>
+    /// <param name="x2"></param>
+    /// <param name="y2"></param>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
     static void SimulaLancioDadi(int x1, int y1, int x2, int y2, string[] player1, string[] player2)
     {
         #region SEI
@@ -849,6 +956,11 @@
     
       Input: string[][] totDadi ---> contiene elementi di tipo array che rappresentano i dadi
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="totDadi"></param>
     static void Stampa4Dadi(string[][] totDadi)
     {
         for (int i = 0; i < 1; i++)
@@ -870,6 +982,13 @@
 
     /* Metodo accessorio di SimulaLancioDadi che assegna il pattern corretto al numero uscito
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="n"></param>
+    /// <param name="dadi"></param>
+    /// <returns></returns>
     static string[] AssegnaPatternDado(int n, string[][] dadi)
     {
         string[] dado = new string[4];
@@ -940,6 +1059,14 @@
              string[] player2 ---> array del giocatore player2 (usa il nome)
              int xRotazioni -----> 6 * xRotazioni = totale rotazioni dado
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dadi"></param>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="xRotazioni"></param>
     private static void SimulaRotazioneDadi(string[][] dadi, string[] player1, string[] player2, int xRotazioni)
     {
         for (int i = 0; i < xRotazioni; i++)
@@ -965,7 +1092,18 @@
 
     /*Avvia il gioco contro il pc 
     */
-    static bool Gioca(string[] player1, string[] player2, string path,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="pathSave">Path del file di salvataggio</param>
+    /// <param name="territoriP1">Lista dei territori conquistati dal giocatore player1</param>
+    /// <param name="territoriP2">Lista dei territori conquistati dal giocatore player2</param>
+    /// <param name="territori">Lista dei territori liberi</param>
+    /// <returns></returns>
+    static bool Gioca(string[] player1, string[] player2, string pathSave,
                         List<string> territoriP1, List<string> territoriP2, List<string> territori)
     {
         char rispostaPlayer;
@@ -1106,7 +1244,7 @@
                     break;
 
                 case 's':   //salva
-                    vittoria = SalvaPartita(path, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
+                    vittoria = SalvaPartita(pathSave, player1, player2, territoriP1, territoriP2); //se va tutto bene, torna il valore true
                     break;
 
                 default:
@@ -1126,6 +1264,13 @@
 
       Output: int -------> 1 se vince player1;  2 se vince player2
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <returns></returns>
     static int LanciaDadi(string[] player1, string[] player2)
     {
         int vittorieP1 = 0, vittorieP2 = 0;  //il primo che arriva a 3 vince
@@ -1198,6 +1343,13 @@
     /* Permette di selezionare il territorio dalla lista dei territori disponibili
        Se c'è solo 1 territorio nella lista allora lo assegna in automatico
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="territoriP">Lista dei territori conquistati dal giocatore player attuale</param>
+    /// <param name="territori">Lista dei territori liberi</param>
     static void ConquistaTerritorio(string[] player, List<string> territoriP, List<string> territori)
     {
         //se c'è ancora un territorio libero
@@ -1273,6 +1425,13 @@
              string territorioScelto -----> il nome del territorio selezionato 
              List<string> territori ------> elenco aggiornato dei territori liberi
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="territorioScelto">Il nome del territorio scelto dall'utente</param>
+    /// <param name="territori">Lista dei territori liberi</param>
     static void AssegnaTerritorio(List<string> player1, string territorioScelto, List<string> territori)
 
     {
@@ -1297,6 +1456,12 @@
              List<string> territoriP ----> lista dei suoi territori
 
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="territoriP">Lista dei territori conquistati dal giocatore player attuale</param>
     static void MemorizzaSuArray(string[] player, List<string> territoriP)
     {
         int n = 3;
@@ -1313,6 +1478,13 @@
       Input: string[] player ------> array del giocatore caricato
              List<string> listaP --> lista vuota dei suoi territori
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="territoriP">Lista dei territori conquistati dal giocatore player attuale</param>
+    /// <param name="territori">Lista dei territori liberi</param>
     static void MemorizzaSuLista(string[] player, List<string> territoriP, List<string> territori)
     {
         for (int i = 3; i < player.Length; i++)
@@ -1343,6 +1515,12 @@
       INPUT: string[] copiaDaFile ------> copia dei dati caricati
              string[] player -----------> array player da aggiornare
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="copiaDaFile"></param>
+    /// <param name="player">Array dati del giocatore player attuale</param>
     static void CaricaPlayer(string[] copiaDaFile, string[] player)
     {
         for (int i = 0; i < player.Length; i++)
@@ -1357,6 +1535,17 @@
            string[] player1 ---> array del player1
            string[] player2 ---> array del player2
     */
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pathSave"></param>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="territoriP1">Lista dei territori conquistati dal giocatore player1</param>
+    /// <param name="territoriP2">Lista dei territori conquistati dal giocatore player1</param>
+    /// <param name="territori">Lista dei territori liberi</param>
+    /// <returns></returns>
     static bool CaricaPartita(string pathSave, string[] player1, string[] player2,
                         List<string> territoriP1, List<string> territoriP2, List<string> territori)
     {
@@ -1434,6 +1623,12 @@
 
     /*Metodo accessorio per la gestione del file csv che in caso di errori
       durante l'esecuzione*/
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pathCopia"></param>
+    /// <param name="pathSave"></param>
     static void GestisciCSV(string pathCopia, string pathSave)
     {
         //se il file è corrotto o non esiste, lo creo
@@ -1466,12 +1661,12 @@
         }
     }
 
-    /*Metodo accessorio che prende il file dopo essere stato caricato 
-      ed elimina le righe del salvatagio
-
-      INPUT: int index -----------> indice della riga da cancellare
-             string path ---------> il file da cui eliminare le righe
-    */
+    /// <summary>
+    /// Metodo accessorio che prende il file dopo essere stato caricato ed elimina <br/>
+    /// tutte le righe del salvataggio attuale.
+    /// </summary>
+    /// <param name="index">Indice della riga da cancellare</param>
+    /// <param name="path">Path del file da cui eliminare le righe</param>
     static void EliminaRigaDalFile(int index, string path)
     {
         string[] righe = File.ReadAllLines(path);
@@ -1500,12 +1695,11 @@
         File.WriteAllLines(path, copia);    //eseguo la copia del file aggiornata
     }
 
-    /*Metodo accessorio al metodo CaricaPartita. Chiede l'input del codice di
-      4 cifre in formato string. Restituisce un valore string di 4 caratteri
-      numerici
-
-      OUTPUT: restituisce una stringa di un numero a 4 cifre
-    */
+    /// <summary>
+    /// Metodo accessorio al metodo <i> CaricaPartita(). </i> Chiede all'utente di inserire <br/>
+    /// un numero di 4 cifre e verifica il corretto inserimento.
+    /// </summary>
+    /// <returns>Un numero di 4 cifre in formato stringa</returns>
     static string InputCodiceID()
     {
         bool corretto = false;
@@ -1533,16 +1727,15 @@
         return value;
     }
 
-    /*Metodo che salva in un file csv i dati della partita attuali che sono
-      presenti nell'array di ogni giocatore (player1 e player2). 
-      Se il file non esiste lo crea da zero includendo le varie etichette.
-
-      Input: string path --------------> il percorso del file di salvataggio
-             string[] player1 ---------> array del player1
-             string[] player2 ---------> array del player2
-             List<string> territoriP1--> territori attuali player1
-             List<string> territoriP2--> territori attuali player2
-    */
+    /// <summary>
+    /// Salva in un file csv i dati della partia presenti negli array di ogni giocatore player.
+    /// </summary>
+    /// <param name="pathSave">Path del file di salvataggio</param>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="territoriP1">Lista dei territori conquistati dal giocatore player1</param>
+    /// <param name="territoriP2">Lista dei territori conquistati dal giocatore player2</param>
+    /// <returns></returns>
     static bool SalvaPartita(string pathSave, string[] player1, string[] player2,
                     List<string> territoriP1, List<string> territoriP2)
     {
@@ -1601,6 +1794,12 @@
 
       Input: string pathRules ---> il percorso del file rules.txt
     */
+    /// <summary>
+    /// Visualizza a schermo le regole del gioco presenti nel file rules.txt. <br/>
+    /// Se il file non esiste lo crea e lo inizializza con il testo utilizzando: <br/>
+    /// <i>ScriviRegole()</i>
+    /// 
+    /// </summary>
     static void RegoleGioco()
     {
         string pathRules = @"./files/rules.txt";
@@ -1625,10 +1824,11 @@
 
     }
 
-    /*Scrive un array di string contenente le regole del gioco formattate per righe
-
-        Output: string[] regole ---> contiene le regole riga per riga
-    */
+    /// <summary>
+    /// Scrive le regole del gioco in un array. Il testo è formattato per essere visualizzato <br/>
+    /// nel terminale.
+    /// </summary>
+    /// <returns>Le regole del gioco da scrivere nel file txt </returns>
     private static string[] ScriviRegole()
     {
         string[] regole =
@@ -1662,15 +1862,14 @@
         return regole;
     }
 
-    /*Metodo che permette di creare un gioctore. Scelta del nome, del colore e
-      messaggio di benvenuto.
-      giocatore
-
-      Input: string[] player --------> array del giocatore player1 o player2
-             string? colorePlayer1 --> colore gia scelto dal player1
-      
-    */
-    static void CreaGiocatore(string[] player, string? colorePlayer1 = null)
+    /// <summary>
+    /// Crea un giocatore player, permette la scelta del nome, del colore e scrive un <br/>
+    /// messaggio di benvenuto per l'utente. <br/>
+    /// Permette la creazione di player 2 aggiungendo il colore scelto da player1.
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="colorePlayer1">Colore scelto dal giocatore player1</param>
+    static void CreaGiocatore(string[] player1, string? colorePlayer1 = null)
     {
         bool corretto = false;
 
@@ -1681,10 +1880,10 @@
             Console.Clear();
             //iserisci il nome
             Console.Write("Inserisci il tuo nome: ");
-            player[1] = Console.ReadLine()!;
-            if (player[1].Length > 2)
+            player1[1] = Console.ReadLine()!;
+            if (player1[1].Length > 2)
             {
-                if (player[1].Length < 21)
+                if (player1[1].Length < 21)
                 {
                     corretto = true;
                 }
@@ -1706,27 +1905,27 @@
         //seleziona il colore
         if (colorePlayer1 == null) //se è il player1 non ci sono restrizioni
         {
-            SceltaColore(player, player[2][..1]);  //invia array e primo carattere del colore 
+            SceltaColore(player1, player1[2][..1]);  //invia array e primo carattere del colore 
         }
         else //il player2 ha una scelta di meno 
         {
-            SceltaColore(player, colorePlayer1[..1]);  //invia array e primo carattere del colore 
+            SceltaColore(player1, colorePlayer1[..1]);  //invia array e primo carattere del colore 
         }
 
         Console.Clear();
 
         //messaggio di saluto
         Console.Write("Ciao ");
-        ScriviAColori(player[1], player[2], 'b');
+        ScriviAColori(player1[1], player1[2], 'b');
         Console.WriteLine();
     }
 
-    /*Metoro che crea il secondo giocatore prendendo il colore gia scelto
-      dall'altro giocatore.
-
-      Input: string[] player2 -----> array del giocatore player2
-             string colorePlayer1--> colore del giocatore player1
-    */
+    /// <summary>
+    /// Assegna il colore al giocatore CPU in base al colore rimasto 
+    /// dopo la scelta <br/> del giocatore player1.
+    /// </summary>
+    /// <param name="player2">Array dati del giocatore player2</param>
+    /// <param name="colorePlayer1">Colore scelto in precedenza dal giocatore player1</param>
     static void CreaGiocatorePC(string[] player2, string colorePlayer1)
     {
         if (player2[1] == "CPU")
@@ -1756,11 +1955,13 @@
         }
     }
 
-    /*Memorizza la scelta fatta nel menu di gioco per ogni giocatore 
-      restituendo il carattere digitato dall'utente dell'opzione scelta.
-
-      Input: string[] player ----> array del giocatore player attuale
-    */
+    /// <summary>
+    /// Memorizza la scelta effettuata dall'utente nel menu di gioco per ogni giocatore <br/>
+    /// restituendo il carattere digitato dall'utente come opzione scelta.
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player1</param>
+    /// <returns>opzione scelta dell'utente in formato char</returns>
     static char SceltaGioco(string[] player1, string[] player2)
     {
         bool corretto = false;
@@ -1850,13 +2051,12 @@
         return c;
     }
 
-    /*Memorizza la scelta fatta nel menu modalità rischio per ogni giocatore 
-      restituendo il carattere digitato dall'utente dell'opzione scelta.
-
-      Input: string[] player ----> array del giocatore player attuale
-
-      OUTPUT: char selezionato --> input inserito dall'utente
-    */
+    /// <summary>
+    /// Memorizza la scelta fatta nel menu "modalità rischio" per ogni giocatore <br/>
+    /// restituendo il carattere digitato dall'utente come opzione scelta.
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <returns>opzione scelta dell'utente in formato char</returns>
     static char SceltaRischio(string[] player)
     {
         bool corretto = false;
@@ -1927,21 +2127,23 @@
         return selezionato;
     }
 
-    /*Gestisce il sotto-gioco pari e dispari
-    
-      INPUT: string[] player1 ----> array giocatore player1
-             string[] player1 ----> array giocatore player2
-    */
+    /// <summary>
+    /// Gestisce il mini-gioco "pari e dispari"
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
     static void PariDispari(string[] player1, string[] player2)
     {
 
     }
 
-    /*Gestisce il sotto-gioco indovina il numero segreto
-    
-      INPUT: string[] player1 ----> array giocatore player1
-             string[] player1 ----> array giocatore player2
-    */
+    /// <summary>
+    /// Gestisce il mini-gioco "indovina il numero"
+    /// </summary>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player 2</param>
+    /// <param name="territoriP1">Lista dei territori conquistati dal giocatore player1</param>
+    /// <param name="territoriP2">Lista dei territori conquistati dal giocatore player2</param>
     static void IndovinaIlNumero(string[] player1, string[] player2, List<string> territoriP1, List<string> territoriP2)
     {
         ScriviAColori("Indovina il numero segreto\n", "blu");    //titolo della pagina
