@@ -145,7 +145,8 @@ class Program
       - InserisciQuantita--> verifica il formato quantita
       - InserisciData------> verifica la data di scadenza
       
-      */
+      OUTPUT: bool corretto -----> true se l'inserimento va a buon fine; 
+    */
     static bool InserisciDaTastiera()
     {
         bool corretto = false;
@@ -178,10 +179,10 @@ class Program
                - exp ----> visualizza solo exp
                - del ----> visualizza tutti con titolo diverso
 
-      INPUT: string opz ----------> default "all"; se true visualizzo solo prodotti 
-                                                in scadenza o in esaurimento
+      INPUT: string opz ----------> default "all"
              string pathDirJson ---> path della cartella JSON
       
+      OUTPUT: bool frigoVuoto ----> true se è vuoto; false se c'è almeno un alimento
      */
     static bool StampaAlimento(string pathDirJson, string opz = "all")
     {
@@ -253,9 +254,11 @@ class Program
         return frigoVuoto;
     }
 
-    /*Metodo che elimina un alimento se è presente il suo file JSON.
+    /*Metodo che gestisce l'eliminazione degli alimenti. 
+      Utilizza StampaAlimento() per visualizzare la lista aggiornata.
+      Utilizza il metodo accessorio SelezionaElimina()
 
-    
+      INPUT: string pathDirJson -----> il path della directory JSON
     */
     static void Elimina(string pathDirJson)
     {
@@ -280,7 +283,13 @@ class Program
         while (!ripetiOperazione);
     }
 
-    /**/
+    /*Metodo accessorio che elimina o modifica i file JSON a seconda della selezione
+      dell'utente.
+    
+      INPUT: string pathDirJson -----> il path della directory JSON
+
+      OUTPUT: bool eseguito ---------> true torna al menu principale;
+    */
     static bool SelezioneElimina(string pathDirJson)
     {
         //seleziono tutti i file della cartella JSON
@@ -390,14 +399,13 @@ class Program
     }
 
     /*Metodo accessorio che crea un file JSON per ogni alimento inserito, nomina il file
-      con il nome dell'alimento. 
+      con il nome dell'alimento e parte della data: 
+      esempio alimento_gg_mm.json 
       Se il file non esiste ne crea uno nuovo.
-      Se il file esiste gia, ne crea una copia con nome diverso oppure lo sovrascrive.
       
       INPUT: string nome -------> nome alimento 
              string quantita ---> quantita alimento
              string data -------> data di scadenza
-             char opz ----------> 'c' cancella; 0 default
       
       OUTPUT: true se tutto è andato a buon fine; 
     */
@@ -429,6 +437,9 @@ class Program
 
     /*Conta tutti gli elementi nella directory JSON
     
+      INPUT: string pathDirJson -----> il path della directory JSON.
+
+      OUTPUT: il numero dei files contenuti nella cartella JSON.
     */
     static int ContaJson(string pathDirJson)
     {
@@ -437,7 +448,8 @@ class Program
     }
 
     /* Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
-
+       
+       OUTPUT: false se non è presente il file csv; true se è presente
     */
     static bool InserisciDaCSV()
     {
@@ -471,8 +483,6 @@ class Program
             {
                 ScriviAColori("Errore [InserisciDaCSV]", "rosso");
             }
-
-
         }
         return true;
     }
@@ -480,7 +490,6 @@ class Program
     /*Gestisce l'iserimento del nome dell'alimento, controlla l'input inserito.
 
       OUTPUT: string nome ---> contiene l'input dell'utente
-
     */
     static string FormatoNome()
     {
@@ -507,8 +516,7 @@ class Program
 
     /*Gestisce l'iserimento della quantita dell'alimento, controlla l'input inserito.
 
-      OUTPUT: string quantita ---> contiene l'input dell'utente
-
+      OUTPUT: int quantita ---> contiene l'input dell'utente
     */
     static int FormatoQuantita()
     {
@@ -536,7 +544,6 @@ class Program
     /*Gestisce l'iserimento della data_scadenza dell'alimento, controlla l'input inserito.
 
       OUTPUT: string data ---> contiene l'input dell'utente 
-
     */
     static string FormatoData()
     {
@@ -633,7 +640,8 @@ class Program
       
       INPUT: string scadenza -----> data di scadenza dell'alimento da controlare
              int offset ----------> entro quanti giorni verificare la scadenza;  default = 0
-
+      
+      OUTPUT: bool scade ---------> true se sta per scadere; false se ancora buono
     */
     static bool ControllaScadenza(string scadenza, int offset = 0)
     {
@@ -729,7 +737,6 @@ class Program
                                         lunghezza del messaggio di inserimento
                                          es (Inserisci: ) = 11 caratteri
              int posizioneY ----------> posizione cursore ordinate fissato a priori
-      
     */
     static void PulisciRiga(int lunghezzaErrore, int posizioneX, int posizioneY)
     {
@@ -840,8 +847,5 @@ class Program
         Console.ForegroundColor = currentForeground;
     }
     #endregion
-
-
-
 
 }
