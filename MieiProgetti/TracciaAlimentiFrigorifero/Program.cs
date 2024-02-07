@@ -81,8 +81,9 @@ class Program
     }
 
     #region  Metodi interfaccia utente e grafica
-    /*Visualizza il menu principale del programma
-    */
+    ///<summary>
+    /// Visualizza il menu principale del programma
+    /// </summary>    
     static void MenuSelezione()
     {
         ScriviAColori("Traccia Alimenti Frigorifero", "blu");
@@ -94,7 +95,9 @@ class Program
         Console.WriteLine("e. Esci");
     }
 
-    /*Visualizza menu dell'opzione 1.Inserisci alimento*/
+    /// <summary>
+    /// Visualizza menu dell'opzione 1.Inserisci alimento
+    /// </summary>
     static void MenuInserisci()
     {
         ScriviAColori("INSERISCI ALIMENTO", "blu");
@@ -114,6 +117,26 @@ class Program
 
       INPUT: char opzione -----> default 't'
     */
+    
+    /// <summary>
+    /// Metodo che permette l'inserimento di un alimento da tastiera o da file csv a seconda <br/>
+    /// dell'opzione inserita. <br/> Verifica la correttezza dei dati inseriti e il giusto formato. <br/><br/>
+    /// <list type="table">
+    /// <listheader>
+    /// <description>Opzioni:</description>
+    /// </listheader>
+    ///     <item>
+    ///         <term>'t'</term>
+    ///         <description>inserisci da tastiera</description>
+    ///     </item>
+    ///     <item>
+    ///         <term>'f'</term>
+    ///         <description>inserisci da file csv</description>
+    ///     </item>
+    /// </list>
+    /// 
+    /// </summary>
+    /// <param name="opzione">default 't'</param>
     static void Inserisci(char opzione)
     {
         bool eseguito;
@@ -147,6 +170,15 @@ class Program
       
       OUTPUT: bool corretto -----> true se l'inserimento va a buon fine; 
     */
+    /// <summary>
+    /// Gestisce l'inserimento dei dati mediante i metodi di controllo input:<br/>  
+    /// InserisciNome() ---> verifica il formato del nome <br/>
+    /// InserisciQuantita--> verifica il formato quantita <br/>
+    /// InserisciData------> verifica la data di scadenza <br/>
+    /// </summary>
+    /// <returns>
+    /// <b>true</b> se l'inserimento va a buon fine, <b>false</b> altrimenti
+    /// </returns>
     static bool InserisciDaTastiera()
     {
         bool corretto = false;
@@ -184,6 +216,18 @@ class Program
       
       OUTPUT: bool frigoVuoto ----> true se è vuoto; false se c'è almeno un alimento
      */
+    
+    /// <summary>
+    /// Visualizza l'elenco completo di tutti gli alimenti nel frigo con quantita e data <br/>
+    /// sotto forma di tabella. <br/>
+    /// Opzioni: <br/>
+    /// - "all" ----> visualizza tutti <br/>
+    /// - "exp" ----> visualizza solo exp <br/>
+    /// - "del" ----> visualizza tutti con titolo diverso <br/>
+    /// </summary>
+    /// <param name="pathDirJson">path della cartella JSON</param>
+    /// <param name="opz">Opzione: default "all"</param>
+    /// <returns><b>true</b> se è vuoto, <b>false</b> se c'è almeno un alimento</returns>
     static bool StampaAlimento(string pathDirJson, string opz = "all")
     {
         if (opz == "all")
