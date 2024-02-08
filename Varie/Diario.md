@@ -805,22 +805,12 @@ Argomenti:
 
 <!-- ******************************************  08 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>08 feb 2024 </h3></summary>
+    <summary><h3>08 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- ...
-
-### Info
-> ...
-
-### Note 
-- ...
-
-esempio:
-
-```c#
-  
-```
+- Creare documentazione pre-beta test da inviare al tester.
+- Inserire il feedback del tester nella documentazione.
+- Eseguire il fix del programma seguendo i feedback raccolti.
 
 </details>
 
