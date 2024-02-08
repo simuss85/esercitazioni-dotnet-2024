@@ -106,6 +106,15 @@ class Program
         Console.WriteLine("2. Importa da file csv");
         Console.WriteLine("r. Torna indietro");
     }
+
+    /// <summary>
+    /// Messaggio informativo per l'utente su come viene gestito l'import del file csv.<br/>
+    /// Va a capo dopo il messaggio
+    /// </summary>
+    static void MessaggioInfoCsv()
+    {
+        ScriviAColori("Avviso: il file csv viene importato\nautomaticamente da altra applicazione!!!\n", "verde");
+    }
     #endregion
 
     #region Logica del programma
@@ -117,7 +126,7 @@ class Program
 
       INPUT: char opzione -----> default 't'
     */
-    
+
     /// <summary>
     /// Metodo che permette l'inserimento di un alimento da tastiera o da file csv a seconda <br/>
     /// dell'opzione inserita. <br/> Verifica la correttezza dei dati inseriti e il giusto formato. <br/><br/>
@@ -143,6 +152,15 @@ class Program
         //inserisci da file csv
         if (opzione == 'f')
         {
+            //messaggio per l'utente sui file csv
+            Console.Clear();
+            MessaggioInfoCsv();
+            Thread.Sleep(1500);
+            Console.Write("\npremi un tasto per continuare...");
+            Console.ReadKey();
+            Console.Clear();
+            //fine del messaggio
+
             //lettura del file csv
             eseguito = InserisciDaCSV();
             if (eseguito)
@@ -216,7 +234,7 @@ class Program
       
       OUTPUT: bool frigoVuoto ----> true se è vuoto; false se c'è almeno un alimento
      */
-    
+
     /// <summary>
     /// Visualizza l'elenco completo di tutti gli alimenti nel frigo con quantita e data <br/>
     /// sotto forma di tabella. <br/>
@@ -290,9 +308,9 @@ class Program
             }
 
         }
-        if (opz != "del")
+        if (opz != "del" || frigoVuoto)
         {
-            Console.Write("\npremi invio...");
+            Console.Write("\npremi un tasto...");
         }
 
         return frigoVuoto;
@@ -304,6 +322,12 @@ class Program
 
       INPUT: string pathDirJson -----> il path della directory JSON
     */
+    /// <summary>
+    /// Gestisce l'eliminazione degli alimenti, utilizza i seguenti metodi: <br/>
+    /// <i>StampaAlimento()</i> per visualizzare la lista aggiornata. <br/>
+    /// <i>SelezionaElimina()</i> 
+    /// </summary>
+    /// <param name="pathDirJson">Path della directory JSON</param>
     static void Elimina(string pathDirJson)
     {
         bool ripetiOperazione = false;
@@ -489,7 +513,8 @@ class Program
     }
 
     /// <summary>
-    /// Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto
+    /// Metodo accessorio che permette la lettura del file csv e lo salva nel json corretto. <br/>
+    /// Dopo la lettura dei dati, il file csv viene spostato nella directory ./files/temp/.
     /// </summary>
     /// <returns><b>false</b> se non è presente il file csv, <b>true</b> altrimenti</returns>
     static bool InserisciDaCSV()
@@ -530,7 +555,11 @@ class Program
                 Directory.CreateDirectory(pathTemp);
 
             }
-            File.Move(pathCSV,$"{pathTemp}inserito.csv");
+            if (File.Exists(pathTemp + "inserito.csv"))
+            {
+                File.Delete(pathTemp + "inserito.csv");
+            }
+            File.Move(pathCSV, $"{pathTemp}inserito.csv");
         }
         return true;
     }
