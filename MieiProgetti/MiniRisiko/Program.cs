@@ -388,7 +388,8 @@
         Console.WriteLine();
         Console.WriteLine("1. Scommetti su pari o dispari (costo 1 territorio)");
         Console.WriteLine("2. Scommetti sul numero esatto (costo 2 territori)");
-        Console.WriteLine("r. Regole\n");
+        Console.WriteLine("3. Regole");
+        Console.WriteLine("r. Rorna indietro...\n");
     }
     #endregion
 
@@ -397,6 +398,7 @@
     /// <summary>
     /// Metodo accessorio che cancella il contenuto della riga dopo l'inserimento 
     /// dell' input <br/> da parte dell' utente e posiziona il cursore nella corretta posizione. <br/>
+    /// Necessita del rientro di cursore '\r' nel messaggio di errore precedente.
     /// </summary>
     /// <param name="lunghezzaErrore">Numero di caratteri del messaggio di errore</param>
     /// <param name="posizioneX">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
@@ -415,7 +417,7 @@
         //sposto il cursore al punto in cui l'utente ha inserito l'input
         //cancello il testo e mi riposiziono al punto corretto
         Console.SetCursorPosition(posizioneX, posizioneY);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 80; i++)
         {
             Console.Write(" ");
         }
@@ -428,12 +430,20 @@
     /// <param name="lista">Lista da visualizzare come elenco numerato</param>
     static void StampaListaNumerata(List<string> lista)
     {
-        int count = 1;
-        foreach (string elemento in lista)
+        if (lista.Count != 0)
         {
-            Console.WriteLine($"{count}. {elemento}");
-            count++;
+            int count = 1;
+            foreach (string elemento in lista)
+            {
+                Console.WriteLine($"{count}. {elemento}");
+                count++;
+            }
         }
+        else
+        {
+            Console.WriteLine("DEBUG: lista vuota");
+        }
+
     }
 
     /// <summary>
@@ -558,7 +568,7 @@
     /// Stampa il messaggio "Selezione errata" in rosso. <br/>
     /// Non va a capo.
     /// </summary>
-    static void SelezioneErrata()
+    static void MessaggioSelezioneErrata()
     {
         //caso digitazione errata
         ScriviAColori("Selezione errata", "rosso", 'f');
@@ -603,12 +613,18 @@
     /// <summary>
     /// Stampa del messaggio: <br/>
     /// "VITTORIA!!!" di colore 'verde'.<br/>
-    /// "Player hai vinto la partita" la parola player del colore scelto dal giocatore. <br/>
+    /// "Player hai vinto la partita". <br/>
     /// "premi invio per uscire!" e attende l'inserimento di un tasto. <br/>
+    ///  oppure<br/>
+    /// "Player hai vinto la sfida". <br/>
+    /// la parola player del colore scelto dal giocatore. <br/>
+    /// Opzione: <br/>
+    /// <b>true</b> -  tutti i territori conquistati; <br/>
+    /// <b>false</b> - vittoria nelle sfide <br/>
     /// Va a capo dopo il messaggio.
     /// </summary>
     /// <param name="player">Array dati del giocatore player attuale</param>
-    /// <param name="fineGioco"></param>
+    /// <param name="fineGioco"><b>true</b> se il gioco è finito.</param>
     static void MessaggioVittoria(string[] player, bool fineGioco = false)
     {
         if (fineGioco)
@@ -656,6 +672,29 @@
         Console.Write(" hai conquistato il seguente territorio: ");
         ScriviAColori(territorio, player[2], 'f');
         Console.WriteLine();
+    }
+
+    /// <summary>
+    /// Stampa del messaggio "Hai conquistato i seguenti territori: t1,t2,t3,(t4 se presente)" <br/>
+    /// con i territori colorati in base al colore scelto dal player vincitore.
+    /// </summary>
+    /// <param name="colorePlayer">Il colore del player vincitore del round</param>
+    /// <param name="territoriInPalio">Lista dei territori messi in palio</param>
+    static void MessaggioTerritorioConquistatoRischio(string colorePlayer, List<string> territoriInPalio)
+    {
+        Console.Write("Hai conquistato i seguenti territori: ");
+        for (int i = 0; i < territoriInPalio.Count; i++)
+        {
+            ScriviAColori(territoriInPalio[i], colorePlayer);
+            if (i != territoriInPalio.Count - 1)
+            {
+                Console.Write(", ");
+            }
+            else
+            {
+                Console.WriteLine(".");
+            }
+        }
     }
 
     /// <summary>
@@ -788,7 +827,7 @@
 
                 default:
                     //caso digitazione errata
-                    SelezioneErrata();
+                    MessaggioSelezioneErrata();
                     corretto = false;
                     break;
             }
@@ -1128,7 +1167,7 @@
                     {
                         while (ripeti)
                         {
-                            opz = SceltaRischio(player1);
+                            opz = SceltaRischio(player1, territoriP1);
                             if (opz == '1')
                             {
                                 PariDispari(player1, player2);
@@ -1136,16 +1175,19 @@
                             }
                             else if (opz == '2')
                             {
-                                IndovinaIlNumero(player1, player2, territoriP1, territoriP2);
+                                IndovinaIlNumero(player1, player2, territoriP1, territoriP2);   //turno player 1
+                                cambioTurno = true;
                                 ripeti = false;
                             }
-                            else if (opz == 'r')
+                            else if (opz == '3')
                             {
                                 RegoleGioco();
                                 Console.Write("\npremi un tasto...");
                                 Console.ReadKey();
-
-
+                            }
+                            else if (opz == 'r')
+                            {
+                                ripeti = false;
                             }
                         }
                     }
@@ -1153,7 +1195,7 @@
                     {
                         while (ripeti)
                         {
-                            opz = SceltaRischio(player2);
+                            opz = SceltaRischio(player2, territoriP2);
                             if (opz == '1')
                             {
                                 PariDispari(player2, player1);
@@ -1161,20 +1203,25 @@
                             }
                             else if (opz == '2')
                             {
-                                IndovinaIlNumero(player2, player1, territoriP2, territoriP1);
+                                IndovinaIlNumero(player2, player1, territoriP2, territoriP1);   //turno player 2
+                                cambioTurno = false;
                                 ripeti = false;
                             }
-                            else if (opz == 'r')
+                            else if (opz == '3')
                             {
                                 RegoleGioco();
                                 Console.Write("\npremi un tasto...");
                                 Console.ReadKey();
 
                             }
+                            else if (opz == 'r')
+                            {
+                                ripeti = false;
+                            }
                         }
                     }
-                    Console.WriteLine("Ritorno al menu di gioco...");
-                    Thread.Sleep(800);
+                    Console.WriteLine("ritorno al menu di gioco...");
+                    Thread.Sleep(1200);
                     break;
 
                 case 's':   //salva
@@ -1350,23 +1397,14 @@
     /// <param name="player">Array dati del giocatore player attuale</param>
     /// <param name="territorioScelto">Il nome del territorio scelto dall'utente</param>
     /// <param name="territoriP">Lista territori giocatore player attuale</param>
-    /// <param name="territori">Lista dei territori liberi</param>
-    static void AssegnaTerritorio(string[] player, List<string> territoriP, string territorioScelto, List<string> territori)
-
+    /// <param name="territori">Lista dei territori liberi o lista scommessi</param>
+    static void AssegnaTerritorio(string[] player, List<string> territoriP,
+                                string territorioScelto, List<string>? territori)
     {
         //aggiunge il territorio nella lista utente
-        if (player.Contains(territorioScelto))
-        {
-            ScriviAColori("Errore [SceltaTerritorio]!!!", "rosso", 'f');
-        }
-        else
-        {
-            territoriP.Add(territorioScelto);            //aggiungo alla lista del giocatore
-            territori.Remove(territorioScelto);          //rimuovo dalla lista dei territori liberi
-            MemorizzaSuArray(player, territorioScelto);  //aggiorno array giocatore
-        }
-        // Console.WriteLine("Eseguito");  //DEBUG
-        // Console.ReadKey();              //DEBUG
+        territoriP.Add(territorioScelto);            //aggiungo alla lista del giocatore
+        territori!.Remove(territorioScelto);          //rimuovo dalla lista dei territori liberi
+        MemorizzaSuArray(player, territorioScelto, 'a');  //aggiorno array giocatore
     }
 
     /// <summary>
@@ -1380,13 +1418,14 @@
     /// <param name="opz"> 'a' default; 'r' opzione rimuovi</param>
     static void MemorizzaSuArray(string[] player, string territorio, char opz = 'a')
     {
-        for (int n = 0; n < player.Length; n++)
+        for (int n = 3; n < player.Length; n++)
         {
             if (opz == 'a') //aggiunge nell'array il territorio
             {
                 if (player[n] == "_")   //se sono nella casella vuota
                 {
                     player[n] = territorio; //aggiungo all array il territorio
+                    break;
                 }
             }
             else if (opz == 'r')        //rimuove il territorio e ripristina il placeholder "_"
@@ -1394,6 +1433,7 @@
                 if (player[n] == territorio)   //se trovo il territorio
                 {
                     player[n] = "_";            //ripristino il placeholder
+                    break;
                 }
             }
         }
@@ -1934,7 +1974,7 @@
 
                     default:
                         //caso digitazione errata
-                        SelezioneErrata();
+                        MessaggioSelezioneErrata();
                         corretto = false;
                         break;
                 }
@@ -1951,7 +1991,7 @@
     /// </summary>
     /// <param name="player">Array dati del giocatore player attuale</param>
     /// <returns>opzione scelta dell'utente in formato char</returns>
-    static char SceltaRischio(string[] player)
+    static char SceltaRischio(string[] player, List<string> territoriP)
     {
         bool corretto = false;
         char selezionato = '0';
@@ -1967,18 +2007,7 @@
             {
                 case ConsoleKey.D1:
                     //Pari e dispari
-                    //breve messaggio dopo la selezione
-                    ScriviAColori("OK...costa 1 territorio", "rosso", 'f');
-                    Thread.Sleep(800);
-                    Console.Clear();
-                    selezionato = '1';
-                    corretto = true;
-                    break;
-
-                case ConsoleKey.D2:   //Necessita di 2 territori
-                    //Indovina il numero
-
-                    if (player[4] == "_")
+                    if (territoriP.Count < 1)
                     {
                         ScriviAColori("devi avere almeno 2 territori", "rosso", 'f');
                         Thread.Sleep(800);
@@ -1988,30 +2017,50 @@
                     else
                     {
                         //breve messaggio dopo la selezione
-                        ScriviAColori("OK...costa 2 territori", "rosso", 'f');
+                        ScriviAColori("Ricorda...costa 1 territorio", "rosso", 'f');
+                        Thread.Sleep(1000);
+                        Console.Clear();
+                        selezionato = '1';
+                        corretto = true;
+                    }
+                    break;
+
+                case ConsoleKey.D2:   //Necessita di 2 territori
+                    //Indovina il numero
+
+                    if (territoriP.Count < 2)
+                    {
+                        ScriviAColori("devi avere almeno 2 territori", "rosso", 'f');
                         Thread.Sleep(800);
+                        Console.Clear();
+                        corretto = false;
+                    }
+                    else
+                    {
+                        //breve messaggio dopo la selezione
+                        ScriviAColori("Ricorda...costa 2 territori", "rosso", 'f');
+                        Thread.Sleep(1000);
                         Console.Clear();
                         selezionato = '2';
                         corretto = true;
                     }
-
                     break;
 
-                case ConsoleKey.R:
+                case ConsoleKey.D3:
                     //regole del gioco
-                    //breve messaggio
-                    selezionato = 'r';
+                    selezionato = '3';
                     corretto = true;
                     break;
 
-                case ConsoleKey.Enter:
-
+                case ConsoleKey.R:
+                    //torna indietro
+                    selezionato = 'r';
                     corretto = true;
                     break;
 
                 default:
                     //caso digitazione errata
-                    SelezioneErrata();
+                    MessaggioSelezioneErrata();
                     corretto = false;
                     break;
             }
@@ -2032,8 +2081,9 @@
     }
 
     /// <summary>
-    /// Gestisce il mini-gioco "indovina il numero", utilizza il metodo accessorio <i>ScommettiTerritorio()</i> <br/>
-    /// per permettere ai giocatori di effettuare la scelta.
+    /// Gestisce il mini-gioco "indovina il numero". <br/>
+    /// Utilizza il metodo accessorio <i>ScommettiTerritorio()</i> <br/>
+    /// Utilizza il metodo accessorio <i>AssegnaTerritorio()</i> <br/>
     /// </summary>
     /// <param name="player1">Array dati del giocatore player1</param>
     /// <param name="player2">Array dati del giocatore player2</param>
@@ -2042,16 +2092,162 @@
     static void IndovinaIlNumero(string[] player1, string[] player2, List<string> territoriP1, List<string> territoriP2)
     {
         List<string> territoriInPalio = []; //creo lista di appoggio per i territori in palio
-        //avvio scelta giocatore player1
+
+        //avvio scelta giocatore player1        
         ScommettiTerritorio(player1, territoriP1, territoriInPalio);
         //avvio scelta giocatore player1
         ScommettiTerritorio(player2, territoriP2, territoriInPalio);
 
         ScriviAColori("Indovina il numero segreto\n", "blu");    //titolo della pagina
-        Console.WriteLine("Elenco territori in palio:");
+        Console.WriteLine("\nElenco territori in palio:");
         StampaListaNumerata(territoriInPalio);
+        Console.Write("\npremi un tasto...");
         Console.ReadKey();
+        Console.Clear();
 
+        if (GiocaIndovinaIlNumero(player1, player2) == 1)
+        {
+            //messaggio per il vincitore della sfida
+            MessaggioVittoria(player1);
+            MessaggioTerritorioConquistatoRischio(player1[2], territoriInPalio);
+            //assegno i territori in palio al player1
+            try
+            {
+                while (territoriInPalio.Count != 0)    //finche non è vuota la lista, copio e elimino il primo elemento
+                {
+                    AssegnaTerritorio(player1, territoriP1, territoriInPalio.First(), territoriInPalio);
+                }
+            }
+            catch (Exception)
+            {
+                ScriviAColori("Errore [GiocaIndovinaIlNumero]!!!", "rosso");
+            }
+        }
+        else
+        {
+            //messaggio per il vincitore della sfida
+            MessaggioVittoria(player2);
+            MessaggioTerritorioConquistatoRischio(player2[2], territoriInPalio);
+            //assegno i territori in palio al player2
+            try
+            {
+                while (territoriInPalio.Count != 0)    //finche non è vuota la lista, copio e elimino il primo elemento
+                {
+                    AssegnaTerritorio(player2, territoriP2, territoriInPalio.First(), territoriInPalio);
+                }
+            }
+            catch (Exception)
+            {
+                ScriviAColori("Errore [GiocaIndovinaIlNumero]!!!", "rosso");
+            }
+
+        }
+        Console.Write("\npremi un tasto...");
+        Console.ReadKey();
+    }
+
+    /// <summary>
+    /// Metodo accessorio che avvia la logica del gioco "Indovina il numero".
+    /// </summary>
+    /// <returns>Il vincitore del gioco: <b>1</b> giocatore che attacca; <b>2</b> giocatore che difende</returns>
+    /// <param name="player1">Array dati del giocatore player1</param>
+    /// <param name="player2">Array dati del giocatore player2</param>
+
+    static int GiocaIndovinaIlNumero(string[] player1, string[] player2)
+    {
+        int vincitore = 0;
+        bool corretto = false;
+        Random random = new();
+        int x = random.Next(1, 51);  //il numero segreto tra 1 e 50
+        int rispostaP1 = 0, rispostaP2 = 0;
+
+        while (vincitore == 0)  //finche uno dei due non vince ripeti il gioco
+        {
+            //player1 è il tuo turno
+            //chiudi gli occhi player 2
+            ScriviAColori(player2[1], player2[2], 'b');
+            Console.Write(" chiudi gli occhi e non guardare il numero inserito...");
+            Console.ReadKey();
+            Console.WriteLine();
+
+            do
+            {
+                ScriviAColori("\n" + player1[1], player1[2], 'b');
+                Console.Write(" scegli un numero tra 1 e 50: DEBUG--->" + x); //DEBUG
+                try
+                {
+                    rispostaP1 = int.Parse(Console.ReadLine()!);
+                    if (rispostaP1 < 1 || rispostaP1 > 50)
+                    {
+                        throw new Exception();
+                    }
+                    corretto = true;
+                }
+                catch (Exception)
+                {
+                    string errore = "Inserimento errato";
+                    ScriviAColori(errore + "\r", "rosso");
+                    //cancella messaggio di errore e posiziona il cursore correttamente
+                    PulisciRiga(errore.Length, 0, 1);
+                }
+            }
+            while (!corretto);
+
+            Thread.Sleep(500);
+            Console.Clear();
+
+            //player2 è il tuo turno
+            //chiudi gli occhi player 2
+            ScriviAColori(player1[1], player1[2], 'b');
+            Console.Write(" chiudi gli occhi e non guardare il numero inserito...");
+            Console.ReadKey();
+            Console.WriteLine();
+
+            corretto = false;
+            do
+            {
+                ScriviAColori("\n" + player2[1], player2[2], 'b');
+                Console.Write(" scegli un numero tra 1 e 50: ");
+                try
+                {
+                    rispostaP2 = int.Parse(Console.ReadLine()!);
+                    if (rispostaP2 < 1 || rispostaP2 > 50)
+                    {
+                        throw new Exception();
+                    }
+                    corretto = true;
+                }
+                catch (Exception)
+                {
+                    string errore = "Inserimento errato";
+                    ScriviAColori(errore + "\r", "rosso");
+                    //cancella messaggio di errore e posiziona il cursore correttamente
+                    PulisciRiga(errore.Length, 0, 1);
+                }
+            }
+            while (!corretto);
+
+            Console.Clear();
+
+            //verifica del vincitore, 
+            //numero player 1 piu vicino dell'altro giocatore nel range di 3 posizioni
+            if (Math.Abs(x - rispostaP1) < Math.Abs(x - rispostaP2) && Math.Abs(x - rispostaP1) < 3)
+            {
+                vincitore = 1;
+            }
+            //numero player 2 piu vicino dell'altro giocatore nel range di 3 posizioni
+            else if (Math.Abs(x - rispostaP2) < Math.Abs(x - rispostaP1) && Math.Abs(x - rispostaP2) < 3)
+            {
+                vincitore = 2;
+            }
+            else    //pareggio, si ripete tutto
+            {
+                Console.WriteLine("Pareggio!!!");
+                Thread.Sleep(800);
+                Console.Clear();
+            }
+        }
+        return vincitore;
     }
 
     /// <summary>
@@ -2069,7 +2265,7 @@
     static void ScommettiTerritorio(string[] player, List<string> territoriP, List<string> territoriInPalio, int opz = 0)
     {
         //input dell'utente player attuale
-        int territorioN;
+        int n;
         bool corretto = false;
         int conta = opz;
         //se player2 che si difende ha 1 territorio e siamo a indovina il numero
@@ -2091,9 +2287,9 @@
             {
                 if (conta < 2)  //se devo ancora inserire chiedo l'input
                 {
-                    territorioN = int.Parse(Console.ReadLine()!);   //prova a convertire in intero
+                    n = int.Parse(Console.ReadLine()!);   //prova a convertire in intero
 
-                    if (territorioN > territoriP.Count || territorioN < 0)
+                    if (n > territoriP.Count || n < 0)
                     {
                         throw new Exception();  //se fuori dal range del menù allora lancia eccezione
                     }
@@ -2101,8 +2297,10 @@
                     {   //selezione corretta
                         ScriviAColori("OK!", "verde");
                         Thread.Sleep(600);
-                        territoriInPalio.Add(territoriP.ElementAt(territorioN - 1));   //aggiungo alla lista di appoggio lelemento in posizione n-1
-                        territoriP.RemoveAt(territorioN - 1);                          //rimuovo dalla lista del giocatore
+                        territoriInPalio.Add(territoriP.ElementAt(n - 1));   //aggiungo alla lista di appoggio lelemento in posizione n-1
+                        MemorizzaSuArray(player, territoriP.ElementAt(n - 1), 'r'); //rimuovo dall array
+                        territoriP.RemoveAt(n - 1);                          //rimuovo dalla lista del giocatore
+
                         conta++;
                     }
                 }
@@ -2113,7 +2311,7 @@
             }
             catch (Exception)
             {
-                SelezioneErrata();
+                MessaggioSelezioneErrata();
                 Console.WriteLine();
             }
         }
