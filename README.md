@@ -14,14 +14,11 @@
 
 > File e programmi condivisi a lezione 
 
-## MieClassi
-
-> Le mie classi 
-
 ## MieiProgetti
 Elenco dei miei progetti personali svolti al corso.
 > - Indovina il numero segreto.
 > - Mini Risiko.
+> - Traccia Alimenti Frigorifero.
 
 ## Varie
 
