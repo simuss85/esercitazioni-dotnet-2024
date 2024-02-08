@@ -13,7 +13,7 @@ Testare il programma, segnalare eventuali bug, consigli e spunti sull'user exper
   >verificare la corretta esecuzione di import o export dei file csv;  
    la manipolazione dei JSON da parte dell'applicazione come creazione, modifica, eliminazione.
 
-### BUG:
+### PROBLEMI:
 Controllare problema **"x"** che non sono riuscito a risolvere o a notare.
 
 
@@ -36,14 +36,14 @@ Controllare problema **"x"** che non sono riuscito a risolvere o a notare.
 - [x] quantita inserita
 
 >  **Bug**
-- [ ] in "Visualizza alimenti" compare "premi invio..." ma si può premere qualsiasi tasto
-- [ ] se il frigo è vuoto non compare la scritta "premi..."
-- [ ] se nella cartella temp c'è gia un file csv non ne salva un altra
-- [ ] se inserisco un csv non formattato no mi segnala alcun errore
+- [x] in "Visualizza alimenti" compare "premi invio..." ma si può premere qualsiasi tasto
+- [x] se il frigo è vuoto non compare la scritta "premi..."
+- [x] se nella cartella temp c'è gia un file csv non ne salva un altra
+- [ ] se inserisco un csv non formattato non mi segnala alcun errore
 
 >  **Miglioramenti**
 
-- [ ] esplicitare all'utente che il csv verrà importato da altra app esterna
+- [x] esplicitare all'utente che il csv verrà importato da altra app esterna
 
   </details>
 </details>
@@ -57,13 +57,13 @@ Priorità
 
 ```mermaid
 gantt
-    title A Gantt Diagram
+    title Tempistiche
     dateFormat  HH:mm
     axisFormat %H:%M
     section Bug
-    Csv       :crit, active, a1, 11:00 , 30m
-    section Migliorie
-    Fix messaggi video      :a2, after a1, 30m
-    Messaggio di avviso       :after a2, 30m
+    Csv       :crit, done, a1, 11:30 , 30m
+    section Miglioramenti
+    Fix messaggi video      :done, a2, after a1, 30m
+    Messaggio di avviso gestione csv       :done, after a2, 30m
 
 ```
