@@ -809,6 +809,7 @@ class Program
     /// <summary>
     /// Metodo accessorio che cancella il contenuto della riga dopo l'inserimento 
     /// dell' input <br/> da parte dell' utente e posiziona il cursore nella corretta posizione. <br/>
+    /// Necessita del rientro di cursore '\r' nel messaggio di errore precedente.
     /// </summary>
     /// <param name="lunghezzaErrore">Numero di caratteri del messaggio di errore</param>
     /// <param name="posizioneX">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
@@ -827,7 +828,7 @@ class Program
         //sposto il cursore al punto in cui l'utente ha inserito l'input
         //cancello il testo e mi riposiziono al punto corretto
         Console.SetCursorPosition(posizioneX, posizioneY);
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 80; i++)
         {
             Console.Write(" ");
         }
