@@ -86,7 +86,7 @@
         {
             Console.Clear();
             //messaggio di benvenuto
-            Console.WriteLine($"{benvenuto}\n");
+            ScriviAColori($"{benvenuto}\n", "blu");
             if (primoAvvio)
             {
                 SchermataLoading();
@@ -108,7 +108,7 @@
                     Console.ReadKey();
 
                     //creo  CPU
-                    CreaGiocatorePC(player2, player1[2]);
+                    AssegnaColorePC(player2, player1[2]);
 
                     //messaggio di sfida
                     Console.Clear();
@@ -219,7 +219,6 @@
     /// </summary>
     static void MenuSelezionePrincipale()
     {
-        Console.WriteLine("Seleziona l'opzione:\n");
         Console.WriteLine("1. Gioca contro il pc");
         Console.WriteLine("2. Gioca contro altro utente");
         Console.WriteLine("3. Carica ultima partita");
@@ -394,11 +393,40 @@
     #endregion
 
     #region "Metodi accessori o utility"
+
+    /// <summary>
+    /// Metodo accessorio che cancella il contenuto della riga dopo l'inserimento 
+    /// dell' input <br/> da parte dell' utente e posiziona il cursore nella corretta posizione. <br/>
+    /// </summary>
+    /// <param name="lunghezzaErrore">Numero di caratteri del messaggio di errore</param>
+    /// <param name="posizioneX">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
+    /// del messaggio di richiesta inserimento dato.</param>
+    /// <param name="posizioneY">Posizione verticale del cursore</param>
+    static void PulisciRiga(int lunghezzaErrore, int posizioneX, int posizioneY)
+    {
+        Thread.Sleep(1000);  //attende la lettura del messaggio
+
+        //cancella il  messaggio di errore 
+        for (int i = 0; i < lunghezzaErrore; i++)
+        {
+            Console.Write(" ");
+        }
+
+        //sposto il cursore al punto in cui l'utente ha inserito l'input
+        //cancello il testo e mi riposiziono al punto corretto
+        Console.SetCursorPosition(posizioneX, posizioneY);
+        for (int i = 0; i < 20; i++)
+        {
+            Console.Write(" ");
+        }
+        Console.SetCursorPosition(posizioneX, posizioneY);
+    }
+
     /// <summary>
     /// Stampa a video di una lista di elementi sotto forma di elenco numerato.
     /// </summary>
     /// <param name="lista">Lista da visualizzare come elenco numerato</param>
-    static void VisualizzaListaNumerata(List<string> lista)
+    static void StampaListaNumerata(List<string> lista)
     {
         int count = 1;
         foreach (string elemento in lista)
@@ -526,8 +554,10 @@
         Console.WriteLine(" è il tuo turno");
     }
 
-    /*Stampa il messaggio in rosso e attende 800 ms. Non va a capo
-    */
+    /// <summary>
+    /// Stampa il messaggio "Selezione errata" in rosso. <br/>
+    /// Non va a capo.
+    /// </summary>
     static void SelezioneErrata()
     {
         //caso digitazione errata
@@ -1272,7 +1302,7 @@
 
                     ScriviAColori(player[1], player[2], 'b');
                     Console.WriteLine(" scegli il territorio:\n");
-                    VisualizzaListaNumerata(territori);
+                    StampaListaNumerata(territori);
                     Console.Write("\nScegli: ");
 
                     input = Console.ReadLine()!;
@@ -1298,7 +1328,7 @@
                 MessaggioTerritorioConquistato(player, territori.ElementAt(n));
                 AssegnaTerritorio(player, territoriP, territori.ElementAt(n), territori);
                 Console.WriteLine("\nLista aggiornata:\n");
-                VisualizzaListaNumerata(territori);
+                StampaListaNumerata(territori);
                 Console.Write("\npremi invio...");
                 Console.ReadKey();
                 Console.Clear();
@@ -1790,7 +1820,7 @@
     /// </summary>
     /// <param name="player2">Array dati del giocatore player2</param>
     /// <param name="colorePlayer1">Colore scelto in precedenza dal giocatore player1</param>
-    static void CreaGiocatorePC(string[] player2, string colorePlayer1)
+    static void AssegnaColorePC(string[] player2, string colorePlayer1)
     {
         if (player2[1] == "CPU")
         {
@@ -2002,7 +2032,8 @@
     }
 
     /// <summary>
-    /// Gestisce il mini-gioco "indovina il numero"
+    /// Gestisce il mini-gioco "indovina il numero", utilizza il metodo accessorio <i>ScommettiTerritorio()</i> <br/>
+    /// per permettere ai giocatori di effettuare la scelta.
     /// </summary>
     /// <param name="player1">Array dati del giocatore player1</param>
     /// <param name="player2">Array dati del giocatore player2</param>
@@ -2010,33 +2041,72 @@
     /// <param name="territoriP2">Lista dei territori conquistati dal giocatore player2</param>
     static void IndovinaIlNumero(string[] player1, string[] player2, List<string> territoriP1, List<string> territoriP2)
     {
-        //input dell'utente player1
-        int selezioneTerritorio;
+        List<string> territoriInPalio = []; //creo lista di appoggio per i territori in palio
+        //avvio scelta giocatore player1
+        ScommettiTerritorio(player1, territoriP1, territoriInPalio);
+        //avvio scelta giocatore player1
+        ScommettiTerritorio(player2, territoriP2, territoriInPalio);
+
+        ScriviAColori("Indovina il numero segreto\n", "blu");    //titolo della pagina
+        Console.WriteLine("Elenco territori in palio:");
+        StampaListaNumerata(territoriInPalio);
+        Console.ReadKey();
+
+    }
+
+    /// <summary>
+    /// Metodo accessorio di <i>IndovinaIlNumero</i> e <i>PariDispari()</i> che permette al giocatore player attuale di scegliere <br/>
+    /// tra 1 o 2 territori a seconda dell'opzione inserita. <br/>
+    /// Opzioni: <br/>
+    /// <b>0</b> per indovina il numero (deafult); <br/>
+    /// <b>1</b> per pari e dispari
+    /// 
+    /// </summary>
+    /// <param name="player">Array dati del giocatore player attuale</param>
+    /// <param name="territoriP">Lista dei territori conquistati dal giocatore player attuale</param>
+    /// <param name="territoriInPalio">Lista dei territori messi in palio dai giocatori</param>
+    /// <param name="opz">Numero di scelte possibili</param>
+    static void ScommettiTerritorio(string[] player, List<string> territoriP, List<string> territoriInPalio, int opz = 0)
+    {
+        //input dell'utente player attuale
+        int territorioN;
         bool corretto = false;
-        int conta = 0;
+        int conta = opz;
+        //se player2 che si difende ha 1 territorio e siamo a indovina il numero
+        if (territoriP.Count == 1 && opz == 0)
+        {
+            conta++;
+        }
         do
         {
             Console.Clear();
             ScriviAColori("Indovina il numero segreto\n", "blu");    //titolo della pagina
             Console.WriteLine();
             //output per il player1 che sceglie per primo
-            ScriviAColori(player1[1], player1[2], 'b');
-            Console.WriteLine(" scegli 2 dei tuoi territori da scommettere");
-            VisualizzaListaNumerata(territoriP1);
+            ScriviAColori(player[1], player[2], 'b');
+            Console.WriteLine(" scegli territorio da scommettere");
+            StampaListaNumerata(territoriP);
             Console.Write("\nseleziona: ");
             try
             {
-                selezioneTerritorio = int.Parse(Console.ReadLine()!);   //prova a convertire in intero
-
-                if (selezioneTerritorio > territoriP1.Count || selezioneTerritorio < 0)
+                if (conta < 2)  //se devo ancora inserire chiedo l'input
                 {
-                    throw new Exception();  //se fuori dal range del menù allora lancia eccezione
+                    territorioN = int.Parse(Console.ReadLine()!);   //prova a convertire in intero
+
+                    if (territorioN > territoriP.Count || territorioN < 0)
+                    {
+                        throw new Exception();  //se fuori dal range del menù allora lancia eccezione
+                    }
+                    else
+                    {   //selezione corretta
+                        ScriviAColori("OK!", "verde");
+                        Thread.Sleep(600);
+                        territoriInPalio.Add(territoriP.ElementAt(territorioN - 1));   //aggiungo alla lista di appoggio lelemento in posizione n-1
+                        territoriP.RemoveAt(territorioN - 1);                          //rimuovo dalla lista del giocatore
+                        conta++;
+                    }
                 }
                 else
-                {
-                    conta++;
-                }
-                if (conta == 2)
                 {
                     corretto = true;
                 }
@@ -2048,9 +2118,7 @@
             }
         }
         while (!corretto);
-
-        Console.WriteLine("Selezionati  n:" + conta);   //DEBUG
-        Console.ReadKey();                              //DEBUG
+        Console.Clear();
     }
 
     #endregion
