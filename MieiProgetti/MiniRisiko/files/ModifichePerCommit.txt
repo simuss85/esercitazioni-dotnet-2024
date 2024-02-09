@@ -1,8 +1,12 @@
 Modifica:
+Selezione della modalità rischio ora controlla lista avversario
+Modificato "premi invio..." con "premi un tasto..."
 
 Fixa:
 
 Aggiunge:
+PariDispari
+GiocaPariDispari
 
 Elimina:
 
