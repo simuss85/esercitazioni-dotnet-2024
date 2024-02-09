@@ -816,21 +816,9 @@ Argomenti:
 
 <!-- ******************************************  09 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>09 feb 2024 </h3></summary>
+    <summary><h3>09 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- ...
-
-### Info
-> ...
-
-### Note 
-- ...
-
-esempio:
-
-```c#
-  
-```
+- Fix dei nostri programmi
 
 </details>
