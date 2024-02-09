@@ -155,7 +155,7 @@ class Program
             //messaggio per l'utente sui file csv
             Console.Clear();
             MessaggioInfoCsv();
-            Thread.Sleep(1500);
+
             Console.Write("\npremi un tasto per continuare...");
             Console.ReadKey();
             Console.Clear();
@@ -181,13 +181,6 @@ class Program
         }
     }
 
-    /*Gestisce l'inserimento dei dati mediante i metodi di controllo input:
-      - InserisciNome() ---> verifica il formato del nome
-      - InserisciQuantita--> verifica il formato quantita
-      - InserisciData------> verifica la data di scadenza
-      
-      OUTPUT: bool corretto -----> true se l'inserimento va a buon fine; 
-    */
     /// <summary>
     /// Gestisce l'inserimento dei dati mediante i metodi di controllo input:<br/>  
     /// InserisciNome() ---> verifica il formato del nome <br/>
@@ -216,24 +209,11 @@ class Program
 
             //se i controlli vanno a buon fine procedo con l'inserimento
             //inserisci i dati nel file JSON
-            corretto = CreaAlimentoJSON(alimento, quantita, scadenza);
+            corretto = CreaAlimentoJSON(alimento, quantita, scadenza, 'a');
         }
 
         return corretto;
     }
-
-    /*Visualizza l'elenco completo di tutti gli alimenti nel frigo con quantita e data
-      sotto forma di tabella. 
-
-      Opzioni: - all ----> visualizza tutti
-               - exp ----> visualizza solo exp
-               - del ----> visualizza tutti con titolo diverso
-
-      INPUT: string opz ----------> default "all"
-             string pathDirJson ---> path della cartella JSON
-      
-      OUTPUT: bool frigoVuoto ----> true se è vuoto; false se c'è almeno un alimento
-     */
 
     /// <summary>
     /// Visualizza l'elenco completo di tutti gli alimenti nel frigo con quantita e data <br/>
@@ -316,12 +296,6 @@ class Program
         return frigoVuoto;
     }
 
-    /*Metodo che gestisce l'eliminazione degli alimenti. 
-      Utilizza StampaAlimento() per visualizzare la lista aggiornata.
-      Utilizza il metodo accessorio SelezionaElimina()
-
-      INPUT: string pathDirJson -----> il path della directory JSON
-    */
     /// <summary>
     /// Gestisce l'eliminazione degli alimenti, utilizza i seguenti metodi: <br/>
     /// <i>StampaAlimento()</i> per visualizzare la lista aggiornata. <br/>
@@ -364,7 +338,8 @@ class Program
         int conta = files.Length;   // conto i file
         bool eseguito = false;
 
-        Console.WriteLine("\nVuoi eliminare qualcosa? (s/n) ");
+        string messaggioSiNo = "\nVuoi eliminare qualcosa? (s/n) ";
+        Console.WriteLine(messaggioSiNo);
         string input = Console.ReadLine()!;
         if (input == "n")
         {
@@ -372,7 +347,10 @@ class Program
         }
         else if (input == "s")
         {
-            Console.WriteLine("\nCosa vuoi eliminare?");
+            var cursore = Console.GetCursorPosition();
+            PulisciRiga(messaggioSiNo.Length, 0, cursore.Top - 2);
+            Console.WriteLine("Cosa vuoi eliminare?");
+            Console.Write(" \r");
             try
             {
                 //memorizzo il numero scelto dall'utente che corrisponde 
@@ -442,8 +420,7 @@ class Program
                                 // Console.WriteLine("DEBUG prima di inviare il codice" + quantita);   //DEBUG
                                 CreaAlimentoJSON(alimento, quantita, scadenza);    //modifico e sovrascrivo
                                 ScriviAColori("Aggiornato", "verde");
-                                Thread.Sleep(800);
-                                Console.ReadKey();
+                                Thread.Sleep(600);
                                 corretto = true;
                             }
                         }
@@ -462,6 +439,12 @@ class Program
                 Thread.Sleep(800);
             }
         }
+        else
+        {
+            string errore = "Selezione errata\r";
+            ScriviAColori(errore, "rosso");
+            PulisciRiga(errore.Length, 0, 1);
+        }
         return eseguito;
     }
 
@@ -474,8 +457,9 @@ class Program
     /// <param name="alimento">Il nome dell'alimento da inserire nel JSON</param>
     /// <param name="quantita">La quantita dell'alimento da inserire nel JSON</param>
     /// <param name="scadenza">La data di scadenza dell'alimento da inseire nel JSON</param>
+    /// <param name="opz">'e' - elimina (default); 'a' - aggiungi</param>
     /// <returns><b>true</b> se la serializzazione va a buon fine, <b>false</b> in caso di errore</returns>
-    static bool CreaAlimentoJSON(string alimento, int quantita, string scadenza)
+    static bool CreaAlimentoJSON(string alimento, int quantita, string scadenza, char opz = 'e')
     {
         // Console.WriteLine($"alimento: {alimento} quantita: {quantita} scadenza: {scadenza}");   //DEBUG
         // Console.ReadKey();                                                                      //DEBUG
@@ -488,10 +472,22 @@ class Program
             if (!File.Exists(pathJson)) //se non c'è alcun prodotto lo creo
             {
                 File.Create(pathJson).Close();
+                //inserisco i dati nel file JSON
+                File.WriteAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
+            }
+            else    //se c'è gia, gestisce la quantita (elimina o aggiunge)
+            {
+                if (opz == 'a') //se opzione 'a' ---> aggiungi alimento
+                {
+                    string jsonFile = File.ReadAllText(pathJson);
+                    dynamic obj = JsonConvert.DeserializeObject(jsonFile)!;
+                    int quantitaDaAggiornare = obj.quantita;
+                    quantita += quantitaDaAggiornare;   //aggiorno la quantita dell'alimento
+                }
+                //inserisco i dati nel file JSON
+                File.WriteAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
             }
 
-            //inserisco i dati nel file JSON
-            File.WriteAllText(pathJson, JsonConvert.SerializeObject(new { alimento, quantita, scadenza }));
             return true;
         }
         catch
@@ -525,6 +521,25 @@ class Program
         {
             ScriviAColori("Nessun file csv trovato", "rosso");
             Thread.Sleep(800);
+            Console.Clear();
+            Console.WriteLine("Vuoi importare un file di prova per il primo avvio?  (s/n)");
+            bool corretto = false;
+            while (!corretto)   //verifica inserimento
+            {
+                string input = Console.ReadLine()!.ToLower();
+                if (input == "s")
+                {
+                    CreaCsvProva(pathCSV);
+                    corretto = true;
+                }
+                else
+                {
+                    string errore = "Selezione errata\r";
+                    ScriviAColori(errore, "rosso");
+                    PulisciRiga(errore.Length, 0, 1);
+                }
+
+            }
             return false;
         }
         else
@@ -562,6 +577,35 @@ class Program
             File.Move(pathCSV, $"{pathTemp}inserito.csv");
         }
         return true;
+    }
+
+    /// <summary>
+    /// Utility che crea un file csv di prova per il primo avvio del programma.
+    /// </summary>
+    /// <param name="pathCSV">Path del file csv da creare</param>
+    static void CreaCsvProva(string pathCSV)
+    {
+        File.Create(pathCSV).Close();
+
+        string[] contenutoCSV = [
+
+            "alimento,quantita,scadenza",
+            "yogurt,4,15/02/2024",
+            "formaggio,2,30/04/2024",
+            "yogurt,2,20/02/2024",
+            "mozzarella,1,20/02/2024",
+            "spinaci,3,08/02/2024",
+            "prosciutto cotto,2,15/02/2024",
+            "prosciutto cotto,1,02/02/2024"
+        ];
+
+        foreach (string alimento in contenutoCSV)
+        {
+            File.AppendAllText(pathCSV, alimento + "\n");
+        }
+        ScriviAColori("\nFile creato correttamente", "verde");
+        Console.Write("\npremi un tasto...");
+        Console.ReadKey();
     }
 
     /// <summary>
