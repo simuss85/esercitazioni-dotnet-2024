@@ -1,16 +1,13 @@
 Modifica:
-Selezione della modalità rischio ora controlla lista avversario
-Modificato "premi invio..." con "premi un tasto..."
 
 Fixa:
 
 Aggiunge:
-PariDispari
-GiocaPariDispari
+
 
 Elimina:
 
 *** DA FARE ***
 - inserici i suoni.
-- chi perde perde il territorio (sceglie l'utente dalla lista, se PC fa da solo prende random).
-- SceltaColore messaggio errore sulla stessa linea input
+- cpu deve sceglie da solo i territori in modalità rischio
+- se non ci sono territori liberi non deve scegliere i dadi
