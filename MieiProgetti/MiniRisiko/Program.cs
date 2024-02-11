@@ -1074,16 +1074,16 @@
             }
             else        //inizia player2
             {
-                #region CPU SCELTA GIOCO
+                #region CPU SCELTA GIOCO player2
                 if (player2[1] == "CPU")    //se il player2 è CPU
                 {
                     MessaggioTurno(player2);
                     SchermataLoading();
-                    if (territoriP2.Count < 4 || territori.Count < 1)  //da 0 a 3 territori per CPU oppure fine dei territori liberi
+                    if (territoriP2.Count < 4 && territori.Count > 1)  //da 0 a 3 territori per CPU oppure fine dei territori liberi
                     {
                         rispostaPlayer = '1';   //sceglie sempre lancio dadi
                     }
-                    else if (territoriP1.Count > 2) //player1 deve avere almeno 2 territori
+                    else if (territoriP1.Count > 2 && territori.Count > 1) //player1 deve avere almeno 2 territori
                     {
                         Random random = new();
                         if (random.Next(1, 3) == 1) //sceglie 1 o 2 a caso
@@ -1097,14 +1097,14 @@
                     }
                     else
                     {
-                        rispostaPlayer = '1';
+                        rispostaPlayer = '2';
                     }
                 }
-                else
+                #endregion
+                else    //sceglie giocatore umano
                 {
                     rispostaPlayer = SceltaGioco(player2, player1, territoriP2, territoriP1);
                 }
-                #endregion
 
             }
 
@@ -2009,13 +2009,24 @@
                 {
                     case ConsoleKey.D1:
                         // LanciaDadi
-                        //breve messaggio dopo la selezione
-                        ScriviAColori("lancio dadi", "verde", 'f');
-                        Thread.Sleep(800);                  //della durata di 800ms
-                        Console.Clear();                    //poi si cancella lo schermo
+                        if (territoriP1.Count + territoriP2.Count == 8)
+                        {
+                            ScriviAColori("devi conquistare i territori dall'avversario", "rosso", 'f');
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                            corretto = false;
+                        }
+                        else
+                        {
+                            //breve messaggio dopo la selezione
+                            ScriviAColori("lancio dadi", "verde", 'f');
+                            Thread.Sleep(800);                  //della durata di 800ms
+                            Console.Clear();                    //poi si cancella lo schermo
 
-                        c = '1';
-                        corretto = true;
+                            c = '1';
+                            corretto = true;
+                        }
+
                         break;
 
                     case ConsoleKey.D2:
@@ -2023,14 +2034,14 @@
                         if (territoriP1.Count < 2)
                         {
                             ScriviAColori("devi avere almento 1 territorio", "rosso", 'f');
-                            Thread.Sleep(800);
+                            Thread.Sleep(1000);
                             Console.Clear();
                             corretto = false;
                         }
                         else if (territoriP2.Count < 1)
                         {
                             ScriviAColori("il tuo avversario non ha territori da scommettere", "rosso", 'f');
-                            Thread.Sleep(800);
+                            Thread.Sleep(1000);
                             Console.Clear();
                             corretto = false;
                         }
@@ -2180,7 +2191,7 @@
         Console.ReadKey();
         Console.Clear();
 
-        if (GiocaPariDispari(player1, player2) == 1)
+        if (GiocaPariDispari(player1, player2) == 1)    //se vince player1
         {
             //messaggio per il vincitore della sfida
             MessaggioVittoria(player1);
@@ -2198,7 +2209,7 @@
                 ScriviAColori("Errore [GiocaPariDispari]!!!", "rosso");
             }
         }
-        else
+        else    //se vince player2
         {
             //messaggio per il vincitore della sfida
             MessaggioVittoria(player2);
@@ -2299,7 +2310,7 @@
         int vincitore = 0;
         bool corretto = false;
         Random random = new();
-        int x;
+        int x, n;   //x per il numero random, n per la scelta del giocatore PC
         bool rispostaP1 = false, rispostaP2 = false; //variabile per il controllo risposta utente
         bool xPari;
         string input;
@@ -2316,39 +2327,65 @@
             //genero il numero ad ogni turno
             x = random.Next(1, 11);  //il numero segreto tra 1 e 10
             xPari = x % 2 == 0;     //true se pari, false se dispari
+                                    // Console.WriteLine("DEBUG PARI?: " + xPari + "numero : " + x); //DEBUG
+                                    // Console.ReadKey();  //DEBUG
+
             do
             {
                 Console.Write("Pari o dispari? (p/d): ");
-                try
+
+                #region CPU SCELTA P/D player1
+                if (player1[1] == "CPU")
                 {
-                    input = Console.ReadLine()!.ToLower();
-                    if (input == "p")   //giocatore sceglie pari
+                    n = random.Next(1, 3);
+                    if (n == 1)
                     {
                         rispostaP1 = true;
-                        corretto = true;
-                    }
-                    else if (input == "d") //giocatore sceglie dispari
-                    {
-                        rispostaP1 = false;
-                        corretto = true;
+                        Console.WriteLine("p");
+
                     }
                     else
                     {
-                        throw new Exception();
+                        rispostaP1 = false;
+                        Console.WriteLine("d");
                     }
-
+                    SchermataLoading();
                 }
-                catch (Exception)
+                #endregion
+                else    //scelta player umano
                 {
-                    string errore = "Inserimento errato";
-                    ScriviAColori(errore + "\r", "rosso");
-                    //cancella messaggio di errore e posiziona il cursore correttamente
-                    PulisciRiga(errore.Length, 0, 1);   //TODO
+                    try
+                    {
+                        input = Console.ReadLine()!.ToLower();
+                        if (input == "p")   //giocatore sceglie pari
+                        {
+                            rispostaP1 = true;
+                            corretto = true;
+                        }
+                        else if (input == "d") //giocatore sceglie dispari
+                        {
+                            rispostaP1 = false;
+                            corretto = true;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        string errore = "Inserimento errato";
+                        ScriviAColori(errore + "\r", "rosso");
+                        //cancella messaggio di errore e posiziona il cursore correttamente
+                        PulisciRiga(errore.Length, 0, 1);   //TODO
+                    }
                 }
+
             }
             while (!corretto);
 
-            if (rispostaP1 && xPari) //verifica risposta del giocatore player1
+            if (rispostaP1 == xPari) //verifica risposta del giocatore player1
             {
                 ScriviAColori("Hai indovinato", "verde");
                 rispostaP1 = true;  //indovinato
@@ -2378,36 +2415,58 @@
             {
 
                 Console.Write("Pari o dispari? (p/d): ");
-                try
+
+                #region CPU SCELTA P/D player2
+                if (player2[1] == "CPU")
                 {
-                    input = Console.ReadLine()!.ToLower();
-                    if (input == "p")   //giocatore sceglie pari
+                    n = random.Next(1, 3);
+                    if (n == 1)
                     {
                         rispostaP2 = true;
-                        corretto = true;
-                    }
-                    else if (input == "d") //giocatore sceglie dispari
-                    {
-                        rispostaP2 = false;
-                        corretto = true;
+                        Console.WriteLine("p");
+
                     }
                     else
                     {
-                        throw new Exception();
+                        rispostaP2 = false;
+                        Console.WriteLine("d");
                     }
-
+                    SchermataLoading();
                 }
-                catch (Exception)
+                #endregion
+                else    //scelta player umano
                 {
-                    string errore = "Inserimento errato";
-                    ScriviAColori(errore + "\r", "rosso");
-                    //cancella messaggio di errore e posiziona il cursore correttamente
-                    PulisciRiga(errore.Length, 0, 1);   //TODO
+                    try
+                    {
+                        input = Console.ReadLine()!.ToLower();
+                        if (input == "p")   //giocatore sceglie pari
+                        {
+                            rispostaP2 = true;
+                            corretto = true;
+                        }
+                        else if (input == "d") //giocatore sceglie dispari
+                        {
+                            rispostaP2 = false;
+                            corretto = true;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        string errore = "Inserimento errato";
+                        ScriviAColori(errore + "\r", "rosso");
+                        //cancella messaggio di errore e posiziona il cursore correttamente
+                        PulisciRiga(errore.Length, 0, 1);   //TODO
+                    }
                 }
             }
             while (!corretto);
 
-            if (rispostaP2 && xPari) //verifica risposta del giocatore player1
+            if (rispostaP2 == xPari) //verifica risposta del giocatore player1
             {
                 rispostaP2 = true;  //indovinato
                 ScriviAColori("Hai indovinato", "verde");
@@ -2425,7 +2484,7 @@
             Console.Clear();
 
             //verifica del vincitore, 
-            if (rispostaP1 && rispostaP2)   //pareggio true & true oppure false & false
+            if (rispostaP1 == rispostaP2)   //pareggio true & true oppure false & false
             {
                 Console.WriteLine("Pareggio!!!");
                 Console.Write("\npremi un tasto...");
@@ -2635,12 +2694,24 @@
             ScriviAColori(player[1], player[2], 'b');
             Console.WriteLine(" scegli territorio da scommettere");
             StampaListaNumerata(territoriP);
+
             Console.Write("\nseleziona: ");
             try
             {
                 if (conta < 2)  //se devo ancora inserire chiedo l'input
                 {
-                    n = int.Parse(Console.ReadLine()!);   //prova a convertire in intero
+                    #region CPU SCELTA SCOMMESSA
+                    if (player[1] == "CPU")
+                    {
+                        Random random = new();
+                        n = random.Next(1, territoriP.Count + 1);
+                        SchermataLoading();
+                    }
+                    #endregion
+                    else    //scelta del player umano
+                    {
+                        n = int.Parse(Console.ReadLine()!);   //prova a convertire in intero
+                    }
 
                     if (n > territoriP.Count || n < 0)
                     {
