@@ -13,7 +13,7 @@ Testare il programma, segnalare eventuali bug, consigli e spunti sull'user exper
   >verificare la corretta esecuzione di import o export dei file csv;  
    la manipolazione dei JSON da parte dell'applicazione come creazione, modifica, eliminazione.
 
-### PROBLEMI:
+### PROBLEMI IGNOTI:
 Controllare problema **"x"** che non sono riuscito a risolvere o a notare.
 
 
