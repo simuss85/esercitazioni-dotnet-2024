@@ -1,5 +1,5 @@
 Modifica:
-
+ScommettiTerritori gestisce le scelte del pc.
 Fixa:
 
 Aggiunge:
@@ -9,5 +9,5 @@ Elimina:
 
 *** DA FARE ***
 - inserici i suoni.
-- cpu deve sceglie da solo i territori in modalità rischio
 - se non ci sono territori liberi non deve scegliere i dadi
+- quando sceglie CPU la modalita rischio si impalla
