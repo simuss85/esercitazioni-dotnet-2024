@@ -6,9 +6,13 @@
 
 > Cartella di test e prove varie
 
-## Esercitazioni
+## Esercitazioni-Csharp
 
-> Elenco dei programmi svolti a lezione
+> Elenco dei programmi svolti a lezione 
+
+## Esercitazioni-HTML
+
+> Esempi di pagine html
 
 ## File-condivisi-in-aula
 
