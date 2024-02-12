@@ -1079,25 +1079,25 @@
                 {
                     MessaggioTurno(player2);
                     SchermataLoading();
-                    if (territoriP2.Count < 4 && territori.Count > 1)  //da 0 a 3 territori per CPU oppure fine dei territori liberi
+                    if (territori.Count < 1)    //territori liberi finiti
                     {
-                        rispostaPlayer = '1';   //sceglie sempre lancio dadi
+                        rispostaPlayer = '2';
                     }
-                    else if (territoriP1.Count > 2 && territori.Count > 1) //player1 deve avere almeno 2 territori
+                    else if (territoriP2.Count < 4) //territori CPU da 0 a 3
+                    {
+                        rispostaPlayer = '1';
+                    }
+                    else
                     {
                         Random random = new();
                         if (random.Next(1, 3) == 1) //sceglie 1 o 2 a caso
                         {
                             rispostaPlayer = '1';
                         }
-                        else
+                        else    //sceglie a caso 
                         {
                             rispostaPlayer = '2';
                         }
-                    }
-                    else
-                    {
-                        rispostaPlayer = '2';
                     }
                 }
                 #endregion
@@ -2030,7 +2030,7 @@
                         break;
 
                     case ConsoleKey.D2:
-                        // Modalità rischio (necessita di almeno 1 territorio per accedere)
+                        // Modalità rischio (necessita di almeno 1 territorio per accedere)                      
                         if (territoriP1.Count < 2)
                         {
                             ScriviAColori("devi avere almento 1 territorio", "rosso", 'f');
@@ -2055,7 +2055,6 @@
                             c = '2';
                             corretto = true;
                         }
-
 
                         break;
 
