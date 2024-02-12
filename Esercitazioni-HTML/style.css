@@ -1,0 +1,31 @@
+body {
+    margin: 50px;
+    padding: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: aqua;
+    color: blue;
+    padding: 10px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav {
+    background-color: rgb(195, 248, 255);
+    color: blue;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: blue;
+    text-decoration: none;
+    padding: 20px;
+}
+
+nav a:hover {
+    background-color: aqua;
+    color: black;
+}
