@@ -1060,22 +1060,24 @@
 
         while (!vittoria)
         {
+            if (territoriP1.Count == 8) //controllo se uno dei due player ha vinto
+            {
+                MessaggioVittoria(player1, true);
+                return true;
+            }
+            else if (territoriP2.Count == 8)
+            {
+                MessaggioVittoria(player2, true);
+                return true;
+            }
+
             if (!cambioTurno)   //inizia player1
-            {   
-                if (territoriP1.Count == 8) //se player1 ha conquistato tutti i territori fine gioco
-                {
-                    MessaggioVittoria(player1,true);
-                    return true;
-                }
+            {
+
                 rispostaPlayer = SceltaGioco(player1, player2, territoriP1, territoriP2);
             }
             else        //inizia player2
             {
-                if (territoriP2.Count == 8) //se player2 ha conquistato tutti i territori fine gioco
-                {
-                    MessaggioVittoria(player2,true);
-                    return true;
-                }
                 #region CPU SCELTA GIOCO player2
                 if (player2[1] == "CPU")    //se il player2 è CPU
                 {
