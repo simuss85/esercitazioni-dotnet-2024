@@ -822,3 +822,27 @@ Argomenti:
 - Fix dei nostri programmi
 
 </details>
+
+<!-- ******************************************  12 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>12 feb 2024 ✔️</h3></summary>
+
+Argomenti:
+- Introduzione al linguaggio HTML.
+- Tag e attributi.
+- Formattazione e CSS.
+
+
+### Info
+> Installato plugin *Live Server* per la preview delle pagine html che stiam generando.
+
+</details>
+
+<!-- ******************************************  13 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>13 feb 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
