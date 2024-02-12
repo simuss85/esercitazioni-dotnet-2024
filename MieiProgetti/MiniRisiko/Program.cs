@@ -31,7 +31,6 @@
         bool primoAvvio = true;     //per la prima schermata di loading
         bool vittoria = false;      //decreta la fine del gioco
 
-
         #endregion
 
         #region DEBUG
@@ -229,7 +228,7 @@
     static void MenuSelezioneColoreUtente(string c)
     {
         var currentBackground = Console.BackgroundColor;    //memorizza il colore attuale
-        // Console.WriteLine($"Valore passato : {c}\n");     //DEBUG
+
         Console.WriteLine("Seleziona il colore della tua armata");
         switch (c.ToLower())
         {
@@ -437,7 +436,7 @@
         }
         else
         {
-            Console.WriteLine("DEBUG: lista vuota");
+            // Console.WriteLine("DEBUG: lista vuota");
         }
 
     }
@@ -695,14 +694,14 @@
     /// <summary>
     /// Metodo accessorio che permette di scrivere un testo a colori.<br/>
     /// Scrive il contenuto di 'messaggio' nel colore scelto e reimposta <br/>
-    /// il colore di default alla fine. Non va a capo. <br/><br/>
+    /// il colore di default alla fine. Non va a capo. <br/>
     /// Colori disponibili: <br/>
     /// - "rosso" <br/>
     /// - "blu" <br/>
     /// - "magenta" <br/>
     /// - "verde" <br/>
     /// - "giallo" <br/>
-    /// 
+    /// </summary>
     /// <param name="messaggio">Il messaggio da stampare a colori</param>
     /// <param name="colore">Il colore in formato string es. "rosso"</param>
     /// <param name="opz">Opzione: 'f' default; 'b per lo sfondo</param>
@@ -1007,13 +1006,6 @@
                 ScriviAColori("Errore [AssegnaPatternDado]!!!", "rosso", 'f');
                 break;
         }
-        // Console.WriteLine("Numero dado: " + n);  //DEBUG
-        // Console.ReadKey();                              //DEBUG
-        // foreach (string linea in dado)      //DEBUG
-        // {
-        //     Console.WriteLine(linea);
-        // }
-        // Console.ReadKey();                  //DEBUG
         return dado;
     }
 
@@ -1069,16 +1061,28 @@
         while (!vittoria)
         {
             if (!cambioTurno)   //inizia player1
-            {
+            {   
+                if (territoriP1.Count == 8) //se player1 ha conquistato tutti i territori fine gioco
+                {
+                    MessaggioVittoria(player1,true);
+                    return true;
+                }
                 rispostaPlayer = SceltaGioco(player1, player2, territoriP1, territoriP2);
             }
             else        //inizia player2
             {
+                if (territoriP2.Count == 8) //se player2 ha conquistato tutti i territori fine gioco
+                {
+                    MessaggioVittoria(player2,true);
+                    return true;
+                }
                 #region CPU SCELTA GIOCO player2
                 if (player2[1] == "CPU")    //se il player2 è CPU
                 {
                     MessaggioTurno(player2);
-                    SchermataLoading();
+                    MenuDiGioco();
+                    Console.Write("\nScegli: ");
+
                     if (territori.Count < 1)    //territori liberi finiti
                     {
                         rispostaPlayer = '2';
@@ -1099,6 +1103,19 @@
                             rispostaPlayer = '2';
                         }
                     }
+                    if (rispostaPlayer == '1')
+                    {
+                        ScriviAColori("lancio dadi", "verde", 'f');
+                        Thread.Sleep(800);                  //della durata di 800ms
+                        Console.Clear();
+                    }
+                    else
+                    {
+                        ScriviAColori("modalità rischio", "magenta", 'f');
+                        Thread.Sleep(800);                  //della durata di 800ms
+                        Console.Clear();                    //poi si cancella lo schermo
+                    }
+                    SchermataLoading();
                 }
                 #endregion
                 else    //sceglie giocatore umano
@@ -1241,6 +1258,7 @@
                             if (player2[1] == "CPU")    //turno player 1
                             {
                                 MessaggioTurno(player2);
+
                                 SchermataLoading();
                                 Random random = new();
                                 if (random.Next(1, 3) == 1) //scelgo opzione 1 o 2 random
@@ -1536,14 +1554,7 @@
             else
             {
                 territoriP.Add(player[i]);
-                // Console.WriteLine("DEBUG: aggiunto alla lista " + player[i]);   //DEBUG
-                // VisualizzaListaNumerata(territoriP);                           //DEBUG
-                // Console.WriteLine();                                           //DEBUG
-                // Console.ReadKey();                                             //DEBUG
                 territori.Remove(player[i]);
-                // Console.WriteLine("DEBUG: rimosso dalla lista " + player[i]);   //DEBUG
-                // VisualizzaListaNumerata(territori);                //DEBUG
-                // Console.ReadKey();                                 //DEBUG
             }
         }
     }
@@ -1589,8 +1600,6 @@
         {
             Console.WriteLine("Inserisci codice del salvataggio: ");
             string ID = InputCodiceID();
-            //Console.WriteLine("DEBUG ID: " + ID);   //DEBUG
-            //Console.ReadKey();
 
             try
             {
@@ -1636,11 +1645,7 @@
         while (!trovato);
 
         //aggiorno le liste dei territori con i dati caricati
-        // Console.Clear();                                    //DEBUG
-        // Console.WriteLine("Memorizzo p1");                  //DEBUG
         MemorizzaSuLista(player1, territoriP1, territori);
-        // Console.ReadKey();                                  //DEBUG
-        // Console.WriteLine("Memorizzo p2");                  //DEBUG
         MemorizzaSuLista(player2, territoriP2, territori);
 
         ScriviAColori("Caricamento completato!", "verde", 'f');
@@ -1701,21 +1706,13 @@
         righe[index] = "_";
         righe[index + 1] = "_";
 
-        // Console.WriteLine("righe file originale: " + righe.Length); //DEBUG
-        // Console.WriteLine("righe file aggiornato: " + copia.Length);//DEBUG
-        // Console.ReadKey();                                          //DEBUG
-
         int count = 0;
 
         foreach (string riga in righe)      //copio tutto l'array del file tranne le 2 righe vuote
         {
-            // Console.WriteLine(riga);        //DEBUG
-            // Console.ReadKey();              //DEBUG
-
             if (riga != "_")
             {
                 copia[count] = riga;
-                // Console.WriteLine("copia: " + copia[count]);    //DEBUG
                 count++;
             }
         }
@@ -1986,7 +1983,6 @@
             MessaggioTurno(player1);
             MenuDiGioco();
             Console.Write("\nScegli: ");
-
             // aspetta finche non viene premuto un tasto
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -2320,14 +2316,12 @@
 
             ScriviAColori(player1[1], player1[2], 'b');
             Console.Write(" indovina se il numero è pari o dispari...");
-            Console.ReadKey();
+            Thread.Sleep(600);
             Console.WriteLine();
 
             //genero il numero ad ogni turno
             x = random.Next(1, 11);  //il numero segreto tra 1 e 10
             xPari = x % 2 == 0;     //true se pari, false se dispari
-                                    // Console.WriteLine("DEBUG PARI?: " + xPari + "numero : " + x); //DEBUG
-                                    // Console.ReadKey();  //DEBUG
 
             do
             {
@@ -2341,12 +2335,14 @@
                     {
                         rispostaP1 = true;
                         Console.WriteLine("p");
+                        corretto = true;
 
                     }
                     else
                     {
                         rispostaP1 = false;
                         Console.WriteLine("d");
+                        corretto = true;
                     }
                     SchermataLoading();
                 }
@@ -2404,7 +2400,7 @@
 
             ScriviAColori(player2[1], player2[2], 'b');
             Console.Write(" indovina se il numero è pari o dispari...");
-            Console.ReadKey();
+            Thread.Sleep(600);
             Console.WriteLine();
 
             //genero il numero ad ogni turno
@@ -2513,7 +2509,7 @@
     static int GiocaIndovinaIlNumero(string[] player1, string[] player2)
     {
         int vincitore = 0;
-        bool corretto = false;
+        bool inserito = false;
         Random random = new();
         int x = random.Next(1, 51);  //il numero segreto tra 1 e 50
         int rispostaP1 = 0, rispostaP2 = 0;
@@ -2539,7 +2535,7 @@
             }
             //player1 è il tuo turno
             #region CPU player1 INDOVINA IL NUMERO
-            if (player1[1] == "CPU")
+            if (player1[1] == "CPU")    //se player1 è la CPU
             {
                 SchermataLoading();
                 ScriviAColori("\n" + player1[1], player1[2], 'b');
@@ -2547,10 +2543,10 @@
                 Thread.Sleep(800);
                 Console.WriteLine();
                 SchermataLoading();
-                rispostaP1 = random.Next(1, 51);
+                rispostaP1 = random.Next(1, 51); //inscerisce un numero a caso
             }
             #endregion
-            else
+            else    //se il player1 è umano
             {
                 //chiudi gli occhi player 2
                 if (player2[1] != "CPU")
@@ -2572,7 +2568,7 @@
                         {
                             throw new Exception();
                         }
-                        corretto = true;
+                        inserito = true;
                     }
                     catch (Exception)
                     {
@@ -2582,59 +2578,60 @@
                         PulisciRiga(errore.Length, 0, 1);
                     }
                 }
-                while (!corretto);
+                while (!inserito);
+            }
 
-                Thread.Sleep(500);
-                Console.Clear();
+            Thread.Sleep(700);
+            Console.Clear();
 
-                //player2 è il tuo turno
-                #region CPU player2 INDOVINA IL NUMERO
-                if (player2[1] == "CPU")
+            inserito = false;   //resetto per il secondo inserimento
+
+            //player2 è il tuo turno
+            #region CPU player2 INDOVINA IL NUMERO
+            if (player2[1] == "CPU")    //se player2 è la CPU
+            {
+                SchermataLoading();
+                ScriviAColori("\n" + player2[1], player2[2], 'b');
+                Console.Write(" scegli un numero " + aiuto);
+                Thread.Sleep(800);
+                Console.WriteLine();
+                SchermataLoading();
+                rispostaP2 = random.Next(1, 51);
+            }
+            #endregion
+            else    //player2 è umano
+            {
+                //chiudi gli occhi player 1
+                if (player1[1] != "CPU")
                 {
-                    SchermataLoading();
+                    ScriviAColori(player1[1], player1[2], 'b');
+                    Console.Write(" chiudi gli occhi e non guardare il numero inserito...premi un tasto");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                }
+
+                do
+                {
                     ScriviAColori("\n" + player2[1], player2[2], 'b');
                     Console.Write(" scegli un numero " + aiuto);
-                    Thread.Sleep(800);
-                    Console.WriteLine();
-                    SchermataLoading();
-                    rispostaP2 = random.Next(1, 51);
-                }
-                #endregion
-                else
-                {
-                    //chiudi gli occhi player 1
-                    if (player1[1] != "CPU")
+                    try
                     {
-                        ScriviAColori(player1[1], player1[2], 'b');
-                        Console.Write(" chiudi gli occhi e non guardare il numero inserito...premi un tasto");
-                        Console.ReadKey();
-                        Console.WriteLine();
+                        rispostaP2 = int.Parse(Console.ReadLine()!);
+                        if (rispostaP2 < 1 || rispostaP2 > 50)
+                        {
+                            throw new Exception();
+                        }
+                        inserito = true;
                     }
-
-                    corretto = false;
-                    do
+                    catch (Exception)
                     {
-                        ScriviAColori("\n" + player2[1], player2[2], 'b');
-                        Console.Write(" scegli un numero " + aiuto);
-                        try
-                        {
-                            rispostaP2 = int.Parse(Console.ReadLine()!);
-                            if (rispostaP2 < 1 || rispostaP2 > 50)
-                            {
-                                throw new Exception();
-                            }
-                            corretto = true;
-                        }
-                        catch (Exception)
-                        {
-                            string errore = "Inserimento errato";
-                            ScriviAColori(errore + "\r", "rosso");
-                            //cancella messaggio di errore e posiziona il cursore correttamente
-                            PulisciRiga(errore.Length, 0, 1);
-                        }
+                        string errore = "Inserimento errato";
+                        ScriviAColori(errore + "\r", "rosso");
+                        //cancella messaggio di errore e posiziona il cursore correttamente
+                        PulisciRiga(errore.Length, 0, 1);
                     }
-                    while (!corretto);
                 }
+                while (!inserito);
             }
 
             Console.Clear();
