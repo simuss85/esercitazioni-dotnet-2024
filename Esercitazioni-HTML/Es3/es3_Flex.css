@@ -1,0 +1,25 @@
+.flex-container {
+    /*questo mette gli elementi in orizzontale*/
+    display: flex;
+    background-color: DodgerBlue;
+    padding: 50px;
+    height: 200px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /*flex-flow: ;*/
+    justify-content: space-between;
+    /*align-items:flex-end;*/
+    align-content: center;
+
+}
+
+
+
+.flex-container div {
+
+    background-color: #f1f1f1;
+
+    padding: 40px;
+    font-size: 30px;
+
+}
