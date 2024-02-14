@@ -840,9 +840,18 @@ Argomenti:
 
 <!-- ******************************************  13 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>13 feb 2024 </h3></summary>
+    <summary><h3>13 feb 2024 ❌</h3></summary>
 
-Argomenti:
-- 
+> :information_source: **Info**  
+> A casa malato
+
+</details>
+
+<!-- ******************************************  14 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>14 feb 2024 ❌</h3></summary>
+
+> :information_source: **Info**  
+> A casa malato
 
 </details>
