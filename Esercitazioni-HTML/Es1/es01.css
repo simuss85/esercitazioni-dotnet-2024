@@ -1,0 +1,131 @@
+body {
+    margin: 20px;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: aqua;
+    color: blue;
+    padding: 10px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+nav {
+    background-color: rgb(195, 248, 255);
+    color: blue;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: blue;
+    text-decoration: none;
+    padding: 20px;
+}
+
+nav a:hover {
+    background-color: aqua;
+    color: black;
+}
+
+hr {
+    border: 1px solid aqua;
+    border-style: dotted;
+}
+
+form {
+    text-align: center;
+}
+
+input,
+textarea,
+select {
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+}
+
+#prova {
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    width: 100px;
+}
+
+table {
+    /* agisce sulla tabella */
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    /* agisce sul th e td della tabella */
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+
+div.contenitore {
+    display: flex;
+    border: 1px solid blue;
+}
+
+div.contenitore div {
+    border: 1px solid aqua;
+    width: 33%;
+    padding: 10px;
+    text-align: center;
+    flex-flow: wrap;
+}
+
+#top {
+    text-align: center;
+}
+
+#top a {
+    text-decoration: none;
+}
+
+#top :visited {
+    color: aqua;
+}
+
+#top :hover {
+    color: blue;
+    text-decoration: none;
+}
+
+footer {
+    margin: auto;
+    padding: 10px;
+    background-color: aqua;
+    text-align: center;
+    color: blue;
+}
+
+/*per gestire diverse risoluzioni display*/
+@media(max-width:700px) {
+    header {
+        background-color: rgb(255, 0, 247);
+    }
+
+    nav {
+        font-size: smaller;
+    }
+}
+
+@media(max-width:580px) {
+    header {
+
+        background-color: green;
+    }
+
+    nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+}
