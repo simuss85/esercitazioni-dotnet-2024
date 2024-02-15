@@ -1,0 +1,31 @@
+#body {
+    font-family: "Protest Riot", sans-serif;
+    size: 8px;
+}
+
+.my-color {
+    background-image: linear-gradient(rgb(0, 204, 255), rgb(88, 222, 255), rgb(150, 234, 255), rgb(88, 222, 255), rgb(0, 204, 255));
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: rgb(161, 228, 255);
+}
+
+h1,
+h2,
+nav {
+    font-family: "Barriecito", system-ui;
+}
+
+footer {
+    display: fixed;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+
+}
+
+#carosello {
+    width: 50%;
+    align-content: center;
+}
