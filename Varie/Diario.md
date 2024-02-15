@@ -855,3 +855,18 @@ Argomenti:
 > A casa malato
 
 </details>
+
+<!-- ******************************************  15 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>14 feb 2024 ✔️</h3></summary>
+
+Argomenti:
+- Bootstrap.
+
+### Info
+> Installata estensione per le icone css *Font Awesome Auto-Complete*.
+> Installata estensione per bootstrap *Bootstrap 5 Quick Snippet*, *Bootstrap 5 & Font Awesome* e *Bootstrap Intellisense*.
+> Pagine web per creare una struttura della pagina web da creare *wireframe.cc*.
+> Giochino delle rane.
+
+</details>
