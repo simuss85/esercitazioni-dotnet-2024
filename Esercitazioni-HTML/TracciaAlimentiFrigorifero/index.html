@@ -3,129 +3,301 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- fogli di stile personali -->
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barriecito&family=Protest+Riot&display=swap" rel="stylesheet">
+    <!-- bootstrap CDN css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <title>Traccia Alimenti Frigorifero</title>
+    <!-- font google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet">
+    <!-- icone fas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Foodexp</title>
 </head>
 
-<body id="body">
+<body id="my-body">
     <header>
-        <div class="contatti">
-
-        </div>
-
-        <nav class="navbar navbar-expand-lg my-color">
+        <!-- menu navbar -->
+        <nav class="navbar navbar-expand-lg bg-light border border-opacity-50 border-light border-1 shadow fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" ></a>
+                <a id="nome-logo" class="navbar-brand p-1" href="#">
+                    <img src="https://previews.123rf.com/images/keltt/keltt1505/keltt150500017/39816723-icona-con-acqua-blu-goccia-spruzzi-silhouette.jpg"
+                        alt="logo" width="30" height="24" class="d-inline-block align-text-top"> Simo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#presentazione">Presentazione</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#informazioni">Informazioni</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#target">Target</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#carosello">Schermate</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#section4" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Download
-                            </a>
-                            <ul class="dropdown-menu my-color">
-                                <li><a class="dropdown-item" href="#">Android</a></li>
-                                <li><a class="dropdown-item" href="#">Iphone</a></li>
-                                <li><a class="dropdown-item" href="#">Windows</a></li>
-                                <li><a class="dropdown-item" href="#">MacOS</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="#intro">Il problema</a>
+                        <a class="nav-link" href="#idea">L'idea</a>
+                        <a class="nav-link" href="#schermate">Foodexp</a>
+                        <a class="nav-link" href="#tecnologie">Tecnologie</a>
+                        <a class="nav-link" href="#questionario">Questionario</a>
+                        <a class="nav-link" href="#contatti">Contatti</a>
+                    </div>
                 </div>
             </div>
         </nav>
-
     </header>
 
-    <div class="container">
-
-        <section id="presentazione">
-            <h1>Presentazione del prodotto</h1>
-            <img src="https://source.unsplash.com/random/300x200?sig=1&android-app" alt="screen1">
-            <p>Programma che tiene traccia di tutti gli alimenti inseriti nel frigorifero. Si possono inserire i dati da
-                tastiera o da file.csv.
-                Avvisa ad ogni avvio gli alimenti prossimi alla scadenza o quelli che stanno per finire (ad esempio ne
-                rimane solo 1).
-                Si tiene traccia del nome prodotto, quantità e data di scadenza.</p>
-        </section>
-
-        <section id="carosello">
-            <h2>Schermate app</h2>
-            <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://source.unsplash.com/random/300x200?sig=1&android-app" class="d-block w-100"
-                            alt="screen1">
+    <div id="my-container">
+        <div class="container my-5">
+            <!-- sezione 1: intro -->
+            <section id="intro">
+                <h1>Fai la tua parte</h1>
+                <div id="container" class="d-flex p-1 ">
+                    <div id="sinistra">
+                        <img id="img-prima" src="https://source.unsplash.com/random/300x200?sig=1&food-fridge"
+                            alt="screen1" width="400">
                     </div>
-                    <div class="carousel-item">
-                        <img src="https://source.unsplash.com/random/300x200?sig=2&android-app" class="d-block w-100"
-                            alt="screen2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://source.unsplash.com/random/300x200?sig=3&android-app" class="d-block w-100"
-                            alt="screen3">
+                    <div id="destra">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id est autem consequatur ratione
+                            eum
+                            optio
+                            illum labore porro, laudantium quas totam sunt distinctio quae quo amet assumenda ex
+                            sapiente
+                            accusantium!</p>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </section>
-
-        <section id="informazioni">
-            <h2>Informazioni</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non fuga totam maxime temporibus autem eos,
-                consectetur, magnam perspiciatis impedit dicta quod eius nobis eveniet ullam dolorum, iure distinctio
-                laboriosam illo!</p>
-        </section>
-
-        <section id="target">
-            <h2>Target di utilizzo</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nemo mollitia autem possimus id unde,
-                corporis, placeat dolores ad aspernatur doloremque fugit, consequatur sunt sed odit similique delectus
-                nihil
-                corrupti.</p>
-        </section>
 
 
+            </section>
+
+            <!-- sezione 2: idea -->
+            <section id="idea">
+                <h2>Perche abbiamo creato Foodexp</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non fuga totam maxime temporibus autem eos,
+                    consectetur, magnam perspiciatis impedit dicta quod eius nobis eveniet ullam dolorum, iure
+                    distinctio
+                    laboriosam illo!</p>
+            </section>
+
+            <!-- sezione 3: schermate -- carosello di immagini -->
+            <section id="schermate">
+                <h2>Foodexp esempi</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos animi hic natus iure, deserunt
+                    eligendi at sed temporibus culpa, nemo quam ea inventore rerum dolorum? Laborum ad ipsam delectus
+                    itaque.</p>
+                <div id="carosello">
+                    <div id="carouselExampleCaptions" class="carousel slide py-3">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://source.unsplash.com/random/300x200?sig=1&ios-app"
+                                    class="d-block w-100" alt="Schermata1">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>First slide label</h5>
+                                    <p>Some representative placeholder content for the first slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://source.unsplash.com/random/300x200?sig=2&ios-app"
+                                    class="d-block w-100" alt="Schermata2">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Second slide label</h5>
+                                    <p>Some representative placeholder content for the second slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://source.unsplash.com/random/300x200?sig=3&ios-app"
+                                    class="d-block w-100" alt="Schermata3">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Third slide label</h5>
+                                    <p>Some representative placeholder content for the third slide.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- sezione4: tecnologie -- collapse -->
+            <section id="tecnologie">
+                <h2>Tecnologie e sviluppo</h2>
+                <div class="accordion py-3" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Accordion Item #1
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>This is the first item's accordion body.</strong> It is shown by default, until
+                                the
+                                collapse plugin adds the appropriate classes that we use to style each element. These
+                                classes control the overall appearance, as well as the showing and hiding via CSS
+                                transitions. You can modify any of this with custom CSS or overriding our default
+                                variables.
+                                It's also worth noting that just about any HTML can go within the
+                                <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Accordion Item #2
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>This is the second item's accordion body.</strong> It is hidden by default,
+                                until
+                                the collapse plugin adds the appropriate classes that we use to style each element.
+                                These
+                                classes control the overall appearance, as well as the showing and hiding via CSS
+                                transitions. You can modify any of this with custom CSS or overriding our default
+                                variables.
+                                It's also worth noting that just about any HTML can go within the
+                                <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Accordion Item #3
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until
+                                the
+                                collapse plugin adds the appropriate classes that we use to style each element. These
+                                classes control the overall appearance, as well as the showing and hiding via CSS
+                                transitions. You can modify any of this with custom CSS or overriding our default
+                                variables.
+                                It's also worth noting that just about any HTML can go within the
+                                <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- sezione5: questionario -- form -->
+            <section id="questionario">
+                <h2>Questionario</h2>
+                <form class="px-5 my-3">
+
+                    <div class="mt-4">
+                        <label for="campo-nome" class="form-label">Nome</label>
+                        <input type="email" class="form-control" id="campo-nome" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="campo-email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="campo-email" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div id="select">
+                        <label for="select" class="mb-3">Opzioni</label>
+                        <select class="form-select form-select-sm mb-2" aria-label="Large select example">
+                            <option selected>Selezione 1</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+
+                        <select class="form-select form-select-sm mb-3" aria-label="Small select example">
+                            <option selected>Selezione 2</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="form-check small mx-3">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Selezione x
+                        </label>
+                    </div>
+                    <div class="form-check small mx-3">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Selezione y
+                        </label>
+                    </div>
+
+                    <div class="form-check small mx-3">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Selezione z
+                        </label>
+                    </div>
+
+                    <div class="mt-4">
+                        <label for="exampleFormControlTextarea1" class="form-label">Lascia un commento</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+
+                    <div class="mb-3 mt-2 d-flex justify-content-end">
+                        <input type="checkbox" class="form-check-input" id="check-acconsento">
+                        <label class="form-check-label small mx-1" for="check-acconsento">Acconsento all'invio dei
+                            dati</label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                    </div>
+
+                </form>
+            </section>
+
+            <section id="contatti">
+                <h2>Contatti</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nemo mollitia autem possimus id
+                    unde,
+                    corporis, placeat dolores ad aspernatur doloremque fugit, consequatur sunt sed odit similique
+                    delectus
+                    nihil
+                    corrupti.</p>
+            </section>
+
+        </div>
     </div>
+    <!-- Back to top button -->
+    <button type="button" class="btn btn-secondary btn-floating btn-lg" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <p id="footer" class="text-center blockquote"> &copy; 2024 Tutti i diritti riservati.</p>
+    </footer>
+    <!-- bootstrap CDN js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <!-- mio js -->
+    <script src="script.js"></script>
 </body>
 
-<footer class="my-color">
-    <p>&copy; 2024 Nome del Progetto. Tutti i diritti riservati.</p>
-</footer>
+
 
 </html>
