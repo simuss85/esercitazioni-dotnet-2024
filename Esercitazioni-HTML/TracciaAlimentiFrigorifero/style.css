@@ -51,9 +51,12 @@ p {
 }
 
 /*----------- collapse -----------*/
-.accordion-button{
-    color: #f163d9;
-    background-color: #eaf3ff;
+.accordion-button:focus{
+    
+    &:focus{
+        background-color: #f4fcff;
+        border-color: #828687;
+    }
 }
 
 /*------- bottone up -----------*/
@@ -106,7 +109,7 @@ footer {
     }
 
     p {
-        padding-left: 40px;
+        padding-left: 20px;
         padding-right: 40px;
     }
 }
