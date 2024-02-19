@@ -870,3 +870,57 @@ Argomenti:
 > Giochino delle rane.
 
 </details>
+
+<!-- ******************************************  16 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>16 feb 2024 ✔️</h3></summary>
+
+Argomenti:
+- Lavorare sul nostro sito.
+
+</details>
+
+<!-- ******************************************  19 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>19 feb 2024 ⚠️</h3></summary>
+
+> :information_source: **Info**  
+> Lezione annullata!!!  
+
+</details>
+
+<!-- ******************************************  20 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>20 feb 2024 ⚠️</h3></summary>
+
+> :information_source: **Info**  
+> Lezione annullata!!!  
+
+</details>
+
+<!-- ******************************************  21 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>21 feb 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
+<!-- ******************************************  22 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>22 feb 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
+<!-- ******************************************  23 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>23 feb 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
