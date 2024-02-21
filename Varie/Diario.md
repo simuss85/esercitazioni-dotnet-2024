@@ -900,10 +900,31 @@ Argomenti:
 
 <!-- ******************************************  21 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>21 feb 2024 </h3></summary>
+    <summary><h3>21 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- I database con SQLite.
+- Installazione del pacchetto da console dotnet.
+- Installare estensione *SQLite Viewer*.
+
+### Info
+Comandi di sqlite3:
+> .open
+> .tables
+> .schema
+> .mode (list, column, table, html)
+> .read
+> .shell cls
+
+### Note 
+- Importare il pacchetto System.Data.SQLite da terminale nella directory del programma dove lo vogliamo utilizzare.  
+  Ua volta importato, il file progetto.csproj conterrà il codice con le sue dipendenze DB.
+
+```sh
+    dotnet add package System.Data.SQLite
+```
+- Installare anche il programma SQLite3 a livello globale sul pc e configurare la variabile d'ambiente nel *PATH*.  
+- Creare in `C:\sqlite3` e inserire i file dll del pacchetto di download.
 
 </details>
 
