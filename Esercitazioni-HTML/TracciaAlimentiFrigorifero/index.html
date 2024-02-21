@@ -15,6 +15,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet">
     <!-- icone fas -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- higlight CDN css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+
     <title>Foodexp</title>
 </head>
 
@@ -46,7 +50,7 @@
     </header>
 
     <div id="my-container">
-        <div class="container my-5">
+        <div class="container my-5 flex-sm-column">
             <!-- sezione 1: intro -->
             <section id="intro">
                 <h1>Ridurre gli sprechi alimentari:</h1>
@@ -173,15 +177,12 @@
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <strong>This is the second item's accordion body.</strong> It is hidden by default,
-                                until
-                                the collapse plugin adds the appropriate classes that we use to style each element.
-                                These
-                                classes control the overall appearance, as well as the showing and hiding via CSS
-                                transitions. You can modify any of this with custom CSS or overriding our default
-                                variables.
-                                It's also worth noting that just about any HTML can go within the
-                                <code>.accordion-body</code>, though the transition does limit overflow.
+                                <strong>Esempio di inserimento alimento in formato JSON</strong>
+                                <pre class="rounded-4"><code>{
+    "alimento": "mozzarella",
+    "quantita": 2,
+    "scadenza": "20/02/2024"
+}                                </code></pre>
                             </div>
                         </div>
                     </div>
@@ -302,6 +303,13 @@
         crossorigin="anonymous"></script>
     <!-- mio js -->
     <script src="script.js"></script>
+
+    <!-- higlight CDN js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+        integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 
 </html>

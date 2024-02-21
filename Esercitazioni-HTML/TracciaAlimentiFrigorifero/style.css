@@ -51,9 +51,9 @@ p {
 }
 
 /*----------- collapse -----------*/
-.accordion-button:focus{
-    
-    &:focus{
+.accordion-button:focus {
+
+    &:focus {
         background-color: #f4fcff;
         border-color: #828687;
     }
@@ -92,12 +92,11 @@ footer {
     #my-container {
         margin-left: 25%;
         margin-right: 25%;
-    } 
+    }
 }
 
 @media(max-width: 768px) {
     #container {
-        flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
