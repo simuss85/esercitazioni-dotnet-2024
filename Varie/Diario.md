@@ -930,10 +930,10 @@ Comandi di sqlite3:
 
 <!-- ******************************************  22 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>22 feb 2024 </h3></summary>
+    <summary><h3>22 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- SQL su C#.
 
 </details>
 
