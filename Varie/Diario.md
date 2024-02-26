@@ -939,9 +939,55 @@ Argomenti:
 
 <!-- ******************************************  23 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>23 feb 2024 </h3></summary>
+    <summary><h3>23 feb 2024 ✔️</h3></summary>
+
+Argomenti:
+- Nuovo progetto con gestione del DB **Progetto2**.
+
+</details>
+
+<!-- ******************************************  26 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>26 feb 2024 ✔️</h3></summary>
+
+Argomenti:
+- Creazione parte front-end per il progetto **Progetto2**.
+
+</details>
+
+<!-- ******************************************  27 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>27 feb 2024 </h3></summary>
 
 Argomenti:
 - 
 
 </details>
+
+<!-- ******************************************  28 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>28 feb 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
+<!-- ******************************************  29 feb 2024   ****************************************** -->
+<details>
+    <summary><h3>29 feb 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
+<!-- ******************************************  01 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>01 mar 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
