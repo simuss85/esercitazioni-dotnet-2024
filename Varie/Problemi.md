@@ -5,7 +5,8 @@
 [3. Gestire i warning gialli da VSC.](#3-gestire-i-warning-gialli-da-VSC)  
 [4. Nella shell non visualizzo i colori e le informazioni sul branch git MacOS.](#4-nella-shell-non-visualizzo-i-colori-e-le-informazioni-sul-branch-git-macos)  
 [5. Modifica autocompletamento shell maiuscole/minuscole.](#5-modifica-autocompletamento-shell-maiuscoleminuscole)  
-[6. Creato per errore un doppio autore con lo stesso account git](#6-creato-per-errore-un-doppio-autore-con-lo-stesso-account-git)
+[6. Creato per errore un doppio autore con lo stesso account git](#6-creato-per-errore-un-doppio-autore-con-lo-stesso-account-git)  
+[7. Aggiornare sqlite3 su MacOS con Brew](#7-aggiornare-sqlite3-su-macos-con-brew)
 
 <!-- /TOC -->
 
@@ -128,17 +129,47 @@ Riavvia il terminale.
 ## 6. Creato per errore un doppio autore con lo stesso account git:
 Potrebbe capitare quando nella procedura di inizializzazione di github sul nuovo pc si esegue un accesso diverso da quello con token. Purtroppo non si possono modificare i commit passati quindi non risulterà alcun contributo da parte dell'autore doppio.  
 Conviene quindi salvare ciò che ci serve, cancellare dal pc locale tutto il repository e procedere come segue.
-Per prima cosa verifichiamo la versione di *gh* installata sul pc digitando il comando:
+Per prima cosa verifichiamo la versione di **gh** installata sul pc digitando il comando:
 ```sh
-   gh version
+   gh version     #restituisce la versione corrente se installata
 ```
 Nel caso non venisse visualizzata alcuna versione, probabilmente non è stata installata precedentemente. Su windows basta installare il file.exe. Su mac seguire la procedura seguente, dopo aver installato il pacchetto `brew` (vedi la guida):
 ```sh
-   brew install gh
+   brew install gh   
 ```
-Una volta installato *gh* eseguire l'accesso e seguire la procedura guidata, con il comando:
+Una volta installato **gh** eseguire l'accesso e seguire la procedura guidata, con il comando:
 ```sh
    gh auth login
 ```
 Arrivati alla sezione token, andiamo su github per generare un nuovo token e copiamolo nel terminale quando richiesto.  
 Adesso tutto dovrebbe essere corretto.
+
+## 7. Aggiornare sqlite3 su MacOS con Brew:
+Per prima cosa verifica se **sqlite3** è gia installato nel Mac eseguendo il comando seguente:
+```sh
+   sqlite3 --version    #restituisce la versione corrente se installata
+```
+Se vogliamo aggiornare alla nuova versione utilizzando il pacchetto `brew` digitiamo il comando seguente:
+```sh
+   brew install sqlite3
+```
+Una volta installato avremo una nuova versione di **sqlite3** nella folder `/usr/local/Cellar/sqlite/3.45.1/bin/sqlite3`.  
+Adesso dobbiamo assegnare il nuovo percorso al PATH di sistema seguendo questi passaggi:
+1. per prima cosa dobbiamo aprire il file di configurazione della shell in uso con *nano*:
+```sh
+   nano ~/.bash_profile
+```
+2. Alla fine del file inseriamo il codice seguente:
+```sh
+   #PATH di sistema per sqlite3 v.3.45.1
+   export PATH="/usr/local/Cellar/sqlite/3.45.1/bin:$PATH"
+```
+3. Salva il file e chiudilo. Nell'editor nano, premi `Ctrl + X`, quindi conferma di voler salvare le modifiche premendo `invio`.
+4. Per rendere effettive le modifiche digita:
+```sh
+   source ~/.bash_profile
+```
+5. Riavvia il terminale e verifica che il "PATH" sia aggiornato eseguendo il comando:
+```sh
+   echo $PATH
+```
