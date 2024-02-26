@@ -18,12 +18,10 @@ nav {
 }
 
 /*--------- sezioni -----------*/
-#my-container {
-    height: 90vh;
+#img-1 {
+    width: 400px;
 }
-
 section {
-    padding-top: 100px;
     padding-bottom: 30px;
     font-size: 18px;
     text-align: justify;
@@ -34,15 +32,10 @@ p {
 }
 
 /*---- sezione 1 ---------*/
-
-#sinistra {
-    margin-top: 5px;
-}
-
 #destra {
-    padding-left: 25px;
+    margin-left: 3%;
+    margin-right: 3%;
 }
-
 /*------- carosello ---------*/
 #carosello {
     display: flex;
@@ -90,3 +83,24 @@ footer {
 }
 
 /*----------- media query -----------------*/
+@media(max-width: 992px){
+    p {
+        font-size: 16px;
+    }
+    #img-1 {
+        width: 360px;
+    }
+}
+
+@media(max-width: 768px) {
+
+    h1,
+    h2 {
+        text-align: center;
+    }
+
+    #img-1 {
+        width: 380px;
+    }
+
+}

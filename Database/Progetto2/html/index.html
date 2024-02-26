@@ -37,269 +37,263 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="#intro">Crea frigorifero</a>
-                        <a class="nav-link" href="#idea">Visualizza alimenti</a>
-                        <a class="nav-link" href="#schermate">Lista della spesa</a>
-                        <a class="nav-link" href="#tecnologie">Gestisci alimenti</a>
-                        <a class="nav-link" href="#questionario">Gestisci categorie</a>
-                        <a class="nav-link" href="#questionario">Gestisci utenti</a>
+                        <a class="nav-link active" aria-current="page" href="#intro">Il problema</a>
+                        <a class="nav-link" href="#idea">L'idea</a>
+                        <a class="nav-link" href="#schermate">Foodexp</a>
+                        <a class="nav-link" href="#tecnologie">Tecnologie</a>
+                        <a class="nav-link" href="#questionario">Questionario</a>
+                        <a class="nav-link" href="#contatti">Contatti</a>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div id="my-container">
-        <div class="container my-5 flex-sm-column">
-            <!-- sezione 1: intro -->
-            <section id="intro">
-                <h1>Ridurre gli sprechi alimentari:</h1>
-                <h2>fai la tua parte.</h2>
-                <div id="container" class="d-flex p-1 ">
-                    <div id="sinistra">
-                        <img id="img-prima" src="https://source.unsplash.com/random/300x200?sig=1&food-fridge"
-                            alt="screen1" width="400">
+    <div class="container">
+        <!-- sezione 1: intro -->
+        <section id="intro" class="mt-5 pt-5">
+            <h1>Ridurre gli sprechi alimentari:</h1>
+            <h2>fai la tua parte.</h2>
+            <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start my-5 my-md-4">
+                <div id="sinistra">
+                    <img id="img-1" src="https://source.unsplash.com/random/300x200?sig=1&food-fridge" alt="screen1">
+                </div>
+                <div id="destra">
+                    <p class="pt-5 pt-md-0">Gli sprechi alimentari rappresentano una sfida globale con gravi conseguenze sia
+                        sull'ambiente che sull'economia. Ogni anno tonnellate di cibo vengono gettate, contribuendo
+                        al degrado dell'ambiente e al crescente problema della fame nel mondo. Il problema degli
+                        sprechi alimentari non riguarda solo i singoli consumatori, ma coinvolge anche ristoranti,
+                        supermercati e altre strutture. È un problema che richiede soluzioni innovative e pratiche
+                        per ridurre al minimo lo spreco e massimizzare l'utilizzo delle risorse alimentari
+                        disponibili.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- sezione 2: idea -->
+        <section id="idea">
+            <h2>Perche abbiamo creato Foodexp</h2>
+            <p>Siamo profondamente motivati ​​a combattere il problema degli sprechi alimentari. Abbiamo creato la
+                nostra applicazione con l'obiettivo di fornire agli utenti uno strumento pratico e intuitivo per
+                gestire in modo efficiente il contenuto del loro frigorifero e ridurre gli sprechi alimentari. Siamo
+                convinti che attraverso l'uso della tecnologia possiamo fare la differenza, incoraggiando una
+                maggiore consapevolezza e facilitando il processo di gestione degli alimenti.</p>
+        </section>
+
+        <!-- sezione 3: schermate -- carosello di immagini -->
+        <section id="schermate">
+            <h2>Anteprima dell'App</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos animi hic natus iure, deserunt
+                eligendi at sed temporibus culpa, nemo quam ea inventore rerum dolorum? Laborum ad ipsam delectus
+                itaque.</p>
+            <div id="carosello">
+                <div id="carouselExampleCaptions" class="carousel slide py-3">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
                     </div>
-                    <div id="destra">
-                        <p>Gli sprechi alimentari rappresentano una sfida globale con gravi conseguenze sia
-                            sull'ambiente che sull'economia. Ogni anno tonnellate di cibo vengono gettate, contribuendo
-                            al degrado dell'ambiente e al crescente problema della fame nel mondo. Il problema degli
-                            sprechi alimentari non riguarda solo i singoli consumatori, ma coinvolge anche ristoranti,
-                            supermercati e altre strutture. È un problema che richiede soluzioni innovative e pratiche
-                            per ridurre al minimo lo spreco e massimizzare l'utilizzo delle risorse alimentari
-                            disponibili.</p>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://source.unsplash.com/random/300x200?sig=1&ios-app" class="d-block w-100"
+                                alt="Schermata1">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>First slide label</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://source.unsplash.com/random/300x200?sig=2&ios-app" class="d-block w-100"
+                                alt="Schermata2">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Second slide label</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://source.unsplash.com/random/300x200?sig=3&ios-app" class="d-block w-100"
+                                alt="Schermata3">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Third slide label</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- sezione4: tecnologie -- collapse -->
+        <section id="tecnologie">
+            <h2>Tecnologie e sviluppo</h2>
+            <p>La nostra applicazione è stata sviluppata utilizzando una combinazione di tecnologie all'avanguardia,
+                tra cui il linguaggio di programmazione C# per lo sviluppo dell'applicazione, JSON per la gestione
+                dei dati e file CSV per l'importazione ed esportazione delle informazioni sul contenuto del
+                frigorifero. Queste tecnologie ci permettono di offrire un'esperienza utente fluida e affidabile.
+            </p>
+            <div class="accordion py-3" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            C#
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the first item's accordion body.</strong> It is shown by default, until
+                            the
+                            collapse plugin adds the appropriate classes that we use to style each element. These
+                            classes control the overall appearance, as well as the showing and hiding via CSS
+                            transitions. You can modify any of this with custom CSS or overriding our default
+                            variables.
+                            It's also worth noting that just about any HTML can go within the
+                            <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- sezione 2: idea -->
-            <section id="idea">
-                <h2>Perche abbiamo creato Foodexp</h2>
-                <p>Siamo profondamente motivati ​​a combattere il problema degli sprechi alimentari. Abbiamo creato la
-                    nostra applicazione con l'obiettivo di fornire agli utenti uno strumento pratico e intuitivo per
-                    gestire in modo efficiente il contenuto del loro frigorifero e ridurre gli sprechi alimentari. Siamo
-                    convinti che attraverso l'uso della tecnologia possiamo fare la differenza, incoraggiando una
-                    maggiore consapevolezza e facilitando il processo di gestione degli alimenti.</p>
-            </section>
-
-            <!-- sezione 3: schermate -- carosello di immagini -->
-            <section id="schermate">
-                <h2>Anteprima dell'App</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos animi hic natus iure, deserunt
-                    eligendi at sed temporibus culpa, nemo quam ea inventore rerum dolorum? Laborum ad ipsam delectus
-                    itaque.</p>
-                <div id="carosello">
-                    <div id="carouselExampleCaptions" class="carousel slide py-3">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="https://source.unsplash.com/random/300x200?sig=1&ios-app"
-                                    class="d-block w-100" alt="Schermata1">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>First slide label</h5>
-                                    <p>Some representative placeholder content for the first slide.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://source.unsplash.com/random/300x200?sig=2&ios-app"
-                                    class="d-block w-100" alt="Schermata2">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Second slide label</h5>
-                                    <p>Some representative placeholder content for the second slide.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://source.unsplash.com/random/300x200?sig=3&ios-app"
-                                    class="d-block w-100" alt="Schermata3">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Third slide label</h5>
-                                    <p>Some representative placeholder content for the third slide.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            JSON
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- sezione4: tecnologie -- collapse -->
-            <section id="tecnologie">
-                <h2>Tecnologie e sviluppo</h2>
-                <p>La nostra applicazione è stata sviluppata utilizzando una combinazione di tecnologie all'avanguardia,
-                    tra cui il linguaggio di programmazione C# per lo sviluppo dell'applicazione, JSON per la gestione
-                    dei dati e file CSV per l'importazione ed esportazione delle informazioni sul contenuto del
-                    frigorifero. Queste tecnologie ci permettono di offrire un'esperienza utente fluida e affidabile.
-                </p>
-                <div class="accordion py-3" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                C#
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the first item's accordion body.</strong> It is shown by default, until
-                                the
-                                collapse plugin adds the appropriate classes that we use to style each element. These
-                                classes control the overall appearance, as well as the showing and hiding via CSS
-                                transitions. You can modify any of this with custom CSS or overriding our default
-                                variables.
-                                It's also worth noting that just about any HTML can go within the
-                                <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                JSON
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>Esempio di inserimento alimento in formato JSON</strong>
-                                <pre class="rounded-4"><code>{
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>Esempio di inserimento alimento in formato JSON</strong>
+                            <pre class="rounded-4"><code>{
     "alimento": "mozzarella",
     "quantita": 2,
     "scadenza": "20/02/2024"
 }                                </code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                File csv
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until
-                                the
-                                collapse plugin adds the appropriate classes that we use to style each element. These
-                                classes control the overall appearance, as well as the showing and hiding via CSS
-                                transitions. You can modify any of this with custom CSS or overriding our default
-                                variables.
-                                It's also worth noting that just about any HTML can go within the
-                                <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- sezione5: questionario -- form -->
-            <section id="questionario">
-                <h2>Questionario</h2>
-                <form class="px-5 my-3">
-
-                    <div class="mt-4">
-                        <label for="campo-nome" class="form-label">Nome</label>
-                        <input type="email" class="form-control" id="campo-nome" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text"></div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            File csv
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until
+                            the
+                            collapse plugin adds the appropriate classes that we use to style each element. These
+                            classes control the overall appearance, as well as the showing and hiding via CSS
+                            transitions. You can modify any of this with custom CSS or overriding our default
+                            variables.
+                            It's also worth noting that just about any HTML can go within the
+                            <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="campo-email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="campo-email" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text"></div>
-                    </div>
-                    <div id="select">
-                        <label for="select" class="mb-3">Opzioni</label>
-                        <select class="form-select form-select-sm mb-2" aria-label="Large select example">
-                            <option selected>Selezione 1</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                </div>
+            </div>
+        </section>
 
-                        <select class="form-select form-select-sm mb-3" aria-label="Small select example">
-                            <option selected>Selezione 2</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-                    <div class="form-check small mx-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Selezione x
-                        </label>
-                    </div>
-                    <div class="form-check small mx-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            Selezione y
-                        </label>
-                    </div>
+        <!-- sezione5: questionario -- form -->
+        <section id="questionario">
+            <h2>Questionario</h2>
+            <form class="px-5 my-3">
 
-                    <div class="form-check small mx-3">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            Selezione z
-                        </label>
-                    </div>
+                <div class="mt-4">
+                    <label for="campo-nome" class="form-label">Nome</label>
+                    <input type="email" class="form-control" id="campo-nome" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="campo-email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="campo-email" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                </div>
+                <div id="select">
+                    <label for="select" class="mb-3">Opzioni</label>
+                    <select class="form-select form-select-sm mb-2" aria-label="Large select example">
+                        <option selected>Selezione 1</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
 
-                    <div class="mt-4">
-                        <label for="exampleFormControlTextarea1" class="form-label">Lascia un commento</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
+                    <select class="form-select form-select-sm mb-3" aria-label="Small select example">
+                        <option selected>Selezione 2</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div class="form-check small mx-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Selezione x
+                    </label>
+                </div>
+                <div class="form-check small mx-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Selezione y
+                    </label>
+                </div>
 
-                    <div class="mb-3 mt-2 d-flex justify-content-end">
-                        <input type="checkbox" class="form-check-input" id="check-acconsento">
-                        <label class="form-check-label small mx-1" for="check-acconsento">Acconsento all'invio dei
-                            dati</label>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-secondary">Submit</button>
-                    </div>
+                <div class="form-check small mx-3">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Selezione z
+                    </label>
+                </div>
 
-                </form>
-            </section>
+                <div class="mt-4">
+                    <label for="exampleFormControlTextarea1" class="form-label">Lascia un commento</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
 
-            <section id="contatti">
-                <h2>Contatti</h2>
-                <p>Il nostro team è composto da professionisti appassionati e dedicati, con competenze diverse e
-                    complementari nel campo dello sviluppo software e della gestione dei progetti. Siamo qui per
-                    aiutarti a ridurre gli sprechi alimentari e a rendere la gestione del tuo frigorifero più efficiente
-                    e conveniente. Per ulteriori informazioni o per contattarci, non esitare a scrivere a [inserire
-                    l'indirizzo email del team] o a seguirci sui nostri canali social [inserire i link ai canali social
-                    del team].</p>
-            </section>
+                <div class="mb-3 mt-2 d-flex justify-content-end">
+                    <input type="checkbox" class="form-check-input" id="check-acconsento">
+                    <label class="form-check-label small mx-1" for="check-acconsento">Acconsento all'invio dei
+                        dati</label>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                </div>
 
-        </div>
+            </form>
+        </section>
+
+        <section id="contatti">
+            <h2>Contatti</h2>
+            <p>Il nostro team è composto da professionisti appassionati e dedicati, con competenze diverse e
+                complementari nel campo dello sviluppo software e della gestione dei progetti. Siamo qui per
+                aiutarti a ridurre gli sprechi alimentari e a rendere la gestione del tuo frigorifero più efficiente
+                e conveniente. Per ulteriori informazioni o per contattarci, non esitare a scrivere a [inserire
+                l'indirizzo email del team] o a seguirci sui nostri canali social [inserire i link ai canali social
+                del team].</p>
+        </section>
+
     </div>
-
-
-    <footer class="align-bottom">
-        <p class="text-center"> &copy; 2024 Tutti i diritti riservati.</p>
-    </footer>
 
     <!-- Back to top button -->
     <button type="button" class="btn btn-secondary btn-floating btn-lg" id="btn-back-to-top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <footer>
+        <p id="footer" class="text-center blockquote"> &copy; 2024 Tutti i diritti riservati.</p>
+    </footer>
     <!-- bootstrap CDN js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
