@@ -9,3 +9,6 @@ Nel caso volessimo rimuoverne alcuni basta aprire VSC e digitare nella barra di 
     > app.recentDoc
 ```
 Selezionare il menù **File: Apri recenti...** e cancellare i file o le cartelle desiderate.
+
+## Impostare l'auto-formattazione durante il salvataggio
+Aprire il menu impostazione di VSC e cercare *Format on save*.
