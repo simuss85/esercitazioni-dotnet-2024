@@ -1,0 +1,92 @@
+/*-------- navbar --------*/
+nav {
+    font-size: 18px;
+}
+
+.navbar-collapse {
+    justify-content: center;
+}
+
+#nome-logo {
+    font-family: "Protest Revolution";
+    font-size: 20px;
+}
+
+/*----- body -----------------*/
+#my-body {
+    background-image: linear-gradient(rgb(249, 251, 253), rgb(247, 251, 255), rgb(242, 246, 253), rgb(240, 242, 245), rgb(241, 245, 250));
+}
+
+/*--------- sezioni -----------*/
+#my-container {
+    height: 90vh;
+}
+
+section {
+    padding-top: 100px;
+    padding-bottom: 30px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+p {
+    padding-top: 10px;
+}
+
+/*---- sezione 1 ---------*/
+
+#sinistra {
+    margin-top: 5px;
+}
+
+#destra {
+    padding-left: 25px;
+}
+
+/*------- carosello ---------*/
+#carosello {
+    display: flex;
+    justify-content: center;
+}
+
+#carouselExampleCaptions {
+    width: 80%;
+}
+
+/*----------- collapse -----------*/
+.accordion-button:focus {
+
+    &:focus {
+        background-color: #f4fcff;
+        border-color: #828687;
+    }
+}
+
+/*------- bottone up -----------*/
+#bottone-up {
+    float: right;
+    border-radius: 20px;
+}
+
+#btn-back-to-top {
+    position: fixed;
+    bottom: 75px;
+    right: 20px;
+    display: none;
+    border-radius: 30px;
+}
+
+/*------------------ footer -------------------*/
+footer {
+    height: 47px;
+    box-shadow: 0px -9px 25px 0px rgba(87, 87, 87, 0.521);
+}
+
+#footer {
+    font-size: 15px;
+    color: rgb(68, 68, 68);
+    border-color: rgba(248, 249, 250, 1);
+    border-radius: 5px;
+}
+
+/*----------- media query -----------------*/
