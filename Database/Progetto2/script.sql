@@ -41,10 +41,40 @@ SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alim
 SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id ORDER BY categorie.nome;
 
 /*query per la visualizzazione della lista della spesa*/
-SELECT * FROM listaSpesa JOIN utenti ON listaSpesa.id_utente = utenti.id;
+SELECT listaSpesa.id, listaSpesa.alimento, listaSpesa.quantita, utenti.nome FROM listaSpesa JOIN utenti ON listaSpesa.id_utente = utenti.id;
 
 /*query per la visualizzazione delle categorie*/
 SELECT * FROM categorie;
 
 /*query per la visualizzazione degli utenti*/
 SELECT * FROM utenti;
+
+/*query per inserire un dato nella lista della spesa*/
+INSERT INTO listaSpesa (alimento, quantita, id_utente) VALUES ('{nome}',{quantita}, (SELECT id FROM utenti WHERE nome = '{utente}'));
+
+/*query per inserire un alimento del frigorifero*/
+INSERT INTO alimenti (nome, quantita, data_inserimento, data_scadenza, id_categoria) VALUES ('{nome}',{quantita}, DATE('now'), '{dataScadenza}', (SELECT id FROM categorie WHERE nome = '{categoria}'));
+
+/*query per la modifica dell'utente*/
+UPDATE utenti SET nome = '{nome}' WHERE id = {idUtente};
+
+/*query per la modifica della categoria*/
+UPDATE categorie SET nome = '{nome}' WHERE id = {idCategoria};
+
+/*query per la modifica degli alimenti*/
+UPDATE alimenti SET nome = '{nome}', quantita = {quantita}, data_inserimento = DATE('now'), data_scadenza = '{dataScadenza}', id_Categoria = (SELECT id FROM categorie WHERE nome = '{categoria}') WHERE id = {idAlimento};
+
+/*query per la modifica della lista della spesa*/
+UPDATE listaSpesa SET alimento = '{alimento}', quantita = {quantita}, id_utente = (SELECT id FROM utenti WHERE nome = '{nomeUtente}') WHERE  id = {idLista};
+
+/*query che elimina un record dagli alimenti*/
+DELETE FROM alimenti WHERE id = {idAlimento};
+
+/*query che elimina un record dalle categorie*/
+DELETE FROM categorie WHERE id = {idCategorie};
+
+/*query che elimina un record dalla lista della spesa*/
+DELETE FROM listaSpesa WHERE id = {idLista};
+
+/*query che elimina un record dagli utenti*/
+DELETE FROM utenti WHERE id = {idUtente};

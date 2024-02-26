@@ -17,7 +17,8 @@ class Program
         string selezione;   //scelta utente dei menù
         bool eseguito; //per la gestione del sotto-menu
 
-        utente = InizializzaApp();
+        InizializzaApp();
+        utente = CreaUtente();
 
         while (true)
         {
@@ -120,6 +121,7 @@ class Program
                     eseguito = false;
                     while (!eseguito)
                     {
+                        Console.Clear();
                         Console.WriteLine("Lista della spesa\n");
                         MenuListaSpesa();
                         //richiesta selezione
@@ -138,7 +140,7 @@ class Program
                                 break;
 
                             case "2":
-                                AggiungiAListaSpesa();
+                                InserisciAListaSpesa(utente);
                                 Console.WriteLine("\npremi un tasto...");
                                 Console.ReadKey();
                                 break;
@@ -172,6 +174,7 @@ class Program
                     eseguito = false;
                     while (!eseguito)
                     {
+                        Console.Clear();
                         Console.WriteLine("Gestisci alimenti\n");
                         MenuAlimenti();
                         //richiesta selezione
@@ -218,6 +221,7 @@ class Program
                     eseguito = false;
                     while (!eseguito)
                     {
+                        Console.Clear();
                         Console.WriteLine("Gestisci categorie\n");
                         MenuCategorie();
                         //richiesta selezione
@@ -264,6 +268,7 @@ class Program
                     eseguito = false;
                     while (!eseguito)
                     {
+                        Console.Clear();
                         Console.WriteLine("Gestisci utenti\n");
                         MenuUtenti();
                         //richiesta selezione
@@ -400,7 +405,7 @@ class Program
     /// Crea le cartelle, il database, le tabelle e inserisce l'utente attuale nella tabella utenti
     /// </summary>
     /// <returns>Il nome dell'utente attuale di tipo string</returns>
-    static string InizializzaApp()
+    static void InizializzaApp()
     {
         string dirDb = @"data";     //path cartella del database
         string path = @"data/database.db";
@@ -431,42 +436,50 @@ class Program
             connection.Close();
         }
 
-        //inserisco l'utente attuale
-        string nome = "";
+    }
+
+    /// <summary>
+    /// Permette di creare un nuovo utente o di gestire uno gia presente
+    /// </summary>
+    /// <returns>La stringa del nome utente attuale</returns>
+    static string CreaUtente()
+    {
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3");
+        connection.Open();
+
+        string nome;
         bool eseguito = false;
-        while (!eseguito)
+
+        Console.WriteLine("Inserisci il tuo nome: ");
+        nome = Console.ReadLine()!;
+
+        //ricerca nella tebella utenti
+        string sql = "SELECT nome FROM utenti;";
+        SQLiteCommand command = new(sql, connection);
+        //leggo il contenuto della tabella utenti
+        SQLiteDataReader reader = command.ExecuteReader();
+
+        while (reader.Read())   //verifico se il nome non è gia inserito
         {
-            Console.WriteLine("Inserisci il tuo nome: ");
-            nome = Console.ReadLine()!;
-
-            //apro connessione al db
-            SQLiteConnection connection = new($"Data Source=data/database.db; Version=3");
-            connection.Open();
-            string sql = "SELECT nome FROM utenti;";
-            SQLiteCommand command = new(sql, connection);
-            //leggo il contenuto della tabella utenti
-            SQLiteDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())   //verifico se il nome non è gia inserito
+            if ($"{reader["nome"]}" == nome)
             {
-                if ($"{reader["nome"]}" == nome)
-                {
-                    Console.WriteLine($"Ciao {reader["nome"]}!!!");
-                    eseguito = true;
-                    break;
-                }
-            }
-
-            if (!eseguito)  //se non c'è il nome lo iserisco nel db.utenti
-            {
-                sql = $"INSERT INTO utenti (nome) VALUES ('{nome}');";
-                command = new(sql, connection);
-                command.ExecuteNonQuery();
+                Console.WriteLine($"Ciao {reader["nome"]}!!!");
+                Console.WriteLine("\npremi un tasto...");
+                Console.ReadKey();
                 eseguito = true;
             }
-            //chiudo la connessione
-            connection.Close();
         }
+
+        if (!eseguito)  //se non c'è il nome lo iserisco nel db.utenti
+        {
+            sql = $"INSERT INTO utenti (nome) VALUES ('{nome}');";
+            command = new(sql, connection);
+            command.ExecuteNonQuery();
+        }
+
+        //chiudo la connessione
+        connection.Close();
         return nome;
     }
 
@@ -508,12 +521,12 @@ class Program
     #region METODI VISUALIZZA ALIMENTI
 
     /// <summary>
-    /// Visualizza a schermo il risultato di una query sql
+    /// Visualizza a schermo il risultato di una query sql.
     /// </summary>
     /// <param name="sql">La query che interroga il database</param>
     /// <param name="table">Oggetto di tipo table della classe Spectre.Console che contiene le etichette corrette</param>
-    /// <param name="colonne">Il numero di colonne per la crazione della table</param>
-    static void Stampa(string sql, Table table)
+    /// <param name="colonna">Il numero di colonne per la crazione della table</param>
+    static void Stampa(string sql, Table table, int colonna)
     {
         SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
         connection.Open();
@@ -521,9 +534,16 @@ class Program
         SQLiteCommand command = new(sql, connection);
         SQLiteDataReader reader = command.ExecuteReader();
 
+
+        int riga = 0;
         while (reader.Read())
         {
-            table.AddRow($"{reader[0]}", $"{reader[1]}", $"{reader[2]}", $"{reader[3]}", $"{reader[4]}");
+            table.AddEmptyRow();
+            for (int i = 0; i < colonna; i++)
+            {
+                table.UpdateCell(riga, i, $"{reader[i]}");
+            }
+            riga++;
         }
 
         AnsiConsole.Write(table);
@@ -531,7 +551,7 @@ class Program
     }
 
     /// <summary>
-    /// Visualizza lista completa degli alimenti
+    /// Visualizza lista completa degli alimenti sotto forma di tabella
     /// </summary>
     static void VisualizzaAlimenti()
     {
@@ -539,11 +559,11 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome, DATE(alimenti.data_scadenza) FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id;";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     /// <summary>
-    /// Visualizza lista degli alimenti scaduti
+    /// Visualizza lista degli alimenti scaduti sotto forma di tabella
     /// </summary>
     static void VisualizzaScaduti()
     {
@@ -551,11 +571,11 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id WHERE DATE(data_scadenza) < DATE('now');";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     /// <summary>
-    /// Visualizza alimenti in esaurimento (quantita < 2)
+    /// Visualizza alimenti in esaurimento (quantita < 2) sotto forma di tabella
     /// </summary>
     static void VisualizzaInEsaurimento()
     {
@@ -563,7 +583,7 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id WHERE quantita < 2;";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     /// <summary>
@@ -575,7 +595,7 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id ORDER BY alimenti.nome;";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     /// <summary>
@@ -587,7 +607,7 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id ORDER BY alimenti.data_scadenza;";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     /// <summary>
@@ -599,7 +619,7 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id ORDER BY alimenti.data_inserimento;";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     /// <summary>
@@ -611,72 +631,237 @@ class Program
         table.AddColumns("id", "nome", "quantità", "categoria", "data_scadenza");
 
         string sql = "SELECT alimenti.id, alimenti.nome, alimenti.quantita, categorie.nome , DATE(alimenti.data_scadenza)FROM alimenti JOIN categorie ON alimenti.id_categoria = categorie.id ORDER BY categorie.nome;";
-        Stampa(sql, table);
+        Stampa(sql, table, 5);
     }
 
     #endregion
 
     #region METODI LISTA SPESA
+    /// <summary>
+    /// Visualizza la lista della spesa sotto forma di tabella
+    /// </summary>
     static void VisualizzaListaSpesa()
     {
         var table = new Table();
         table.AddColumns("id", "alimento", "quantità", "nome_utente");
 
-        string sql = "SELECT * FROM listaSpesa JOIN utenti ON listaSpesa.id_utente = utenti.id;";
-        Stampa(sql, table);
+        string sql = "SELECT listaSpesa.id, listaSpesa.alimento, listaSpesa.quantita, utenti.nome FROM listaSpesa JOIN utenti ON listaSpesa.id_utente = utenti.id;";
+        Stampa(sql, table, 4);
     }
 
-    static void AggiungiAListaSpesa()
+    /// <summary>
+    /// Inserisce un alimento nella lista della spesa, trova in automatico l'id_utente
+    /// </summary>
+    /// <param name="utente">Nome dell'utente attuale </param>
+    static void InserisciAListaSpesa(string utente)
     {
+        Console.WriteLine("Cosa vuoi aggiungere? ");
+        string nome = Console.ReadLine()!;
+        Console.WriteLine("Quanti ne inserisco? ");
+        string quantita = Console.ReadLine()!;
 
+        // Apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"INSERT INTO listaSpesa (alimento, quantita, id_utente) VALUES ('{nome}', {quantita}, (SELECT id FROM utenti WHERE nome = '{utente}'));";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        //chiudo la connessione
+        connection.Close();
     }
 
     static void ModificaListaSpesa()
     {
+        Console.WriteLine("Quale alimento vuoi modificare?\n");
+        VisualizzaListaSpesa();
+        string idLista = Console.ReadLine()!;
 
+        Console.WriteLine("Inserisci nuovo alimento");
+        string alimento = Console.ReadLine()!;
+
+        Console.WriteLine("Inserisci nuova quantita");
+        string quantita = Console.ReadLine()!;
+
+        Console.WriteLine("Nome di chi ha inserito il prodotto");
+        string nomeUtente = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"UPDATE listaSpesa SET alimento = '{alimento}', quantita = {quantita}, id_utente = (SELECT id FROM utenti WHERE nome = '{nomeUtente}') WHERE  id = {idLista};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        //chiudo la connessione
+        connection.Close();
     }
 
+    /// <summary>
+    /// Permette di eliminare un record dalla tabella lista della spesa
+    /// </summary>
     static void EliminaInListaSpesa()
     {
+        Console.WriteLine("Quale alimento vuoi eliminare?\n");
+        VisualizzaListaSpesa();
 
+        string idLista = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"DELETE FROM listaSpesa WHERE id = {idLista};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+
+        //chiudo la connessione
+        connection.Close();
     }
     #endregion
 
     #region METODI GESTIONE ALIMENTI
     static void InserisciAlimento()
     {
+        Console.WriteLine("Cosa vuoi aggiungere? ");
+        string nome = Console.ReadLine()!;
+        Console.WriteLine("Quantità? ");
+        string quantita = Console.ReadLine()!;
+        Console.WriteLine("Data di scadenza YYYY-MM-DD: ");
+        string dataScadenza = Console.ReadLine()!;
+        Console.WriteLine("Categoria?");
+        string categoria = Console.ReadLine()!;
 
+        // Apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"INSERT INTO alimenti (nome, quantita, data_inserimento, data_scadenza, id_categoria) VALUES ('{nome}',{quantita}, DATE('now'), '{dataScadenza}', (SELECT id FROM categorie WHERE nome = '{categoria}'));";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        //chiudo la connessione
+        connection.Close();
     }
 
+    /// <summary>
+    /// Permette di modificare un alimento del frigo
+    /// </summary>
     static void ModificaAlimento()
     {
+        Console.WriteLine("Quale alimento vuoi modificare?\n");
+        VisualizzaAlimenti();
+        string idAlimento = Console.ReadLine()!;
 
+        Console.WriteLine("Inserisci nuovo alimento");
+        string nome = Console.ReadLine()!;
+
+        Console.WriteLine("Inserisci nuova quantita");
+        string quantita = Console.ReadLine()!;
+
+        Console.WriteLine("Inserisci nuova data_scadenza YYYY-MM-DD");
+        string dataScadenza = Console.ReadLine()!;
+
+        Console.WriteLine("Inserisci categoria");
+        string categoria = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"UPDATE alimenti SET nome = '{nome}', quantita = {quantita}, data_inserimento = DATE('now'), data_scadenza = '{dataScadenza}', id_Categoria = (SELECT id FROM categorie WHERE nome = '{categoria}') WHERE id = {idAlimento};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        //chiudo la connessione
+        connection.Close();
     }
 
+    /// <summary>
+    /// Permette di eliminare un alimento dalla tabella alimenti
+    /// </summary>
     static void EliminaAlimento()
     {
+        Console.WriteLine("Quale alimento vuoi eliminare?\n");
+        VisualizzaAlimenti();
 
+        string idAlimento = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"DELETE FROM alimenti WHERE id = {idAlimento};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+
+        //chiudo la connessione
+        connection.Close();
     }
     #endregion
 
     #region METODI GESTIONE CATEGORIE
+    /// <summary>
+    /// Visualizza elenco categorie sotto forma di tabella
+    /// </summary>
     static void VisualizzaCategorie()
     {
         var table = new Table();
         table.AddColumns("id", "categoria");
 
         string sql = "SELECT * FROM categorie;";
-        Stampa(sql, table);
+        Stampa(sql, table, 2);
     }
 
+    /// <summary>
+    /// Permette di modificare il nome di una categoria
+    /// </summary>
     static void ModificaCategoria()
     {
+        Console.WriteLine("Quale categoria vuoi modificare?\n");
+        VisualizzaCategorie();
+        string idCategoria = Console.ReadLine()!;
 
+        Console.WriteLine("Inserisci nuovo nome categoria");
+        string nome = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"UPDATE categorie SET nome = '{nome}' WHERE id = {idCategoria};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        //chiudo la connessione
+        connection.Close();
     }
 
+    /// <summary>
+    /// Permette di eliminare una categoria dalla tabella categorie
+    /// </summary>
     static void EliminaCategoria()
     {
+        Console.WriteLine("Quale categoria vuoi eliminare?\n");
+        VisualizzaCategorie();
 
+        string idCategoria = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"DELETE FROM categorie WHERE id = {idCategoria};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+
+        //chiudo la connessione
+        connection.Close();
     }
     #endregion
 
@@ -687,17 +872,51 @@ class Program
         table.AddColumns("id", "nome_utente");
 
         string sql = "SELECT * FROM utenti;";
-        Stampa(sql, table);
+        Stampa(sql, table, 2);
     }
 
+    /// <summary>
+    /// Permette di modificare il nome di un utente
+    /// </summary>
     static void ModificaUtente()
     {
+        Console.WriteLine("Quale utente vuoi modificare?\n");
+        VisualizzaUtenti();
+        string idUtente = Console.ReadLine()!;
 
+        Console.WriteLine("Inserisci nuovo nome");
+        string nome = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"UPDATE utenti SET nome = '{nome}' WHERE id = {idUtente};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+        //chiudo la connessione
+        connection.Close();
     }
 
     static void EliminaUtente()
     {
+        Console.WriteLine("Quale utente vuoi eliminare?\n");
+        VisualizzaUtenti();
 
+        string idUtente = Console.ReadLine()!;
+
+        //apro la connessione
+        SQLiteConnection connection = new($"Data Source=data/database.db; Version=3;");
+        connection.Open();
+
+        string sql = $"DELETE FROM utenti WHERE id = {idUtente};";
+
+        SQLiteCommand command = new(sql, connection);
+        command.ExecuteNonQuery();
+
+        //chiudo la connessione
+        connection.Close();
     }
     #endregion
 
