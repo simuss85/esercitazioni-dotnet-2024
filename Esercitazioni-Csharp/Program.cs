@@ -2,13 +2,42 @@
 {
     static void Main(string[] args)
     {
-        Dado d1 = new();
-        Dado d2 = new();
+        Player p1 = new();
+        Player p2 = new();
+        string path = @"save.csv";
+        string[] file = File.ReadAllLines(path);
+        Console.WriteLine("file csv letto...premi");
+        Console.ReadKey();
 
-        int n1 = d1.Lancia();
-        int n2 = d2.Lancia();
+        int count = 0;
+        foreach (string riga in file)
+        {
+            if (count == 0)
+            {
+                p1.Carica(riga.Split(","));
+                Console.WriteLine("scrittura p1...premi");
+                Console.ReadKey();
 
-        Console.WriteLine($"Dado 1: {n1}");
-        Console.WriteLine($"Dado 2: {n2}");
+            }
+            else
+            {
+                p2.Carica(riga.Split(","));
+                Console.WriteLine("scrittura p2...premi");
+                Console.ReadKey();
+            }
+            count++;
+
+        }
+
+        Console.WriteLine("Stampa del giocatore 1...premi");
+        Console.ReadKey();
+
+        p1.Stampa();
+        Console.WriteLine("Stampa del giocatore 2...premi");
+        Console.ReadKey();
+
+        p2.Stampa();
+
+
     }
 }
