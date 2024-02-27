@@ -957,10 +957,13 @@ Argomenti:
 
 <!-- ******************************************  27 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>27 feb 2024 </h3></summary>
+    <summary><h3>27 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- Introduzione a classi e oggetti.
+
+### :white_check_mark: Commit program status
+- Inseriti commit da **n.102** a **n.106**
 
 </details>
 
