@@ -5532,7 +5532,52 @@ Main
 ```
 </details>
 
-### 103 - Classi: 
+### 103 - Classi: crea una classe Persona con costruttore.
+<details>
+    <summary> codice </summary>
+
+Classe
+```c#
+    class Persona
+    {
+        public string? nome;
+        public string? cognome;
+        public int eta;
+
+        //costruttore
+        public Persona(string nome, string cognome, int eta)
+        {
+            this.nome = nome;
+            this.cognome = cognome;
+            this.eta = eta;
+        }
+    }
+    
+    //stessa classe ma con costruttore primario ma solo con 1 costruttore!!!
+    class Persona(string nome, string cognome, int eta)
+    {
+        public string? nome = nome;
+        public string? cognome = cognome;
+        public int eta = eta;
+    }
+```
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Persona p = new("mario", "Rossi", 30);
+
+            Console.WriteLine($"Nome: {p.nome}");
+            Console.WriteLine($"Cognome: {p.cognome}");
+            Console.WriteLine($"Eta: {p.eta}");
+        }
+    }
+```
+</details>
+
+### 104 - Classi: crea una classe Persona con costruttore e metodo di classe Stampa.
 <details>
     <summary> codice </summary>
 
@@ -5543,23 +5588,33 @@ Classe
         public string nome;
         public string cognome;
         public int eta;
-    }
 
+        //costruttore
+        public Persona(string nome, string cognome, int eta)
+        {
+            this.nome = nome;
+            this.cognome = cognome;
+            this.eta = eta;
+        }
+
+        public void Stampa()
+        {
+            Console.WriteLine($"Nome: {nome}");
+            Console.WriteLine($"Cognome: {cognome}");
+            Console.WriteLine($"Eta: {eta}");
+        }
+    }
 ```
+
 Main
 ```c#
     class Program
     {
         static void Main(string[] args)
         {
-            Persona p = new();
-            p.nome = "Mario";
-            p.cognome = "Rossi";
-            p.eta = 30;
+            Persona p = new("mario", "Rossi", 30);
 
-            Console.WriteLine($"Nome: {p.nome}");
-            Console.WriteLine($"Cognome: {p.cognome}");
-            Console.WriteLine($"Eta: {p.eta}");
+            p.Stampa();
         }
     }
 ```
