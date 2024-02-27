@@ -5498,3 +5498,69 @@ possibile risultato test.json:
     ]
 ```
 </details>
+
+### 102 - Classi: crea una classe Persona di base
+<details>
+    <summary> codice </summary>
+
+Classe
+```c#
+    class Persona
+    {
+        public string nome;
+        public string cognome;
+        public int eta;
+    }
+
+```
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Persona p = new();
+            p.nome = "Mario";
+            p.cognome = "Rossi";
+            p.eta = 30;
+
+            Console.WriteLine($"Nome: {p.nome}");
+            Console.WriteLine($"Cognome: {p.cognome}");
+            Console.WriteLine($"Eta: {p.eta}");
+        }
+    }
+```
+</details>
+
+### 103 - Classi: 
+<details>
+    <summary> codice </summary>
+
+Classe
+```c#
+    class Persona
+    {
+        public string nome;
+        public string cognome;
+        public int eta;
+    }
+
+```
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Persona p = new();
+            p.nome = "Mario";
+            p.cognome = "Rossi";
+            p.eta = 30;
+
+            Console.WriteLine($"Nome: {p.nome}");
+            Console.WriteLine($"Cognome: {p.cognome}");
+            Console.WriteLine($"Eta: {p.eta}");
+        }
+    }
+```
+</details>
