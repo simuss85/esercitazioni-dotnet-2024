@@ -2,8 +2,13 @@
 {
     static void Main(string[] args)
     {
-        Persona p = new("mario", "Rossi", 30);
+        Dado d1 = new();
+        Dado d2 = new();
 
-        p.Stampa();
+        int n1 = d1.Lancia();
+        int n2 = d2.Lancia();
+
+        Console.WriteLine($"Dado 1: {n1}");
+        Console.WriteLine($"Dado 2: {n2}");
     }
 }

@@ -5619,3 +5619,91 @@ Main
     }
 ```
 </details>
+
+### 105 - Classi: crea una classe Persona con costruttore e metodo di classe Stampa e getter e setter.
+<details>
+    <summary> codice </summary>
+
+Classe
+```c#
+    class Persona
+    {
+        private string? nome;
+        private string? cognome;
+        private int eta;
+
+        //costruttore
+        public Persona(string nome, string cognome, int eta)
+        {
+            this.Nome = nome;
+            this.Cognome = cognome;
+            this.Eta = eta;
+        }
+
+        //getter e setter
+        public string Nome { get => nome!; set => nome = value; }
+        public string Cognome { get => cognome!; set => cognome = value; }
+        public int Eta { get => eta; set => eta = value; }
+
+        //metodi di classe
+        public void Stampa()
+        {
+            Console.WriteLine($"Nome: {Nome}");
+            Console.WriteLine($"Cognome: {Cognome}");
+            Console.WriteLine($"Eta: {Eta}");
+        }
+    }
+```
+
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Persona p = new("mario", "Rossi", 30);
+
+            p.Stampa();
+            p.Nome = "Luigi";
+            p.Stampa();
+
+            Console.WriteLine(p.Nome);
+        }
+    }
+```
+</details>
+
+### 106 - Classi: crea una classe Dado con metodo Lancia.
+<details>
+    <summary> codice </summary>
+
+Classe
+```c#
+    class Dado
+    {
+        private Random random = new();
+
+        public int Lancia()
+        {
+            return random.Next(1, 7);
+        }
+    }
+```
+
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dado d1 = new();
+            Dado d2 = new();
+
+            int n1 = d1.Lancia();
+            int n2 = d2.Lancia();
+
+            Console.WriteLine($"Dado 1: {n1}");
+            Console.WriteLine($"Dado 2: {n2}");
+        }
+    }
+```
