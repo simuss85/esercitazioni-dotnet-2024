@@ -3,7 +3,7 @@ class Player
     private string? codiceID;
     private string? nome;
     private string? colore;
-    private List<string> territori;
+    private List<string>? territori;
 
     //costruttore
     public Player() { }
@@ -34,7 +34,7 @@ class Player
         {
             if (arrayCSV[i] != "_")
             {
-                territori.Add(arrayCSV[i]);
+                territori!.Add(arrayCSV[i]);
             }
         }
     }
@@ -48,7 +48,7 @@ class Player
         Console.WriteLine($"Nome: {nome}");
         Console.WriteLine($"Armate: {colore}");
         Console.Write("Lista territori attuale: ");
-        Console.WriteLine(territori.Count);
+        Console.WriteLine(territori!.Count);
         if (territori.Count != 0)
         {
             foreach (string territorio in territori)

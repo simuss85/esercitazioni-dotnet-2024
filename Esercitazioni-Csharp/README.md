@@ -5708,3 +5708,306 @@ Main
     }
 ```
 </details>
+
+### 107 - Classi: crea una classe ContoBancario e ContoCorrente che la estende.
+<details>
+    <summary> codice </summary>
+
+Classi
+```c#
+    //classe madre
+    class ContoBancario
+    {
+        private string? nome;
+        private double saldo;
+
+        public ContoBancario(string nome, double saldo)
+        {
+            this.nome = nome;
+            this.saldo = saldo;
+        }
+
+        public string? Nome { get => nome; set => nome = value; }
+        public double Saldo { get => saldo; set => saldo = value; }
+
+        /*
+        public string Nome 
+        {
+            get { return nome; }
+            set { nome = value; }
+        }
+
+        public double Saldo
+        {
+            get { return saldo; }
+            set { saldo = value; }
+        }
+        */
+
+        public void Deposita(double importo)
+        {
+            saldo += importo;
+        }
+
+        public void Preleva(double importo)
+        {
+            saldo -= importo;
+        }
+
+        public void Stampa()
+        {
+            Console.WriteLine($"Nome: {nome}");
+            Console.WriteLine($"Saldo: {saldo}");
+        }
+    }
+
+    //classe figlia
+    class ContoCorrente : ContoBancario
+    {
+        private double tasso;
+
+        public ContoCorrente(string nome, double saldo, double tasso) : base(nome, saldo)
+        {
+            this.tasso = tasso;
+        }
+
+        public double Tasso { get => tasso; set => tasso = value; }
+
+        public void CalcolaInteressi()
+        {
+            double interessi = Saldo * tasso / 100;
+            Saldo += interessi;
+        }
+    }
+```
+
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ContoCorrente cc = new("Mario Rossi", 1000, 2);
+            cc.Deposita(500);
+            cc.Preleva(200);
+            cc.CalcolaInteressi();
+            cc.Stampa();
+        }
+    }
+```
+</detalis>
+
+### 108 - Classi: crea una classe Libro e una Biblioteca (doppia versione).
+<details>
+    <summary> codice </summary>
+
+Classi
+```c#
+    //versione brutta
+    class Libro
+    {
+        public string titolo;
+        public string autore;
+
+        public Libro(string titolo, string autore)
+        {
+            this.titolo = titolo;
+            this.autore = autore;
+        }
+    }
+
+    class Biblioteca
+    {
+        private List<Libro> libri = new();
+
+        public void Aggiungi(Libro libro)
+        {
+            libri.Add(libro);
+        }
+
+        public void Stampa()
+        {
+            foreach (Libro libro in libri)
+            {
+                Console.WriteLine($"Titolo: {libro.titolo}");
+                Console.WriteLine($"Autore: {libro.autore}");
+            }
+        }
+    }
+
+    //mia versione migliorata
+    class Libro
+    {
+        private string titolo;
+        private string autore;
+
+        public Libro(string titolo, string autore)
+        {
+            this.titolo = titolo;
+            this.autore = autore;
+        }
+
+        public string Titolo { get => titolo; set => titolo = value; }
+        public string Autore { get => autore; set => autore = value; }
+
+        public void Stampa()
+        {
+            Console.WriteLine($"Titolo: {titolo}");
+            Console.WriteLine($"Autore: {autore}");
+        }
+    }
+
+    class Biblioteca
+    {
+        private List<Libro> libri = new();
+
+        public void Aggiungi(Libro libro)
+        {
+            libri.Add(libro);
+        }
+
+        public void Stampa()
+        {
+            foreach (Libro libro in libri)
+            {
+                libro.Stampa();
+            }
+        }
+    }
+```
+
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Biblioteca biblioteca = new();
+            Libro li = new("Il signore degli anelli", "J.R.R. Tolkien");
+            Libro l2 = new("Il nome della rosa", "Umberto Eco");
+            biblioteca.Aggiungi(li);
+            biblioteca.Aggiungi(l2);
+            biblioteca.Stampa();
+        }
+    }
+```
+</details>
+
+### 109 - Classi: crea una classe Persona (senza costruttore) e una GestioneJson.
+<details>
+    <summary> codice </summary>
+
+Classi
+```c#
+    class Persona
+    {
+        public string? Nome { get; set; }
+        public int Eta { get; set; }
+        public bool Utilizzato { get; set; }
+    }
+```
+Classe con Main
+```c#
+    using Newtonsoft.Json;
+
+    class GestioneJson
+    {
+        static void Main(string[] args)
+        {
+            Persona persona = new()
+            {
+                Nome = "Mario Rossi",
+                Eta = 30,
+                Utilizzato = true
+            };
+
+            //serializzazione dell'oggetto in una stringa JSON
+            string json = JsonConvert.SerializeObject(persona, Formatting.Indented);
+            File.WriteAllText(@"jsonProve/persona.json", json);
+
+            //deserializzazione della stringa JSON in un oggetto persona
+            string jsonDaLeggere = File.ReadAllText(@"jsonProve/persona.json");
+            Persona personaDeserializzata = JsonConvert.DeserializeObject<Persona>(jsonDaLeggere)!;
+
+            Console.WriteLine(personaDeserializzata.Nome);
+        }
+    }
+```
+</details>
+
+### 110 - Classi: crea una classe Animali, Cane e Gatto.
+<details>
+    <summary> codice </summary>
+
+Classi
+```c#
+    //classe madre
+    class Animale
+    {
+        public string nome;
+        public int eta;
+
+        public Animale(string nome, int eta)
+        {
+            this.nome = nome;
+            this.eta = eta;
+        }
+
+        public virtual void Stampa()
+        {
+            Console.WriteLine($"Nome: {nome}");
+            Console.WriteLine($"Età: {eta}");
+        }
+    }
+
+    //classi figlie
+    class Cane : Animale
+{
+    public string razza;
+
+    public Cane(string nome, int eta, string razza) : base(nome, eta)
+    {
+        this.razza = razza;
+    }
+
+    public override void Stampa()
+    {
+        base.Stampa();
+        Console.WriteLine($"Razza: {razza}");
+    }
+
+    class Gatto : Animale
+    {
+        public string colore;
+
+        public Gatto(string nome, int eta, string colore) : base(nome, eta)
+        {
+            this.colore = colore;
+        }
+
+        public override void Stampa()
+        {
+            base.Stampa();
+            Console.WriteLine($"Colore: {colore}");
+        }
+    }
+}
+
+```
+
+Main
+```c#
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Animale a1 = new Cane("Fido", 5, "Labrador");
+            Animale a2 = new Gatto("Felix", 3, "Nero");
+
+            a1.Stampa();
+            a2.Stampa();
+
+        }
+    }
+```
+</details>
