@@ -52,17 +52,17 @@
 
 
         Console.Clear();
-        
+
         Console.WriteLine("Inserisci il tuo nome");
         string nomeGiocatore = Console.ReadLine()!;
 
 
-        string punteggioGiocatore; 
+        string punteggioGiocatore;
         string saluto = $"Ciao {nomeGiocatore}";
 
         // verifico se è un nuovo giocatore
         if (!listaGiocatori.Any(linea => linea.StartsWith(nomeGiocatore)))   //salvo il nome del nuovo giocatore e il punteggio subito sotto
-        {   
+        {
             punteggioGiocatore = $"Punteggio: {punteggioTotale}";
             //stampa della prima riga di asterischi
             for (int i = 0; i < 18; i++)
@@ -99,7 +99,6 @@
 
             for (int i = 0; i < (18 - punteggioGiocatore.Length); i++)
             {
-
                 if (i == (17 - punteggioGiocatore.Length))
                 {
                     File.AppendAllText(path, "\n");          //chiusura del box di * (dava problemi!!!)
