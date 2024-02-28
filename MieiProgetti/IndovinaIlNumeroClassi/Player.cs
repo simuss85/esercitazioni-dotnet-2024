@@ -16,8 +16,4 @@ public class Player
         this.punteggio = 0;
         this.tentativi = 0;
     }
-
-
-
-
 }
