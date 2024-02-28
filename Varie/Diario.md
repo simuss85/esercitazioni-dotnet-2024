@@ -969,10 +969,10 @@ Argomenti:
 
 <!-- ******************************************  28 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>28 feb 2024 </h3></summary>
+    <summary><h3>28 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- Classi e oggetti nei nostri programmi.
 
 </details>
 
