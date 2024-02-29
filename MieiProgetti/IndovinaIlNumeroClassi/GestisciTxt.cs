@@ -29,6 +29,7 @@ public class GestisciTxt
                     p.Punteggio = double.Parse(listaGiocatori[i + 1].Substring(11));
                 }
             }
+            p.Saluto = "Bentornato";
         }
     }
 
