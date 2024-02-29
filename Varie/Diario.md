@@ -978,10 +978,39 @@ Argomenti:
 
 <!-- ******************************************  29 feb 2024   ****************************************** -->
 <details>
-    <summary><h3>29 feb 2024 </h3></summary>
+    <summary><h3>29 feb 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- Entity Framework.
+
+### Note
+- Installazione con il seguente comando:
+```sh
+    dotnet add package Microsoft.EntityFrameworkCore
+```
+- Installazione di un provider DB in memoria con il comando:
+```sh
+    dotnet add package Microsoft.EntityFrameworkCore.InMemory
+```
+- Installazione di un provider DB con il comando:
+```sh
+    dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+```
+- Scaricare ultima versione .net dal sito [link](https://dotnet.microsoft.com/en-us/download/dotnet/8.0/runtime?cid=getdotnetcore&os=windows&arch=x64)
+- Installare i pacchetti Tools ??
+```sh
+    dotnet add package Microsoft.EntityFrameworkCore.Tools
+```
+- Esegui la procedura per la **migrazione**
+```sh
+    dotnet tool install --global dotnet-ef
+    dotnet add package Microsoft.EntityFrameworkCore.Design
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update
+```
+
+### Info 
+Segui la guida al link [link](https://learn.microsoft.com/it-it/ef/core/get-started/overview/install).
 
 </details>
 
