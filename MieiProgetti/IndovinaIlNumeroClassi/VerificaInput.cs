@@ -15,4 +15,10 @@ public class VerificaInput : ControlloInput
             Valido = false;
         }
     }
+
+    public void Tentativi(string input, int max, int min)
+    {
+        base.Numero(input);
+        //inserire if
+    }
 }

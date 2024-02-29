@@ -6,7 +6,7 @@ public class Game
     public void Gioca()
     {
         GestisciTxt.CreaTxt();
-        VerificaInput i = new();
+        VerificaInput vi = new();
         string nome;
         string input;
         int maxTentativi = 0;
@@ -18,9 +18,9 @@ public class Game
 
             Console.WriteLine("Inserisci il tuo nome");
             nome = Console.ReadLine()!;
-            i.MaxNome(nome);
+            vi.MaxNome(nome);
         }
-        while (!i.Valido);
+        while (!vi.Valido);
 
         Player p = new(nome);
 
@@ -35,22 +35,28 @@ public class Game
         {
             MenuDifficoltà();
             input = Console.ReadLine()!;
-            i.Stringa(input);
+            vi.Stringa(input);
 
             switch (input)
             {
                 case "f":   //facile - max 3 tentativi
-                    Console.WriteLine("Scegli il numero di tentativi (max 3).");
-                    input = Console.ReadLine()!;
-                    i.Numero(input);
-                    if (i.Valido)
+                    //do
+                    {
+                        Console.WriteLine("Scegli il numero di tentativi (max 3).");
+                        input = Console.ReadLine()!;
+                        vi.Numero(input);
+                    }
+
+
+                    if (vi.Valido)
                     {
                         maxTentativi = int.Parse(input);
+                        while (!(maxTentativi <= 3 && maxTentativi > 0))
+                        {
+                            Console.WriteLine("Puoi fare un massimo di 3 tentativi in modalità facile");
+                        }
                     }
-                    while (!(maxTentativi <= 3 && maxTentativi > 0))
-                    {
-                        Console.WriteLine("Puoi fare un massimo di 3 tentativi in modalità facile");
-                    }
+
                     break;
 
                 case "m":   //medio - max 6 tentativi
@@ -65,12 +71,12 @@ public class Game
 
                 default:
                     Console.WriteLine("Selezione errata. Digita il tasto corretto");
-                    i.Valido = false;
+                    vi.Valido = false;
                     break;
             }
 
         }
-        while (!i.Valido);
+        while (!vi.Valido);
 
 
     }
