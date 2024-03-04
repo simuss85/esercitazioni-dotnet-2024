@@ -1016,10 +1016,39 @@ Segui la guida al link [link](https://learn.microsoft.com/it-it/ef/core/get-star
 
 <!-- ******************************************  01 mar 2024   ****************************************** -->
 <details>
-    <summary><h3>01 mar 2024 </h3></summary>
+    <summary><h3>01 mar 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- Progetto di guppo.
+
+</details>
+
+<!-- ******************************************  04 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>04 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Migrazione MariaDB con Entity Framework.
+
+### Note
+- Installare MadiaDB server sul pc.
+- Importare il package da console:
+```sh
+    dotnet add package Pomelo.EntityFrameworkCore.MySql
+```
+- Eseguire la procedura di migrazione:
+```sh
+    dotnet ef migrations add InitialCreateMDB
+    dotnet ef database update
+```
+- Modificare il metodo config:
+```c#
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        string connection = "server=localhost;user=root;password=1234;database=myDatabaseMariaDB";
+        optionsBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection));
+    }
+```
 
 </details>
 
