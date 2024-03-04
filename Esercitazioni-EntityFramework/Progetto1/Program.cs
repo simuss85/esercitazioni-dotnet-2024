@@ -26,6 +26,19 @@
             Console.WriteLine("prodotti per cliente");
             db.InserisciProdotti(prodotti);
             db.StampaProdotti();
+
+            var ordini = new List<Ordine>
+            {
+                new Ordine { ProdottoId = 1},
+                new Ordine { ProdottoId = 2},
+                new Ordine { ProdottoId = 3},
+                new Ordine { ProdottoId = 4},
+                new Ordine { ProdottoId = 5},
+                new Ordine { ProdottoId = 6},
+            };
+            Console.WriteLine("ordini");
+            db.InserisciOrdini(ordini);
+            db.StampaOrdini();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,16 +10,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Progetto1.Migrations
 {
     [DbContext(typeof(Database))]
-    partial class DatabaseModelSnapshot : ModelSnapshot
+    [Migration("20240304111815_InitialCreateMaria")]
+    partial class InitialCreateMaria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Cliente", b =>
                 {
@@ -26,16 +29,16 @@ namespace Progetto1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cognome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -48,7 +51,7 @@ namespace Progetto1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ProdottoId")
                         .HasColumnType("int");
@@ -66,16 +69,16 @@ namespace Progetto1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<double>("Prezzo")
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
