@@ -8,7 +8,8 @@ public class Database : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseInMemoryDatabase("MyDatabase");
+        // optionsBuilder.UseInMemoryDatabase("MyDatabase");
+        optionsBuilder.UseSqlite("Data Source=MyDatabase.sqlite");
     }
 
     //metodi di instanza
@@ -45,6 +46,7 @@ public class Database : DbContext
                 user.Name = name;
             }
         }
+        SaveChanges();
     }
 
     public void RemoveUser(string name)
