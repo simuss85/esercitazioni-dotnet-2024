@@ -1,25 +1,19 @@
-using System.Data.SQLite;
 using Microsoft.EntityFrameworkCore;
 
 public class Database : DbContext
 {
-    public DbSet<Users> Users { get; set; } //tabella utenti
+    public DbSet<User> Users { get; set; } //tabella utenti
     //costruttore di default
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // optionsBuilder.UseInMemoryDatabase("MyDatabase");
-        optionsBuilder.UseSqlite("Data Source=MyDatabase.sqlite");
+        optionsBuilder.UseSqlite("Data Source=data/MyDatabase.sqlite");
     }
 
-    //metodi di instanza
-    /// <summary>
-    /// Aggiunge un utente nella tabella users
-    /// </summary>
-    /// <param name="name">Il record da inserire nel db</param>
     public void AddUser(string name)
     {
-        Users user = new Users { Name = name };
+        User user = new User { Name = name };
         Users.Add(user);
         SaveChanges();
     }

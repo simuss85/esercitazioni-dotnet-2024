@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MvcConsole.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20240305114332_InitialCreateSQLite")]
+    [Migration("20240305131731_InitialCreateSQLite")]
     partial class InitialCreateSQLite
     {
         /// <inheritdoc />
@@ -18,7 +18,7 @@ namespace MvcConsole.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
-            modelBuilder.Entity("Users", b =>
+            modelBuilder.Entity("User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
