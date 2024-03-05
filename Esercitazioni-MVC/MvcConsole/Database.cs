@@ -1,16 +1,14 @@
 using System.Data.SQLite;
+using Microsoft.EntityFrameworkCore;
 
-public class Database
+public class Database : DbContext
 {
-    private SQLiteConnection _connection;
-
+    public DbSet<Users> Users { get; set; } //tabella utenti
     //costruttore di default
-    public Database()
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        _connection = new SQLiteConnection("Data Source=database.db");
-        _connection.Open();
-        var command = new SQLiteCommand("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT);", _connection);
-        command.ExecuteNonQuery();
+        optionsBuilder.UseInMemoryDatabase("MyDatabase");
     }
 
     //metodi di instanza
@@ -20,32 +18,46 @@ public class Database
     /// <param name="name">Il record da inserire nel db</param>
     public void AddUser(string name)
     {
-        var command = new SQLiteCommand($"INSERT INTO users (name) VALUES ('{name}')", _connection);
-        command.ExecuteNonQuery();
+        Users user = new Users { Name = name };
+        Users.Add(user);
+        SaveChanges();
     }
 
     public List<string> GetUsers()
     {
-        var command = new SQLiteCommand("SELECT name FROM users", _connection);
-        var reader = command.ExecuteReader();
-        var users = new List<string>();
-
-        while (reader.Read())
+        var users = Users.ToList();
+        List<string> res = new();
+        foreach (var user in users)
         {
-            users.Add(reader.GetString(0));
+            res.Add(user.Name!);
         }
-        return users;
+        return res;
     }
 
     public void UpdateUser(string oldName, string name)
     {
-        var command = new SQLiteCommand($"UPDATE users SET name = '{name}' WHERE name = '{oldName}'", _connection);
-        command.ExecuteNonQuery();
+        var users = Users.ToList();
+
+        foreach (var user in users)
+        {
+            if (user.Name == oldName)
+            {
+                user.Name = name;
+            }
+        }
     }
 
     public void RemoveUser(string name)
     {
-        var command = new SQLiteCommand($"DELETE FROM users WHERE name = '{name}'", _connection);
-        command.ExecuteNonQuery();
+        var users = Users.ToList();
+
+        foreach (var user in users)
+        {
+            if (user.Name == name)
+            {
+                Users.Remove(user);
+            }
+        }
+        SaveChanges();
     }
 }

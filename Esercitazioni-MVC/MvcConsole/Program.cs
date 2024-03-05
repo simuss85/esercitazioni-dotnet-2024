@@ -1,4 +1,4 @@
-﻿using System.Data.SQLite;
+﻿using Microsoft.EntityFrameworkCore;
 /// <summary>
 /// App che permette di creare un db SQLite e di visualizzarne il contenuto
 /// </summary>
