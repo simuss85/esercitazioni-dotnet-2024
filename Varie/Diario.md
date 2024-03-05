@@ -1029,6 +1029,7 @@ Argomenti:
 
 Argomenti:
 - Migrazione MariaDB con Entity Framework.
+- Guida comandi **ef** [link](https://learn.microsoft.com/en-us/ef/core/cli/dotnet).
 
 ### Note
 - Installare MadiaDB server sul pc.
@@ -1049,6 +1050,40 @@ Argomenti:
         optionsBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection));
     }
 ```
+</details>
+
+<!-- ******************************************  05 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>05 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Pattern MVC
 
 </details>
 
+<!-- ******************************************  06 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>06 mar 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
+<!-- ******************************************  07 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>07 mar 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
+
+<!-- ******************************************  08 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>08 mar 2024 </h3></summary>
+
+Argomenti:
+- 
+
+</details>
