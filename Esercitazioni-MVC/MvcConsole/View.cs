@@ -1,12 +1,5 @@
 public class View
 {
-    private Database _db;
-
-    public View(Database db)
-    {
-        _db = db;
-    }
-
     public void ShowMainMenu()
     {
         Console.WriteLine("1. Add user");
