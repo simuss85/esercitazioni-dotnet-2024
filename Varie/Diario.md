@@ -1063,10 +1063,10 @@ Argomenti:
 
 <!-- ******************************************  06 mar 2024   ****************************************** -->
 <details>
-    <summary><h3>06 mar 2024 </h3></summary>
+    <summary><h3>06 mar 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- Sviluppare la nostra app con il pattern MVC, un db con almeno 3 tabelle utilizzando entityframework, classi documentate.
 
 </details>
 
