@@ -8,9 +8,9 @@ public class Database : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string connection = "server=localhost;user=root;password=1234;database=myDatabaseMariaDB";
-        optionsBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection));
-        // optionsBuilder.UseSqlite("Data Source=MyDatabase.sqlite");  //gestito con DB Sqlite
+        // string connection = "server=localhost;user=root;password=1234;database=myDatabaseMariaDB";
+        // optionsBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection));
+        optionsBuilder.UseSqlite("Data Source=MyDatabase.sqlite");  //gestito con DB Sqlite
         // optionsBuilder.UseInMemoryDatabase("MyDatabase");        //gestito in memoria
     }
 
