@@ -1,0 +1,9 @@
+namespace FoodexpMvc.Models
+{
+    public class Categoria
+    {
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+        public List<Alimento>? Alimenti { get; set; }
+    }
+}
