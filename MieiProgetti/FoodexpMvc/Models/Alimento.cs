@@ -9,7 +9,7 @@ namespace FoodexpMvc.Models
         public DateTime DataInserimento { get; set; }
         //chiave esterna
         public int CategoriaId { get; set; }
-        public Categoria? Categoria { get; set; } //riferimento molti a uno categoria
+        public Categoria? Categoria { get; set; } //riferimento molti a uno tab-categoria
         public string? Info { get; set; }
     }
 }

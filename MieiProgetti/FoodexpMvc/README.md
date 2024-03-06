@@ -110,9 +110,9 @@ erDiagram
         password txt
     }
     
-    a |{--|| c : is
-    l |{--|| c : contains
-    l |{--|| p : contains
+    a }|--|| c : is
+    l }|--|| c : contains
+    l }|--|| p : contains
 ```
 
 - [ ] L'applicazione deve poter leggere un elenco di alimenti da file **csv**.

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodexpMvc.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20240306145521_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240306171321_AddTabAlimenti")]
+    partial class AddTabAlimenti
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,21 +20,47 @@ namespace FoodexpMvc.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
+            modelBuilder.Entity("FoodexpMvc.Models.Alimento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DataInserimento")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DataScadenza")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantita")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Alimenti");
+                });
+
             modelBuilder.Entity("FoodexpMvc.Models.Categoria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ListaSpesaId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ListaSpesaId");
 
                     b.ToTable("Categorie");
                 });
@@ -59,6 +85,10 @@ namespace FoodexpMvc.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("UtenteId");
+
                     b.ToTable("ListaSpesa");
                 });
 
@@ -66,9 +96,6 @@ namespace FoodexpMvc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ListaSpesaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nome")
@@ -79,30 +106,42 @@ namespace FoodexpMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ListaSpesaId");
-
                     b.ToTable("Utenti");
                 });
 
-            modelBuilder.Entity("FoodexpMvc.Models.Categoria", b =>
+            modelBuilder.Entity("FoodexpMvc.Models.Alimento", b =>
                 {
-                    b.HasOne("FoodexpMvc.Models.ListaSpesa", null)
-                        .WithMany("Categorie")
-                        .HasForeignKey("ListaSpesaId");
-                });
+                    b.HasOne("FoodexpMvc.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("FoodexpMvc.Models.Utente", b =>
-                {
-                    b.HasOne("FoodexpMvc.Models.ListaSpesa", null)
-                        .WithMany("Utenti")
-                        .HasForeignKey("ListaSpesaId");
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("FoodexpMvc.Models.ListaSpesa", b =>
                 {
-                    b.Navigation("Categorie");
+                    b.HasOne("FoodexpMvc.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Utenti");
+                    b.HasOne("FoodexpMvc.Models.Utente", "Utente")
+                        .WithMany("ListaSpesaUtente")
+                        .HasForeignKey("UtenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
+
+                    b.Navigation("Utente");
+                });
+
+            modelBuilder.Entity("FoodexpMvc.Models.Utente", b =>
+                {
+                    b.Navigation("ListaSpesaUtente");
                 });
 #pragma warning restore 612, 618
         }
