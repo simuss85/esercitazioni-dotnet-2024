@@ -6,6 +6,7 @@ namespace FoodexpMvc.Models
     {
         public DbSet<Utente> Utenti { get; set; }
         public DbSet<Categoria> Categorie { get; set; }
+        public DbSet<ListaSpesa> ListaSpesa { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
