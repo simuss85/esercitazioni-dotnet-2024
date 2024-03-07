@@ -9,7 +9,7 @@ L'applizazione avvisa l'utente in caso di alimenti scaduti o in esaurimento (ad 
 
 ## DEFINIZIONE DEI REQUISITI E ANALISI
 - [x] L'applicazione utilizza un sistema di autenticazione **nome utente/password** per l'accesso.
-- L'applicazione deve poter gestire gli **accessi illegali** da parte di utenti no accreditati.
+- [x] L'applicazione deve poter gestire gli **accessi illegali** da parte di utenti no accreditati.
 - [x] L'applicazione deve consentire all'utente di **inserire**, **modificare**, **eliminare** il proprio nome utente e/o la password di accesso.
 - [x] L'applicazione deve consentire all'utente di **inserire**, **modificare**, **eliminare** un alimento da tastiera.
 - [x] L'applicazione deve consentire all'utente di **inserire**, **modificare**, **eliminare** un prodotto dalla lista della spesa comune.
@@ -126,13 +126,13 @@ erDiagram
 
 > **Schermata iniziale**
 > - 1.Frigorifero
-> - 2.Filtra alimenti
-> - 3.Gestisci alimenti
-> - 4.Gestisci categorie
-> - 5.Gestisci utenti
+> - 2.Lista della spesa
+> - 3.Gestione alimenti
+> - 4.Gestione categorie
+> - 5.Gestione utenti
 > - e.Esci
 
-> **Filtra alimenti**
+> **Frigorifero**
 > - 1.Visualizza tutti
 > - 2.Visualizza scaduti
 > - 3.Visualizza in scadenza
@@ -144,19 +144,26 @@ erDiagram
 > - 9.Ordina per categoria
 > - r.Torna al menu principale
 
-> **Gestisci alimenti**
+> **Lista della spesa**
+> - 1.Visualizza lista
+> - 2.Inserisci alimento
+> - 3.Modifica alimento
+> - 4.Elimina alimento
+> - r.Torna al menu principale
+
+> **Gestione alimenti**
 > - 1.Inserisci alimento
 > - 2.Modifica alimento
 > - 3.Elimina alimento
 > - r.Torna al menu principale
 
-> **Gestisci categorie**
+> **Gestione categorie**
 > - 1.Visualizza categorie
 > - 2.Modifica categoria
 > - 3.Elimina categoria
 > - r.Torna al menu principale
 
-> **Gestisci utenti**
+> **Gestione utenti**
 > - 1.Visualizza utenti
 > - 2.Modifica password
 > - 3.Elimina account
