@@ -1072,10 +1072,10 @@ Argomenti:
 
 <!-- ******************************************  07 mar 2024   ****************************************** -->
 <details>
-    <summary><h3>07 mar 2024 </h3></summary>
+    <summary><h3>07 mar 2024 ✔️</h3></summary>
 
 Argomenti:
-- 
+- Secondo giorno dedicato al nostro progetto MVC.
 
 </details>
 
