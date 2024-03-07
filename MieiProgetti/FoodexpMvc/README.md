@@ -166,7 +166,7 @@ erDiagram
 
 > **Gestione utenti**
 > - 1.Visualizza utenti
-> - 2.Modifica password
+> - 2.Modifica nome e/o password
 > - 3.Elimina account
 > - r.Torna al menu principale
 
