@@ -1,3 +1,4 @@
+using FoodexpMvc.Models;
 using FoodexpMvc.Views;
 
 namespace FoodexpMvc.Controllers
@@ -6,6 +7,8 @@ namespace FoodexpMvc.Controllers
     {
         private static bool accesso;
         private static bool eseguito;
+        private static int idAutenticato;
+        private static Utente utenteAttuale = new();
 
         /// <summary>
         /// Getisce l'avvio dell'applicazione, gestisce i menu di login e il menu <br/>
@@ -26,12 +29,22 @@ namespace FoodexpMvc.Controllers
                 switch (input)
                 {
                     case "1":
-                        // richiama metodo accesso account UtentiController.cs
-                        accesso = UtentiController.VerificaAccesso();
+                        //accesso login
+                        //verifico l'accesso
+                        idAutenticato = UtentiController.VerificaAccesso();
+                        if (idAutenticato != 0)
+                        {
+                            //memorizzo l'utente attuale
+                            utenteAttuale = UtentiController.GetUtenteById(idAutenticato);
+                            accesso = true;
+                        }
+
                         break;
 
                     case "2":
-                        //richiama metodo di registrazione utente UtentiController.cs
+                        //registra nuovo utente
+                        Console.Clear();
+
                         UtentiController.RegistraUtente();
                         break;
 
@@ -66,27 +79,29 @@ namespace FoodexpMvc.Controllers
                         break;
 
                     case "2":
-                        //filtra alimenti 
-                        View.MenuLitaSpesa();
+                        //lista della spesa
+                        ListaSpesaView.MenuListaSpesa();
                         //ListaSpesaController.cs
                         break;
 
                     case "3":
                         //gestione alimenti
-                        View.MenuGestioneAlimenti();
+                        AlimentiView.MenuGestioneAlimenti();
                         //AlimentiController.cs
                         break;
 
                     case "4":
                         //gestione categorie 
-                        View.MenuGestioneCategorie();
+                        CategorieView.MenuGestioneCategorie();
                         //CategorieController.cs
                         break;
 
                     case "5":
                         //gestione utenti
-                        View.MenuGestioneUtenti();
-                        //UtentiController.cs
+                        UtentiView.MenuGestioneUtenti();
+                        //creo l'oggetto utente controller per la gestione utente
+                        UtentiController utentiController = new(utenteAttuale);
+                        utentiController.SelezioneMenu();
                         break;
 
                     case "e":

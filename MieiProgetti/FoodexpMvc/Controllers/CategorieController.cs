@@ -12,7 +12,7 @@ namespace FoodexpMvc.Controllers
             eseguito = false;
             while (!eseguito)
             {
-                View.MenuGestioneCategorie();
+                CategorieView.MenuGestioneCategorie();
                 string input = Console.ReadLine()!.ToLower();
 
                 Console.Clear();

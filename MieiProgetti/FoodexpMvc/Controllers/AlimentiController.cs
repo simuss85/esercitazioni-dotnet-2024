@@ -12,7 +12,7 @@ namespace FoodexpMvc.Controllers
             eseguito = false;
             while (!eseguito)
             {
-                View.MenuFiltraAlimenti();
+                AlimentiView.MenuFiltraAlimenti();
                 string input = Console.ReadLine()!.ToLower();
 
                 switch (input)

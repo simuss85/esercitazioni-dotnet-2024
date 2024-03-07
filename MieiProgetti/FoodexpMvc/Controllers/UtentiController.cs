@@ -8,17 +8,26 @@ namespace FoodexpMvc.Controllers
         private static readonly Database _db = new();
         private static bool eseguito;
 
+        private static Utente? _utenteAttuale;
+
+        public UtentiController(Utente utenteAttuale)
+        {
+            _utenteAttuale = utenteAttuale;
+        }
+
         #region Switch Selezione
         /// <summary>
         /// Gestisce la selezione del sotto-menu "Gestione utenti"
         /// </summary>
-        public static void SelezioneMenu()
+        public void SelezioneMenu()
         {
             //gestione utenti
             eseguito = false;
             while (!eseguito)
             {
-                View.MenuGestioneUtenti();
+                Console.Clear();
+
+                UtentiView.MenuGestioneUtenti();
                 string input = Console.ReadLine()!.ToLower();
 
                 Console.Clear();
@@ -30,7 +39,8 @@ namespace FoodexpMvc.Controllers
                         break;
 
                     case "2":
-                        //modifica password
+                        //modifica nome e/o password
+                        ModificaUtente();
                         break;
 
                     case "3":
@@ -67,12 +77,12 @@ namespace FoodexpMvc.Controllers
             //verifica inserimento di almeno 8 caratteri
             while (!(password.Length == 8))
             {
-                Console.WriteLine("Devi inseire almeno 8 caratteri");
+                Console.WriteLine("Devi inserire almeno 8 caratteri");
                 password = Console.ReadLine()!;
             }
 
             //ricerca dell'utente; true trovato, false non trovato
-            if (EsisteUtente(nome, password))
+            if (GetIdUtente(nome, password) != 0)
             {
                 Console.WriteLine("Utente gia presente.\nEsegui l'accesso nella schermata principale");
             }
@@ -108,9 +118,91 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region U - Modifica utente
+        /// <summary>
+        /// Permette di modificare il nome e/o la password dell'utente attuale. <br/>
+        /// Richiede la password per poter accedere alle modifiche con max 3 tentativi.
+        /// </summary>
         public static void ModificaUtente()
         {
-            Console.WriteLine("Inserisci la passwod");
+            string input;
+            bool eseguito = false;
+            bool accesso = false;
+            int tentativi = 3;
+
+            while (!accesso && tentativi > 0)
+            {
+                Console.WriteLine($"Inserisci la passwod (hai {tentativi} tentativi)");
+                string passwod = Console.ReadLine()!;
+                if (passwod == _utenteAttuale!.Password)    //verifico la password
+                {
+                    accesso = true;
+
+                    while (!eseguito)
+                    {
+                        Console.WriteLine("Vuoi modificare il tuo nome? (s/n)");
+                        input = Console.ReadLine()!;
+
+                        if (input == "s")
+                        {
+                            Console.WriteLine("Inserisci il nuovo nome");
+                            string nome = Console.ReadLine()!;  //TO DO controllo input
+                            _utenteAttuale.Nome = nome;  //aggiorno con il nuovo nome
+                            eseguito = true;
+                        }
+                        else if (input == "n")
+                        {
+                            eseguito = true;
+                        }
+                        else
+                        {
+                            View.MessaggioSelezioneErrata();
+                        }
+                    }
+
+                    eseguito = false;
+
+                    while (!eseguito)
+                    {
+                        Console.WriteLine("Vuoi cambiare la tua password? (s/n)");
+                        input = Console.ReadLine()!;
+                        if (input == "s")
+                        {
+                            Console.WriteLine("***Provvisorio password***");  //TO DO da migliorare?
+                            Console.WriteLine("Inserisci una password di 8 caratteri:");
+                            string password = Console.ReadLine()!;
+                            //verifica inserimento di almeno 8 caratteri
+                            while (!(password.Length == 8))
+                            {
+                                Console.WriteLine("Devi inseire almeno 8 caratteri");
+                                password = Console.ReadLine()!;
+                            }
+                            _utenteAttuale.Password = passwod;  //aggiorno la password
+                            eseguito = true;
+                        }
+                        else if (input == "n")
+                        {
+                            eseguito = true;
+                        }
+                        else
+                        {
+                            View.MessaggioSelezioneErrata();
+                        }
+                    }
+                }
+                else    //password inserita errata
+                {
+                    tentativi--;
+                    if (tentativi == 1)
+                    {
+                        Console.WriteLine("Attenzione, ultimo tentativo!!!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Password errata, riprova");
+
+                    }
+                }
+            }
         }
         #endregion
 
@@ -123,20 +215,21 @@ namespace FoodexpMvc.Controllers
         /// e verifica la corrispondeza dei dati inseriti. Permette l'inserimento per massimo 3 volte <br/>
         /// poi esce dal controllo.
         /// </summary>
-        /// <returns>True se l'utente è stato autenticato; false se non è stato trovato</returns>
-        public static bool VerificaAccesso()
+        /// <returns>L'id dell'utente attualmente autenticato; 0 se non esiste o errato</returns>
+        public static int VerificaAccesso()
         {
             bool accesso = false;
-            int contaErrori = 3;    //esegue al max per 3 volte
+            int idUtente = 0;
+            int tentativi = 3;    //esegue al max per 3 volte
             string nome;
             string password;
 
-            while (!accesso && contaErrori > 0)
+            while (!accesso && tentativi > 0)
             {
                 Console.Clear();
 
                 //TO DO da gestire gli errori di input
-                if (contaErrori == 1)
+                if (tentativi == 1)
                 {
                     Console.WriteLine("Attenzione ultima possibilità");
                 }
@@ -150,22 +243,34 @@ namespace FoodexpMvc.Controllers
                 Console.Write("\nPassword: ");
                 password = Console.ReadLine()!;
                 //ricerca dell'utente; true trovato, false non trovato
-                accesso = EsisteUtente(nome, password);
+                idUtente = GetIdUtente(nome, password);
 
-                if (accesso == false)
+                Console.Clear();
+
+                if (idUtente != 0)
                 {
-                    contaErrori--;
-                    Console.WriteLine($"Utente non trovato.");
+                    accesso = true;
+                    Console.WriteLine("Accesso eseguito!!!");   //TO DO spectre verde
+                    Console.WriteLine("\n...premi un tasto");
+                    Console.ReadKey();
+
+                }
+                else
+                {
+                    tentativi--;
+                    Console.WriteLine($"Utente non trovato.");  //TO DO spectre rosso
+                    Console.WriteLine("\n...premi un tasto");
+                    Console.ReadKey();
                 }
 
             }
 
-            if (contaErrori == 0)
+            if (tentativi == 0)
             {
                 View.MessaggioTornaMenuPrincipale();
             }
 
-            return accesso;
+            return idUtente;
         }
         #endregion
 
@@ -176,21 +281,44 @@ namespace FoodexpMvc.Controllers
         /// </summary>
         /// <param name="nome">Il nome da ricercare</param>
         /// <param name="password">La password associata al nome da cercare</param>
-        /// <returns>True se l'utente è stato trovato; false se non è presente nella lista</returns>
-        private static bool EsisteUtente(string nome, string password)
+        /// <returns>Il numero id dell'utente; 0 se non esiste l'utente</returns>
+        private static int GetIdUtente(string nome, string password)
         {
-            bool trovato = false;
+            int idUtente = 0;
 
             var utenti = _db.Utenti.ToList();
             foreach (var u in utenti)
             {
                 if (u.Nome == nome && u.Password == password)
                 {
-                    trovato = true;
+                    idUtente = u.Id;
                     break;  //TO DO da controllare se la connessione rimane aperta o no
                 }
             }
-            return trovato;
+            return idUtente;
+        }
+
+        /// <summary>
+        /// Cerca nella tabella db.Utenti l'oggetto Utente corrispondente all'id inserito.
+        /// </summary>
+        /// <param name="idUtente">Il numero id da ricercare nella tabella Utenti</param>
+        /// <returns>Un oggetto di tipo Utente che corrisponde a quello memorizzato nel db.Utenti</returns>
+        public static Utente GetUtenteById(int idUtente)
+        {
+            Utente utente = new();
+            var utenti = _db.Utenti.ToList();
+            foreach (var u in utenti)
+            {
+                if (u.Id == idUtente)
+                {
+                    utente.Id = idUtente;
+                    utente.Nome = u.Nome;
+                    utente.Password = u.Password;
+                    break;
+                }
+            }
+
+            return utente;
         }
         #endregion
     }

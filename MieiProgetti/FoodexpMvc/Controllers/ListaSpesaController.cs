@@ -11,7 +11,7 @@ namespace FoodexpMvc.Controllers
             eseguito = false;
             while (!eseguito)
             {
-                View.MenuLitaSpesa();
+                ListaSpesaView.MenuListaSpesa();
                 string input = Console.ReadLine()!.ToLower();
 
                 Console.Clear();
