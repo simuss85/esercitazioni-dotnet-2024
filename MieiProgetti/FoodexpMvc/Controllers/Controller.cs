@@ -8,7 +8,7 @@ namespace FoodexpMvc.Controllers
         private static bool accesso;
         private static bool eseguito;
         private static int idAutenticato;
-        private static Utente utenteAttuale = new();
+        private static Utente? utenteAttuale;
 
         /// <summary>
         /// Getisce l'avvio dell'applicazione, gestisce i menu di login e il menu <br/>
@@ -100,7 +100,7 @@ namespace FoodexpMvc.Controllers
                         //gestione utenti
                         UtentiView.MenuGestioneUtenti();
                         //creo l'oggetto utente controller per la gestione utente
-                        UtentiController utentiController = new(utenteAttuale);
+                        UtentiController utentiController = new(utenteAttuale!);
                         utentiController.SelezioneMenu();
                         break;
 

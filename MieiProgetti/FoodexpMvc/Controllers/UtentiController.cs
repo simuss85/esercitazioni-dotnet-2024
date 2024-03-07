@@ -36,6 +36,9 @@ namespace FoodexpMvc.Controllers
                 {
                     case "1":
                         //visualizza utenti
+                        UtentiView.VisualizzaUtenti(LeggiUtenti());
+                        Console.WriteLine("\n...premi un tasto");
+                        Console.ReadKey();
                         break;
 
                     case "2":
@@ -207,6 +210,56 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region D - Elimina utente
+        public static void EliminaUtente()
+        {
+            string input;
+            bool eseguito = false;
+            bool accesso = false;
+            int tentativi = 3;
+
+            while (!accesso && tentativi > 0)
+            {
+                Console.WriteLine($"Inserisci la passwod (hai {tentativi} tentativi)");
+                string passwod = Console.ReadLine()!;
+                if (passwod == _utenteAttuale!.Password)    //verifico la password
+                {
+                    accesso = true;
+
+                    while (!eseguito)
+                    {
+                        Console.WriteLine("Vuoi eliminare il tuo account? (s/n)");
+                        input = Console.ReadLine()!;
+
+                        if (input == "s")
+                        {
+                            //TO DO elimina account db.Utenti
+                            eseguito = true;
+                        }
+                        else if (input == "n")
+                        {
+                            eseguito = true;
+                        }
+                        else
+                        {
+                            View.MessaggioSelezioneErrata();
+                        }
+                    }
+                }
+                else
+                {
+                    tentativi--;
+                    if (tentativi == 1)
+                    {
+                        Console.WriteLine("Attenzione, ultimo tentativo!!!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Password errata, riprova");
+
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Verifica accesso Utente

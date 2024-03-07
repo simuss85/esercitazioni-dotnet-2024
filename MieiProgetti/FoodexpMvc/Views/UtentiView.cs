@@ -14,4 +14,13 @@ public class UtentiView
         Console.WriteLine("r. tona al menu principale");
         Console.WriteLine("\nseleziona opzione");
     }
+
+    public static void VisualizzaUtenti(List<string> utenti)
+    {
+        Console.WriteLine("Elenco utenti");
+        foreach (var u in utenti)
+        {
+            Console.WriteLine(u);
+        }
+    }
 }
