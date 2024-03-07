@@ -122,6 +122,7 @@ erDiagram
 ### Menu applicazione console
 > **Login**
 > - 1.Accedi
+> - 2.Registrati
 > - e.Esci
 
 > **Schermata iniziale**

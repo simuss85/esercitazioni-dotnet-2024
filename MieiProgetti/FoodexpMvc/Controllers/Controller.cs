@@ -27,7 +27,12 @@ namespace FoodexpMvc.Controllers
                 {
                     case "1":
                         // richiama metodo accesso account UtentiController.cs
-                        accesso = true;
+                        accesso = UtentiController.VerificaAccesso();
+                        break;
+
+                    case "2":
+                        //richiama metodo di registrazione utente UtentiController.cs
+                        UtentiController.RegistraUtente();
                         break;
 
                     case "e":

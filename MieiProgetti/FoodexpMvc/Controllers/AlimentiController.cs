@@ -62,7 +62,6 @@ namespace FoodexpMvc.Controllers
                     default:
                         //torna al menu principale
                         View.MessaggioSelezioneErrata();
-                        eseguito = true;
                         break;
                 }
             }

@@ -9,6 +9,7 @@ namespace FoodexpMvc.Views
         {
             Console.WriteLine("Benvenuti in Foodexp\n");
             Console.WriteLine("1. Accedi");
+            Console.WriteLine("2. Registrati");
             Console.WriteLine("e. Esci");
         }
 
