@@ -110,7 +110,7 @@ erDiagram
         password txt
     }
     
-    a }|--|| c : is
+    a }|--|| c : "is a"
     l }|--|| c : contains
     l }|--|| p : contains
 ```
