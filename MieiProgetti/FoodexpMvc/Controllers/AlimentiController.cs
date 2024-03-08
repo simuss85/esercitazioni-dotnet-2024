@@ -1,11 +1,16 @@
+using FoodexpMvc.Models;
 using FoodexpMvc.Views;
 
 namespace FoodexpMvc.Controllers
 {
-    public class AlimentiController
+    public class AlimentiController : Controller
     {
         private static bool eseguito;
 
+        #region Switch Selezione
+        /// <summary>
+        /// Gestisce la selezione del sotto-menu "Gestione utenti"
+        /// </summary>
         public static void SelezioneMenu()
         {
             //frigorifero - filtra alimenti
@@ -66,5 +71,86 @@ namespace FoodexpMvc.Controllers
                 }
             }
         }
+        #endregion
+
+        #region C - Aggiungi alimento
+        /// <summary>
+        /// Aggiunge al db.Alimenti gli oggetti di tipo Alimento presenti nella lista alimenti.
+        /// </summary>
+        /// <param name="alimentiDaInserire">La lista di oggetti di tipo Alimento</param>
+        public static void AggiungiAlimenti(List<Alimento> alimentiDaInserire)
+        {
+            bool eseguito = false;
+            //memorizzo il db.Alimenti
+            var alimentiNelDb = _db.Alimenti.ToList();
+
+            foreach (var a in alimentiDaInserire)   //per ogni elemento della lista da inserire
+            {
+                foreach (var adb in alimentiNelDb)  //ricerco nel db la corrispondenza
+                {
+                    if (a.Nome == adb.Nome)     //trovato il nome verifico la data
+                    {
+                        if (a.DataScadenza == adb.DataScadenza)
+                        {
+                            a.Quantita += adb.Quantita; //stessa data incremento quantità
+                            eseguito = true;
+                        }
+                        else
+                        {   //stsso nome, data diversa
+                            _db.Alimenti.Add(a);
+                            eseguito = true;
+                        }
+                    }
+                    else    //nome non presente, inseriso l'oggetto in db.Alimenti
+                    {
+                        _db.Alimenti.Add(a);
+                        eseguito = true;
+                    }
+                }
+            }
+
+            if (eseguito)
+            {
+                _db.SaveChanges();
+            }
+        }
+        #endregion
+
+        #region R - Leggi tabella alimenti
+        /// <summary>
+        /// Seleziona tutti gli alimenti presenti in db.Alimenti
+        /// <b>**da modificare**</b>
+        /// </summary>
+        /// <returns>La lista degli alimenti da stampare</returns>
+        public static List<string> GetAlimenti()
+        {
+            int conta = 1;
+            var alimenti = _db.Alimenti.ToList();
+            List<string> listaAlimenti = new();
+            foreach (var a in alimenti)
+            {
+                listaAlimenti.Add($"{conta} - {a.Nome} {a.Quantita} {a.DataScadenza}");
+            }
+
+            return listaAlimenti;
+        }
+        #endregion
+
+        #region U - Modifica alimento
+        public static void ModificaAlimento()
+        {
+
+        }
+        #endregion
+
+        #region D - Elimina alimento
+        private static void EliminaAlimento()
+        {
+
+        }
+        #endregion
+
+        #region Metodi accessori
+        #endregion
     }
 }

@@ -7,8 +7,8 @@ namespace FoodexpMvc.Controllers
     {
         private static bool accesso;
         private static bool eseguito;
-        private static int idAutenticato;
-        private static Utente? utenteAttuale;
+        public static Utente? UtenteAttuale { get; set; }
+        protected static readonly Database _db = new();
 
         /// <summary>
         /// Getisce l'avvio dell'applicazione, gestisce i menu di login e il menu <br/>
@@ -17,6 +17,9 @@ namespace FoodexpMvc.Controllers
         /// </summary>
         public static void AvvioApp()
         {
+            CreaUtenteAdmin();  //per l'inizializzazione DEBUG TEST
+
+        Login:
             //schermata login
             accesso = false;
             while (!accesso)
@@ -31,14 +34,19 @@ namespace FoodexpMvc.Controllers
                     case "1":
                         //accesso login
                         //verifico l'accesso
-                        idAutenticato = UtentiController.VerificaAccesso();
-                        if (idAutenticato != 0)
+                        accesso = UtentiController.VerificaAccesso();
+                        if (accesso)
                         {
-                            //memorizzo l'utente attuale
-                            utenteAttuale = UtentiController.GetUtenteById(idAutenticato);
-                            accesso = true;
+                            Console.WriteLine("Accesso eseguito");   //TO DO spectre verde
+                            Console.WriteLine("\n...premi un tasto");
+                            Console.ReadKey();
                         }
-
+                        else
+                        {
+                            Console.WriteLine("Accesso bloccato!!!\nEsegui la registrazione");   //TO DO spectre verde
+                            Console.WriteLine("\n...premi un tasto");
+                            Console.ReadKey();
+                        }
                         break;
 
                     case "2":
@@ -65,7 +73,11 @@ namespace FoodexpMvc.Controllers
             while (!eseguito)
             {
                 Console.Clear();
-
+                if (UtenteAttuale!.Nome == "admin123")
+                {
+                    Console.WriteLine("Inizializzo il frigo");
+                    InizializzaFrigo();
+                }
                 View.MenuPrincipale();
                 string input = Console.ReadLine()!.ToLower();
 
@@ -99,9 +111,11 @@ namespace FoodexpMvc.Controllers
                     case "5":
                         //gestione utenti
                         UtentiView.MenuGestioneUtenti();
-                        //creo l'oggetto utente controller per la gestione utente
-                        UtentiController utentiController = new(utenteAttuale!);
-                        utentiController.SelezioneMenu();
+                        if (UtentiController.SelezioneMenu() == -1)
+                        {
+                            //utente eliminato torna al login
+                            goto Login;
+                        }
                         break;
 
                     case "e":
@@ -116,5 +130,45 @@ namespace FoodexpMvc.Controllers
                 }
             }
         }
+        #region Utente admin e test
+        private static void CreaUtenteAdmin()
+        {
+            var user = _db.Utenti.FirstOrDefault(u => u.Nome == "admin123");
+
+            if (user == null)
+            {
+                Utente admin = new Utente { Nome = "admin123", Password = "qwertyuiop" };
+                _db.Utenti.Add(admin);
+                _db.SaveChanges();
+            }
+        }
+
+        private static void InizializzaFrigo()
+        {
+            //creo categorie 
+            List<Categoria> cateogrieDaAggiungere = new List<Categoria>
+            {
+                new Categoria { Nome = "Latticini"},
+                new Categoria { Nome = "Salumi"},
+                new Categoria { Nome = "Frutta"},
+                new Categoria { Nome = "Verdura"},
+                new Categoria { Nome = "Formaggi"},
+                new Categoria { Nome = "Carne"},
+                new Categoria { Nome = "Pesce"},
+                new Categoria { Nome = "Bevande"}
+            };
+            CategorieController.AggiungiCategorie(cateogrieDaAggiungere);
+            //creo lista alimenti
+            DateTime now = DateTime.Now;
+            string dataOggi = now.ToString("dd/MM/yyyy");
+
+            List<Alimento> alimentiDaAggiungere = new List<Alimento>
+            {
+                new Alimento {Nome = "yogurt fragola", Quantita = 3, DataScadenza = new DateTime(2024, 3, 12), DataInserimento = DateTime.Parse(dataOggi) , CategoriaId = 1},
+            };
+            //aggiungo alimenti iniziali
+            AlimentiController.AggiungiAlimenti(alimentiDaAggiungere);
+        }
+        #endregion
     }
 }
