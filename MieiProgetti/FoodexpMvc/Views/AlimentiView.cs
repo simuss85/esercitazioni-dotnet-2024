@@ -33,4 +33,13 @@ public class AlimentiView
         Console.WriteLine("r. torna al menu principale");
         Console.WriteLine("\nseleziona opzione");
     }
+
+    public static void VisualizzaAlimenti(List<string> listaAlimenti, string titolo)
+    {
+        Console.WriteLine(titolo);
+        foreach (var elemento in listaAlimenti)
+        {
+            Console.WriteLine(elemento);
+        }
+    }
 }
