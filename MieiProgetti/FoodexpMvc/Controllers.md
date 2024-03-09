@@ -11,7 +11,7 @@ Le classi svolgono un ruolo chiave nella gestione dell'interazione dell'utente c
 ```mermaid
 
 ---
-title: namespace Foodexp.Controllers
+title: namespace FoodexpMcv.Controllers
 ---
 classDiagram
 namespace Controllers{
@@ -21,10 +21,13 @@ namespace Controllers{
         + Utente UtenteAttuale$
         # Database _db
         + AvvioApp() void$
+        - CreaUtenteAdmin()$ void
+        - InizializzaFrigo()$ void
     }
 
     class UtentiController{
-
+        
+        UtentiController(Utente utenteAttuale)
         + SelezioneMenu()$ int
         + RegistraUtente()$ void
         - LeggiUtenti()$ List~string~
@@ -47,9 +50,9 @@ namespace Controllers{
 
     }
 }
-    Controller <-- UtentiController
-    Controller <-- AlimentiController
-    Controller <-- CategorieController
-    Controller <-- ListaSpesaController
+    Controller <.. UtentiController : extend
+    Controller <.. AlimentiController : extend
+    Controller <.. CategorieController : extend
+    Controller <.. ListaSpesaController : extend
 
 ```
