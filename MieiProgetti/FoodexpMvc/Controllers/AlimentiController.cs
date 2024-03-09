@@ -75,12 +75,11 @@ namespace FoodexpMvc.Controllers
 
         #region C - Aggiungi alimento
         /// <summary>
-        /// Aggiunge al db.Alimenti gli oggetti di tipo Alimento presenti nella lista alimenti.
+        /// Aggiunge al db.Alimenti gli oggetti di tipo Alimento presenti nella lista.
         /// </summary>
-        /// <param name="alimentiDaInserire">La lista di oggetti di tipo Alimento</param>
+        /// <param name="alimentiDaInserire">La lista di oggetti di tipo Alimento da aggiungere</param>
         public static void AggiungiAlimenti(List<Alimento> alimentiDaInserire)
         {
-            bool eseguito = false;
             //memorizzo il db.Alimenti
             var alimentiNelDb = _db.Alimenti.ToList();
 
@@ -93,24 +92,17 @@ namespace FoodexpMvc.Controllers
                         if (a.DataScadenza == adb.DataScadenza)
                         {
                             a.Quantita += adb.Quantita; //stessa data incremento quantità
-                            eseguito = true;
+                            _db.SaveChanges();
                         }
                         else
                         {   //stsso nome, data diversa
                             _db.Alimenti.Add(a);
-                            eseguito = true;
+                            _db.SaveChanges();
                         }
                     }
-                    else    //nome non presente, inseriso l'oggetto in db.Alimenti
-                    {
-                        _db.Alimenti.Add(a);
-                        eseguito = true;
-                    }
                 }
-            }
-
-            if (eseguito)
-            {
+                //nome non presente, inseriso l'oggetto in db.Alimenti
+                _db.Alimenti.Add(a);
                 _db.SaveChanges();
             }
         }
