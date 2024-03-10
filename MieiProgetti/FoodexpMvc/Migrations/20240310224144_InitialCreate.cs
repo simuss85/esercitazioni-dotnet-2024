@@ -38,6 +38,28 @@ namespace FoodexpMvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Alimenti",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    Quantita = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoriaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Info = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Alimenti", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Alimenti_Categorie_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categorie",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ListaSpesa",
                 columns: table => new
                 {
@@ -66,6 +88,11 @@ namespace FoodexpMvc.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Alimenti_CategoriaId",
+                table: "Alimenti",
+                column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ListaSpesa_CategoriaId",
                 table: "ListaSpesa",
                 column: "CategoriaId");
@@ -79,6 +106,9 @@ namespace FoodexpMvc.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Alimenti");
+
             migrationBuilder.DropTable(
                 name: "ListaSpesa");
 

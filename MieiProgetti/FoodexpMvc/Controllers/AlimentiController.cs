@@ -98,6 +98,7 @@ namespace FoodexpMvc.Controllers
                 {
                     if (a.Nome == adb.Nome)     //trovato il nome verifico la data
                     {
+                        trovato = true;
                         if (a.DataScadenza == adb.DataScadenza)
                         {
                             adb.Quantita += a.Quantita; //stessa data incremento quantità
@@ -109,7 +110,7 @@ namespace FoodexpMvc.Controllers
                             _db.Alimenti.Add(a);
                             _db.SaveChanges();
                         }
-                        trovato = true;
+
                         break;
 
                     }
@@ -142,18 +143,32 @@ namespace FoodexpMvc.Controllers
             return lista;
         }
 
-        public static List<string> GetAlimentiScaduti()
+        /// <summary>
+        /// Filtra gli alimenti per data di scadenza (minore o uguale alla data odierna), oppure <br/>
+        /// per alimenti che stanno per scadere (scadenza = 1)
+        /// </summary>
+        /// <param name="scadenza">Valore da sommare alla data attuale</param>
+        /// <returns></returns>
+        public static List<string> GetAlimentiScaduti(int scadenza = 0)
         {
             int conta = 1;
 
             List<string> lista = new();
             foreach (var a in _db.Alimenti)
             {
-                if (a.DataScadenza <= DateTime.Now)
+                if (scadenza != 0)
                 {
-                    lista.Add($"{conta} - {a.Nome} {a.Quantita} {a.DataScadenza}");
-                    conta++;
+                    if (a.DataScadenza == Date.Oggi())
+                    {
+                        lista.Add($"{conta} - {a.Nome} {a.Quantita} {a.DataScadenza}");
+                        conta++;
+                    }
                 }
+                else
+                {
+                    //TO DO
+                }
+
             }
             return lista;
         }
