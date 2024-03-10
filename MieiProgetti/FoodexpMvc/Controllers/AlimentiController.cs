@@ -20,14 +20,18 @@ namespace FoodexpMvc.Controllers
                 AlimentiView.MenuFiltraAlimenti();
                 string input = Console.ReadLine()!.ToLower();
 
+                Console.Clear();
+
                 switch (input)
                 {
                     case "1":
                         //visualizza tutti
+                        AlimentiView.VisualizzaAlimenti(GetAlimenti(), "Tutti\n");
                         break;
 
                     case "2":
                         //visualizza scaduti
+                        AlimentiView.VisualizzaAlimenti(GetAlimentiScaduti(), "Scaduti\n");
                         break;
 
                     case "3":
@@ -62,13 +66,17 @@ namespace FoodexpMvc.Controllers
                         //torna al menu principale
                         View.MessaggioTornaMenuPrincipale();
                         eseguito = true;
-                        break;
+                        return;
 
                     default:
                         //torna al menu principale
                         View.MessaggioSelezioneErrata();
                         break;
                 }
+                Console.WriteLine("\n...premi un tasto");
+                Console.ReadKey();
+                Console.Clear();
+
             }
         }
         #endregion
@@ -80,30 +88,37 @@ namespace FoodexpMvc.Controllers
         /// <param name="alimentiDaInserire">La lista di oggetti di tipo Alimento da aggiungere</param>
         public static void AggiungiAlimenti(List<Alimento> alimentiDaInserire)
         {
+            bool trovato;
             //memorizzo il db.Alimenti
-            var alimentiNelDb = _db.Alimenti.ToList();
 
             foreach (var a in alimentiDaInserire)   //per ogni elemento della lista da inserire
             {
-                foreach (var adb in alimentiNelDb)  //ricerco nel db la corrispondenza
+                trovato = false;
+                foreach (var adb in _db.Alimenti)  //ricerco nel db la corrispondenza
                 {
                     if (a.Nome == adb.Nome)     //trovato il nome verifico la data
                     {
                         if (a.DataScadenza == adb.DataScadenza)
                         {
-                            a.Quantita += adb.Quantita; //stessa data incremento quantità
+                            adb.Quantita += a.Quantita; //stessa data incremento quantità
                             _db.SaveChanges();
+
                         }
                         else
                         {   //stsso nome, data diversa
                             _db.Alimenti.Add(a);
                             _db.SaveChanges();
                         }
+                        trovato = true;
+                        break;
+
                     }
                 }
-                //nome non presente, inseriso l'oggetto in db.Alimenti
-                _db.Alimenti.Add(a);
-                _db.SaveChanges();
+                if (!trovato)
+                {   //nome non presente, inseriso l'oggetto in db.Alimenti
+                    _db.Alimenti.Add(a);
+                    _db.SaveChanges();
+                }
             }
         }
         #endregion
@@ -117,14 +132,30 @@ namespace FoodexpMvc.Controllers
         public static List<string> GetAlimenti()
         {
             int conta = 1;
-            var alimenti = _db.Alimenti.ToList();
-            List<string> listaAlimenti = new();
-            foreach (var a in alimenti)
-            {
-                listaAlimenti.Add($"{conta} - {a.Nome} {a.Quantita} {a.DataScadenza}");
-            }
 
-            return listaAlimenti;
+            List<string> lista = new();
+            foreach (var a in _db.Alimenti)
+            {
+                lista.Add($"{conta} - {a.Nome} {a.Quantita} {a.DataScadenza}");
+                conta++;
+            }
+            return lista;
+        }
+
+        public static List<string> GetAlimentiScaduti()
+        {
+            int conta = 1;
+
+            List<string> lista = new();
+            foreach (var a in _db.Alimenti)
+            {
+                if (a.DataScadenza <= DateTime.Now)
+                {
+                    lista.Add($"{conta} - {a.Nome} {a.Quantita} {a.DataScadenza}");
+                    conta++;
+                }
+            }
+            return lista;
         }
         #endregion
 

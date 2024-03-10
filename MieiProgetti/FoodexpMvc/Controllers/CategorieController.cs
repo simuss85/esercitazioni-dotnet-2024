@@ -58,14 +58,12 @@ namespace FoodexpMvc.Controllers
         /// <param name="categorieDaInserire">La lista dei oggetti di tipo Categoria da aggiungere</param>
         public static void AggiungiCategorie(List<Categoria> categorieDaInserire)
         {
-            bool trovato = false;
-            //memorizzo il db.Categorie
-            var categorieNelDb = _db.Categorie.ToList();
+            bool trovato;
 
             foreach (var c in categorieDaInserire)       //per ogni elemento della lista da inserire
             {
                 trovato = false;
-                foreach (var cdb in categorieNelDb)     //ricerco nel db la corrispondenza
+                foreach (var cdb in _db.Categorie)     //ricerco nel db la corrispondenza
                 {
                     if (c.Nome == cdb.Nome)     //categoria gia presente
                     {
