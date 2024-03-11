@@ -205,9 +205,60 @@ namespace FoodexpMvc.Controllers
 
             }
         }
+
+        public static void SelezioneSottoMenu()
+        {
+            //gestione alimenti
+            eseguito = false;
+            while (!eseguito)
+            {
+                AlimentiView.MenuGestioneAlimenti();
+                string input = Console.ReadLine()!.ToLower();
+
+                Console.Clear();
+
+                switch (input)
+                {
+                    case "1":
+                        //inserisci alimento
+                        break;
+
+                    case "2":
+                        //modifica alimento
+                        break;
+
+                    case "3":
+                        //elimina alimento
+                        eseguito = false;
+                        while (!eseguito)
+                        {
+                            eseguito = EliminaAlimento();
+                        }
+
+                        break;
+
+                    case "r":
+                        //torna al menu principale
+                        View.MessaggioTornaMenuPrincipale();
+                        eseguito = true;
+                        return;
+
+                    default:
+                        //torna al menu principale
+                        View.MessaggioSelezioneErrata();
+                        break;
+                }
+                Console.Clear();
+            }
+        }
         #endregion
 
         #region C - Aggiungi alimento
+        public static void AggiungiAlimento()
+        {
+            Console.Write("Inserisci Alimento: ");
+        }
+
         /// <summary>
         /// Aggiunge al db.Alimenti gli oggetti di tipo Alimento presenti nella lista.
         /// </summary>
@@ -263,6 +314,16 @@ namespace FoodexpMvc.Controllers
                 lista.Add($"{a.Nome} {a.Quantita} {a.DataScadenza!.Value:d}"); //per la data ottengo il valore e formatto output con solo la data
             }
             return lista;
+        }
+
+        /// <summary>
+        /// Estrate dalla tabella db.Alimenti gli oggetti di tipo Alimento e li mette in una lista.
+        /// </summary>
+        /// <returns>La lista di oggetti di tipo Alimento</returns>
+        private static List<Alimento> GetListTipoAlimento()
+        {
+            var alimenti = _db.Alimenti.ToList();
+            return alimenti;
         }
 
         /// <summary>
@@ -457,13 +518,100 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region D - Elimina alimento
-        private static void EliminaAlimento()
-        {
 
+        /// <summary>
+        /// Permette di eliminare un alimento da un elenco numerato fino a quando l'utente seleziona <br/>
+        /// il carattere 0.
+        /// </summary>
+        /// <returns>True se l'utente ha finito l'eliminazione; false altrimenti</returns>
+        private static bool EliminaAlimento()
+        {
+            int index;
+            int tentativi = 3;
+            string input;
+            bool fine = false;   //termina l'operazione e torna al menu precedente
+
+            Console.Clear();
+
+            AlimentiView.VisualizzaAlimenti(GetAlimenti(), "Seleziona alimento da eliminare\n");
+            Console.WriteLine("\n0. torna al menu principale");
+            var alimenti = GetListTipoAlimento();
+
+            Console.Write("\nQuale alimento elimino?\nId: ");
+
+            //controllo dell'input inserito
+            while (tentativi > 0 & !int.TryParse(Console.ReadLine()!, out index))
+            {
+                View.MessaggioSelezioneErrata(600, true, 3, 4);
+                tentativi--;
+                if (tentativi == 1)
+                {
+                    var cursore = Console.GetCursorPosition();
+                    Console.WriteLine("\nUltimo tentativo");
+                    Thread.Sleep(800);
+                    View.PulisciRiga(cursore.Left, cursore.Top);
+                }
+                else if (tentativi == 0)
+                {
+                    View.MessaggioTornaMenuPrecedente(0);
+                    Thread.Sleep(1200);
+                    break;
+                }
+
+            }
+            //seleziono l'alimento in posizione [index - 1] dalla lista di tipo Alimento
+            //seleziono poi il suo id che passo al metodo che elimina l'oggetto dal db.Alimento
+
+            if (index - 1 >= 0)
+            {
+                eseguito = false;
+                while (!eseguito)
+                {
+                    Console.WriteLine($"Vuoi eliminare {alimenti[index - 1].Nome}? (s/n)");
+                    input = Console.ReadLine()!.ToLower();
+                    if (input == "s")
+                    {
+                        EliminaAlimentoPerId(alimenti[index - 1].Id);
+                        Console.WriteLine("Alimento cancellato");
+                        eseguito = true;
+                    }
+                    else if (input == "n")
+                    {
+                        eseguito = true;
+                    }
+                    else    //ripete 
+                    {
+                        View.MessaggioSelezioneErrata(600, true);
+                    }
+                }
+            }
+            else
+            {
+                View.MessaggioTornaMenuPrecedente(800);
+                fine = true;
+            }
+            return fine;
         }
+
+
         #endregion
 
         #region Metodi accessori
+        /// <summary>
+        /// Metodo accessorio che elimina un record da db.Alimenti tramite il suo Id
+        /// </summary>
+        /// <param name="id">L'id del record da eliminare</param>
+        private static void EliminaAlimentoPerId(int id)
+        {
+            foreach (var a in _db.Alimenti)
+            {
+                if (a.Id == id)
+                {
+                    _db.Alimenti.Remove(a);
+                    _db.SaveChanges();
+                }
+            }
+        }
         #endregion
     }
 }
