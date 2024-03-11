@@ -105,28 +105,49 @@ public class ValidaInput
         return oggettoData;
     }
 
-    public static int GetInt(int left, int top)
+    public static int GetQuantita(int left, int top)
     {
         string errore = "Devi inserire una quantita valida\r";
         int x = 0;
-        while (!int.TryParse(Console.ReadLine()!, out x))
+        while (!int.TryParse(Console.ReadLine()!, out x) || x <= 0)
         {
-            Console.WriteLine(errore);
+            Console.Write(errore);
             View.PulisciRiga(errore.Length, left, top);
         }
         return x;
     }
 
-    public static int GetIntCategoria(int totaleCategorie, int left, int top)
+    public static int GetIntElenco(int totaleElenco, int left, int top)
     {
         string errore = "Devi inserire una quantita valida\r";
         int x = 0;
-        //se non inserisco in numero oppure se supero il range delle categorie
-        while (!int.TryParse(Console.ReadLine()!, out x) || (x < 1 && x > totaleCategorie))
+        //se non inserisco in numero oppure se supero il range dei numeri in elenco
+        while (!int.TryParse(Console.ReadLine()!, out x) || x <= 0 || x > totaleElenco)
         {
-            Console.WriteLine(errore);
+            Console.Write(errore);
             View.PulisciRiga(errore.Length, left, top);
         }
         return x;
+    }
+
+    public static string GetSiNo(int left, int top)
+    {
+        string errore = "Selezione errata\r";
+        string input = "";
+        bool corretto = false;
+        while (!corretto)
+        {
+            input = Console.ReadLine()!.ToLower();
+            if (input == "s" || input == "n")
+            {
+                corretto = true;
+            }
+            else
+            {
+                Console.Write(errore);
+                View.PulisciRiga(errore.Length, left, top);
+            }
+        }
+        return input;
     }
 }
