@@ -36,10 +36,20 @@ public class AlimentiView
 
     public static void VisualizzaAlimenti(List<string> listaAlimenti, string titolo)
     {
+        int conta = 1;  //gestisce l'elenco numerato
         Console.WriteLine(titolo);
-        foreach (var elemento in listaAlimenti)
+        if (listaAlimenti.Count == 0)
         {
-            Console.WriteLine(elemento);
+            Console.WriteLine("Elenco vuoto!!!");
         }
+        else
+        {
+            foreach (var elemento in listaAlimenti)
+            {
+                Console.WriteLine($"{conta} - {elemento}");
+                conta++;
+            }
+        }
+
     }
 }
