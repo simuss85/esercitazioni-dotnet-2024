@@ -10,8 +10,27 @@ public class CategorieView
         Console.WriteLine("Gestione categorie\n");
         Console.WriteLine("1. Visualizza categorie");
         Console.WriteLine("2. Modifica categoria");
-        Console.WriteLine("3. Elimina categoria");
         Console.WriteLine("r. torna al menu principale");
         Console.WriteLine("\nseleziona opzione");
+    }
+
+    /// <summary>
+    /// Stampa a schermo la lista delle categorie in formato elenco numerato (Categoria.Id).
+    /// </summary>
+    /// <param name="listaCategorie">Lista delle categorie</param>
+    public static void VisualizzaCategorie(List<string> listaCategorie)
+    {
+        Console.WriteLine("Elenco categorie");
+        if (listaCategorie.Count == 0)
+        {
+            Console.WriteLine("Elenco vuoto!!!");
+        }
+        else
+        {
+            foreach (var elemento in listaCategorie)
+            {
+                Console.WriteLine(elemento);
+            }
+        }
     }
 }
