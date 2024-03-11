@@ -38,8 +38,7 @@ namespace FoodexpMvc.Controllers
                         if (accesso)
                         {
                             Console.WriteLine("Accesso eseguito");   //TO DO spectre verde
-                            Console.WriteLine("\n...premi un tasto");
-                            Console.ReadKey();
+                            Thread.Sleep(1000);
                         }
                         else
                         {
@@ -57,13 +56,12 @@ namespace FoodexpMvc.Controllers
                         break;
 
                     case "e":
-                        Console.WriteLine("Uscita..."); //TO DO spectre
+                        Console.WriteLine("\nUscita..."); //TO DO spectre
                         Thread.Sleep(500);
                         return;
 
                     default:
-                        Console.WriteLine("Selezione errata");  //TO DO spectre
-                        Thread.Sleep(500);
+                        View.MessaggioSelezioneErrata();
                         break;
                 }
             }
@@ -123,8 +121,7 @@ namespace FoodexpMvc.Controllers
                         return;
 
                     default:
-                        Console.WriteLine("Selezione errata");  //TO DO spectre
-                        Thread.Sleep(500);
+                        View.MessaggioSelezioneErrata();
                         break;
                 }
             }
