@@ -34,6 +34,11 @@ public class AlimentiView
         Console.WriteLine("\nseleziona opzione");
     }
 
+    /// <summary>
+    /// Stampa a schermo la lista degli alimenti in formato elenco numerato
+    /// </summary>
+    /// <param name="listaAlimenti">Lista degli alimenti</param>
+    /// <param name="titolo">Titolo della sezione corrente</param>
     public static void VisualizzaAlimenti(List<string> listaAlimenti, string titolo)
     {
         int conta = 1;  //gestisce l'elenco numerato

@@ -15,6 +15,10 @@ public class UtentiView
         Console.WriteLine("\nseleziona opzione");
     }
 
+    /// <summary>
+    /// Stampa a schermo la lista degli utenti
+    /// </summary>
+    /// <param name="utenti"></param>
     public static void VisualizzaUtenti(List<string> utenti)
     {
         Console.WriteLine("Elenco utenti");

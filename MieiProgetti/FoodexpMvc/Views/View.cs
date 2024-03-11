@@ -73,18 +73,33 @@ namespace FoodexpMvc.Views
         }
 
         /// <summary>
-        /// Pulisce la console e ripristina il cursore a prima del messaggio
+        /// Metodo accessorio che cancella il contenuto della riga dopo l'inserimento 
+        /// dell' input <br/> da parte dell' utente e posiziona il cursore nella corretta posizione. <br/>
+        /// Necessita del rientro di cursore '\r' nel messaggio di errore precedente.
         /// </summary>
-        /// <param name="left">Posizione left del cursore prima del messaggio</param>
-        /// <param name="top">Posizione top del cursore prima del messaggio</param>
-        public static void PulisciRiga(int left, int top)
+        /// <param name="lunghezzaErrore">Numero di caratteri del messaggio di errore</param>
+        /// <param name="posizioneX">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
+        /// del messaggio di richiesta inserimento dato.</param>
+        /// <param name="posizioneY">Posizione verticale del cursore</param>
+        public static void PulisciRiga(int lunghezzaErrore, int posizioneX, int posizioneY)
         {
-            Console.SetCursorPosition(left, top);
-            for (int i = 0; i < top; i++)
+            Thread.Sleep(1000);  //attende la lettura del messaggio
+
+            //cancella il  messaggio di errore 
+            for (int i = 0; i < lunghezzaErrore; i++)
             {
-                Console.WriteLine("                                     ");
+                Console.Write(" ");
             }
-            Console.SetCursorPosition(left, top);
+
+            //sposto il cursore al punto in cui l'utente ha inserito l'input
+            //cancello il testo e mi riposiziono al punto corretto
+            Console.SetCursorPosition(posizioneX, posizioneY);
+            for (int i = 0; i < 80; i++)
+            {
+                Console.Write(" ");
+            }
+            Console.SetCursorPosition(posizioneX, posizioneY);
         }
+
     }
 }
