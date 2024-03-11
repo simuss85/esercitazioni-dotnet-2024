@@ -73,10 +73,10 @@ namespace FoodexpMvc.Controllers
         /// </summary>
         public static void RegistraUtente()
         {
-            Console.WriteLine("Inserisci il tuo nome: ");
+            Console.Write("Inserisci il tuo nome: ");
             string nome = Console.ReadLine()!;
             Console.WriteLine("***Provvisorio password***");  //TO DO da migliorare?
-            Console.WriteLine("Inserisci una password di 8 caratteri:");
+            Console.Write("Inserisci una password di 8 caratteri:");
             string password = Console.ReadLine()!;
             //verifica inserimento di almeno 8 caratteri
             while (password.Length < 8)
