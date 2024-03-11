@@ -221,6 +221,7 @@ namespace FoodexpMvc.Controllers
                 {
                     case "1":
                         //inserisci alimento
+                        AggiungiAlimento();
                         break;
 
                     case "2":
@@ -256,7 +257,35 @@ namespace FoodexpMvc.Controllers
         #region C - Aggiungi alimento
         public static void AggiungiAlimento()
         {
-            Console.Write("Inserisci Alimento: ");
+            Alimento a = new Alimento();    //creo nuovo oggetto Alimento
+
+            //nome
+            Console.Write("Inserisci nome: ");
+            var cursore = Console.GetCursorPosition();
+            string nome = ValidaInput.GetString(cursore.Left, cursore.Top);
+
+            //quantita
+            Console.Write("Inserisci quantita: ");
+            cursore = Console.GetCursorPosition();
+            int quantita = ValidaInput.GetInt(cursore.Left, cursore.Top);
+
+            //data
+            Console.Write("Inserisci Data\n(gg/mm/aaaa): ");
+            cursore = Console.GetCursorPosition();
+            DateTime dataScadenza = ValidaInput.GetData(cursore.Left, cursore.Top);
+
+            //categoria
+            //stampo elenco per l'utente
+            CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
+            int totaleCategorie = _db.Categorie.Count();
+            Console.Write("Seleziona categoria: ");
+            cursore = Console.GetCursorPosition();
+            int idCategoria = ValidaInput.GetIntCategoria(totaleCategorie, cursore.Left, cursore.Top);
+            Console.WriteLine(idCategoria);
+            Console.ReadKey();
+
+
+
         }
 
         /// <summary>
@@ -549,7 +578,7 @@ namespace FoodexpMvc.Controllers
                     var cursore = Console.GetCursorPosition();
                     Console.WriteLine("\nUltimo tentativo");
                     Thread.Sleep(800);
-                    View.PulisciRiga(cursore.Left, cursore.Top);
+                    View.PulisciRiga(16, cursore.Left, cursore.Top);
                 }
                 else if (tentativi == 0)
                 {
