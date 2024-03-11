@@ -32,10 +32,6 @@ namespace FoodexpMvc.Controllers
                         //modifica categorie
                         break;
 
-                    case "3":
-                        //elimina categorie
-                        break;
-
                     case "r":
                         //torna al menu principale
                         View.MessaggioTornaMenuPrincipale();
@@ -81,12 +77,30 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region R - Leggi tabella categorie
+        /// <summary>
+        /// Legge la tabella Categorie e memorizza i recordi in una lista di string.
+        /// </summary>
+        /// <returns>Lista di utenti in formato "id - Nome "</returns>
+        public static List<string> GetCategorie()
+        {
+            List<string> listaCategorie = new();
+
+            //scansiono db.Categorie
+            var utenti = _db.Categorie.ToList();
+
+            foreach (var u in utenti)
+            {
+                listaCategorie.Add($"{u.Id} - {u.Nome}");
+            }
+            return listaCategorie;
+        }
         #endregion
 
         #region U - Modifica categoria
         #endregion
 
         #region D - Elimina categoria
+        //l'applicazione non consente l'eliminiazione di una categoria
         #endregion
 
         #region Metodi accessori
