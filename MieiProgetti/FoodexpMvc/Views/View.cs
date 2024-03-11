@@ -39,12 +39,12 @@ namespace FoodexpMvc.Views
         }
 
         /// <summary>
-        /// Messaggio "...uscita" con attesa (default ms = 600).
+        /// Messaggio "...selezione errata" con attesa (default ms = 600).
         /// </summary>
         /// <param name="ms">Tempo di attesa per il Thread.Sleep (600 ms default)</param>
         public static void MessaggioSelezioneErrata(int ms = 600)
         {
-            Console.WriteLine("\n...uscita"); //TO DO spectre
+            Console.Write("\n...selezione errata"); //TO DO spectre
             Thread.Sleep(600);
         }
     }
