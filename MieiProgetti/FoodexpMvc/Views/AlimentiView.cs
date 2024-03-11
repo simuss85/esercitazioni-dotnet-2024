@@ -18,7 +18,7 @@ public class AlimentiView
         Console.WriteLine("8. Ordina per quantità");
         Console.WriteLine("9. Ordina per categoria");
         Console.WriteLine("r. torna al menu principale");
-        Console.WriteLine("\nseleziona opzione");
+        Console.Write("\nseleziona opzione: ");
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ public class AlimentiView
         Console.WriteLine("2. Modifica alimento");
         Console.WriteLine("3. Elimina alimento");
         Console.WriteLine("r. torna al menu principale");
-        Console.WriteLine("\nseleziona opzione");
+        Console.Write("\nseleziona opzione: ");
     }
 
     /// <summary>

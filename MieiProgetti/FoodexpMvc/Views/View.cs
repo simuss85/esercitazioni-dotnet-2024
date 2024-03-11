@@ -11,6 +11,7 @@ namespace FoodexpMvc.Views
             Console.WriteLine("1. Accedi");
             Console.WriteLine("2. Registrati");
             Console.WriteLine("e. Esci");
+            Console.Write("\nseleziona opzione");
         }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace FoodexpMvc.Views
             Console.WriteLine("4. Gestione categorie");
             Console.WriteLine("5. Gestione utenti");
             Console.WriteLine("e. Esci");
-            Console.WriteLine("\nseleziona opzione");
+            Console.Write("\nseleziona opzione");
         }
 
         /// <summary>

@@ -13,6 +13,6 @@ public class ListaSpesaView
         Console.WriteLine("3. Modifica alimento");
         Console.WriteLine("4. Elimina alimento");
         Console.WriteLine("r. torna al menu principale");
-        Console.WriteLine("\nseleziona opzione");
+        Console.Write("\nseleziona opzione: ");
     }
 }

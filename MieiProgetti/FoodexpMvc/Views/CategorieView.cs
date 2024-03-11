@@ -11,7 +11,7 @@ public class CategorieView
         Console.WriteLine("1. Visualizza categorie");
         Console.WriteLine("2. Modifica categoria");
         Console.WriteLine("r. torna al menu principale");
-        Console.WriteLine("\nseleziona opzione");
+        Console.Write("\nseleziona opzione: ");
     }
 
     /// <summary>
