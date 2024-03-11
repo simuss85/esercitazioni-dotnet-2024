@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -45,6 +46,8 @@ namespace FoodexpMvc.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     Quantita = table.Column<int>(type: "INTEGER", nullable: false),
+                    DataScadenza = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DataInserimento = table.Column<DateTime>(type: "TEXT", nullable: true),
                     CategoriaId = table.Column<int>(type: "INTEGER", nullable: false),
                     Info = table.Column<string>(type: "TEXT", nullable: true)
                 },
