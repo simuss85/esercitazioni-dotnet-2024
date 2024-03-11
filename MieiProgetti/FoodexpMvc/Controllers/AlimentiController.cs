@@ -267,7 +267,7 @@ namespace FoodexpMvc.Controllers
             //quantita
             Console.Write("Inserisci quantita: ");
             cursore = Console.GetCursorPosition();
-            int quantita = ValidaInput.GetInt(cursore.Left, cursore.Top);
+            int quantita = ValidaInput.GetQuantita(cursore.Left, cursore.Top);
 
             //data
             Console.Write("Inserisci Data\n(gg/mm/aaaa): ");
@@ -275,17 +275,153 @@ namespace FoodexpMvc.Controllers
             DateTime dataScadenza = ValidaInput.GetData(cursore.Left, cursore.Top);
 
             //categoria
+            Console.Clear();
             //stampo elenco per l'utente
             CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
             int totaleCategorie = _db.Categorie.Count();
             Console.Write("Seleziona categoria: ");
             cursore = Console.GetCursorPosition();
-            int idCategoria = ValidaInput.GetIntCategoria(totaleCategorie, cursore.Left, cursore.Top);
-            Console.WriteLine(idCategoria);
-            Console.ReadKey();
+            int idCategoria = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top);
 
+            //info
+            Console.Write("\nVuoi inserire un'info? (s/n)");
+            cursore = Console.GetCursorPosition();
+            string input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+            string info = "";
+            if (input == "s")
+            {
+                Console.Clear();
 
+                Console.Write("Info: ");
+                cursore = Console.GetCursorPosition();
+                info = ValidaInput.GetString(cursore.Left, cursore.Top);
+            }
 
+            Console.Clear();
+
+            Console.WriteLine("Riepilogo inserimento\n");
+            Console.WriteLine($"Nome: {nome}\nQuantità: {quantita}\nData di scadenza: {dataScadenza.ToString("d")}\nCategoria: {_db.Categorie.FirstOrDefault(c => c.Id == idCategoria)!.Nome}\nInfo: {info}");
+
+            //conferma
+            eseguito = false;
+            while (!eseguito)
+            {
+                //assegno i valori per ogni attributo
+                a.Nome = nome;
+                a.Quantita = quantita;
+                a.DataScadenza = dataScadenza;
+                a.DataInserimento = DateTime.Today;
+                a.CategoriaId = idCategoria;
+                a.Info = info;
+
+                Console.WriteLine("\nConfermi inserimento? (s/n)");
+                cursore = Console.GetCursorPosition();
+                input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
+                if (input == "s")   //confermo inserimento
+                {
+                    eseguito = true;
+                    //inserisco nel db e salvo
+                    _db.Alimenti.Add(a);
+                    _db.SaveChanges();
+                    Console.WriteLine("Alimento aggiunto");
+                    Thread.Sleep(800);
+                }
+                else            //non voglio inserire oppure voglio modificare
+                {
+                    eseguito = false;
+                    Console.WriteLine("Vuoi modificare qualcosa? (s/n)");
+                    cursore = Console.GetCursorPosition();
+                    input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
+                    if (input == "s")   //voglio modificare qualcosa
+                    {
+                        eseguito = false;
+                        Console.Clear();
+
+                        Console.WriteLine("Riepilogo inserimento\n");
+                        Console.WriteLine($"1 - Nome: {nome}\n2 - Quantità: {quantita}\n3 - Data di scadenza: {dataScadenza.ToString("d")}\n4 - Categoria: {_db.Categorie.FirstOrDefault(c => c.Id == idCategoria)!.Nome}\n5 - Info: {info}\n6 - Tutto corretto");
+                        Console.Write("\nSeleziona l'elemento da modificare: ");
+                        cursore = Console.GetCursorPosition();
+                        int idSelezione = ValidaInput.GetIntElenco(6, cursore.Left, cursore.Top);
+
+                        switch (idSelezione)
+                        {
+                            case 1:
+                                //nome
+                                Console.Write("Inserisci nome: ");
+                                cursore = Console.GetCursorPosition();
+                                nome = ValidaInput.GetString(cursore.Left, cursore.Top);
+                                break;
+
+                            case 2:
+                                //quantita
+                                Console.Write("Inserisci quantita: ");
+                                cursore = Console.GetCursorPosition();
+                                quantita = ValidaInput.GetQuantita(cursore.Left, cursore.Top);
+                                break;
+
+                            case 3:
+                                //data
+                                Console.Write("Inserisci Data\n(gg/mm/aaaa): ");
+                                cursore = Console.GetCursorPosition();
+                                dataScadenza = ValidaInput.GetData(cursore.Left, cursore.Top);
+                                break;
+
+                            case 4:
+                                //categoria
+                                Console.Clear();
+                                //stampo elenco per l'utente
+                                CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
+                                totaleCategorie = _db.Categorie.Count();
+                                Console.Write("Seleziona categoria: ");
+                                cursore = Console.GetCursorPosition();
+                                idCategoria = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top);
+                                break;
+
+                            case 5:
+                                //info
+                                Console.Write("\nVuoi inserire un'info? (s/n)");
+                                cursore = Console.GetCursorPosition();
+                                input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+                                info = "";
+                                if (input == "s")
+                                {
+                                    Console.Clear();
+
+                                    Console.Write("Info: ");
+                                    cursore = Console.GetCursorPosition();
+                                    info = ValidaInput.GetString(cursore.Left, cursore.Top);
+                                    Console.Clear();
+                                }
+
+                                Console.Clear();
+
+                                Console.WriteLine("Riepilogo inserimento\n");
+                                Console.WriteLine($"Nome: {nome}\nQuantità: {quantita}\nData di scadenza: {dataScadenza.ToString("d")}\nCategoria: {_db.Categorie.FirstOrDefault(c => c.Id == idCategoria)!.Nome}\nInfo: {info}");
+                                break;
+
+                            case 6:
+                                //tutto corretto non fa niente
+                                break;
+
+                            default:
+                                Console.WriteLine("Selezione errata");
+                                break;
+                        }
+
+                        Console.Clear();
+                        Console.WriteLine("Riepilogo inserimento\n");
+                        Console.WriteLine($"Nome: {nome}\nQuantità: {quantita}\nData di scadenza: {dataScadenza.ToString("d")}\nCategoria: {_db.Categorie.FirstOrDefault(c => c.Id == idCategoria)!.Nome}\nInfo: {info}");
+                    }
+                    else
+                    {
+                        eseguito = true;
+                        View.MessaggioTornaMenuPrecedente();
+                        Console.ReadKey();
+                    }
+                }
+            }
         }
 
         /// <summary>
