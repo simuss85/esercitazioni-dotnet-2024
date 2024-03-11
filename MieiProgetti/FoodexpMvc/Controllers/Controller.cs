@@ -98,8 +98,7 @@ namespace FoodexpMvc.Controllers
 
                     case "3":
                         //gestione alimenti
-                        AlimentiView.MenuGestioneAlimenti();
-                        //AlimentiController.cs
+                        AlimentiController.SelezioneSottoMenu();
                         break;
 
                     case "4":
