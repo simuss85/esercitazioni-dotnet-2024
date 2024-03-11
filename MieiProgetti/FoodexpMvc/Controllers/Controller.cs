@@ -159,21 +159,18 @@ namespace FoodexpMvc.Controllers
             };
             CategorieController.AggiungiCategorie(cateogrieDaAggiungere);
             //creo lista alimenti
-            DateTime now = DateTime.Now;
-            string dataOggi = now.ToString("dd/MM/yyyy");
-
             List<Alimento> alimentiDaAggiungere = new List<Alimento>
             {
-                new Alimento {Nome = "yogurt fragola", Quantita = 3, DataScadenza = new Date(12, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 1},
-                new Alimento {Nome = "prosciutto cotto", Quantita = 1, DataScadenza = new Date(3, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 2},
-                new Alimento {Nome = "gorgonzola", Quantita = 1, DataScadenza = new Date(31, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 5},
-                new Alimento {Nome = "branzino", Quantita = 3, DataScadenza = new Date(20, 3,2024), DataInserimento = Date.Oggi() , CategoriaId = 7},
-                new Alimento {Nome = "salsiccia", Quantita = 4, DataScadenza = new Date(28, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 6},
-                new Alimento {Nome = "actimel", Quantita = 6, DataScadenza = new Date(22, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 1},
-                new Alimento {Nome = "succo ACE", Quantita = 2, DataScadenza = new Date(24, 4, 2024), DataInserimento = Date.Oggi() , CategoriaId = 8},
-                new Alimento {Nome = "melanzane", Quantita = 3, DataScadenza = new Date(16, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 4},
-                new Alimento {Nome = "braciole", Quantita = 3, DataScadenza = new Date(19, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 6},
-                new Alimento {Nome = "rucola", Quantita = 1, DataScadenza = new Date(11, 3, 2024), DataInserimento = Date.Oggi() , CategoriaId = 4}
+                new Alimento {Nome = "yogurt fragola", Quantita = 3, DataScadenza = new DateTime(2024, 3, 12), DataInserimento = DateTime.Today , CategoriaId = 1},
+                new Alimento {Nome = "prosciutto cotto", Quantita = 1, DataScadenza = new DateTime(2024, 3, 3), DataInserimento = DateTime.Today , CategoriaId = 2},
+                new Alimento {Nome = "gorgonzola", Quantita = 1, DataScadenza = new DateTime(2024, 3, 31), DataInserimento = DateTime.Today , CategoriaId = 5},
+                new Alimento {Nome = "branzino", Quantita = 3, DataScadenza = new DateTime(2024, 3, 20), DataInserimento = DateTime.Today , CategoriaId = 7},
+                new Alimento {Nome = "salsiccia", Quantita = 4, DataScadenza = new DateTime(2024, 3, 28), DataInserimento = DateTime.Today , CategoriaId = 6},
+                new Alimento {Nome = "actimel", Quantita = 6, DataScadenza = new DateTime(2024, 3, 22), DataInserimento = DateTime.Today , CategoriaId = 1},
+                new Alimento {Nome = "succo ACE", Quantita = 2, DataScadenza = new DateTime(2024, 4, 24), DataInserimento = DateTime.Today , CategoriaId = 8},
+                new Alimento {Nome = "melanzane", Quantita = 3, DataScadenza = new DateTime(2024, 3, 16), DataInserimento = DateTime.Today , CategoriaId = 4},
+                new Alimento {Nome = "braciole", Quantita = 3, DataScadenza = new DateTime(2024, 3, 19), DataInserimento = DateTime.Today , CategoriaId = 6},
+                new Alimento {Nome = "rucola", Quantita = 1, DataScadenza = new DateTime(2024, 3, 17), DataInserimento = DateTime.Today , CategoriaId = 4}
 
             };
             //aggiungo alimenti iniziali
