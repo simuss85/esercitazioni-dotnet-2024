@@ -142,14 +142,14 @@ namespace FoodexpMvc.Controllers
             //creo categorie 
             List<Categoria> cateogrieDaAggiungere = new List<Categoria>
             {
-                new Categoria { Nome = "latticini"},
-                new Categoria { Nome = "salumi"},
-                new Categoria { Nome = "frutta"},
-                new Categoria { Nome = "verdura"},
-                new Categoria { Nome = "formaggi"},
-                new Categoria { Nome = "carne"},
-                new Categoria { Nome = "pesce"},
-                new Categoria { Nome = "bevande"}
+                new Categoria { Nome = "latticini"},//1
+                new Categoria { Nome = "salumi"},   //2
+                new Categoria { Nome = "frutta"},   //3
+                new Categoria { Nome = "verdura"},  //4
+                new Categoria { Nome = "formaggi"}, //5
+                new Categoria { Nome = "carne"},    //6
+                new Categoria { Nome = "pesce"},    //7
+                new Categoria { Nome = "bevande"}   //8
             };
             CategorieController.AggiungiCategorie(cateogrieDaAggiungere);
             //creo lista alimenti
@@ -167,6 +167,24 @@ namespace FoodexpMvc.Controllers
                 new Alimento {Nome = "rucola", Quantita = 1, DataScadenza = new DateTime(2024, 3, 17), DataInserimento = DateTime.Today , CategoriaId = 4}
 
             };
+
+            //creo utenti di prova
+            List<Utente> utentiDaInserire = new List<Utente>
+            {
+                new Utente {Nome = "Emy", Password = "pongo89" },   //2
+                new Utente {Nome = "Alex", Password = "maria99" }   //3
+            };
+
+            //creo lista listaAlimenti
+            List<ListaSpesa> listaSpesaDaAggiungere = new List<ListaSpesa>
+            {
+                new ListaSpesa {Alimento = "insalata", Quantita = 1, CategoriaId = 4, UtenteId = 2},
+                new ListaSpesa {Alimento = "salamino", Quantita = 3, CategoriaId = 2, UtenteId = 3},
+                new ListaSpesa {Alimento = "parmigiano", Quantita = 1, CategoriaId = 5, UtenteId = 1},
+                new ListaSpesa {Alimento = "orata", Quantita = 1, CategoriaId = 7, UtenteId = 2},
+                new ListaSpesa {Alimento = "vino rosso", Quantita = 2, CategoriaId = 8, UtenteId = 3}
+            };
+
             //aggiungo alimenti iniziali
             AlimentiController.AggiungiAlimenti(alimentiDaAggiungere);
         }
