@@ -19,18 +19,18 @@ namespace Controllers{
         - bool accesso$
         - bool eseguito$
         + Utente UtenteAttuale$
-        # Database _db
+        # Database _db$
         + AvvioApp() void$
         - CreaUtenteAdmin()$ void
         - InizializzaFrigo()$ void
     }
 
     class UtentiController{
-        
         UtentiController(Utente utenteAttuale)
         + SelezioneMenu()$ int
         + RegistraUtente()$ void
-        - LeggiUtenti()$ List~string~
+        + AggiungiUtenti(List~Utente~ utentiDaInserire)$ void
+        - GetUtenti()$ List~string~
         + ModificaUtente()$ void
         - EliminaUtente()$ void
         + VerificaAccesso()$ bool
@@ -39,14 +39,42 @@ namespace Controllers{
     }
 
     class AlimentiController{
-
+        - bool eseguito$
+        + SelezioneMenu()$ void
+        + SelezioneSottoMenu()$ void
+        + AggiungiAlimento()$ void
+        + AggiungiAlimenti(List~Alimento~ alimentiDaInserire)$ void
+        + GetAlimenti()$ List~string~
+        - GetListTipoAlimento()$ List~Alimento~
+        + GetAlimentiScaduti(int range)$ List~string~
+        + GetAlimentiEsaurimento(int range)$ List~string~
+        + GetAlimentiPerNome(bool inverti)$ List~string~
+        + GetAlimentiPerScadenza(bool inverti)$ List~string~
+        + GetAlimentiPerInserimento(bool inverti)$ List~string~
+        + GetAlimentiPerQuantita(bool inverti)$ List~string~
+        + GetAlimentiPerCategoria(bool inverti)$ List~string~
+        + ModificaAlimento()$ void
+        - EliminaAlimento()$ bool
+        - EliminaAlimentoPerId(int id)$ bool
     }
 
     class CategorieController{
-
+        - bool eseguito$
+        + SelezioneMenu()$ void
+        + AggiungiCategoria()$ void
+        + AggiungiCategorie(List~Categoria~ categorieDaInserire)$ void
+        + GetCategorie()$ List~string~
+        + ModificaCategoria()$ void
     }
 
     class ListaSpesaController{
+        - bool eseguito$
+        + SelezioneMenu()$ void
+        + AggiungiInListaSpesa()$ void
+        + AggiungiListaSpesa(List~ListaSpesa~ listaSpesaDaAggiungere)$ void
+        + GetLista()$ List~string~
+        + ModificaListaSpesa()$ void
+        - EliminaDaListaSpesa()$ void
 
     }
 }
