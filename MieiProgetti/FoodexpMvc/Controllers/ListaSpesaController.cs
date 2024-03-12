@@ -15,15 +15,17 @@ namespace FoodexpMvc.Controllers
             eseguito = false;
             while (!eseguito)
             {
+                Console.Clear();
+
                 ListaSpesaView.MenuListaSpesa();
                 string input = Console.ReadLine()!.ToLower();
-
-                Console.Clear();
 
                 switch (input)
                 {
                     case "1":
                         //viualizza lista
+                        Console.Clear();
+
                         ListaSpesaView.VisualizzaLista(GetLista());
                         Console.Write("\n...premi un tasto ");
                         Console.ReadKey();
