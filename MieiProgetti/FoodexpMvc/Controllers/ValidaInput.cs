@@ -138,31 +138,32 @@ public class ValidaInput
     /// <summary>
     /// Verifica il corretto inserimento di input di tipo int riferito a un elenco numerato.<br/>
     /// Valore intero maggiore di zero fino al maxElementi dell'elenco.<br/>
-    /// NOTA! Se l'utente inserisce il carattere 'r' viene restituito -1.
+    /// NOTA! Se l'utente inserisce il carattere 'r' oppure 'e' viene restituito -1.
     /// 
     /// </summary>
     /// <param name="totaleElenco">Il numero di elementi che compongono la selezione.</param>
     /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
     /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
-    /// <param name="opzioneR">Opzione che permette anche la gestione dell'inserimento di 'r'</param>
+    /// <param name="opzioneRoE">Opzione che permette anche la gestione dell'inserimento di 'r' o 'e'</param>
     /// <returns>Un intero maggiore di zero e minore di totaleElenco;<br/> (-1) se viene inserito 'r'</returns>
-    public static int GetIntElenco(int totaleElenco, int left, int top, bool opzioneR = false)
+    public static int GetIntElenco(int totaleElenco, int left, int top, bool opzioneRoE = false)
     {
-        string errore = "Devi inserire una quantita valida\r";
+
+        string errore = "Selezione errata\r";
         int x = 0;
         string input = Console.ReadLine()!;
 
-        if (opzioneR && input == "r")
+        if (opzioneRoE && (input == "r" || input == "e"))
         {
             x = -1;
         }
         else
         {
             //se non inserisco in numero oppure se supero il range dei numeri in elenco
-            while (!int.TryParse(input, out x) || x < 0 || x > totaleElenco)
+            while (!int.TryParse(input, out x) || x <= 0 || x > totaleElenco)
             {
                 Console.Write(errore);
-                View.PulisciRiga(errore.Length, left, top);
+                View.PulisciRiga(errore.Length, left, top, 500);
                 input = Console.ReadLine()!;
             }
         }
