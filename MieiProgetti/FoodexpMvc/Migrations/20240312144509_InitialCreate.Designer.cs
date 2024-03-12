@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodexpMvc.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20240311082012_InitialCreate")]
+    [Migration("20240312144509_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
