@@ -14,183 +14,209 @@ namespace FoodexpMvc.Controllers
         /// </summary>
         public static void SelezioneMenu()
         {
+            int idSelezione;
+            string input;
+
             //frigorifero - filtra alimenti
             bool inverti;
             eseguito = false;
             while (!eseguito)
             {
-                AlimentiView.MenuFiltraAlimenti();
-                string input = Console.ReadLine()!.ToLower();
-
                 Console.Clear();
 
-                switch (input)
+                AlimentiView.MenuFiltraAlimenti();
+                var cursore = Console.GetCursorPosition();
+                idSelezione = ValidaInput.GetIntElenco(9, cursore.Left, cursore.Top, true);
+
+                switch (idSelezione)
                 {
-                    case "1":
+                    case 1:
                         //visualizza tutti
+                        Console.Clear();
+
                         AlimentiView.VisualizzaAlimenti(GetAlimenti(), "Tutti\n");
+                        //gestione output uscita
+                        Console.Write("\n...premi un tasto per tornare indietro ");
+                        Console.ReadKey();
                         break;
 
-                    case "2":
+                    case 2:
                         //visualizza scaduti
+                        Console.Clear();
+
                         AlimentiView.VisualizzaAlimenti(GetAlimentiScaduti(), "Scaduti\n");
+                        //gestione output uscita
+                        Console.Write("\n...premi un tasto per tornare indietro ");
+                        Console.ReadKey();
                         break;
 
-                    case "3":
+                    case 3:
                         //visualizza in scadenza
+                        Console.Clear();
+
                         int giorni = 1;
                         AlimentiView.VisualizzaAlimenti(GetAlimentiScaduti(giorni), $"Scaduti o in scadenza ({giorni} giorno/i)\n");
+                        //gestione output uscita
+                        Console.Write("\n...premi un tasto per tornare indietro ");
+                        Console.ReadKey();
                         break;
 
-                    case "4":
+                    case 4:
                         //visualizza in esaurimento
+                        Console.Clear();
+
                         int quantita = 1;
                         AlimentiView.VisualizzaAlimenti(GetAlimentiEsaurimento(quantita), $"In esaurimento (quantità {quantita})\n");
+                        //gestione output uscita
+                        Console.Write("\n...premi un tasto per tornare indietro ");
+                        Console.ReadKey();
                         break;
 
-                    case "5":
+                    case 5:
                         //ordina per nome
-                        inverti = false;
                         do
                         {
+                            Console.Clear();
+
                             AlimentiView.VisualizzaAlimenti(GetAlimentiPerNome(), $"Ordine per nome\n");
-                            Console.WriteLine("\n...vuoi invertire l'ordine della lista? (s/n)");
-                            input = Console.ReadLine()!.ToLower();
+                            Console.Write("\n...vuoi invertire l'ordine della lista? (s/n) ");
+                            cursore = Console.GetCursorPosition();
+                            input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
                             if (input == "s")
                             {
                                 inverti = true;
                                 Console.Clear();
 
                                 AlimentiView.VisualizzaAlimenti(GetAlimentiPerNome(inverti), $"Ordine per nome decrescente\n");
-                            }
-                            else if (input == "n")
-                            {
-                                inverti = true; //condizione di uscita dal while senza forzarlo
+                                Console.Write("\n...premi per riordinare ");
+                                Console.ReadKey();
+                                Console.Clear();
                             }
                             else
                             {
-                                View.MessaggioSelezioneErrata();
-                                Console.Clear();
+                                inverti = false;
                             }
                         }
-                        while (!inverti);
+                        while (inverti);
                         break;
 
-                    case "6":
+                    case 6:
                         //ordina per data di scadenza
-                        inverti = false;
                         do
                         {
+                            Console.Clear();
+
                             AlimentiView.VisualizzaAlimenti(GetAlimentiPerScadenza(), $"Ordine per data di scadenza\n");
-                            Console.WriteLine("\n...vuoi invertire l'ordine della lista? (s/n)");
-                            input = Console.ReadLine()!.ToLower();
+                            Console.Write("\n...vuoi invertire l'ordine della lista? (s/n) ");
+                            cursore = Console.GetCursorPosition();
+                            input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
                             if (input == "s")
                             {
                                 inverti = true;
                                 Console.Clear();
 
                                 AlimentiView.VisualizzaAlimenti(GetAlimentiPerScadenza(inverti), $"Ordine per data di scadenza decrescente\n");
-                            }
-                            else if (input == "n")
-                            {
-                                break;
+                                Console.Write("\n...premi per riordinare ");
+                                Console.ReadKey();
+                                Console.Clear();
                             }
                             else
                             {
-                                View.MessaggioSelezioneErrata(1000);
-                                Console.Clear();
+                                inverti = false;
                             }
                         }
-                        while (!inverti);
+                        while (inverti);
                         break;
 
-                    case "7":
+                    case 7:
                         //ordina per data di inserimento
-                        inverti = false;
                         do
                         {
+                            Console.Clear();
+
                             AlimentiView.VisualizzaAlimenti(GetAlimentiPerInserimento(), $"Ordine per data di inserimento\n");
-                            Console.WriteLine("\n...vuoi invertire l'ordine della lista? (s/n)");
-                            input = Console.ReadLine()!.ToLower();
+                            Console.Write("\n...vuoi invertire l'ordine della lista? (s/n) ");
+                            cursore = Console.GetCursorPosition();
+                            input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
                             if (input == "s")
                             {
                                 inverti = true;
                                 Console.Clear();
 
                                 AlimentiView.VisualizzaAlimenti(GetAlimentiPerInserimento(inverti), $"Ordine per data di inserimento decrescente\n");
-                            }
-                            else if (input == "n")
-                            {
-                                break;
+                                Console.Write("\n...premi per riordinare ");
+                                Console.ReadKey();
                             }
                             else
                             {
-                                View.MessaggioSelezioneErrata(1000);
-                                Console.Clear();
+                                inverti = false;
                             }
                         }
-                        while (!inverti);
+                        while (inverti);
                         break;
 
-                    case "8":
+                    case 8:
                         //ordina per quantità
-                        inverti = false;
                         do
                         {
+                            Console.Clear();
+
                             AlimentiView.VisualizzaAlimenti(GetAlimentiPerQuantita(), $"Ordine per quantità\n");
-                            Console.WriteLine("\n...vuoi invertire l'ordine della lista? (s/n)");
-                            input = Console.ReadLine()!.ToLower();
+                            Console.Write("\n...vuoi invertire l'ordine della lista? (s/n) ");
+                            cursore = Console.GetCursorPosition();
+                            input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
                             if (input == "s")
                             {
                                 inverti = true;
                                 Console.Clear();
 
                                 AlimentiView.VisualizzaAlimenti(GetAlimentiPerQuantita(inverti), $"Ordine per quantità decrescente\n");
-                            }
-                            else if (input == "n")
-                            {
-                                break;
+                                Console.Write("\n...premi per riordinare ");
+                                Console.ReadKey();
                             }
                             else
                             {
-                                View.MessaggioSelezioneErrata(1000);
-                                Console.Clear();
+                                inverti = false;
                             }
                         }
-                        while (!inverti);
+                        while (inverti);
                         break;
 
-                    case "9":
+                    case 9:
                         //ordina per categoria
-                        inverti = false;
                         do
                         {
+                            Console.Clear();
+
                             AlimentiView.VisualizzaAlimenti(GetAlimentiPerCategoria(), $"Ordine per categoria alimenti\n");
-                            Console.WriteLine("\n...vuoi invertire l'ordine della lista? (s/n)");
-                            input = Console.ReadLine()!.ToLower();
+                            Console.Write("\n...vuoi invertire l'ordine della lista? (s/n) ");
+                            cursore = Console.GetCursorPosition();
+                            input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
                             if (input == "s")
                             {
                                 inverti = true;
                                 Console.Clear();
 
                                 AlimentiView.VisualizzaAlimenti(GetAlimentiPerCategoria(inverti), $"Ordine per categoria decrescente\n");
-                            }
-                            else if (input == "n")
-                            {
-                                break;
+                                Console.Write("\n...premi per riordinare ");
+                                Console.ReadKey();
                             }
                             else
                             {
-                                View.MessaggioSelezioneErrata(1000);
-                                Console.Clear();
+                                inverti = false;
                             }
                         }
-                        while (!inverti);
+                        while (inverti);
                         break;
 
-                    case "r":
+                    case -1:
                         //torna al menu principale
-                        View.MessaggioTornaMenuPrincipale();
+                        View.MessaggioTornaMenuPrincipale(800);
                         eseguito = true;
                         return;
 
@@ -199,10 +225,8 @@ namespace FoodexpMvc.Controllers
                         View.MessaggioSelezioneErrata();
                         break;
                 }
-                Console.Write("\n...premi un tasto");
-                Console.ReadKey();
-                Console.Clear();
-
+                //torna al menu principale
+                View.MessaggioTornaMenuPrincipale(0);
             }
         }
 
