@@ -26,10 +26,19 @@ namespace FoodexpMvc.Controllers
                 {
                     case "1":
                         //visualizza categorie
+                        CategorieView.VisualizzaCategorie(GetCategorie());
+                        Console.WriteLine("\n...premi un tasto");
+                        Console.ReadKey();
                         break;
 
                     case "2":
+                        //inserisci categorie
+                        AggiungiCategoria();
+                        break;
+
+                    case "3":
                         //modifica categorie
+                        ModificaCategoria();
                         break;
 
                     case "r":
@@ -43,11 +52,68 @@ namespace FoodexpMvc.Controllers
                         View.MessaggioSelezioneErrata();
                         break;
                 }
+                Console.Clear();
             }
         }
         #endregion
 
         #region C - Aggiungi categoria
+        /// <summary>
+        /// Aggiunge un oggetto di tipo Categoria al db.Categorie.
+        /// </summary>
+        public static void AggiungiCategoria()
+        {
+            eseguito = false;
+            while (!eseguito)
+            {
+                Console.Clear();
+
+                CategorieView.VisualizzaCategorie(GetCategorie());
+                Console.WriteLine("\nVuoi inserire una nuova categoria? (s/n)");
+                var cursore = Console.GetCursorPosition();
+                string input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
+
+                if (input == "n")   //torna al menu precedente
+                {
+                    eseguito = true;
+                    View.MessaggioTornaMenuPrecedente(1000);
+                }
+                else    //inserimento categoria
+                {
+                    eseguito = false;
+                    Categoria nuovaCategoria = new Categoria();      //creo nuovo oggetto Categoria
+
+                    Console.Write("Inserisci nome: ");
+                    cursore = Console.GetCursorPosition();
+                    string nome = ValidaInput.GetString(cursore.Left, cursore.Top).ToLower();   //i nomi categoria uppercase
+
+                    //verifico che non sia gia presente
+                    var giaPresente = _db.Categorie.FirstOrDefault(c => c.Nome == nome);
+
+                    if (giaPresente == null)    //continuo con la modifica
+                    {
+                        //eseguo l'inserimento
+                        nuovaCategoria.Nome = nome;
+                        _db.Categorie.Add(nuovaCategoria);
+                        _db.SaveChanges();
+
+                        Console.WriteLine($"\nCategoria '{nome}' aggiunta");
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Categoria '{nome}' gia presente");
+                        Console.WriteLine("Riprova");
+                        Thread.Sleep(800);
+                    }
+
+                }
+            }
+
+
+        }
+
         /// <summary>
         /// Aggiunge al db.Categorie gli oggetti di tipo Categoria presenti nella lista.
         /// </summary>
@@ -90,13 +156,77 @@ namespace FoodexpMvc.Controllers
 
             foreach (var u in utenti)
             {
-                listaCategorie.Add($"{u.Id} - {u.Nome}");
+                listaCategorie.Add($"{u.Id} - {View.PascalCase(u.Nome!)}");
             }
             return listaCategorie;
         }
         #endregion
 
         #region U - Modifica categoria
+        /// <summary>
+        /// Permette di modificare una categoria dal db.Categorie
+        /// </summary>
+        public static void ModificaCategoria()
+        {
+            eseguito = false;
+            while (!eseguito)
+            {
+                Console.Clear();
+
+                CategorieView.VisualizzaCategorie(GetCategorie());
+                int totaleCategorie = _db.Categorie.Count();
+                Console.WriteLine($"r - Torna al menu precedente");  //inserisco opzione di uscita dinamica
+                Console.WriteLine("\nCosa vuoi modificare? ");
+                var cursore = Console.GetCursorPosition();
+                int id = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top, true);
+
+                if (id == -1)   //torna al menu precedente
+                {
+                    eseguito = true;
+                    View.MessaggioTornaMenuPrecedente(1000);
+                }
+                else    //modifico categoria
+                {
+                    eseguito = false;
+
+                    //carico categoria da modificare
+                    var c = _db.Categorie.FirstOrDefault(c => c.Id == id);
+
+                    //preparo la variabile di appoggio per l'inserimento dell'utente
+                    string? nome = c!.Nome;
+
+                    Console.Clear();
+
+                    cursore = Console.GetCursorPosition();
+                    Console.WriteLine($"Vuoi modificare la categoria '{View.PascalCase(c.Nome!)}'? (s/n)");
+                    cursore = Console.GetCursorPosition();
+                    string input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+                    if (input == "s")
+                    {
+                        Console.Write("Inserisci nuovo nome: ");
+                        cursore = Console.GetCursorPosition();
+                        nome = ValidaInput.GetString(cursore.Left, cursore.Top).ToLower();   //i nomi categoria uppercase
+
+                        //conferma iserimento
+                        Console.WriteLine($"\nConfermi nuovo nome categoria: '{View.PascalCase(nome)}'? (s/n)");
+                        cursore = Console.GetCursorPosition();
+                        input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
+                        if (input == "s")
+                        {
+                            //assegno il nuovo valore per l'attributo nome e salvo
+                            c.Nome = nome;
+                            _db.SaveChanges();
+                        }
+
+                    }
+                    else
+                    {
+                        //non fa niente
+                    }
+                }
+            }
+        }
         #endregion
 
         #region D - Elimina categoria
@@ -104,6 +234,7 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region Metodi accessori
+        //eventuali metodi accessori
         #endregion
     }
 }
