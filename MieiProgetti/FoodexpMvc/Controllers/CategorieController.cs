@@ -17,15 +17,17 @@ namespace FoodexpMvc.Controllers
             eseguito = false;
             while (!eseguito)
             {
+                Console.Clear();
+
                 CategorieView.MenuGestioneCategorie();
                 string input = Console.ReadLine()!.ToLower();
-
-                Console.Clear();
 
                 switch (input)
                 {
                     case "1":
                         //visualizza categorie
+                        Console.Clear();
+
                         CategorieView.VisualizzaCategorie(GetCategorie());
                         Console.Write("\n...premi un tasto ");
                         Console.ReadKey();
@@ -52,7 +54,6 @@ namespace FoodexpMvc.Controllers
                         View.MessaggioSelezioneErrata();
                         break;
                 }
-                Console.Clear();
             }
         }
         #endregion

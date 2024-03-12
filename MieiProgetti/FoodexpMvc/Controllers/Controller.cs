@@ -19,6 +19,8 @@ namespace FoodexpMvc.Controllers
         {
             CreaUtenteAdmin();  //per l'inizializzazione DEBUG TEST
 
+            int idSelezione;
+
         Login:
             //schermata login
             accesso = false;
@@ -27,11 +29,12 @@ namespace FoodexpMvc.Controllers
                 Console.Clear();
 
                 View.MenuLogin();
-                string input = Console.ReadLine()!.ToLower();
+                var cursore = Console.GetCursorPosition();
+                idSelezione = ValidaInput.GetIntElenco(2, cursore.Left, cursore.Top, true);
 
-                switch (input)
+                switch (idSelezione)
                 {
-                    case "1":
+                    case 1:
                         //accesso login
                         //verifico l'accesso
                         accesso = UtentiController.VerificaAccesso();
@@ -48,20 +51,20 @@ namespace FoodexpMvc.Controllers
                         }
                         break;
 
-                    case "2":
+                    case 2:
                         //registra nuovo utente
                         Console.Clear();
 
                         UtentiController.RegistraUtente();
                         break;
 
-                    case "e":
+                    case -1:
                         Console.WriteLine("\nUscita..."); //TO DO spectre
                         Thread.Sleep(500);
                         return;
 
                     default:
-                        View.MessaggioSelezioneErrata();
+                        //non fa nulla
                         break;
                 }
             }
@@ -77,33 +80,34 @@ namespace FoodexpMvc.Controllers
                     InizializzaFrigo();
                 }
                 View.MenuPrincipale();
-                string input = Console.ReadLine()!.ToLower();
+                var cursore = Console.GetCursorPosition();
+                idSelezione = ValidaInput.GetIntElenco(5, cursore.Left, cursore.Top, true);
 
                 Console.Clear();
 
-                switch (input)
+                switch (idSelezione)
                 {
-                    case "1":
+                    case 1:
                         //frigorifero 
                         AlimentiController.SelezioneMenu();
                         break;
 
-                    case "2":
+                    case 2:
                         //lista della spesa
                         ListaSpesaController.SelezioneMenu();
                         break;
 
-                    case "3":
+                    case 3:
                         //gestione alimenti
                         AlimentiController.SelezioneSottoMenu();
                         break;
 
-                    case "4":
+                    case 4:
                         //gestione categorie 
                         CategorieController.SelezioneMenu();
                         break;
 
-                    case "5":
+                    case 5:
                         //gestione utenti
                         UtentiView.MenuGestioneUtenti();
                         if (UtentiController.SelezioneMenu() == -1)
@@ -113,7 +117,7 @@ namespace FoodexpMvc.Controllers
                         }
                         break;
 
-                    case "e":
+                    case -1:
                         Console.WriteLine("Uscita..."); //TO DO spectre
                         Thread.Sleep(500);
                         return;
@@ -180,13 +184,15 @@ namespace FoodexpMvc.Controllers
             {
                 new ListaSpesa {Alimento = "insalata", Quantita = 1, CategoriaId = 4, UtenteId = 2},
                 new ListaSpesa {Alimento = "salamino", Quantita = 3, CategoriaId = 2, UtenteId = 3},
-                new ListaSpesa {Alimento = "parmigiano", Quantita = 1, CategoriaId = 5, UtenteId = 1},
+                new ListaSpesa {Alimento = "parmigiano", Quantita = 1, CategoriaId = 5, UtenteId = 2},
                 new ListaSpesa {Alimento = "orata", Quantita = 1, CategoriaId = 7, UtenteId = 2},
                 new ListaSpesa {Alimento = "vino rosso", Quantita = 2, CategoriaId = 8, UtenteId = 3}
             };
 
             //aggiungo alimenti iniziali
             AlimentiController.AggiungiAlimenti(alimentiDaAggiungere);
+            UtentiController.AggiungiUtenti(utentiDaInserire);
+            ListaSpesaController.AggiungiListaSpesa(listaSpesaDaAggiungere);
         }
         #endregion
     }

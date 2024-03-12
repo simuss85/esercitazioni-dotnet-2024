@@ -27,12 +27,12 @@ namespace FoodexpMvc.Controllers
                 UtentiView.MenuGestioneUtenti();
                 string input = Console.ReadLine()!.ToLower();
 
-                Console.Clear();
-
                 switch (input)
                 {
                     case "1":
                         //visualizza utenti
+                        Console.Clear();
+
                         UtentiView.VisualizzaUtenti(GetUtenti());
                         Console.Write("\n...premi un tasto ");
                         Console.ReadKey();
@@ -104,7 +104,7 @@ namespace FoodexpMvc.Controllers
         /// <summary>
         /// Aggiunge al db.Utenti gli oggetti di tipo Utenti presenti nella lista.
         /// </summary>
-        /// <param name="utentiDaInserire">La lista dei oggetti di tipo Utenti da aggiungere</param>
+        /// <param name="utentiDaInserire">La lista di oggetti di tipo Utenti da aggiungere</param>
         public static void AggiungiUtenti(List<Utente> utentiDaInserire)
         {
 
@@ -157,6 +157,8 @@ namespace FoodexpMvc.Controllers
             bool eseguito = false;
             bool accesso = false;
             int tentativi = 3;
+
+            Console.Clear();
 
             while (!accesso && tentativi > 0)
             {
@@ -259,6 +261,8 @@ namespace FoodexpMvc.Controllers
             bool eseguito = false;
             bool accesso = false;
             int tentativi = 3;
+
+            Console.Clear();
 
             while (!accesso && tentativi > 0)
             {

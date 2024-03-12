@@ -64,6 +64,29 @@ namespace FoodexpMvc.Controllers
         {
 
         }
+
+        /// <summary>
+        /// Aggiunge al db.ListaSpesa gli oggetti di tipo ListaSpesa presenti nella lista.
+        /// </summary>
+        /// <param name="listaSpesaDaAggiungere">La lista di oggetti di tipo ListaSpesa da aggiungere</param>
+        public static void AggiungiListaSpesa(List<ListaSpesa> listaSpesaDaAggiungere)
+        {
+            foreach (var elemento in listaSpesaDaAggiungere)   //per ogni elemento della lista da inserire
+            {
+                //verifico che non sia gia nella lista
+                var ldb = _db.ListaSpesa.FirstOrDefault(l => l.Alimento == elemento.Alimento);
+
+                if (ldb != null)
+                {
+                    //elemento gia presente non fa niente
+                }
+                else
+                {
+                    _db.ListaSpesa.Add(elemento);
+                    _db.SaveChanges();
+                }
+            }
+        }
         #endregion
 
         #region R - Leggi tabella ListaSpesa
