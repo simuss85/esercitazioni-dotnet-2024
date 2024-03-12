@@ -79,10 +79,11 @@ namespace FoodexpMvc.Views
         /// Necessita del rientro di cursore '\r' nel messaggio di errore precedente.
         /// </summary>
         /// <param name="lunghezzaErrore">Numero di caratteri del messaggio di errore</param>
-        /// <param name="posizioneX">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
+        /// <param name="left">Posizione orizzontale del cursore che corrisponde alla lunghezza <br/>
         /// del messaggio di richiesta inserimento dato.</param>
-        /// <param name="posizioneY">Posizione verticale del cursore</param>
-        public static void PulisciRiga(int lunghezzaErrore, int posizioneX, int posizioneY)
+        /// <param name="top">Posizione verticale del cursore</param>
+        /// /// <param name="ms">Tempo in ms di default 1000</param>
+        public static void PulisciRiga(int lunghezzaErrore, int left, int top, int ms = 1000)
         {
             Thread.Sleep(1000);  //attende la lettura del messaggio
 
@@ -94,12 +95,12 @@ namespace FoodexpMvc.Views
 
             //sposto il cursore al punto in cui l'utente ha inserito l'input
             //cancello il testo e mi riposiziono al punto corretto
-            Console.SetCursorPosition(posizioneX, posizioneY);
+            Console.SetCursorPosition(left, top);
             for (int i = 0; i < 80; i++)
             {
                 Console.Write(" ");
             }
-            Console.SetCursorPosition(posizioneX, posizioneY);
+            Console.SetCursorPosition(left, top);
         }
 
         /// <summary>

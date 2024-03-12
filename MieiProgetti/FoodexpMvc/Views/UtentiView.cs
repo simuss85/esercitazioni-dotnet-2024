@@ -11,7 +11,7 @@ public class UtentiView
         Console.WriteLine("1. Visualizza utenti");
         Console.WriteLine("2. Modifica nome e/o password");
         Console.WriteLine("3. Elimina account");
-        Console.WriteLine("r. tona al menu principale");
+        Console.WriteLine("r. torna al menu principale");
         Console.Write("\nseleziona opzione: ");
     }
 
