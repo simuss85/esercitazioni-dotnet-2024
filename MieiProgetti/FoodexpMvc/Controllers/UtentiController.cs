@@ -100,6 +100,29 @@ namespace FoodexpMvc.Controllers
                 _db.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Aggiunge al db.Utenti gli oggetti di tipo Utenti presenti nella lista.
+        /// </summary>
+        /// <param name="utentiDaInserire">La lista dei oggetti di tipo Utenti da aggiungere</param>
+        public static void AggiungiUtenti(List<Utente> utentiDaInserire)
+        {
+
+            foreach (var u in utentiDaInserire)       //per ogni elemento della lista da inserire
+            {
+                //ricerca dell'utente; true trovato, false non trovato
+                if (GetIdUtente(u.Nome!, u.Password!) != 0)
+                {
+                    //non fa niente
+                }
+                else
+                {
+                    //aggiungo utnete u al db.Utenti e salvo
+                    _db.Utenti.Add(u);
+                    _db.SaveChanges();
+                }
+            }
+        }
         #endregion
 
         #region R - Leggi tabella utenti
@@ -363,8 +386,7 @@ namespace FoodexpMvc.Controllers
         {
             int idUtente = 0;
 
-            var utenti = _db.Utenti.ToList();
-            foreach (var u in utenti)
+            foreach (var u in _db.Utenti)
             {
                 if (u.Nome == nome && u.Password == password)
                 {
