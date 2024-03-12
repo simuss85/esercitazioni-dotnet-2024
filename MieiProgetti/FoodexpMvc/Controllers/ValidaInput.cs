@@ -8,6 +8,12 @@ public class ValidaInput
 
     // }
 
+    /// <summary>
+    /// Verifica il corretto inserimento di input di tipo string non null o numerico.
+    /// </summary>
+    /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
+    /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
+    /// <returns></returns>
     public static string GetString(int left, int top)
     {
         string errore = "Devi inserire un nome valido\r";
@@ -21,6 +27,12 @@ public class ValidaInput
         return input;
     }
 
+    /// <summary>
+    /// Verifica il corretto inserimento di input di tipo data gg/mm/aaaa.
+    /// </summary>
+    /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
+    /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
+    /// <returns></returns>
     public static DateTime GetData(int left, int top)
     {
         bool corretto = false;
@@ -105,6 +117,12 @@ public class ValidaInput
         return oggettoData;
     }
 
+    /// <summary>
+    /// Verifica il corretto inserimento di input di tipo int per la quantita maggiore di zero.
+    /// </summary>
+    /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
+    /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
+    /// <returns></returns>
     public static int GetQuantita(int left, int top)
     {
         string errore = "Devi inserire una quantita valida\r";
@@ -117,19 +135,47 @@ public class ValidaInput
         return x;
     }
 
-    public static int GetIntElenco(int totaleElenco, int left, int top)
+    /// <summary>
+    /// Verifica il corretto inserimento di input di tipo int riferito a un elenco numerato.<br/>
+    /// Valore intero maggiore di zero fino al maxElementi dell'elenco.<br/>
+    /// NOTA! Se l'utente inserisce il carattere 'r' viene restituito -1.
+    /// 
+    /// </summary>
+    /// <param name="totaleElenco">Il numero di elementi che compongono la selezione.</param>
+    /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
+    /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
+    /// <param name="opzioneR">Opzione che permette anche la gestione dell'inserimento di 'r'</param>
+    /// <returns>Un intero maggiore di zero e minore di totaleElenco; -1 se viene inserito 'r'</returns>
+    public static int GetIntElenco(int totaleElenco, int left, int top, bool opzioneR = false)
     {
         string errore = "Devi inserire una quantita valida\r";
         int x = 0;
-        //se non inserisco in numero oppure se supero il range dei numeri in elenco
-        while (!int.TryParse(Console.ReadLine()!, out x) || x <= 0 || x > totaleElenco)
+        string input = Console.ReadLine()!;
+
+        if (opzioneR && input == "r")
         {
-            Console.Write(errore);
-            View.PulisciRiga(errore.Length, left, top);
+            x = -1;
         }
+        else
+        {
+            //se non inserisco in numero oppure se supero il range dei numeri in elenco
+            while (!int.TryParse(input, out x) || x < 0 || x > totaleElenco)
+            {
+                Console.Write(errore);
+                View.PulisciRiga(errore.Length, left, top);
+                input = Console.ReadLine()!;
+            }
+        }
+
         return x;
     }
 
+    /// <summary>
+    /// Verifica il corretto insrimento di input di tipo (s/n).
+    /// </summary>
+    /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
+    /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
+    /// <returns></returns>
     public static string GetSiNo(int left, int top)
     {
         string errore = "Selezione errata\r";
