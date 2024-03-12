@@ -90,8 +90,7 @@ namespace FoodexpMvc.Controllers
 
                     case "2":
                         //lista della spesa
-                        ListaSpesaView.MenuListaSpesa();
-                        //ListaSpesaController.cs
+                        ListaSpesaController.SelezioneMenu();
                         break;
 
                     case "3":
@@ -101,8 +100,7 @@ namespace FoodexpMvc.Controllers
 
                     case "4":
                         //gestione categorie 
-                        CategorieView.MenuGestioneCategorie();
-                        //CategorieController.cs
+                        CategorieController.SelezioneMenu();
                         break;
 
                     case "5":
@@ -144,14 +142,14 @@ namespace FoodexpMvc.Controllers
             //creo categorie 
             List<Categoria> cateogrieDaAggiungere = new List<Categoria>
             {
-                new Categoria { Nome = "Latticini"},
-                new Categoria { Nome = "Salumi"},
-                new Categoria { Nome = "Frutta"},
-                new Categoria { Nome = "Verdura"},
-                new Categoria { Nome = "Formaggi"},
-                new Categoria { Nome = "Carne"},
-                new Categoria { Nome = "Pesce"},
-                new Categoria { Nome = "Bevande"}
+                new Categoria { Nome = "latticini"},
+                new Categoria { Nome = "salumi"},
+                new Categoria { Nome = "frutta"},
+                new Categoria { Nome = "verdura"},
+                new Categoria { Nome = "formaggi"},
+                new Categoria { Nome = "carne"},
+                new Categoria { Nome = "pesce"},
+                new Categoria { Nome = "bevande"}
             };
             CategorieController.AggiungiCategorie(cateogrieDaAggiungere);
             //creo lista alimenti
