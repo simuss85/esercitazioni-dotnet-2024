@@ -34,7 +34,7 @@ namespace FoodexpMvc.Controllers
                     case "1":
                         //visualizza utenti
                         UtentiView.VisualizzaUtenti(GetUtenti());
-                        Console.WriteLine("\n...premi un tasto");
+                        Console.Write("\n...premi un tasto ");
                         Console.ReadKey();
                         break;
 
@@ -89,7 +89,7 @@ namespace FoodexpMvc.Controllers
             if (GetIdUtente(nome, password) != 0)
             {
                 Console.WriteLine("Utente gia presente.\nEsegui l'accesso nella schermata principale");
-                Console.WriteLine("\n...premi un tasto");
+                Console.Write("\n...premi un tasto ");
                 Console.ReadKey();
             }
             else
@@ -258,7 +258,7 @@ namespace FoodexpMvc.Controllers
                                 _db.Utenti.Remove(user);
                                 _db.SaveChanges();
                                 Console.WriteLine("Utente cancellato! Arrivederci");
-                                Console.WriteLine("\n...premi un tasto");
+                                Console.Write("\n...premi un tasto ");
                                 Console.ReadKey();
                                 eseguito = true;
                             }
@@ -337,7 +337,7 @@ namespace FoodexpMvc.Controllers
                 {
                     tentativi--;
                     Console.WriteLine($"Utente non trovato.");  //TO DO spectre rosso
-                    Console.WriteLine("\n...premi un tasto");
+                    Console.Write("\n...premi un tasto ");
                     Console.ReadKey();
                 }
             }
