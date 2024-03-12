@@ -102,5 +102,13 @@ namespace FoodexpMvc.Views
             Console.SetCursorPosition(posizioneX, posizioneY);
         }
 
+        /// <summary>
+        /// Scrive maiuscola la prima lettera di ogni stringa.
+        /// </summary>
+        /// <param name="stringa"></param>
+        public static string PascalCase(string stringa)
+        {
+            return stringa[..1].ToUpper() + stringa[1..];
+        }
     }
 }
