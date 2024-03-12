@@ -27,7 +27,7 @@ namespace FoodexpMvc.Controllers
                     case "1":
                         //visualizza categorie
                         CategorieView.VisualizzaCategorie(GetCategorie());
-                        Console.WriteLine("\n...premi un tasto");
+                        Console.Write("\n...premi un tasto ");
                         Console.ReadKey();
                         break;
 
@@ -107,11 +107,8 @@ namespace FoodexpMvc.Controllers
                         Console.WriteLine("Riprova");
                         Thread.Sleep(800);
                     }
-
                 }
             }
-
-
         }
 
         /// <summary>
