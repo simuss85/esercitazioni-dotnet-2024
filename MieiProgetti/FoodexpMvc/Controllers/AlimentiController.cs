@@ -519,16 +519,6 @@ namespace FoodexpMvc.Controllers
         }
 
         /// <summary>
-        /// Estrate dalla tabella db.Alimenti gli oggetti di tipo Alimento e li mette in una lista.
-        /// </summary>
-        /// <returns>La lista di oggetti di tipo Alimento</returns>
-        private static List<Alimento> GetListTipoAlimento()
-        {
-            var alimenti = _db.Alimenti.ToList();
-            return alimenti;
-        }
-
-        /// <summary>
         /// Filtra gli alimenti per data di scadenza (minore o uguale alla data odierna), oppure <br/>
         /// per alimenti che stanno per scadere (range = 0 default).
         /// </summary>
@@ -899,6 +889,16 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region Metodi accessori
+        /// <summary>
+        /// Estrate dalla tabella db.Alimenti gli oggetti di tipo Alimento e li mette in una lista.
+        /// </summary>
+        /// <returns>La lista di oggetti di tipo Alimento</returns>
+        private static List<Alimento> GetListTipoAlimento()
+        {
+            var alimenti = _db.Alimenti.ToList();
+            return alimenti;
+        }
+
         /// <summary>
         /// Metodo accessorio che elimina un record da db.Alimenti tramite il suo Id
         /// </summary>
