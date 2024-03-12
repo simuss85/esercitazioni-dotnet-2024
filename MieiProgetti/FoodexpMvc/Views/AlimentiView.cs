@@ -46,7 +46,7 @@ public class AlimentiView
         Console.WriteLine(titolo);
         if (listaAlimenti.Count == 0)
         {
-            Console.WriteLine("Elenco vuoto!!!");
+            Console.WriteLine("\nElenco vuoto!!!");
         }
         else
         {

@@ -24,7 +24,7 @@ public class CategorieView
         Console.WriteLine("Elenco categorie");
         if (listaCategorie.Count == 0)
         {
-            Console.WriteLine("Elenco vuoto!!!");
+            Console.WriteLine("\nElenco vuoto!!!");
         }
         else
         {
