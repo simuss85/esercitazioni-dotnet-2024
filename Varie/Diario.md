@@ -1096,3 +1096,12 @@ Argomenti:
 - Quarto giorno dedicato al nostro progetto MVC.
 
 </details>
+
+<!-- ******************************************  12 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>12 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Quinto giorno dedicato al nostro progetto MVC.
+
+</details>
