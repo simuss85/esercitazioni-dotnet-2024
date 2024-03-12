@@ -14,7 +14,6 @@ namespace FoodexpMvc.Controllers
         /// </summary>
         public static void SelezioneMenu()
         {
-            int idSelezione;
             string input;
 
             //frigorifero - filtra alimenti
@@ -26,7 +25,7 @@ namespace FoodexpMvc.Controllers
 
                 AlimentiView.MenuFiltraAlimenti();
                 var cursore = Console.GetCursorPosition();
-                idSelezione = ValidaInput.GetIntElenco(9, cursore.Left, cursore.Top, true);
+                int idSelezione = ValidaInput.GetIntElenco(9, cursore.Left, cursore.Top, true);
 
                 switch (idSelezione)
                 {
@@ -216,7 +215,7 @@ namespace FoodexpMvc.Controllers
 
                     case -1:
                         //torna al menu principale
-                        View.MessaggioTornaMenuPrincipale(800);
+                        View.MessaggioTornaMenuPrincipale();
                         eseguito = true;
                         return;
 
@@ -240,36 +239,32 @@ namespace FoodexpMvc.Controllers
             while (!eseguito)
             {
                 AlimentiView.MenuGestioneAlimenti();
-                string input = Console.ReadLine()!.ToLower();
+                var cursore = Console.GetCursorPosition();
+                int idSelezione = ValidaInput.GetIntElenco(3, cursore.Left, cursore.Top, true);
+
 
                 Console.Clear();
 
-                switch (input)
+                switch (idSelezione)
                 {
-                    case "1":
+                    case 1:
                         //inserisci alimento
                         AggiungiAlimento();
                         break;
 
-                    case "2":
+                    case 2:
                         //modifica alimento
                         ModificaAlimento();
                         break;
 
-                    case "3":
+                    case 3:
                         //elimina alimento
-                        eseguito = false;
-                        while (!eseguito)
-                        {
-                            eseguito = EliminaAlimento();
-                        }
-
+                        EliminaAlimento();
                         break;
 
-                    case "r":
+                    case -1:
                         //torna al menu principale
                         View.MessaggioTornaMenuPrincipale();
-                        eseguito = true;
                         return;
 
                     default:
@@ -277,7 +272,8 @@ namespace FoodexpMvc.Controllers
                         View.MessaggioSelezioneErrata();
                         break;
                 }
-                Console.Clear();
+                //torna al menu principale
+                View.MessaggioTornaMenuPrincipale(0);
             }
         }
         #endregion
@@ -288,55 +284,57 @@ namespace FoodexpMvc.Controllers
         /// </summary>
         public static void AggiungiAlimento()
         {
-            Alimento a = new Alimento();    //creo nuovo oggetto Alimento
-
-            //nome
-            Console.Write("Inserisci nome: ");
-            var cursore = Console.GetCursorPosition();
-            string nome = ValidaInput.GetString(cursore.Left, cursore.Top);
-
-            //quantita
-            Console.Write("Inserisci quantita: ");
-            cursore = Console.GetCursorPosition();
-            int quantita = ValidaInput.GetQuantita(cursore.Left, cursore.Top);
-
-            //data
-            Console.Write("Inserisci Data\n(gg/mm/aaaa): ");
-            cursore = Console.GetCursorPosition();
-            DateTime dataScadenza = ValidaInput.GetData(cursore.Left, cursore.Top);
-
-            //categoria
-            Console.Clear();
-            //stampo elenco per l'utente
-            CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
-            int totaleCategorie = _db.Categorie.Count();
-            Console.Write("Seleziona categoria: ");
-            cursore = Console.GetCursorPosition();
-            int idCategoria = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top);
-
-            //info
-            Console.Write("\nVuoi inserire un'info? (s/n)");
-            cursore = Console.GetCursorPosition();
-            string input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
-            string info = "";
-            if (input == "s")
-            {
-                Console.Clear();
-
-                Console.Write("Info: ");
-                cursore = Console.GetCursorPosition();
-                info = ValidaInput.GetString(cursore.Left, cursore.Top);
-            }
-
-            Console.Clear();
-
-            Console.WriteLine("Riepilogo inserimento\n");
-            Console.WriteLine($"Nome: {nome}\nQuantità: {quantita}\nData di scadenza: {dataScadenza.ToString("d")}\nCategoria: {_db.Categorie.FirstOrDefault(c => c.Id == idCategoria)!.Nome}\nInfo: {info}");
-
-            //conferma
             eseguito = false;
             while (!eseguito)
             {
+                Console.Clear();
+
+                //nome
+                Console.Write("Inserisci nome: ");
+                var cursore = Console.GetCursorPosition();
+                string nome = ValidaInput.GetString(cursore.Left, cursore.Top);
+
+                //quantita
+                Console.Write("Inserisci quantita: ");
+                cursore = Console.GetCursorPosition();
+                int quantita = ValidaInput.GetQuantita(cursore.Left, cursore.Top);
+
+                //data
+                Console.Write("Inserisci Data\n(gg/mm/aaaa): ");
+                cursore = Console.GetCursorPosition();
+                DateTime dataScadenza = ValidaInput.GetData(cursore.Left, cursore.Top);
+
+                //categoria
+                Console.Clear();
+                //stampo elenco per l'utente
+                CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
+                int totaleCategorie = _db.Categorie.Count();
+                Console.Write("\nSeleziona categoria: ");
+                cursore = Console.GetCursorPosition();
+                int idCategoria = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top);
+
+                //info
+                Console.Write("\nVuoi inserire un'info? (s/n)");
+                cursore = Console.GetCursorPosition();
+                string input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+                string info = "";
+                if (input == "s")
+                {
+                    Console.Clear();
+
+                    Console.Write("Info: ");
+                    cursore = Console.GetCursorPosition();
+                    info = ValidaInput.GetString(cursore.Left, cursore.Top);
+                }
+
+                Console.Clear();
+
+                Console.WriteLine("Riepilogo inserimento\n");
+                Console.WriteLine($"Nome: {nome}\nQuantità: {quantita}\nData di scadenza: {dataScadenza.ToString("d")}\nCategoria: {_db.Categorie.FirstOrDefault(c => c.Id == idCategoria)!.Nome}\nInfo: {info}");
+
+                //creo nuovo oggetto Alimento
+                Alimento a = new Alimento();
+
                 //assegno i valori per ogni attributo
                 a.Nome = nome;
                 a.Quantita = quantita;
@@ -345,29 +343,37 @@ namespace FoodexpMvc.Controllers
                 a.CategoriaId = idCategoria;
                 a.Info = info;
 
+                //conferma
                 Console.WriteLine("\nConfermi inserimento? (s/n)");
                 cursore = Console.GetCursorPosition();
                 input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
 
                 if (input == "s")   //confermo inserimento
                 {
-                    eseguito = true;
                     //inserisco nel db e salvo
                     _db.Alimenti.Add(a);
                     _db.SaveChanges();
                     Console.WriteLine("Alimento aggiunto");
                     Thread.Sleep(800);
+
+                    //richiesta altro inserimento
+                    Console.Write("\nVuoi aggiungere altro? (s/n)");
+                    cursore = Console.GetCursorPosition();
+                    input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+                    if (input == "n")
+                    {
+                        eseguito = true;
+                    }
+
                 }
                 else            //non voglio inserire oppure voglio modificare
                 {
-                    eseguito = false;
                     Console.WriteLine("Vuoi modificare qualcosa? (s/n)");
                     cursore = Console.GetCursorPosition();
                     input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
 
                     if (input == "s")   //voglio modificare qualcosa
                     {
-                        eseguito = false;
                         Console.Clear();
 
                         Console.WriteLine("Riepilogo inserimento\n");
@@ -405,7 +411,7 @@ namespace FoodexpMvc.Controllers
                                 //stampo elenco per l'utente
                                 CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
                                 totaleCategorie = _db.Categorie.Count();
-                                Console.Write("Seleziona categoria: ");
+                                Console.Write("\nSeleziona categoria: ");
                                 cursore = Console.GetCursorPosition();
                                 idCategoria = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top);
                                 break;
@@ -442,8 +448,14 @@ namespace FoodexpMvc.Controllers
                     }
                     else
                     {
-                        eseguito = true;
-                        View.MessaggioTornaMenuPrecedente(1000);
+                        //richiesta altro inserimento
+                        Console.Write("\nVuoi aggiungere altro? (s/n)");
+                        cursore = Console.GetCursorPosition();
+                        input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+                        if (input == "n")
+                        {
+                            eseguito = true;
+                        }
                     }
                 }
             }
@@ -702,7 +714,7 @@ namespace FoodexpMvc.Controllers
 
         #region U - Modifica alimento
         /// <summary>
-        /// 
+        /// Permette di modificare un alimento da un elenco numerato.
         /// </summary>
         public static void ModificaAlimento()
         {
@@ -722,7 +734,7 @@ namespace FoodexpMvc.Controllers
                 if (id == -1)   //premuto r - torna al menu precedente
                 {
                     eseguito = true;
-                    View.MessaggioTornaMenuPrecedente(1000);
+                    View.MessaggioTornaMenuPrecedente(800);
                 }
                 else    //ho selezionato un alimento dalla lista 
                 {
@@ -778,7 +790,7 @@ namespace FoodexpMvc.Controllers
                             //stampo elenco per l'utente
                             CategorieView.VisualizzaCategorie(CategorieController.GetCategorie());
                             int totaleCategorie = _db.Categorie.Count();
-                            Console.Write("Seleziona categoria: ");
+                            Console.Write("\nSeleziona categoria: ");
                             cursore = Console.GetCursorPosition();
                             idCategoria = ValidaInput.GetIntElenco(totaleCategorie, cursore.Left, cursore.Top);
                             break;
@@ -844,75 +856,45 @@ namespace FoodexpMvc.Controllers
         /// il carattere 0.
         /// </summary>
         /// <returns>True se l'utente ha finito l'eliminazione; false altrimenti</returns>
-        private static bool EliminaAlimento()
+        private static void EliminaAlimento()
         {
-            int index;
-            int tentativi = 3;
-            string input;
-            bool fine = false;   //termina l'operazione e torna al menu precedente
-
-            Console.Clear();
-
-            AlimentiView.VisualizzaAlimenti(GetAlimenti(), "Seleziona alimento da eliminare\n");
-            Console.WriteLine("\n0. torna al menu principale");
-            var alimenti = GetListTipoAlimento();
-
-            Console.Write("\nQuale alimento elimino?\nId: ");
-
-            //controllo dell'input inserito
-            while (tentativi > 0 & !int.TryParse(Console.ReadLine()!, out index))
+            eseguito = false;
+            while (!eseguito)
             {
-                View.MessaggioSelezioneErrata(600, true, 3, 4);
-                tentativi--;
-                if (tentativi == 1)
-                {
-                    var cursore = Console.GetCursorPosition();
-                    Console.WriteLine("\nUltimo tentativo");
-                    Thread.Sleep(800);
-                    View.PulisciRiga(16, cursore.Left, cursore.Top);
-                }
-                else if (tentativi == 0)
-                {
-                    View.MessaggioTornaMenuPrecedente(0);
-                    Thread.Sleep(1200);
-                    break;
-                }
+                Console.Clear();
 
-            }
-            //seleziono l'alimento in posizione [index - 1] dalla lista di tipo Alimento
-            //seleziono poi il suo id che passo al metodo che elimina l'oggetto dal db.Alimento
+                AlimentiView.VisualizzaAlimenti(GetAlimenti(), "Seleziona alimento da eliminare\n");
+                var alimenti = GetListTipoAlimento();   //estrae la lista Alimenti dal db.Alimenti
+                int totaleAlimenti = alimenti.Count;
+                Console.WriteLine($"r - Torna al menu precedente");  //inserisco opzione di uscita dinamica
+                Console.WriteLine("\nCosa vuoi eliminare? ");
+                var cursore = Console.GetCursorPosition();
+                int id = ValidaInput.GetIntElenco(totaleAlimenti, cursore.Left, cursore.Top, true);
 
-            if (index - 1 >= 0)
-            {
-                eseguito = false;
-                while (!eseguito)
+                if (id == -1)   //premuto r - torna al menu precedente
                 {
-                    Console.WriteLine($"Vuoi eliminare {alimenti[index - 1].Nome}? (s/n)");
-                    input = Console.ReadLine()!.ToLower();
+                    eseguito = true;
+                    View.MessaggioTornaMenuPrecedente(800);
+                }
+                else    //ho selezionato un alimento dalla lista 
+                {
+                    eseguito = false;
+                    id--;       //index parte da 0
+
+                    Console.WriteLine($"Vuoi eliminare {alimenti[id].Nome}? (s/n)");
+                    cursore = Console.GetCursorPosition();
+                    string input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
+
                     if (input == "s")
                     {
-                        EliminaAlimentoPerId(alimenti[index - 1].Id);
+                        //seleziono l'alimento in posizione [id] dalla lista di tipo Alimento
+                        //seleziono poi il suo id che passo al metodo che elimina l'oggetto dal db.Alimento
+                        EliminaAlimentoPerId(alimenti[id].Id);
                         Console.WriteLine("Alimento cancellato");
-                        eseguito = true;
-                    }
-                    else if (input == "n")
-                    {
-                        eseguito = true;
-                    }
-                    else    //ripete 
-                    {
-                        View.MessaggioSelezioneErrata(600, true);
                     }
                 }
             }
-            else
-            {
-                View.MessaggioTornaMenuPrecedente(800);
-                fine = true;
-            }
-            return fine;
         }
-
 
         #endregion
 
