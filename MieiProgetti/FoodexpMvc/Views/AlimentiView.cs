@@ -35,11 +35,12 @@ public class AlimentiView
     }
 
     /// <summary>
-    /// Stampa a schermo la lista degli alimenti in formato elenco numerato
+    /// Stampa a schermo la lista degli alimenti in formato elenco numerato. <br/>
+    /// Prevede l'inserimento di un messaggio come titolo per la sezione.
     /// </summary>
     /// <param name="listaAlimenti">Lista degli alimenti</param>
-    /// <param name="titolo">Titolo della sezione corrente</param>
-    public static void VisualizzaAlimenti(List<string> listaAlimenti, string titolo)
+    /// <param name="titolo">Titolo della sezione corrente; vuoto di default</param>
+    public static void VisualizzaAlimenti(List<string> listaAlimenti, string titolo = "")
     {
         int conta = 1;  //gestisce l'elenco numerato
         Console.WriteLine(titolo);
