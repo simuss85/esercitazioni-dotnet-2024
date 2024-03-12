@@ -145,7 +145,7 @@ public class ValidaInput
     /// <param name="left">Parametro left del cursore prima del messaggio di errore</param>
     /// <param name="top">Parametro top del cursore prima del messaggio di errore</param>
     /// <param name="opzioneR">Opzione che permette anche la gestione dell'inserimento di 'r'</param>
-    /// <returns>Un intero maggiore di zero e minore di totaleElenco; -1 se viene inserito 'r'</returns>
+    /// <returns>Un intero maggiore di zero e minore di totaleElenco;<br/> (-1) se viene inserito 'r'</returns>
     public static int GetIntElenco(int totaleElenco, int left, int top, bool opzioneR = false)
     {
         string errore = "Devi inserire una quantita valida\r";
