@@ -9,7 +9,8 @@ public class CategorieView
     {
         Console.WriteLine("Gestione categorie\n");
         Console.WriteLine("1. Visualizza categorie");
-        Console.WriteLine("2. Modifica categoria");
+        Console.WriteLine("2. Inserisci categoria");
+        Console.WriteLine("3. Modifica categoria");
         Console.WriteLine("r. torna al menu principale");
         Console.Write("\nseleziona opzione: ");
     }
