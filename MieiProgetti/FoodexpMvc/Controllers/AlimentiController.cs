@@ -280,7 +280,7 @@ namespace FoodexpMvc.Controllers
 
         #region C - Aggiungi alimento
         /// <summary>
-        /// Aggiunge un oggetto di iopo Alimento al db.Alimenti.
+        /// Aggiunge un oggetto di tipo Alimento al db.Alimenti.
         /// </summary>
         public static void AggiungiAlimento()
         {
