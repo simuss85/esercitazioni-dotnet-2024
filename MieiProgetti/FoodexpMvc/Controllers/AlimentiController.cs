@@ -704,7 +704,7 @@ namespace FoodexpMvc.Controllers
 
         #region U - Modifica alimento
         /// <summary>
-        /// Permette di modificare un alimento da un elenco numerato.
+        /// Permette di modificare un record da db.Alimenti selezionando da un elenco numerato.
         /// </summary>
         public static void ModificaAlimento()
         {
