@@ -25,20 +25,21 @@
     </tbody>
 </table>
 <p>Uso i div</p>
-
-@foreach (var prodotto in Model.Prodotti)
-{
-    <div class="card">
-        <div class="card-header bg-primary">
-            @prodotto.Nome
+<div class="row g-0">
+    @foreach (var prodotto in Model.Prodotti)
+    {
+        <div class="card col-md-4">
+            <div class="card-header bg-primary">
+                @prodotto.Nome
+            </div>
+            <div class="card-body mx-0">
+                <h6>Prezzo</h6>
+                @prodotto.Prezzo
+                <p class="card-text">
+                <h6>Descrizione</h6>
+                    @prodotto.Dettaglio
+                </p>
+            </div>
         </div>
-        <div class="card-body">
-            <h6>Prezzo</h6>
-            @prodotto.Prezzo
-            <p class="card-text">
-            <h6>Descrizione</h6>
-                @prodotto.Dettaglio
-            </p>
-        </div>
-    </div>
-}
+    }
+</div>
