@@ -1,0 +1,44 @@
+@page
+@model ProdottiModel
+@{
+    ViewData["Title"] = "Prodotti";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Prezzo</th>
+            <th>Dettaglio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prodotto in Model.Prodotti)
+        {
+            <tr>
+                <td>@prodotto.Nome</td>
+                <td>@prodotto.Prezzo</td>
+                <td>@prodotto.Dettaglio</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>Uso i div</p>
+
+@foreach (var prodotto in Model.Prodotti)
+{
+    <div class="card">
+        <div class="card-header bg-primary">
+            @prodotto.Nome
+        </div>
+        <div class="card-body">
+            <h6>Prezzo</h6>
+            @prodotto.Prezzo
+            <p class="card-text">
+            <h6>Descrizione</h6>
+                @prodotto.Dettaglio
+            </p>
+        </div>
+    </div>
+}
