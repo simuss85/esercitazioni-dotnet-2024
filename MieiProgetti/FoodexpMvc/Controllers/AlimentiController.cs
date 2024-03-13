@@ -715,7 +715,7 @@ namespace FoodexpMvc.Controllers
 
                 AlimentiView.VisualizzaAlimenti(GetAlimenti(), "Modifica alimento");
                 var alimenti = _db.Alimenti.ToList();   //per la corretta corrispondenza tra elenco e id
-                int totaleAlimenti = _db.Alimenti.Count();
+                int totaleAlimenti = alimenti.Count;
                 Console.WriteLine($"r - Torna al menu precedente");  //inserisco opzione di uscita dinamica
                 Console.WriteLine("\nCosa vuoi modificare? ");
                 var cursore = Console.GetCursorPosition();
@@ -749,7 +749,7 @@ namespace FoodexpMvc.Controllers
                     //richiesta di modifica
                     Console.Write("\nSeleziona l'elemento da modificare: ");
                     cursore = Console.GetCursorPosition();
-                    int idSelezione = ValidaInput.GetIntElenco(6, cursore.Left, cursore.Top, true);
+                    int idSelezione = ValidaInput.GetIntElenco(5, cursore.Left, cursore.Top, true);
 
                     switch (idSelezione)
                     {
@@ -842,10 +842,9 @@ namespace FoodexpMvc.Controllers
         #region D - Elimina alimento
 
         /// <summary>
-        /// Permette di eliminare un alimento da un elenco numerato fino a quando l'utente seleziona <br/>
+        /// Permette di eliminare un record di db.Alimento scegliendo da un elenco numerato fino a quando l'utente seleziona <br/>
         /// il carattere 0.
         /// </summary>
-        /// <returns>True se l'utente ha finito l'eliminazione; false altrimenti</returns>
         private static void EliminaAlimento()
         {
             eseguito = false;
