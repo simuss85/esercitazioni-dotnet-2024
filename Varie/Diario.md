@@ -1105,3 +1105,15 @@ Argomenti:
 - Quinto giorno dedicato al nostro progetto MVC.
 
 </details>
+
+<!-- ******************************************  13 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>13 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: creazione prima web app.
+
+### Note
+- Usa il comando `dotnet watch run` per visualizzare in tempo reale le modifiche.
+
+</details>
