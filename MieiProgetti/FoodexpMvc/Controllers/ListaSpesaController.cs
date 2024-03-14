@@ -35,7 +35,7 @@ namespace FoodexpMvc.Controllers
                         break;
 
                     case "2":
-                        //inserisci alimento
+                        //aggiungi alimento
                         AggiungiInListaSpesa();
                         break;
 
@@ -195,6 +195,10 @@ namespace FoodexpMvc.Controllers
         #endregion
 
         #region R - Leggi tabella ListaSpesa
+        /// <summary>
+        /// Seleziona tutti gli elementi presenti in db.ListaSpesa
+        /// </summary>
+        /// <returns>La lista degli elementi da stampare</returns>
         public static List<string> GetLista()
         {
             List<string> lista = new();
