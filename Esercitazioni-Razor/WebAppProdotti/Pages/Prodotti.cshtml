@@ -5,6 +5,19 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+<form method="get">
+    <div class="form-group">
+        <label for="minPrezzo">Min Prezzo</label>
+        <input type="text" class="form-control container" name="minPrezzo" />
+    </div>
+    <div class="form-group">
+        <label for="maxPrezzo">Max Prezzo</label>
+        <input type="text" class="form-control" name="maxPrezzo" />
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Filtra</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,12 +32,19 @@
             <tr>
                 <td>@prodotto.Nome</td>
                 <td>@prodotto.Prezzo</td>
-                <td>@prodotto.Dettaglio</td>
+                <td><a asp-page="ProdottoDettaglio" asp-route-nome="@prodotto.Nome" asp-route-prezzo="@prodotto.Prezzo"
+                        asp-route-dettaglio="@prodotto.Dettaglio">Dettaglio</a></td>
             </tr>
         }
     </tbody>
 </table>
-<p>Uso i div</p>
+<form method="get">
+    <input type="hidden" name="minPrezzo" value="@Request.Query["minPrezzo"]" />
+    <input type="hidden" name="maxPrezzo" value="@Request.Query["maxPrezzo"]" />
+    <button type="submit" class="btn btn-primary" name="pageIndex" value="1">1</button>
+    <button type="submit" class="btn btn-primary" name="pageIndex" value="2">2</button>
+    <button type="submit" class="btn btn-primary" name="pageIndex" value="3">3</button>
+</form>
 <div class="row g-0">
     @foreach (var prodotto in Model.Prodotti)
     {
