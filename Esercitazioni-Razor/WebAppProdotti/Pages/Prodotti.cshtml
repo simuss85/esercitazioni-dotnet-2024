@@ -31,7 +31,21 @@
         {
             <tr>
                 <td>@prodotto.Nome</td>
-                <td>@prodotto.Prezzo</td>
+                @{
+                    if (prodotto.Prezzo < 300)
+                    {
+                        <td class="text-danger">@prodotto.Prezzo</td>
+                    }
+                    else if (prodotto.Prezzo < 600)
+                    {
+                        <td class="text-primary">@prodotto.Prezzo</td>
+                    }
+                    else
+                    {
+                        <td class="text-success">@prodotto.Prezzo</td>
+                    }
+                }
+
                 <td><a asp-page="ProdottoDettaglio" asp-route-nome="@prodotto.Nome" asp-route-prezzo="@prodotto.Prezzo"
                         asp-route-dettaglio="@prodotto.Dettaglio">Dettaglio</a></td>
             </tr>
@@ -41,9 +55,11 @@
 <form method="get" class="text-center">
     <input type="hidden" name="minPrezzo" value="@Request.Query["minPrezzo"]" /> <!-- mantiene il valore del filtro -->
     <input type="hidden" name="maxPrezzo" value="@Request.Query["maxPrezzo"]" /> <!-- mantiene il valore del filtro -->
-    <button type="submit" class="btn btn-primary" name="pageIndex" value="1">1</button>
-    <button type="submit" class="btn btn-primary" name="pageIndex" value="2">2</button>
-    <button type="submit" class="btn btn-primary" name="pageIndex" value="3">3</button>
+    @for (int i = 1; i <= Model.numeroPagine; i++)
+    {
+        <button type="submit" class="btn btn-primary" name="pageIndex" value="@i">@i</button>
+    }
+
 </form>
 <div class="row g-0">
     @foreach (var prodotto in Model.Prodotti)
@@ -97,7 +113,6 @@
                     </div>
                 }
             }
-
         </div>
     }
 </div>

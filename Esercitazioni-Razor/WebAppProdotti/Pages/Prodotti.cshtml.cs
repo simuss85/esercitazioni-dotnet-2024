@@ -6,6 +6,7 @@ namespace WebAppProdotti.Pages;
 
 public class ProdottiModel : PageModel
 {
+    public required int numeroPagine { get; set; }
     private readonly ILogger<ProdottiModel> _logger;
 
     public ProdottiModel(ILogger<ProdottiModel> logger)
@@ -35,7 +36,20 @@ public class ProdottiModel : PageModel
             new Prodotto {Nome = "Prodotto 13", Prezzo = 300, Dettaglio = "Descrizione prodotto 13"},
             new Prodotto {Nome = "Prodotto 14", Prezzo = 400, Dettaglio = "Descrizione prodotto 14"},
             new Prodotto {Nome = "Prodotto 15", Prezzo = 500, Dettaglio = "Descrizione prodotto 15"},
-            new Prodotto {Nome = "Prodotto 16", Prezzo = 600, Dettaglio = "Descrizione prodotto 16"}
+            new Prodotto {Nome = "Prodotto 16", Prezzo = 600, Dettaglio = "Descrizione prodotto 16"},
+            new Prodotto {Nome = "Prodotto 17", Prezzo = 100, Dettaglio = "Descrizione prodotto 17"},
+            new Prodotto {Nome = "Prodotto 18", Prezzo = 200, Dettaglio = "Descrizione prodotto 18"},
+            new Prodotto {Nome = "Prodotto 19", Prezzo = 300, Dettaglio = "Descrizione prodotto 19"},
+            new Prodotto {Nome = "Prodotto 20", Prezzo = 300, Dettaglio = "Descrizione prodotto 20"},
+            new Prodotto {Nome = "Prodotto 21", Prezzo = 400, Dettaglio = "Descrizione prodotto 21"},
+            new Prodotto {Nome = "Prodotto 22", Prezzo = 500, Dettaglio = "Descrizione prodotto 22"},
+            new Prodotto {Nome = "Prodotto 23", Prezzo = 600, Dettaglio = "Descrizione prodotto 23"},
+            new Prodotto {Nome = "Prodotto 24", Prezzo = 100, Dettaglio = "Descrizione prodotto 24"},
+            new Prodotto {Nome = "Prodotto 25", Prezzo = 200, Dettaglio = "Descrizione prodotto 25"},
+            new Prodotto {Nome = "Prodotto 26", Prezzo = 300, Dettaglio = "Descrizione prodotto 26"},
+            new Prodotto {Nome = "Prodotto 27", Prezzo = 300, Dettaglio = "Descrizione prodotto 27"},
+            new Prodotto {Nome = "Prodotto 28", Prezzo = 400, Dettaglio = "Descrizione prodotto 28"},
+            new Prodotto {Nome = "Prodotto 29", Prezzo = 500, Dettaglio = "Descrizione prodotto 29"},
         };
         if (minPrezzo.HasValue)
         {
@@ -48,9 +62,13 @@ public class ProdottiModel : PageModel
             Prodotti = Prodotti.Where(p => p.Prezzo <= maxPrezzo);
             _logger.LogInformation("maxPrezzo: {maxPrezzo}", maxPrezzo);
         }
-        Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 6).Take(6);
 
+        //aggiungi un log
         _logger.LogInformation("pageIndex: {pageIndex}", pageIndex);
+
+        numeroPagine = (int)Math.Ceiling((double)Prodotti.Count() / 6);
+
+        Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 6).Take(6);
     }
 }
 
