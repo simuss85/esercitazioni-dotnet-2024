@@ -38,9 +38,9 @@
         }
     </tbody>
 </table>
-<form method="get">
-    <input type="hidden" name="minPrezzo" value="@Request.Query["minPrezzo"]" />
-    <input type="hidden" name="maxPrezzo" value="@Request.Query["maxPrezzo"]" />
+<form method="get" class="text-center">
+    <input type="hidden" name="minPrezzo" value="@Request.Query["minPrezzo"]" /> <!-- mantiene il valore del filtro -->
+    <input type="hidden" name="maxPrezzo" value="@Request.Query["maxPrezzo"]" /> <!-- mantiene il valore del filtro -->
     <button type="submit" class="btn btn-primary" name="pageIndex" value="1">1</button>
     <button type="submit" class="btn btn-primary" name="pageIndex" value="2">2</button>
     <button type="submit" class="btn btn-primary" name="pageIndex" value="3">3</button>
@@ -49,17 +49,55 @@
     @foreach (var prodotto in Model.Prodotti)
     {
         <div class="card col-md-4">
-            <div class="card-header bg-primary">
-                @prodotto.Nome
-            </div>
-            <div class="card-body mx-0">
-                <h6>Prezzo</h6>
-                @prodotto.Prezzo
-                <p class="card-text">
-                <h6>Descrizione</h6>
-                    @prodotto.Dettaglio
-                </p>
-            </div>
+            @{
+                if (prodotto.Prezzo < 300)
+                {
+                    <div class="card-header bg-danger">
+                        @prodotto.Nome
+                    </div>
+                    <div class="card-body mx-0">
+                        <h6>Prezzo</h6>
+                        <p class="text-danger">
+                            @prodotto.Prezzo
+                        </p>
+                        <p class="card-text text-danger">
+                        <h6>Descrizione</h6>
+                            @prodotto.Dettaglio
+                        </p>
+                    </div>
+                }
+                else if (prodotto.Prezzo < 600)
+                {
+                    <div class="card-header bg-primary">
+                        @prodotto.Nome
+                    </div>
+                    <div class="card-body mx-0 ">
+                        <h6>Prezzo</h6>
+                        <p class="text-primary"> @prodotto.Prezzo</p>
+
+                        <p class="card-text ">
+                        <h6>Descrizione</h6>
+                            @prodotto.Dettaglio
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-header bg-success">
+                        @prodotto.Nome
+                    </div>
+                    <div class="card-body mx-0 ">
+                        <h6>Prezzo</h6>
+                        <p class="text-success"> @prodotto.Prezzo</p>
+
+                        <p class="card-text ">
+                        <h6>Descrizione</h6>
+                            @prodotto.Dettaglio
+                        </p>
+                    </div>
+                }
+            }
+
         </div>
     }
 </div>

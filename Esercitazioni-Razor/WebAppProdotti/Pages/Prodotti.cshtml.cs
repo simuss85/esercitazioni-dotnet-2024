@@ -48,7 +48,7 @@ public class ProdottiModel : PageModel
             Prodotti = Prodotti.Where(p => p.Prezzo <= maxPrezzo);
             _logger.LogInformation("maxPrezzo: {maxPrezzo}", maxPrezzo);
         }
-        Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 2).Take(5);
+        Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 6).Take(6);
 
         _logger.LogInformation("pageIndex: {pageIndex}", pageIndex);
     }
