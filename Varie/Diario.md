@@ -1117,3 +1117,22 @@ Argomenti:
 - Usa il comando `dotnet watch run` per visualizzare in tempo reale le modifiche.
 
 </details>
+
+<!-- ******************************************  14 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>14 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: creare link a nuove pagine.
+
+### Info
+- **Operatore di coalescenza** utilizzato per la paginazione di un elenco prodotti. Si utilizza con l'operatore `??`:
+```c#
+    Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 6).Take(6);
+```
+- In questa linea di codice si utilizza l'operatore `a ?? b` il cui risultato è il seguente: 
+    >- *a* se *a!= null* 
+    >- *b* se *a==null*.  
+ 
+
+</details>
