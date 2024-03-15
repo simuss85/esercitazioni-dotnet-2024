@@ -25,7 +25,12 @@ body {
   margin-bottom: 60px;
 }
 
-/*----------- collapse -----------*/
+/*----------- table ---------------*/
+tbody tr:hover {
+  background-color: #e6eeffa2;
+}
+
+/*----------- accordion -----------*/
 
 .rosso.accordion-button:not(.collapsed) {
 
@@ -38,7 +43,6 @@ body {
   color: red;
 }
 
-
 .verde.accordion-button:not(.collapsed) {
 
   background-color: #30d80e;
@@ -50,7 +54,6 @@ body {
   color: green;
 }
 
-
 .blu.accordion-button:not(.collapsed) {
 
   background-color: #0e76d8;
@@ -61,4 +64,9 @@ body {
 
 .blu.accordion-button {
   color: blue;
+}
+
+/*----------- card -----------*/
+.card:hover {
+  background-color: #e6eeffa2;
 }
