@@ -44,10 +44,16 @@
                     {
                         <td class="text-success">@prodotto.Prezzo</td>
                     }
-                }
 
-                <td><a asp-page="ProdottoDettaglio" asp-route-nome="@prodotto.Nome" asp-route-prezzo="@prodotto.Prezzo"
-                        asp-route-dettaglio="@prodotto.Dettaglio">Dettaglio</a></td>
+                    var d = new Dictionary<string,string>
+                        {
+                            {"nome",prodotto.Nome!},
+                            {"prezzo",prodotto.Prezzo.ToString()},
+                            {"dettaglio",prodotto.Dettaglio!}
+                        };
+                        
+                    <td><a asp-page="ProdottoDettaglio" asp-all-route-data="@d">Dettaglio</a></td>      
+                }
             </tr>
         }
     </tbody>

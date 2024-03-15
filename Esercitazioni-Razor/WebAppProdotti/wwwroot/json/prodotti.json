@@ -1,0 +1,132 @@
+[
+    {
+        "nome": "Prodotto 1",
+        "prezzo": 100,
+        "dettaglio": "Descrizione del prodotto 1"
+    },
+    {
+        "nome": "Prodotto 2",
+        "prezzo": 200,
+        "dettaglio": "Descrizione del prodotto 2"
+    },
+    {
+        "nome": "Prodotto 3",
+        "prezzo": 1000,
+        "dettaglio": "Descrizione del prodotto 3"
+    },
+    {
+        "nome": "Prodotto 4",
+        "prezzo": 400,
+        "dettaglio": "Descrizione del prodotto 4"
+    },
+    {
+        "nome": "Prodotto 5",
+        "prezzo": 300,
+        "dettaglio": "Descrizione del prodotto 5"
+    },
+    {
+        "nome": "Prodotto 6",
+        "prezzo": 500,
+        "dettaglio": "Descrizione del prodotto 6"
+    },
+    {
+        "nome": "Prodotto 7",
+        "prezzo": 200,
+        "dettaglio": "Descrizione del prodotto 7"
+    },
+    {
+        "nome": "Prodotto 8",
+        "prezzo": 500,
+        "dettaglio": "Descrizione del prodotto 8"
+    },
+    {
+        "nome": "Prodotto 9",
+        "prezzo": 900,
+        "dettaglio": "Descrizione del prodotto 9"
+    },
+    {
+        "nome": "Prodotto 10",
+        "prezzo": 600,
+        "dettaglio": "Descrizione del prodotto 10"
+    },
+    {
+        "nome": "Prodotto 11",
+        "prezzo": 500,
+        "dettaglio": "Descrizione del prodotto 11"
+    },
+    {
+        "nome": "Prodotto 12",
+        "prezzo": 400,
+        "dettaglio": "Descrizione del prodotto 12"
+    },
+    {
+        "nome": "Prodotto 13",
+        "prezzo": 500,
+        "dettaglio": "Descrizione del prodotto 13"
+    },
+    {
+        "nome": "Prodotto 14",
+        "prezzo": 700,
+        "dettaglio": "Descrizione del prodotto 14"
+    },
+    {
+        "nome": "Prodotto 15",
+        "prezzo": 300,
+        "dettaglio": "Descrizione del prodotto 15"
+    },
+    {
+        "nome": "Prodotto 16",
+        "prezzo": 800,
+        "dettaglio": "Descrizione del prodotto 16"
+    },
+    {
+        "nome": "Prodotto 17",
+        "prezzo": 800,
+        "dettaglio": "Descrizione del prodotto 17"
+    },
+    {
+        "nome": "Prodotto 18",
+        "prezzo": 100,
+        "dettaglio": "Descrizione del prodotto 18"
+    },
+    {
+        "nome": "Prodotto 19",
+        "prezzo": 100,
+        "dettaglio": "Descrizione del prodotto 19"
+    },
+    {
+        "nome": "Prodotto 20",
+        "prezzo": 200,
+        "dettaglio": "Descrizione del prodotto 20"
+    },
+    {
+        "nome": "Prodotto 21",
+        "prezzo": 400,
+        "dettaglio": "Descrizione del prodotto 21"
+    },
+    {
+        "nome": "Prodotto 22",
+        "prezzo": 900,
+        "dettaglio": "Descrizione del prodotto 22"
+    },
+    {
+        "nome": "Prodotto 23",
+        "prezzo": 600,
+        "dettaglio": "Descrizione del prodotto 23"
+    },
+    {
+        "nome": "Prodotto 24",
+        "prezzo": 1000,
+        "dettaglio": "Descrizione del prodotto 24"
+    },
+    {
+        "nome": "Prodotto 25",
+        "prezzo": 600,
+        "dettaglio": "Descrizione del prodotto 25"
+    },
+    {
+        "nome": "Prodotto 26",
+        "prezzo": 700,
+        "dettaglio": "Descrizione del prodotto 26"
+    }
+]
