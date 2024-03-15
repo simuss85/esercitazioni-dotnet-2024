@@ -59,8 +59,35 @@
     {
         <button type="submit" class="btn btn-primary" name="pageIndex" value="@i">@i</button>
     }
-
 </form>
+<br>
+<!-- prodotti accordion -->
+<div class="accordion" id="accordionPanelsStayOpenExample">
+    @{
+        int n = 1;
+        string id = "id";
+
+        foreach (var prodotti in Model.Prodotti)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=@("#" + id +
+                n.ToString()) aria-expanded="true" aria-controls=@(id + n.ToString())>
+                        @prodotti.Nome
+                    </button>
+                </h2>
+                <div id=@(id + n.ToString()) class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        <strong>Dettaglio: </strong> @prodotti.Dettaglio
+                    </div>
+                </div>
+            </div>
+            n++;
+        }
+    }
+</div>
+<br>
+<!-- prodotti card-->
 <div class="row g-0">
     @foreach (var prodotto in Model.Prodotti)
     {
