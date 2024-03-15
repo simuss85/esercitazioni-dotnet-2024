@@ -61,24 +61,42 @@
     }
 </form>
 <br>
+
 <!-- prodotti accordion -->
 <div class="accordion" id="accordionPanelsStayOpenExample">
     @{
         int n = 1;
         string id = "id";
+        string classe = "";
 
-        foreach (var prodotti in Model.Prodotti)
+        foreach (var prodotto in Model.Prodotti)
         {
+            if (prodotto.Prezzo < 300)
+            {
+                classe = "rosso";
+            }
+            else if (prodotto.Prezzo < 600)
+            {
+                classe = "blu";
+            }
+            else
+            {
+                classe = "verde";
+            }
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target=@("#" + id +
+                    <button class="accordion-button @(classe)" type="button" data-bs-toggle="collapse" data-bs-target=@("#" + id +
                 n.ToString()) aria-expanded="true" aria-controls=@(id + n.ToString())>
-                        @prodotti.Nome
+                        @prodotto.Nome
                     </button>
                 </h2>
                 <div id=@(id + n.ToString()) class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <strong>Dettaglio: </strong> @prodotti.Dettaglio
+                        <strong>Prezzo: </strong>
+                        <p>@prodotto.Prezzo</p>
+                        <strong>Link: </strong>
+                        <a asp-page="ProdottoDettaglio" asp-route-nome="@prodotto.Nome" asp-route-prezzo="@prodotto.Prezzo"
+                            asp-route-dettaglio="@prodotto.Dettaglio">Dettaglio</a>
                     </div>
                 </div>
             </div>
@@ -87,6 +105,7 @@
     }
 </div>
 <br>
+
 <!-- prodotti card-->
 <div class="row g-0">
     @foreach (var prodotto in Model.Prodotti)
