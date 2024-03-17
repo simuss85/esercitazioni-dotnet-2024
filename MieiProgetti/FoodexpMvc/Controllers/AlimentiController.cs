@@ -238,33 +238,40 @@ namespace FoodexpMvc.Controllers
             eseguito = false;
             while (!eseguito)
             {
+                Console.Clear();
+
                 AlimentiView.MenuGestioneAlimenti();
                 var cursore = Console.GetCursorPosition();
                 int idSelezione = ValidaInput.GetIntElenco(3, cursore.Left, cursore.Top, true);
-
-
-                Console.Clear();
 
                 switch (idSelezione)
                 {
                     case 1:
                         //inserisci alimento
+                        Console.Clear();
+
                         AggiungiAlimento();
                         break;
 
                     case 2:
                         //modifica alimento
+                        Console.Clear();
+
                         ModificaAlimento();
                         break;
 
                     case 3:
                         //elimina alimento
+                        Console.Clear();
+
                         EliminaAlimento();
+                        eseguito = false;
                         break;
 
                     case -1:
                         //torna al menu principale
                         View.MessaggioTornaMenuPrincipale();
+                        eseguito = true;
                         return;
 
                     default:
@@ -272,8 +279,6 @@ namespace FoodexpMvc.Controllers
                         View.MessaggioSelezioneErrata();
                         break;
                 }
-                //torna al menu principale
-                View.MessaggioTornaMenuPrincipale(0);
             }
         }
         #endregion
