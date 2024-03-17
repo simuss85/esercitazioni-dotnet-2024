@@ -21,11 +21,12 @@ namespace FoodexpMvc.Controllers
                 Console.Clear();
 
                 ListaSpesaView.MenuListaSpesa();
-                string input = Console.ReadLine()!.ToLower();
+                var cursore = Console.GetCursorPosition();
+                int idSelezione = ValidaInput.GetIntElenco(3, cursore.Left, cursore.Top, true);
 
-                switch (input)
+                switch (idSelezione)
                 {
-                    case "1":
+                    case 1:
                         //viualizza lista
                         Console.Clear();
 
@@ -34,24 +35,25 @@ namespace FoodexpMvc.Controllers
                         Console.ReadKey();
                         break;
 
-                    case "2":
+                    case 2:
                         //aggiungi alimento
                         AggiungiInListaSpesa();
                         break;
 
-                    case "3":
+                    case 3:
                         //modifica alimento
                         ModificaListaSpesa();
                         break;
 
-                    case "4":
+                    case 4:
                         //elimina alimento
                         EliminaDaListaSpesa();
                         break;
 
-                    case "r":
+                    case -1:
                         //torna al menu principale
                         View.MessaggioTornaMenuPrincipale();
+                        eseguito = true;
                         break;
 
                     default:
