@@ -45,8 +45,8 @@ namespace FoodexpMvc.Controllers
                         }
                         else
                         {
-                            Console.WriteLine("Accesso bloccato!!!\nEsegui la registrazione");   //TO DO spectre verde
-                            Console.WriteLine("\n...premi un tasto");
+                            Console.WriteLine("Esegui la registrazione");   //TO DO spectre verde
+                            Console.Write("\n...premi un tasto");
                             Console.ReadKey();
                         }
                         break;

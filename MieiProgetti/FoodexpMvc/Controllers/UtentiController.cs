@@ -362,14 +362,7 @@ namespace FoodexpMvc.Controllers
                 {
                     tentativi--;
                     Console.WriteLine($"Utente non trovato.");  //TO DO spectre rosso
-                    Console.Write("\n...premi un tasto ");
-                    Console.ReadKey();
                 }
-            }
-
-            if (tentativi == 0)
-            {
-                View.MessaggioTornaMenuPrincipale();
             }
 
             return accesso;
