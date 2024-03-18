@@ -25,11 +25,12 @@ namespace FoodexpMvc.Controllers
                 Console.Clear();
 
                 UtentiView.MenuGestioneUtenti();
-                string input = Console.ReadLine()!.ToLower();
+                var cursore = Console.GetCursorPosition();
+                int idSelezione = ValidaInput.GetIntElenco(3, cursore.Left, cursore.Top, true);
 
-                switch (input)
+                switch (idSelezione)
                 {
-                    case "1":
+                    case 1:
                         //visualizza utenti
                         Console.Clear();
 
@@ -38,19 +39,21 @@ namespace FoodexpMvc.Controllers
                         Console.ReadKey();
                         break;
 
-                    case "2":
+                    case 2:
                         //modifica nome e/o password
                         ModificaUtente();
                         break;
 
-                    case "3":
+                    case 3:
                         //elimina account
-                        EliminaUtente();
-                        eseguito = true;
-                        idUscita = -1;
+                        eseguito = EliminaUtente();
+                        if (eseguito)
+                        {
+                            idUscita = -1;
+                        }
                         break;
 
-                    case "r":
+                    case -1:
                         //torna al menu principale
                         View.MessaggioTornaMenuPrincipale();
                         eseguito = true;
@@ -255,7 +258,8 @@ namespace FoodexpMvc.Controllers
         /// <summary>
         /// Permette di eliminare l'utente attuale
         /// </summary>
-        private static void EliminaUtente()
+        /// <returns>True se l 'utente viene eliminato; <br/>false se non viene eliminato l'utente</returns>
+        private static bool EliminaUtente()
         {
             string input;
             bool eseguito = false;
@@ -274,7 +278,8 @@ namespace FoodexpMvc.Controllers
                     while (!eseguito)
                     {
                         Console.WriteLine("Vuoi eliminare il tuo account? (s/n)");
-                        input = Console.ReadLine()!;
+                        var cursore = Console.GetCursorPosition();
+                        input = ValidaInput.GetSiNo(cursore.Left, cursore.Top);
 
                         if (input == "s")
                         {
@@ -289,14 +294,6 @@ namespace FoodexpMvc.Controllers
                                 Console.ReadKey();
                                 eseguito = true;
                             }
-                        }
-                        else if (input == "n")
-                        {
-                            eseguito = true;
-                        }
-                        else
-                        {
-                            View.MessaggioSelezioneErrata();
                         }
                     }
                 }
@@ -314,6 +311,7 @@ namespace FoodexpMvc.Controllers
                     }
                 }
             }
+            return eseguito;
         }
         #endregion
 
