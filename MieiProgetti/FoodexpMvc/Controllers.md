@@ -75,7 +75,14 @@ namespace Controllers{
         + GetLista()$ List~string~
         + ModificaListaSpesa()$ void
         - EliminaDaListaSpesa()$ void
-
+        - EliminaDaListaPerId(int id)$ void
+    }
+    class ValidaInput{
+        + GetString(int left, int top)$ string
+        + GetData(int left, int top)$ DateTime
+        + GetQuantita(int left, int top)$ int
+        + GetIntElenco(int totaleElenco, int left, int top, bool opzioneRoE)$ int
+        + GetSiNo(int left, int top)$ string
     }
 }
     Controller <.. UtentiController : extend
