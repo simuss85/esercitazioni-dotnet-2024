@@ -1144,3 +1144,12 @@ Argomenti:
 - Razor: utilizzare componenti bootstrap.
 
 </details>
+
+<!-- ******************************************  18 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>18 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: riepilogo OnGet().
+
+</details>
