@@ -4,24 +4,24 @@
 
 ## Beta_testing
 
-> Cartella di test e prove varie
+Cartella di test e prove varie
 
 ## Esercitazioni-Csharp
 
-> Elenco dei programmi svolti a lezione 
+Elenco dei programmi svolti a lezione 
 
 ## Esercitazioni-Database
 
-> Esempi di database
+Esempi di database
 
 ## Esercitazioni-EntityFramework
 
-> Elenco di programmi svolti a lezione
+Elenco di programmi svolti a lezione
 > - Progetto1
 
 ## Esercitazioni-HTML
 
-> Esempi di pagine html
+Esempi di pagine html
 > - Es1
 > - Es2
 > - Es3
@@ -29,27 +29,26 @@
 
 ## Esercitazioni-MVC
 
-> Esempi di pattern MVC
+Esempi di pattern MVC
 > - MvcConsole
 
-## File-condivisi-in-aula
-
-> File e programmi condivisi a lezione 
+## Esercitazioni-Razor
+> - WebAppProdotti
 
 ## MieiProgetti
 Elenco dei miei progetti personali svolti al corso.
 > - Foodexp con pattern Mvc
-> - Indovina il numero segreto.
+> - Foodexp Razor
+> - Indovina il numero segreto
 > - Indovina il numero segreto con classi
-> - Mini Risiko.
+> - Mini Risiko
 > - Progetto database 01
 > - Progetto database 02
-> - Traccia Alimenti Frigorifero.
+> - Traccia Alimenti Frigorifero
 
 ## Varie
 
-> Documentazione personale
-
+Documentazione personale
 - Diario 
 - Git
 - Markdown
