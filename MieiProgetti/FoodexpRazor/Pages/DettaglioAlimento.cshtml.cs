@@ -6,7 +6,9 @@ namespace FoodexpRazor.Pages;
 
 public class DettaglioAlimentoModel : PageModel
 {
+    public readonly Database _db = new();
     public required Alimento Alimento { get; set; }
+
     #region Logger
     private readonly ILogger<DettaglioAlimentoModel> _logger;
 
@@ -16,9 +18,10 @@ public class DettaglioAlimentoModel : PageModel
     }
     #endregion
 
-    public void OnGet(Alimento alimento)
+    public void OnGet(int id)
     {
-        Alimento = alimento;
+        _logger.LogInformation("Data: {0}", id);
+        Alimento = _db.Alimenti.First(a => a.Id == id)!;
 
     }
 

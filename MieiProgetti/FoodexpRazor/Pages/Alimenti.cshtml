@@ -19,18 +19,8 @@
     <tbody>
         @foreach (var a in Model.Alimenti)
         {
-            var alimento = new Dictionary<string, string>
-        {
-        {"Nome",a.Nome!},
-        {"DataScadenza",a.DataScadenza.ToString()},
-        {"DataInserimento",a.DataInserimento.ToString()},
-        {"Quantita",a.Quantita.ToString()},
-        {"CategoriaId",a.CategoriaId.ToString()},
-        {"Info", a.Info!},
-        {"Immagine", a.Immagine!}
-        };
             <tr>
-                <td><a asp-page="/DettaglioAlimento" asp-all-route-data="@alimento">@a.Nome</a></td>
+                <td><a asp-page="/DettaglioAlimento" asp-route-id="@a.Id">@a.Nome</a></td>
                 <td>@a.DataScadenza.ToString("d")</td>
                 <td>@a.Quantita</td>
             </tr>
