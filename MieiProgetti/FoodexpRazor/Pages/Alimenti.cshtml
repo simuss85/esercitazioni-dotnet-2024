@@ -1,0 +1,39 @@
+@page
+@model AlimentiModel
+@{
+    ViewData["Title"] = "Elenco Alimenti";
+}
+
+<div class="text-center m-5">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>Alimento</th>
+            <th>Data di scadenza</th>
+            <th>Quantità</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model.Alimenti)
+        {
+            var alimento = new Dictionary<string, string>
+        {
+        {"Nome",a.Nome!},
+        {"DataScadenza",a.DataScadenza.ToString()},
+        {"DataInserimento",a.DataInserimento.ToString()},
+        {"Quantita",a.Quantita.ToString()},
+        {"CategoriaId",a.CategoriaId.ToString()},
+        {"Info", a.Info!},
+        {"Immagine", a.Immagine!}
+        };
+            <tr>
+                <td><a asp-page="/DettaglioAlimento" asp-all-route-data="@alimento">@a.Nome</a></td>
+                <td>@a.DataScadenza.ToString("d")</td>
+                <td>@a.Quantita</td>
+            </tr>
+        }
+    </tbody>
+</table>

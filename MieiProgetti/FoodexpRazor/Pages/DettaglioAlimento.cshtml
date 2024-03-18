@@ -1,0 +1,36 @@
+@page
+@model DettaglioAlimentoModel
+@{
+    ViewData["Title"] = "Dettaglio Alimento";
+}
+
+<div class="text-center m-5">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="card text-center" style="width: 32rem;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10">
+                    <h4 class="card-title ms-5 ps-5">@Model.Alimento.Nome</h4>
+                </div>
+                <div class="col-2">
+                    <span class="badge bg-primary rounded-pill">@Model.Alimento.Quantita</span>
+                </div>
+            </div>
+
+            <hr>
+            <img src="@Model.Alimento.Immagine" class="card-img-top" alt="@Html.DisplayFor(a => a.Alimento.Immagine)">
+            <p>@Model.Alimento.Info Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet sint
+                exercitationem
+                quas fugiat animi
+                earum, enim esse placeat laborum amet quod minima ullam cumque fuga distinctio nemo inventore!
+                Nostrum,
+                possimus.</p>
+            <p class="card-text">scad. @Model.Alimento.DataScadenza.ToString("d")</p>
+            <a href="#" class="btn btn-primary">modifica</a>
+            <a href="#" class="btn btn-danger">elimina</a>
+        </div>
+    </div>
+</div>

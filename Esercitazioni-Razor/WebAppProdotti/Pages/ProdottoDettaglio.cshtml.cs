@@ -18,7 +18,7 @@ public class ProdottoDettaglioModel : PageModel
     public void OnGet(Prodotto prodotto)
     {
         Prodotto = prodotto;
-        _logger.LogInformation($"***argomento***nome: {prodotto.Nome}, prezzo: {prodotto.Prezzo}, dettaglio: {prodotto.Dettaglio}");
+        _logger.LogInformation($"nome: {prodotto.Nome}, prezzo: {prodotto.Prezzo}, dettaglio: {prodotto.Dettaglio}");
 
         // _logger.LogInformation($"***assegnamento***nome: {Prodotto.Nome}, prezzo: {Prodotto.Prezzo}, dettaglio: {Prodotto.Dettaglio}");
 
