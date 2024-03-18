@@ -1,7 +1,8 @@
+using FoodexpRazor.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebAppProdotti.Pages;
+namespace FoodexpRazor.Pages;
 
 public class IndexModel : PageModel
 {
@@ -16,5 +17,4 @@ public class IndexModel : PageModel
     {
 
     }
-
 }

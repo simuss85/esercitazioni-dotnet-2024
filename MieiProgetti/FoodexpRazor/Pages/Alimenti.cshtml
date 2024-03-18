@@ -1,0 +1,29 @@
+@page
+@model AlimentiModel
+@{
+    ViewData["Title"] = "Elenco Alimenti";
+}
+
+<div class="text-center m-5">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>Alimento</th>
+            <th>Data di scadenza</th>
+            <th>Quantità</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model.Alimenti)
+        {
+            <tr>
+                <td><a asp-page="/DettaglioAlimento" asp-route-id="@a.Id">@a.Nome</a></td>
+                <td>@a.DataScadenza.ToString("d")</td>
+                <td>@a.Quantita</td>
+            </tr>
+        }
+    </tbody>
+</table>

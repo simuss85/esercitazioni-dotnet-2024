@@ -10,13 +10,14 @@ public class ProdottiModel : PageModel
     public required string jsonPath = "wwwroot/json/prodotti.json";
     public required IEnumerable<Prodotto> Prodotti { get; set; }
 
-
+    #region Logger
     private readonly ILogger<ProdottiModel> _logger;
 
     public ProdottiModel(ILogger<ProdottiModel> logger)
     {
         _logger = logger;
     }
+    #endregion
 
 
     public void OnGet(decimal? minPrezzo, decimal? maxPrezzo, int? pageIndex)
