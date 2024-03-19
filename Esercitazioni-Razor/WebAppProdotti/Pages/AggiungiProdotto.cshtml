@@ -1,0 +1,23 @@
+@page
+@model AggiungiProdottoModel
+@{
+    ViewData["Title"] = "Aggiungi Prodotto";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" name="nome" required />
+    </div>
+    <div class="form-group">
+        <label for="prezzo">Prezzo</label>
+        <input type="text" class="form-control" name="prezzo" required />
+    </div>
+    <div class="form-group">
+        <label for="dettaglio">Dettaglio</label>
+        <input type="text" class="form-control" name="dettaglio" required />
+    </div>
+    <br>
+    <button type="submit" class="btn btn-dark">Aggiungi</button>
+</form>
