@@ -13,15 +13,26 @@
         <tr>
             <th>Alimento</th>
             <th>Data di scadenza</th>
+            <th>Status</th>
             <th>Quantità</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var a in Model.Alimenti)
         {
+            int now, max, percent;
+            max = (a.DataScadenza - a.DataInserimento).Days;
+            now = (DateTime.Today - a.DataInserimento).Days;
+            percent = (int)Math.Ceiling(max * now / 1.0);
             <tr>
                 <td><a asp-page="/DettaglioAlimento" asp-route-id="@a.Id">@a.Nome</a></td>
                 <td>@a.DataScadenza.ToString("d")</td>
+                <td>
+                    <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="@percent"
+                        aria-valuemin="0" aria-valuemax="@max">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: @percent%"></div>
+                    </div>
+                </td>
                 <td>@a.Quantita</td>
             </tr>
         }

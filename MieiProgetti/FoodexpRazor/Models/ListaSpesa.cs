@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FoodexpRazor.Models;
 public class ListaSpesa
 {
+    [Key]
     public int Id { get; set; }
     public string? Alimento { get; set; }
     public int Quantita { get; set; }
