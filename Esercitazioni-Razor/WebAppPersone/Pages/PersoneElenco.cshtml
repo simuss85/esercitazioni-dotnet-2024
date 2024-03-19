@@ -1,0 +1,28 @@
+﻿@page
+@model PersoneElencoModel
+@{
+    ViewData["Title"] = "Persone";
+}
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Età</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var persona in Model.Persone)
+        {
+            <tr>
+                <td><a asp-page="Persona" asp-route-id="@persona.Id">@persona.Id</a></td>
+                <td>@persona.Nome</td>
+                <td>@persona.Cognome</td>
+                <td>@persona.Eta</td>
+            </tr>
+        }
+    </tbody>
+</table>

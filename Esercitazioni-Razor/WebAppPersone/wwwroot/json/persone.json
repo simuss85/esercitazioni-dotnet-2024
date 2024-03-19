@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 1,
+        "Nome": "Simone",
+        "Cognome": "Ussi",
+        "Eta": 38
+    },
+    {
+        "Id": 2,
+        "Nome": "Nome2",
+        "Cognome": "Cognome2",
+        "Eta": 25
+    },
+    {
+        "Id": 3,
+        "Nome": "Nome3",
+        "Cognome": "Cognome3",
+        "Eta": 30
+    },
+    {
+        "Id": 4,
+        "Nome": "Nome4",
+        "Cognome": "Cognome4",
+        "Eta": 28
+    }
+]
