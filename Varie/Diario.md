@@ -1153,3 +1153,12 @@ Argomenti:
 - Razor: riepilogo OnGet().
 
 </details>
+
+<!-- ******************************************  19 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>19 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: ripasso.
+
+</details>
