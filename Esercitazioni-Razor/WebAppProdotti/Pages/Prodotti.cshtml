@@ -18,12 +18,13 @@
     <button type="submit" class="btn btn-primary">Filtra</button>
 </form>
 
-<table class="table">
+<table class="table text-center">
     <thead>
         <tr>
             <th>Nome</th>
             <th>Prezzo</th>
             <th>Dettaglio</th>
+            <th>Azione</th>
         </tr>
     </thead>
     <tbody>
@@ -34,15 +35,15 @@
                 @{
                     if (prodotto.Prezzo < 300)
                     {
-                        <td class="text-danger">@prodotto.Prezzo</td>
+                        <td class="text-danger">@Html.DisplayFor(model => prodotto.Prezzo)</td>
                     }
                     else if (prodotto.Prezzo < 600)
                     {
-                        <td class="text-primary">@prodotto.Prezzo</td>
+                        <td class="text-primary">@Html.DisplayFor(model => prodotto.Prezzo)</td>
                     }
                     else
                     {
-                        <td class="text-success">@prodotto.Prezzo</td>
+                        <td class="text-success">@Html.DisplayFor(model => prodotto.Prezzo)</td>
                     }
 
                     var d = new Dictionary<string,string>
@@ -53,6 +54,9 @@
                         };
                         
                     <td><a asp-page="ProdottoDettaglio" asp-all-route-data="@d">Dettaglio</a></td>      
+                    <td><a asp-page="ModificaProdotto" asp-route-nome="@prodotto.Nome" class="btn btn-success" a>modifica</a>
+                        <a asp-page="CancellaProdotto" asp-route-nome="@prodotto.Nome" class="btn btn-danger" a>elimina</a> 
+                    </td>
                 }
             </tr>
         }
@@ -99,7 +103,7 @@
                 <div id=@(id + n.ToString()) class="accordion-collapse collapse">
                     <div class="accordion-body">
                         <strong>Prezzo: </strong>
-                        <p>@prodotto.Prezzo</p>
+                        <p>@Html.DisplayFor(model => prodotto.Prezzo)</p>
                         <strong>Link: </strong>
                         <a asp-page="ProdottoDettaglio" asp-route-nome="@prodotto.Nome" asp-route-prezzo="@prodotto.Prezzo"
                             asp-route-dettaglio="@prodotto.Dettaglio">Dettaglio</a>
@@ -126,7 +130,7 @@
                     <div class="card-body mx-0">
                         <h6>Prezzo</h6>
                         <p class="text-danger">
-                            @prodotto.Prezzo
+                            @Html.DisplayFor(model => prodotto.Prezzo)
                         </p>
                         <p class="card-text text-danger">
                         <h6>Descrizione</h6>

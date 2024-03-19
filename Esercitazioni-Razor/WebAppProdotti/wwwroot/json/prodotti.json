@@ -1,18 +1,8 @@
 [
   {
-    "Nome": "Prodotto 1",
-    "Prezzo": 350.0,
-    "Dettaglio": "Descrizione del prodotto 1"
-  },
-  {
-    "Nome": "Prodotto 2",
-    "Prezzo": 135.0,
-    "Dettaglio": "Descrizione del prodotto 2"
-  },
-  {
     "Nome": "Prodotto 3",
-    "Prezzo": 1000.0,
-    "Dettaglio": "Descrizione del prodotto 3"
+    "Prezzo": 123.0,
+    "Dettaglio": "Descrizione prodotto tre"
   },
   {
     "Nome": "Prodotto 4",
