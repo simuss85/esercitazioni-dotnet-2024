@@ -12,6 +12,7 @@
             <th>Nome</th>
             <th>Cognome</th>
             <th>Età</th>
+            <th>Azione</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,9 @@
                 <td>@persona.Nome</td>
                 <td>@persona.Cognome</td>
                 <td>@persona.Eta</td>
+                <td>
+                    <a class="btn btn-danger" asp-page="ModificaPersona" asp-route-id="@persona.Id">Modifica</a>
+                </td>
             </tr>
         }
     </tbody>

@@ -1,0 +1,21 @@
+@page
+@model ModificaPersonaModel
+@{
+    ViewData["Title"] = "Modifica Persona";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form action="post">
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control container" name="nome">
+        <label for="cognome">Cognome</label>
+        <input type="text" class="form-control container" name="cognome">
+        <label for="eta">Età</label>
+        <input type="text" class="form-control container" name="eta">
+        <br>
+        <a asp-page="ModificaPersona">salva</a>
+    </div>
+</form>
+<br>
+<a asp-page="PersoneElenco">Torna alla pagina Persone</a>

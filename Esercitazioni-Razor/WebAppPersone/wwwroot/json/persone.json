@@ -1,15 +1,15 @@
 [
     {
         "Id": 1,
-        "Nome": "Simone",
-        "Cognome": "Ussi",
-        "Eta": 38
+        "Nome": null,
+        "Cognome": null,
+        "Eta": 0
     },
     {
         "Id": 2,
-        "Nome": "Nome2",
-        "Cognome": "Cognome2",
-        "Eta": 25
+        "Nome": null,
+        "Cognome": null,
+        "Eta": 0
     },
     {
         "Id": 3,
