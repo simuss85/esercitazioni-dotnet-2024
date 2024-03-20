@@ -1,0 +1,27 @@
+{
+    "Id": 45,
+    "Nome": "Cristian",
+    "Immagine": [
+        {
+            "ImmagineId": 1,
+            "Voto": 4,
+            "Data": "2024/02/15",
+            "Commento": "si dai va bene",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 4,
+            "Voto": 2,
+            "Data": "2024/02/11",
+            "Commento": "cazzi e mazzi",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 5,
+            "Voto": 3,
+            "Data": "2024/03/15",
+            "Commento": "potresti fare meglio",
+            "Visibile": true
+        }
+    ]
+}

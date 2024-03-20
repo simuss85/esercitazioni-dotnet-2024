@@ -1,0 +1,27 @@
+{
+    "Id": 2,
+    "Nome": "Giada",
+    "Immagine": [
+        {
+            "ImmagineId": 1,
+            "Voto": 4,
+            "Data": "2024/03/15",
+            "Commento": "mi piace",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 3,
+            "Voto": 2,
+            "Data": "2024/02/21",
+            "Commento": "insomma",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 8,
+            "Voto": 4,
+            "Data": "2024/03/05",
+            "Commento": "ok",
+            "Visibile": true
+        }
+    ]
+}

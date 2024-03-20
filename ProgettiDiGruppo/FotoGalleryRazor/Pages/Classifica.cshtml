@@ -1,0 +1,31 @@
+@page
+@model ClassificaModel
+@{
+    ViewData["Title"] = "Classifica";
+}
+<div class="text-center">
+    <h1 class="display-4">Classifica</h1>
+</div>
+<br>
+
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>Posizione</th>
+            <th>Titolo</th>
+            <th>Autore</th>
+            <th>Voto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var img in Model.Immagini)
+        {
+            <tr>
+                <td>@img.Id</td>
+                <td>@img.Titolo</td>
+                <td>@img.Autore</td>
+                <td>@img.Voto</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+{
+    "Id": 1,
+    "Nome": "Simone",
+    "Immagine": [
+        {
+            "ImmagineId": 1,
+            "Voto": 4,
+            "Data": "2024/03/21",
+            "Commento": "belin che bella",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 2,
+            "Voto": 2,
+            "Data": "2024/03/21",
+            "Commento": "che merda cazzo",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 5,
+            "Voto": 4,
+            "Data": "2024/03/21",
+            "Commento": "capolavoro",
+            "Visibile": true
+        }
+    ]
+}

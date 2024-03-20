@@ -1,0 +1,27 @@
+{
+    "Id": 3,
+    "Nome": "Alex",
+    "Immagine": [
+        {
+            "ImmagineId": 1,
+            "Voto": 4,
+            "Data": "2024/02/15",
+            "Commento": "mi piace la maria",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 3,
+            "Voto": 2,
+            "Data": "2024/01/21",
+            "Commento": "cazzo",
+            "Visibile": true
+        },
+        {
+            "ImmagineId": 8,
+            "Voto": 4,
+            "Data": "2024/03/15",
+            "Commento": "sballato",
+            "Visibile": true
+        }
+    ]
+}
