@@ -1159,6 +1159,15 @@ Argomenti:
     <summary><h3>19 mar 2024 ✔️</h3></summary>
 
 Argomenti:
-- Razor: ripasso.
+- Razor: persistenza con file json.
+
+</details>
+
+<!-- ******************************************  20 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>20 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie.
 
 </details>
