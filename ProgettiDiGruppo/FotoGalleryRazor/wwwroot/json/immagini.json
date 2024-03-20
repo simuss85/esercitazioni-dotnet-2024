@@ -1,7 +1,7 @@
 [
     {
         "Id": 1,
-        "Path": "wwwroot/img/img_01.jpg",
+        "Path": "/img/img_01.jpg",
         "Titolo": "Immagine 1",
         "Voto": 2.3,
         "Autore": "Autore 1",
@@ -9,7 +9,7 @@
     },
     {
         "Id": 2,
-        "Path": "wwwroot/img/img_02.jpg",
+        "Path": "/img/img_02.jpg",
         "Titolo": "Immagine 2",
         "Voto": 4.6,
         "Autore": "Autore 2",
@@ -17,7 +17,7 @@
     },
     {
         "Id": 3,
-        "Path": "wwwroot/img/img_03.jpg",
+        "Path": "/img/img_03.jpg",
         "Titolo": "Immagine 3",
         "Voto": 3.2,
         "Autore": "Autore 3",
@@ -25,7 +25,7 @@
     },
     {
         "Id": 4,
-        "Path": "wwwroot/img/img_04.jpg",
+        "Path": "/img/img_04.jpg",
         "Titolo": "Immagine 4",
         "Voto": 1.3,
         "Autore": "Autore 4",
@@ -33,7 +33,7 @@
     },
     {
         "Id": 5,
-        "Path": "wwwroot/img/img_05.jpg",
+        "Path": "/img/img_05.jpg",
         "Titolo": "Immagine 5",
         "Voto": 5.0,
         "Autore": "Autore 5",
@@ -41,7 +41,7 @@
     },
     {
         "Id": 6,
-        "Path": "wwwroot/img/img_06.jpg",
+        "Path": "/img/img_06.jpg",
         "Titolo": "Immagine 6",
         "Voto": 4.6,
         "Autore": "Autore 6",
@@ -49,7 +49,7 @@
     },
     {
         "Id": 7,
-        "Path": "wwwroot/img/img_07.jpg",
+        "Path": "/img/img_07.jpg",
         "Titolo": "Immagine 7",
         "Voto": 3.4,
         "Autore": "Autore 7",
@@ -57,7 +57,7 @@
     },
     {
         "Id": 8,
-        "Path": "wwwroot/img/img_08.jpg",
+        "Path": "/img/img_08.jpg",
         "Titolo": "Immagine 8",
         "Voto": 1.3,
         "Autore": "Autore 8",
@@ -65,7 +65,7 @@
     },
     {
         "Id": 9,
-        "Path": "wwwroot/img/img_09.jpg",
+        "Path": "/img/img_09.jpg",
         "Titolo": "Immagine 9",
         "Voto": 2.7,
         "Autore": "Autore 9",
@@ -73,7 +73,7 @@
     },
     {
         "Id": 10,
-        "Path": "wwwroot/img/img_10.jpg",
+        "Path": "/img/img_10.jpg",
         "Titolo": "Immagine 10",
         "Voto": 4.8,
         "Autore": "Autore 10",
@@ -81,7 +81,7 @@
     },
     {
         "Id": 11,
-        "Path": "wwwroot/img/img_11.jpg",
+        "Path": "/img/img_11.jpg",
         "Titolo": "Immagine 11",
         "Voto": 1.9,
         "Autore": "Autore 11",
@@ -89,7 +89,7 @@
     },
     {
         "Id": 12,
-        "Path": "wwwroot/img/img_12.jpg",
+        "Path": "/img/img_12.jpg",
         "Titolo": "Immagine 12",
         "Voto": 4.6,
         "Autore": "Autore 12",
@@ -97,7 +97,7 @@
     },
     {
         "Id": 13,
-        "Path": "wwwroot/img/img_13.jpg",
+        "Path": "/img/img_13.jpg",
         "Titolo": "Immagine 13",
         "Voto": 3.5,
         "Autore": "Autore 13",
@@ -105,7 +105,7 @@
     },
     {
         "Id": 14,
-        "Path": "wwwroot/img/img_14.jpg",
+        "Path": "/img/img_14.jpg",
         "Titolo": "Immagine 14",
         "Voto": 2.3,
         "Autore": "Autore 14",
@@ -113,7 +113,7 @@
     },
     {
         "Id": 15,
-        "Path": "wwwroot/img/img_15.jpg",
+        "Path": "/img/img_15.jpg",
         "Titolo": "Immagine 15",
         "Voto": 4.3,
         "Autore": "Autore 15",
@@ -121,7 +121,7 @@
     },
     {
         "Id": 16,
-        "Path": "wwwroot/img/img_16.jpg",
+        "Path": "/img/img_16.jpg",
         "Titolo": "Immagine 16",
         "Voto": 4.3,
         "Autore": "Autore 16",

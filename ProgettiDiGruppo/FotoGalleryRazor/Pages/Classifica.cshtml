@@ -8,10 +8,11 @@
 </div>
 <br>
 
-<table class="table text-center">
+<table class="table text-center table-striped align-middle">
     <thead>
         <tr>
-            <th>Posizione</th>
+            <th>#</th>
+            <th>Immagine</th>
             <th>Titolo</th>
             <th>Autore</th>
             <th>Voto</th>
@@ -20,11 +21,33 @@
     <tbody>
         @foreach (var img in Model.Immagini)
         {
+            var count = @img.Voto;
             <tr>
                 <td>@img.Id</td>
-                <td>@img.Titolo</td>
+                <td><img src="@img.Path" alt="img_01" width="80" height="60" /></td>
+                <td><a asp-page="/Immagine" asp-route-id="@img.Id">@img.Titolo</a></td>
                 <td>@img.Autore</td>
-                <td>@img.Voto</td>
+                <td>
+
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (count > 1)
+                        {
+                            <span class="bi bi-star-fill"></span>
+                        }
+                        else if (count > 0)
+                        {
+                            <span class="bi bi-star-half"></span>
+                        }
+                        else
+                        {
+                            <span class="bi bi-star"></span>
+                        }
+                        count--;
+                    }
+                    <span class="px-1">@img.Voto</span>
+
+                </td>
             </tr>
         }
     </tbody>
