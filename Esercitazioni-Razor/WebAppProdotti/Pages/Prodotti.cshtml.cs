@@ -6,7 +6,7 @@ namespace WebAppProdotti.Pages;
 
 public class ProdottiModel : PageModel
 {
-    public required int numeroPagine { get; set; }
+    public required int NumeroPagine { get; set; }
     public required string jsonPath = "wwwroot/json/prodotti.json";
     public required IEnumerable<Prodotto> Prodotti { get; set; }
 
@@ -44,7 +44,7 @@ public class ProdottiModel : PageModel
         //aggiungi un log
         _logger.LogInformation("pageIndex: {pageIndex}", pageIndex);
 
-        numeroPagine = (int)Math.Ceiling((double)Prodotti.Count() / 6);
+        NumeroPagine = (int)Math.Ceiling((double)Prodotti.Count() / 6);
 
         Prodotti = Prodotti.Skip(((pageIndex ?? 1) - 1) * 6).Take(6);
     }

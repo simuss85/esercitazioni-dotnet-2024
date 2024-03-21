@@ -65,7 +65,7 @@
 <form method="get" class="text-center">
     <input type="hidden" name="minPrezzo" value="@Request.Query["minPrezzo"]" /> <!-- mantiene il valore del filtro -->
     <input type="hidden" name="maxPrezzo" value="@Request.Query["maxPrezzo"]" /> <!-- mantiene il valore del filtro -->
-    @for (int i = 1; i <= Model.numeroPagine; i++)
+    @for (int i = 1; i <= Model.NumeroPagine; i++)
     {
         <button type="submit" class="btn btn-primary" name="pageIndex" value="@i">@i</button>
     }
