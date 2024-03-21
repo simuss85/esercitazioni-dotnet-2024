@@ -32,12 +32,11 @@ Il file **immagini** conterrà:
 Il file **utente** conterrà:
 - Id: numero identificativo univoco dell'utente
 - Nome: il nome dell'utente
-- Immagine: per ogni immagine verrano memorizzati i seguenti attributi:
->- ImmagineId: numero identificativo univoco dell'immagine
->- Voto: voto da 1 a 5
->- Data: data di pubblicazione del commento
->- Commento: breve commento dell'utente
->- Visibile: valore booleano gestito dal moderatore che setta il commento su visibile o nascosto
+- ImmagineId: numero identificativo univoco dell'immagine
+- Voto: voto da 1 a 5
+- Data: data di pubblicazione del commento
+- Commento: breve commento dell'utente
+- Visibile: valore booleano gestito dal moderatore che setta il commento su visibile o nascosto
 
 ## DEFINIZIONE DI STRUTTURE E CONVENZIONI
 
