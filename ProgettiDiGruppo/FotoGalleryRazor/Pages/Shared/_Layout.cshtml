@@ -8,8 +8,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FotoGalleryRazor.styles.css" asp-append-version="true" />
+
+    <!-- rating stars -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <!-- cazzata per le immagini che si muovono -->
+    @* <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/86044/bisk8s_cdpn_base_201312_1.css">
+    *@
+
+    <!-- fine cazzata -->
+
 </head>
 
 <body>
@@ -29,12 +40,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Classifica">Classifica</a>
                         </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -49,6 +61,14 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- cazzata per le immagini che si muovono -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+        type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.js" type="text/javascript"></script>
+    <script src="https://cdpn.io/cpe/boomboom/pen.js?key=pen.js-16317212-6993-4854-21d9-e79b5949e95c"
+        crossorigin=""></script>
+    <!-- fine cazzata -->
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

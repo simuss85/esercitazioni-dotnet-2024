@@ -1,0 +1,29 @@
+[
+  {
+    "Id": 1,
+    "Nome": "Simone",
+    "ImmagineId": 1,
+    "Voto": 4.0,
+    "Data": "2024-03-21T00:00:00",
+    "Commento": "belin che bella",
+    "Visibile": true
+  },
+  {
+    "Id": 2,
+    "Nome": "dsfbslbglskjg",
+    "ImmagineId": 1,
+    "Voto": 4.0,
+    "Data": "2024-03-21T00:00:00+01:00",
+    "Commento": "sfdgdagegr",
+    "Visibile": true
+  },
+  {
+    "Id": 3,
+    "Nome": "fggdgf",
+    "ImmagineId": 4,
+    "Voto": 2.0,
+    "Data": "2024-03-21T00:00:00+01:00",
+    "Commento": "gdgdfsdfd",
+    "Visibile": true
+  }
+]

@@ -8,12 +8,63 @@
 </div>
 <br>
 
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="container">
+    <div class="card flex-column flex-sm-row w-100">
+        <img src="@Model.Immagine.Path" class="card-img-top " alt="@Model.Immagine.Titolo">
+        <div class=" card-body">
+            <h5 class="card-text">@Model.Immagine.Titolo</h5>
+            <p class="card-text">Autore: @Model.Immagine.Autore</p>
+            <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
+            <p class="card-text"></p>
+            <p class="card-text"></p>
+
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <p class="d-inline-flex gap-1">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample">
+            Commenta
+        </a>
+        <a asp-page="/Index" class="btn btn-primary" type="button" aria-controls="collapseExample">
+            Torna alle immagini
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <form method="post">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" name="nome" placeholder="Nome" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="commento">Commento</label>
+                    <textarea class="form-control" name="commento" rows="3"></textarea>
+                </div>
+
+                <div class="stars">
+
+                    <input class="star star-5" id="star-5" type="radio" name="star5" />
+                    <label class="star star-5" for="star-5"></label>
+                    <input class="star star-4" id="star-4" type="radio" name="star4" />
+                    <label class="star star-4" for="star-4"></label>
+                    <input class="star star-3" id="star-3" type="radio" name="star3" />
+                    <label class="star star-3" for="star-3"></label>
+                    <input class="star star-2" id="star-2" type="radio" name="star2" />
+                    <label class="star star-2" for="star-2"></label>
+                    <input class="star star-1" id="star-1" type="radio" name="star1" />
+                    <label class="star star-1" for="star-1"></label>
+
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Invia</button>
+                </div>
+
+
+            </form>
+        </div>
     </div>
 </div>
