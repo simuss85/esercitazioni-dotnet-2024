@@ -19,7 +19,7 @@ I commenti degli utenti verranno visualizzati sotto forma di nome utente, numero
 
 - [x] L'applicazione utilizza file json per la memorizzazione dei dati:
 > - immagini.json
-> - utente.json
+> - utenti.json
 
 Il file **immagini** conterrà:
 - Id: numero identificativo univoco dell'immagine
@@ -29,7 +29,7 @@ Il file **immagini** conterrà:
 - Autore: chi ha pubblicato
 - Data: data di pubblicazione immagine
 
-Il file **utente** conterrà:
+Il file **utenti** conterrà:
 - Id: numero identificativo univoco dell'utente
 - Nome: il nome dell'utente
 - ImmagineId: numero identificativo univoco dell'immagine
@@ -46,7 +46,8 @@ Il file **utente** conterrà:
 - [x] I nomi delle **variabili** devono essere camelCase.
 - [x] I nomi delle **costanti** devono essere SNAKE_UPPERCASE.
 - [x] I nomi dei **file** devono essere camelCase.
-- [ ] I nomi delle **cartelle** MVC e Data devono essere PascalCase.
+- [x] I nomi delle **cartelle** MVC e Data devono essere PascalCase.
+- [x] I nomi dei file **immagini** devono essere snake_case.
 - [ ] I nomi dello **schema** sql devono essere snake_case.
 
 ## SVILUPPO DEI COMPONENTI
