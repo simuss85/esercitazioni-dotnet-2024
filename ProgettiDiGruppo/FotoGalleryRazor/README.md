@@ -19,7 +19,7 @@ I commenti degli utenti verranno visualizzati sotto forma di nome utente, numero
 
 - [x] L'applicazione utilizza file json per la memorizzazione dei dati:
 > - immagini.json
-> - utenti.json
+> - voti.json
 
 Il file **immagini** conterrà:
 - Id: numero identificativo univoco dell'immagine
@@ -33,7 +33,7 @@ Il file **utenti** conterrà:
 - Id: numero identificativo univoco dell'utente
 - Nome: il nome dell'utente
 - ImmagineId: numero identificativo univoco dell'immagine
-- Voto: voto da 1 a 5
+- Stelle: voto da 1 a 5
 - Data: data di pubblicazione del commento
 - Commento: breve commento dell'utente
 - Visibile: valore booleano gestito dal moderatore che setta il commento su visibile o nascosto

@@ -6,7 +6,6 @@
 <div class="mx-5">
     <div class="text-center">
         <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
 
     <div class="d-flex flex-wrap justify-content-center align-items-center">
@@ -14,10 +13,10 @@
         @for (int i = 0; i < Model.Immagini.Count(); i++)
         {
 
-            <div class="d-flex m-3 border border-5">
+            <div class="d-flex m-3 border border-5 w-25 h-50">
                 <div class="bg-image hover-overlay ripple shadow-1-strong rounded" data-ripple-color="light">
                     <a asp-page="/Immagine" asp-route-id="@Model.Immagini.ElementAt(i).Id">
-                        <img src="@Model.Immagini.ElementAt(i).Path" width="400px" height="250px" /></a>
+                        <img src="@Model.Immagini.ElementAt(i).Path" class="img-fluid" /></a>
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
                 </div>
             </div>

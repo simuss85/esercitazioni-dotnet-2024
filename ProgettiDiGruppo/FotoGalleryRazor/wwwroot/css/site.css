@@ -107,3 +107,10 @@ label.star:before {
   content: '\f006';
   font-family: FontAwesome;
 }
+
+/*-------- gestione commenti ----------- */
+
+.moderato {
+  color: red;
+  background-color: rgba(236, 123, 123, 0.404);
+}

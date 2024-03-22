@@ -27,7 +27,7 @@ public class IndexModel : PageModel
 
         _logger.LogInformation("Numero pagina: {NumeroPagine}", NumeroPagine);
 
-        NumeroPagine = (int)Math.Ceiling((decimal)Immagini.Count() / 12);
+        NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / 12);
 
         Immagini = Immagini.Skip(((pageIndex ?? 1) - 1) * 12).Take(12);
     }

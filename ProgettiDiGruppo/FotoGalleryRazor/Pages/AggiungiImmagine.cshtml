@@ -1,0 +1,35 @@
+@page
+@model AggiungiImmagineModel
+@{
+    ViewData["Title"] = "Aggiungi Immagine";
+}
+
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="autore">Autore</label>
+            <input type="text" class="form-control" name="autore" />
+        </div>
+        <div class="form-group">
+            <label for="titolo">Titolo</label>
+            <input type="text" class="form-control" name="titolo" />
+        </div>
+
+        <label for="titolo">Categoria</label>
+        <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(Model.Categorie))">
+            <option>Seleziona categoria</option>
+        </select>
+
+        <div class="form-group">
+            <label for="path">Link Immagine</label>
+            <input type="text" class="form-control" name="path" required />
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Aggiungi</button>
+        <a asp-page="/Index" class="btn btn-primary" type="button">
+            Torna alle immagini
+        </a>
+    </form>
+</div>

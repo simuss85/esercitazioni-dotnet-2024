@@ -2,53 +2,80 @@
 @model ClassificaModel
 @{
     ViewData["Title"] = "Classifica";
+    int n = 1;
 }
-<div class="text-center">
-    <h1 class="display-4">Classifica</h1>
-</div>
-<br>
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4">Classifica</h1>
+    </div>
+    <br>
 
-<table class="table text-center table-striped align-middle">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Immagine</th>
-            <th>Titolo</th>
-            <th>Autore</th>
-            <th>Voto</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var img in Model.Immagini)
-        {
-            var count = @img.Voto;
+    <table class="table text-center table-striped align-middle">
+        <thead>
             <tr>
-                <td>@img.Id</td>
-                <td><img src="@img.Path" alt="img_01" width="80" height="60" /></td>
-                <td><a asp-page="/Immagine" asp-route-id="@img.Id">@img.Titolo</a></td>
-                <td>@img.Autore</td>
-                <td>
+                <th>#</th>
+                <th>Immagine</th>
+                <th>Titolo</th>
+                <th>Autore</th>
+                <th>Voto <a asp-page="/Classifica" asp-route-reverse="@true"><i class=" bi bi-caret-down"></i></a><a
+                        asp-page="/Classifica" asp-route-reverse="@false"><i class=" bi bi-caret-up"></i></a></th>
 
-                    @for (int i = 0; i < 5; i++)
-                    {
-                        if (count > 1)
-                        {
-                            <span class="bi bi-star-fill"></span>
-                        }
-                        else if (count > 0)
-                        {
-                            <span class="bi bi-star-half"></span>
-                        }
-                        else
-                        {
-                            <span class="bi bi-star"></span>
-                        }
-                        count--;
-                    }
-                    <span class="px-1">@img.Voto</span>
-
-                </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var img in Model.Immagini)
+            {
+                var count = @img.Voto;
+                <tr>
+                    <td>@n</td>
+                    <td><a asp-page="/Immagine" asp-route-id="@img.Id"><img src="@img.Path" alt="img_01" width="80"
+                                height="60" /></a></td>
+                    <td><a asp-page="/Immagine" asp-route-id="@img.Id">@img.Titolo</a></td>
+                    <td>@img.Autore</td>
+                    <td>
+
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            if (count >= 1)
+                            {
+                                <span class="bi bi-star-fill"></span>
+                            }
+                            else if (count > 0)
+                            {
+                                <span class="bi bi-star-half"></span>
+                            }
+                            else
+                            {
+                                <span class="bi bi-star"></span>
+                            }
+                            count--;
+                        }
+                        <span class="px-1">@img.Voto</span>
+
+                    </td>
+                </tr>
+                n++;
+            }
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.NumeroPagine; i++)
+            {
+                <li class="page-item"><a class="page-link" asp-page="/Classifica" asp-route-pageindex="@i">@i</a></li>
+            }
+            <li class="page-item">
+                <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

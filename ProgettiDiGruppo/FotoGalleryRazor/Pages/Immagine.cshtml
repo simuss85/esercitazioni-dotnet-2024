@@ -2,6 +2,7 @@
 @model ImmagineModel
 @{
     ViewData["Title"] = "Dettaglio Immagine";
+    var stelleImmagine = @Model.Immagine.Voto;
 }
 <div class="text-center">
     <h1 class="display-4">Dettaglio Immagine</h1>
@@ -9,13 +10,31 @@
 <br>
 
 <div class="container">
-    <div class="card flex-column flex-sm-row w-100">
-        <img src="@Model.Immagine.Path" class="card-img-top " alt="@Model.Immagine.Titolo">
+    <div class="card flex-column flex-lg-row w-100">
+        <img src="@Model.Immagine.Path" class="card-img-top p-2" alt="@Model.Immagine.Titolo">
         <div class=" card-body">
             <h5 class="card-text">@Model.Immagine.Titolo</h5>
             <p class="card-text">Autore: @Model.Immagine.Autore</p>
             <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
-            <p class="card-text"></p>
+            <p class="card-text">
+                @for (int i = 0; i < 5; i++)
+                {
+                    if (stelleImmagine >= 1)
+                    {
+                        <span class="bi bi-star-fill"></span>
+                    }
+                    else if (stelleImmagine > 0)
+                    {
+                        <span class="bi bi-star-half"></span>
+                    }
+                    else
+                    {
+                        <span class="bi bi-star"></span>
+                    }
+                    stelleImmagine--;
+                }
+                <span class="px-1">@Model.Immagine.Voto</span>
+            </p>
             <p class="card-text"></p>
 
         </div>
@@ -66,5 +85,55 @@
 
             </form>
         </div>
+
+    </div>
+
+    <div class="commenti w-75">
+
+        @foreach (var voto in Model.Voti)
+        {
+            if (Model.Immagine.Id == voto.ImmagineId)
+            {
+                var stelle = @voto.Stelle;
+                <div class="card">
+                    <div class="card-header">
+                        @voto.Nome
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (stelle >= 1)
+                                {
+                                    <span class="bi bi-star-fill"></span>
+                                }
+                                else if (stelle > 0)
+                                {
+                                    <span class="bi bi-star-half"></span>
+                                }
+                                else
+                                {
+                                    <span class="bi bi-star"></span>
+                                }
+                                stelle--;
+                            }
+                            <span class="px-1">@voto.Stelle</span>
+                        </h5>
+                        @if (voto.Visibile)
+                        {
+                            <p class="card-text">@voto.Commento</p>
+                        }
+                        else
+                        {
+                            <p class="card-text moderato">Commento eliminato</p>
+
+                        }
+
+
+                    </div>
+                </div>
+            }
+
+        }
     </div>
 </div>
