@@ -18,7 +18,8 @@
         </div>
 
         <label for="titolo">Categoria</label>
-        <select class="form-select" aria-label="Default select example" asp-items="@(new SelectList(Model.Categorie))">
+        <select asp-for="Categoria" class="form-select" aria-label="Default select example"
+            asp-items="@(new SelectList(Model.Categorie))">
             <option>Seleziona categoria</option>
         </select>
 

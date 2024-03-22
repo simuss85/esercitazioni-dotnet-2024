@@ -9,6 +9,7 @@ public class AggiungiImmagineModel : PageModel
 {
 
     public required List<string> Categorie { get; set; }
+    public required string Categoria { get; set; }
     public required Immagine Immagine { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
     public string jsonPath3 = @"wwwroot/json/categorie.json";
@@ -26,11 +27,13 @@ public class AggiungiImmagineModel : PageModel
         var jsonFile3 = System.IO.File.ReadAllText(jsonPath3);
         Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFile3)!;
     }
+
     public IActionResult OnPost(string? autore, string? titolo, string path, string categoria)
     {
+        _logger.LogInformation("Categoria: {0}", categoria);
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
-
+        Categoria = categoria;
 
         int id = immagini.Max(i => i.Id);
         id++;
@@ -44,7 +47,7 @@ public class AggiungiImmagineModel : PageModel
             titolo = $"Titolo {id}";
         }
 
-        immagini.Add(new Immagine { Id = id, Path = path, Titolo = titolo, Voto = 0, NumeroVoti = 0, Autore = autore, Data = DateTime.Today });
+        immagini.Add(new Immagine { Id = id, Path = path, Titolo = titolo, Voto = 0, NumeroVoti = 0, Autore = autore, Data = DateTime.Today, Categoria = Categoria });
         System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(immagini, Formatting.Indented));
         return Page();
     }
