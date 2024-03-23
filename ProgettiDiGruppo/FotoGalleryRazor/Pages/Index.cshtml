@@ -8,26 +8,31 @@
         <h1 class="display-4">Welcome</h1>
     </div>
 
-    <div class="row align-items-center">
-
+    <!---------------------- row delle immagini ------------------------>
+    <div class="row">
         @for (int i = 0; i < Model.Immagini.Count(); i++)
         {
-
-            <div class="col-3 p-0 m-0  align-items-center border border-5">
-                <div class="bg-image hover-overlay ripple shadow-1-strong rounded text-center" data-ripple-color="light">
-                    <a asp-page="/Immagine" asp-route-id="@Model.Immagini.ElementAt(i).Id">
-                        <img src="@Model.Immagini.ElementAt(i).Path" class="img-fluid " /></a>
-                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-0 m-0 align-items-center border border-2">
+                <div class="d-flex flex-wrap flex-row-reverse">
+                    <div class="image-container">
+                        <a asp-page="/Immagine" asp-route-id="@Model.Immagini.ElementAt(i).Id">
+                            <img src="@Model.Immagini.ElementAt(i).Path" class="img-fluid" /></a>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                    </div>
+                    <div class="position-absolute pt-2 pe-1">
+                        <span class="bi bi-star-fill"></span>
+                        <span class="index-voto px-1 rounded-1">@Model.Immagini.ElementAt(i).Voto</span>
+                    </div>
                 </div>
             </div>
-
         }
     </div>
 
-    <nav aria-label="Page navigation example">
+    <!---------------------------- tasti paginazione -------------------------->
+    <nav class="mt-4" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" aria-label="Previous" asp-page="/Index" asp-route-pageindex="1">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -36,7 +41,7 @@
                 <li class="page-item"><a class="page-link" asp-page="/Index" asp-route-pageindex="@i">@i</a></li>
             }
             <li class="page-item">
-                <a class="page-link" aria-label="Next">
+                <a class="page-link" aria-label="Next" asp-page="/Index" asp-route-pageindex="@Model.NumeroPagine">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

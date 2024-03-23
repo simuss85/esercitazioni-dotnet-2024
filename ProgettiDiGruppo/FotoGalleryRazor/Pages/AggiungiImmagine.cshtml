@@ -6,31 +6,37 @@
 
 
 <div class="container">
-    <h1>@ViewData["Title"]</h1>
-    <form method="post">
-        <div class="form-group">
-            <label for="autore">Autore</label>
-            <input type="text" class="form-control" name="autore" />
-        </div>
-        <div class="form-group">
-            <label for="titolo">Titolo</label>
-            <input type="text" class="form-control" name="titolo" />
-        </div>
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
 
-        <label for="titolo">Categoria</label>
-        <select asp-for="Categoria" class="form-select" aria-label="Default select example"
-            asp-items="@(new SelectList(Model.Categorie))">
-            <option>Seleziona categoria</option>
-        </select>
+    <div class="d-flex justify-content-center mt-5">
+        <form method="post">
+            <div class="form-group">
+                <label for="autore">Autore</label>
+                <input type="text" class="form-control" name="autore" />
+            </div>
+            <div class="form-group">
+                <label for="titolo">Titolo</label>
+                <input type="text" class="form-control" name="titolo" />
+            </div>
 
-        <div class="form-group">
-            <label for="path">Link Immagine</label>
-            <input type="text" class="form-control" name="path" required />
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary">Aggiungi</button>
-        <a asp-page="/Index" class="btn btn-primary" type="button">
-            Torna alle immagini
-        </a>
-    </form>
+            <label for="titolo">Categoria</label>
+            <select asp-for="Categoria" class="form-select" aria-label="Default select example"
+                asp-items="@(new SelectList(Model.Categorie))">
+                <option>Seleziona categoria</option>
+            </select>
+
+            <div class="form-group">
+                <label for="path">Link Immagine</label>
+                <input type="text" class="form-control" name="path" required />
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Aggiungi</button>
+            <a asp-page="/Index" class="btn btn-primary" type="button">
+                Torna alle immagini
+            </a>
+        </form>
+    </div>
+
 </div>

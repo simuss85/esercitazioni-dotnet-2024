@@ -25,7 +25,7 @@ public class IndexModel : PageModel
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
 
-        _logger.LogInformation("Numero pagina: {NumeroPagine}", NumeroPagine);
+        _logger.LogInformation("Index Numero pagina: {0}", pageIndex);
 
         NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / 12);
 

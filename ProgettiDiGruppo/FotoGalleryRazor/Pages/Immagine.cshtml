@@ -4,15 +4,19 @@
     ViewData["Title"] = "Dettaglio Immagine";
     var stelleImmagine = @Model.Immagine.Voto;
 }
-<div class="text-center">
-    <h1 class="display-4">Dettaglio Immagine</h1>
-</div>
-<br>
+
 
 <div class="container">
-    <div class="card flex-column flex-lg-row w-100">
-        <img src="@Model.Immagine.Path" class="card-img-top p-2" alt="@Model.Immagine.Titolo">
-        <div class=" card-body">
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+    <br>
+    <!----------------- sezione card immagine ---------------------------->
+    <div class="row border border-2 mx-2">
+        <div class="col-12 col-md-10 p-2 my-2">
+            <img src="@Model.Immagine.Path" class="card-img-top" alt="@Model.Immagine.Titolo">
+        </div>
+        <div class="col-2 card-body p-2 mt-2">
             <h5 class="card-text">@Model.Immagine.Titolo</h5>
             <p class="card-text">Autore: @Model.Immagine.Autore</p>
             <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
@@ -35,23 +39,23 @@
                 }
                 <span class="px-1">@Model.Immagine.Voto</span>
             </p>
-            <p class="card-text"></p>
-
         </div>
     </div>
 </div>
-<div class="container mt-4">
+
+<!--------------- sezione inserimento voto collapse -------------------------->
+<div class="container mt-4 ps-4">
     <p class="d-inline-flex gap-1">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-            aria-controls="collapseExample">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
+            aria-expanded="false" aria-controls="collapseCommenta">
             Commenta
         </a>
-        <a asp-page="/Index" class="btn btn-primary" type="button" aria-controls="collapseExample">
+        <a asp-page="/Index" class="btn btn-primary" type="button">
             Torna alle immagini
         </a>
     </p>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
+    <div class="collapse" id="collapseCommenta">
+        <div class="card card-body w-75">
             <form method="post">
                 <div class="row">
                     <div class="form-group col-6">
@@ -63,9 +67,8 @@
                     <label for="commento">Commento</label>
                     <textarea class="form-control" name="commento" rows="3"></textarea>
                 </div>
-
+                <!---------------- input stars ------------------->
                 <div class="stars">
-
                     <input class="star star-5" id="star-5" type="radio" name="star5" />
                     <label class="star star-5" for="star-5"></label>
                     <input class="star star-4" id="star-4" type="radio" name="star4" />
@@ -76,18 +79,14 @@
                     <label class="star star-2" for="star-2"></label>
                     <input class="star star-1" id="star-1" type="radio" name="star1" />
                     <label class="star star-1" for="star-1"></label>
-
                 </div>
                 <div>
                     <button type="submit" class="btn btn-success">Invia</button>
                 </div>
-
-
             </form>
         </div>
-
     </div>
-
+    <!------------------------ sezione dei commenti --------------------->
     <div class="commenti w-75">
 
         @foreach (var voto in Model.Voti)

@@ -47,28 +47,6 @@ tbody tr:hover {
   background-color: aliceblue;
 }
 
-/*------- prova gallery strana -----*/
-/* .gallery {
-  position: relative;
-  perspective: 2000px;
-  perspective-origin: 0px 0px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  transform-style: preserve-3d;
-}
-
-.gallery img {
-  position: absolute;
-  transform-style: preserve-3d;
-  transform-origin: 50% 50%;
-  top: 50%;
-  left: 40%;
-  max-width: 150px;
-  max-height: 150px;
-  cursor: pointer;
-} */
-
 /*------ rating -------stars */
 div.stars {
   width: 270px;
@@ -113,4 +91,28 @@ label.star:before {
 .moderato {
   color: red;
   background-color: rgba(236, 123, 123, 0.404);
+}
+
+/*---------- index immagini ----------------*/
+.image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  /* Imposta l'altezza del contenitore al 100% della larghezza per mantenere il rapporto di aspetto  */
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Per riempire completamente il contenitore */
+  object-fit: cover;
+  /* Copre il contenitore mantenendo il rapporto di aspetto */
+}
+
+/*-------------- index stelle -------------------*/
+.index-voto {
+  background-color: rgba(240, 248, 255, 0.508);
 }

@@ -2,14 +2,26 @@
 @model ClassificaModel
 @{
     ViewData["Title"] = "Classifica";
-    int n = 1;
+    //calcola il numero N progressivo da inserire nella tabella classifica per ogni paginazione
+    bool reverse = Model.Reverse;
+    int n;
+    if (!Model.Reverse)
+    {
+        n = ((Model.PageIndex ?? 1) - 1) * 10;
+    }
+    else
+    {
+        n = Model.TotaleImmagini - (((Model.PageIndex ?? 1) - 1) * 10);
+    }
 }
+
 <div class="container">
     <div class="text-center">
-        <h1 class="display-4">Classifica</h1>
+        <h1 class="display-4">@ViewData["Title"]</h1>
     </div>
     <br>
 
+    <!------------------- tabella classifica ----------------------->
     <table class="table text-center table-striped align-middle">
         <thead>
             <tr>
@@ -17,31 +29,45 @@
                 <th>Immagine</th>
                 <th>Titolo</th>
                 <th>Autore</th>
-                <th>Voto <a asp-page="/Classifica" asp-route-reverse="@true"><i class=" bi bi-caret-down"></i></a><a
-                        asp-page="/Classifica" asp-route-reverse="@false"><i class=" bi bi-caret-up"></i></a></th>
-
+                <th>Voto
+                    @if (Model.Reverse)
+                    {
+                        <a class="voto" asp-page="/Classifica" asp-route-reverse="@false">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-page="/Classifica" asp-route-reverse="@true">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                </th>
             </tr>
         </thead>
         <tbody>
 
             @foreach (var img in Model.Immagini)
             {
-                var count = @img.Voto;
+                if (!Model.Reverse)
+                {
+                    n++;
+                }
+
+                var stelle = @img.Voto;
                 <tr>
                     <td>@n</td>
-                    <td><a asp-page="/Immagine" asp-route-id="@img.Id"><img src="@img.Path" alt="img_01" width="80"
+                    <td><a asp-page="/Immagine" asp-route-id="@img.Id"><img src="@img.Path" alt="@img.Titolo" width="80"
                                 height="60" /></a></td>
                     <td><a asp-page="/Immagine" asp-route-id="@img.Id">@img.Titolo</a></td>
                     <td>@img.Autore</td>
                     <td>
-
+                        @* Gestione delle stelle dinamiche per la sezione Voto *@
                         @for (int i = 0; i < 5; i++)
                         {
-                            if (count >= 1)
+                            if (stelle >= 1)
                             {
                                 <span class="bi bi-star-fill"></span>
                             }
-                            else if (count > 0)
+                            else if (stelle > 0)
                             {
                                 <span class="bi bi-star-half"></span>
                             }
@@ -49,30 +75,36 @@
                             {
                                 <span class="bi bi-star"></span>
                             }
-                            count--;
+                            stelle--;
                         }
                         <span class="px-1">@img.Voto</span>
-
                     </td>
                 </tr>
-                n++;
+                if (Model.Reverse)
+                {
+                    n--;
+                }
             }
         </tbody>
     </table>
 
-    <nav aria-label="Page navigation example">
+    <!---------------------------- tasti paginazione -------------------------->
+    <nav class="mt-4" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+                <a class="page-link" aria-label="Previous" asp-page="/Classifica" asp-route-reverse="@reverse"
+                    asp-route-pageindex="1">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             @for (int i = 1; i <= Model.NumeroPagine; i++)
             {
-                <li class="page-item"><a class="page-link" asp-page="/Classifica" asp-route-pageindex="@i">@i</a></li>
+                <li class="page-item"><a class="page-link" asp-page="/Classifica" asp-route-reverse="@reverse"
+                        asp-route-pageindex="@i">@i</a></li>
             }
             <li class="page-item">
-                <a class="page-link" aria-label="Next">
+                <a class="page-link" aria-label="Next" asp-page="/Classifica" asp-route-reverse="@reverse"
+                    asp-route-pageindex="@Model.NumeroPagine">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
