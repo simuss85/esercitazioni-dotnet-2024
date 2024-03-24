@@ -7,10 +7,12 @@ namespace FotoGalleryRazor.Pages;
 
 public class AggiungiImmagineModel : PageModel
 {
+    [BindProperty]
+    public string? Categoria { get; set; }
+    [BindProperty]
+    public Immagine? Immagine { get; set; }
+    public required IEnumerable<string> Categorie { get; set; }
 
-    public required List<string> Categorie { get; set; }
-    public required string Categoria { get; set; }
-    public required Immagine Immagine { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
     public string jsonPath3 = @"wwwroot/json/categorie.json";
     #region  Logger
@@ -28,27 +30,37 @@ public class AggiungiImmagineModel : PageModel
         Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFile3)!;
     }
 
-    public IActionResult OnPost(string? autore, string? titolo, string path, string categoria)
+    public IActionResult OnPost()
     {
-        _logger.LogInformation("Categoria: {0}", categoria);
+        //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+        _logger.LogInformation("Categoria: {0}", Categoria);
+
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
-        Categoria = categoria;
 
         int id = immagini.Max(i => i.Id);
         id++;
-        if (autore == null)
+
+        if (string.IsNullOrEmpty(Immagine!.Autore))
         {
-            autore = $"Autore {id}";
+            Immagine.Autore = $"Autore {id}";
+        }
+        if (string.IsNullOrEmpty(Immagine.Titolo))
+        {
+            Immagine.Titolo = $"Titolo {id}";
         }
 
-        if (titolo == null)
-        {
-            titolo = $"Titolo {id}";
-        }
+        Immagine.Id = id;
+        Immagine.Categoria = Categoria;
+        Immagine.Data = DateTime.Today;
 
-        immagini.Add(new Immagine { Id = id, Path = path, Titolo = titolo, Voto = 0, NumeroVoti = 0, Autore = autore, Data = DateTime.Today, Categoria = Categoria });
+        immagini.Add(Immagine);
+
         System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(immagini, Formatting.Indented));
-        return Page();
+        return RedirectToPage("/Index");
     }
 }

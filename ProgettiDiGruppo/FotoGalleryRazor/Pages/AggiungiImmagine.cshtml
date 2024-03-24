@@ -21,11 +21,15 @@
                 <input type="text" class="form-control" name="titolo" />
             </div>
 
-            <label for="titolo">Categoria</label>
-            <select asp-for="Categoria" class="form-select" aria-label="Default select example"
-                asp-items="@(new SelectList(Model.Categorie))">
-                <option>Seleziona categoria</option>
+            <label for="categoria">Categoria</label>
+            <select class="form-control" id="categoria" name="Categoria">
+                <option value="">Seleziona una categoria</option>
+                @foreach (var cat in Model.Categorie)
+                {
+                    <option value="@cat">@cat</option>
+                }
             </select>
+            <span asp-validation-for="Categoria" class="text-danger"></span>
 
             <div class="form-group">
                 <label for="path">Link Immagine</label>
