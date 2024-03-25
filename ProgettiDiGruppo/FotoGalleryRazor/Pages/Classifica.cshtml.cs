@@ -28,6 +28,7 @@ public class ClassificaModel : PageModel
     {
         PageIndex = pageIndex;
         Reverse = reverse;
+
         _logger.LogInformation("Classifica - Numero Pagina: {0}, Reverse {1}", PageIndex, reverse);
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.OrderByDescending(i => i.Voto);

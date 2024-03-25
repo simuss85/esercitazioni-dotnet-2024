@@ -34,19 +34,28 @@
     <nav class="mt-4" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" asp-page="/Index" asp-route-pageindex="1"
+                <a class="page-link" aria-label="Previous" asp-page="/Categoria" asp-route-pagecategoria="1"
                     asp-route-categoria="@categoria">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             @for (int i = 1; i <= Model.NumeroPagine; i++)
             {
-                <li class="page-item"><a class="page-link" asp-page="/Index" asp-route-pageindex="@i"
-                        asp-route-categoria="@categoria">@i</a></li>
+                if (i == Model.PageCategoria)
+                {
+                    <li class="page-item active"><a class="page-link" asp-page="/Categoria" asp-route-pagecategoria="@i"
+                            asp-route-categoria="@categoria">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-page="/Categoria" asp-route-pagecategoria="@i"
+                            asp-route-categoria="@categoria">@i</a></li>
+                }
+
             }
             <li class="page-item">
-                <a class="page-link" aria-label="Next" asp-page="/Index" asp-route-pageindex="@Model.NumeroPagine"
-                    asp-route-categoria="@categoria">
+                <a class="page-link" aria-label="Next" asp-page="/Categoria"
+                    asp-route-pagecategoria="@Model.NumeroPagine" asp-route-categoria="@categoria">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

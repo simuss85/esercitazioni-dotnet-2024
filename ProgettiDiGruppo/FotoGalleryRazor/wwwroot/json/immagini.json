@@ -41,7 +41,7 @@
   },
   {
     "Id": 5,
-    "Path": "/img/img_05.jpg",
+    "Path": "",
     "Titolo": "Immagine 5",
     "Voto": 4.8,
     "NumeroVoti": 21,
@@ -583,8 +583,8 @@
     "Id": 59,
     "Path": "https://www.legambiente.it/wp-content/uploads/2022/12/animali-in-citta-report.jpg",
     "Titolo": "Titolo 59",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 59",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"

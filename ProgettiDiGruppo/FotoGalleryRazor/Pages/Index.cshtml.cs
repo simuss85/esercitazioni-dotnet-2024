@@ -9,6 +9,7 @@ public class IndexModel : PageModel
 {
     public required int NumeroPagine { get; set; }
     public required string? Categoria { get; set; }
+    public required int? PageIndex { get; set; }
     public required IEnumerable<Immagine> Immagini { get; set; }
     public required IEnumerable<string> Categorie { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
@@ -34,7 +35,9 @@ public class IndexModel : PageModel
 
         _logger.LogInformation("Index Numero pagina: {0}", pageIndex);
 
+        //per la gestione del frontend mi copio i valori attuali nelgli attributi di classe
         Categoria = categoria;
+        PageIndex = pageIndex;
         if (!string.IsNullOrEmpty(Categoria))
         {
             Immagini = Immagini.Where(i => i.Categoria == categoria);

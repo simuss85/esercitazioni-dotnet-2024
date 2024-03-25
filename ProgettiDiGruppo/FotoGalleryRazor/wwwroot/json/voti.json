@@ -331,5 +331,14 @@
     "Data": "2024-03-25T00:00:00+01:00",
     "Commento": "bello",
     "Visibile": true
+  },
+  {
+    "Id": 38,
+    "Nome": "chch",
+    "ImmagineId": 59,
+    "Stelle": 5.0,
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Commento": null,
+    "Visibile": true
   }
 ]

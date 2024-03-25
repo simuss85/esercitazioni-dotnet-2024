@@ -11,15 +11,16 @@
     <div class="text-center">
         <h1 class="display-4"> @ViewData["Title"]</h1>
     </div>
-
+    <!-------------------------- caselle categorie ------------------------------>
     <div class="row text-center mt-5">
         @foreach (var c in Model.Categorie)
         {
             max = Model.Immagini.Count(i => i.Categoria == c);
             n = random.Next(1, max);
 
-            <!-- seleziona random un immagine per ogni categoia -->
+            <!----------- seleziona random un immagine per ogni categoia --------->
             path = Model.Immagini.Where(i => i.Categoria == c).Skip(n).First().Path;
+
             <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
                 <div class="img-categoria rounded" style="background-image: url(@path);">
                     <h1 class="text-categoria"><a class="link-categoria" asp-page="/Categoria"
