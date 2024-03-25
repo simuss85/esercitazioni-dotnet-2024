@@ -133,13 +133,14 @@ label.star:before {
 .img-categoria {
   height: 20rem;
   vertical-align: middle;
+  background-size: cover;
+  background-position: center;
 }
 
 .text-categoria {
   position: relative;
   top: 45%;
 }
-
 
 .rounded {
   border-radius: 4rem !important;

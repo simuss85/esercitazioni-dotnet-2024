@@ -20,8 +20,8 @@
 
             <!-- seleziona random un immagine per ogni categoia -->
             path = Model.Immagini.Where(i => i.Categoria == c).Skip(n).First().Path;
-            <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-2 px-2">
-                <div class="img-categoria rounded" style="background-image: url(@path); background-size: cover;">
+            <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
+                <div class="img-categoria rounded" style="background-image: url(@path);">
                     <h1 class="text-categoria"><a class="link-categoria" asp-page="/Categoria"
                             asp-route-categoria="@c">@c</a>
                     </h1>
