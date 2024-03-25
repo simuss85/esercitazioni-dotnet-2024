@@ -8,8 +8,6 @@ namespace FotoGalleryRazor.Pages;
 public class AggiungiImmagineModel : PageModel
 {
     [BindProperty]
-    public string? Categoria { get; set; }
-    [BindProperty]
     public Immagine? Immagine { get; set; }
     public required IEnumerable<string> Categorie { get; set; }
 
@@ -37,7 +35,7 @@ public class AggiungiImmagineModel : PageModel
         {
             return Page();
         }
-        _logger.LogInformation("Categoria: {0}", Categoria);
+        _logger.LogInformation("Categoria: {0}", Immagine!.Categoria);
 
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
@@ -55,7 +53,6 @@ public class AggiungiImmagineModel : PageModel
         }
 
         Immagine.Id = id;
-        Immagine.Categoria = Categoria;
         Immagine.Data = DateTime.Today;
 
         immagini.Add(Immagine);

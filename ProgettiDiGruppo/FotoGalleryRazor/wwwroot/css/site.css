@@ -116,3 +116,31 @@ label.star:before {
 .index-voto {
   background-color: rgba(240, 248, 255, 0.508);
 }
+
+/*----------------------- generi ------------------*/
+.link-categoria {
+  text-decoration: none;
+  color: rgba(32, 30, 30, 0.733);
+  background-color: rgba(240, 255, 253, 0.342);
+  border-radius: 1rem;
+  padding: 2%;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.986);
+  }
+}
+
+.img-categoria {
+  height: 20rem;
+  vertical-align: middle;
+}
+
+.text-categoria {
+  position: relative;
+  top: 45%;
+}
+
+
+.rounded {
+  border-radius: 4rem !important;
+}

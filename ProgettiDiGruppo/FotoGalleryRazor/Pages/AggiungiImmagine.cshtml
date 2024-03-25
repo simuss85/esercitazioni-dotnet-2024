@@ -22,14 +22,14 @@
             </div>
 
             <label for="categoria">Categoria</label>
-            <select class="form-control" id="categoria" name="Categoria">
+            <select class="form-control" id="categoria" name="categoria" required>
                 <option value="">Seleziona una categoria</option>
                 @foreach (var cat in Model.Categorie)
                 {
                     <option value="@cat">@cat</option>
                 }
             </select>
-            <span asp-validation-for="Categoria" class="text-danger"></span>
+            <span asp-validation-for="Immagine!.Categoria" class="text-danger"></span>
 
             <div class="form-group">
                 <label for="path">Link Immagine</label>

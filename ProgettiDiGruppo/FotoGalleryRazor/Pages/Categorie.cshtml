@@ -1,0 +1,33 @@
+@page
+@model CategorieModel
+@{
+    ViewData["Title"] = "Categorie";
+    string? path;
+    int max, n;
+    Random random = new();
+
+}
+<div class="container">
+    <div class="text-center">
+        <h1 class="display-4"> @ViewData["Title"]</h1>
+    </div>
+
+    <div class="row text-center mt-5">
+        @foreach (var c in Model.Categorie)
+        {
+            max = Model.Immagini.Count(i => i.Categoria == c);
+            n = random.Next(1, max);
+
+            <!-- seleziona random un immagine per ogni categoia -->
+            path = Model.Immagini.Where(i => i.Categoria == c).Skip(n).First().Path;
+            <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-2 px-2">
+                <div class="img-categoria rounded" style="background-image: url(@path); background-size: cover;">
+                    <h1 class="text-categoria"><a class="link-categoria" asp-page="/Categoria"
+                            asp-route-categoria="@c">@c</a>
+                    </h1>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

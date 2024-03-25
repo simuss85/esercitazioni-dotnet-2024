@@ -43,8 +43,8 @@
     "Id": 5,
     "Path": "/img/img_05.jpg",
     "Titolo": "Immagine 5",
-    "Voto": 5.0,
-    "NumeroVoti": 20,
+    "Voto": 4.8,
+    "NumeroVoti": 21,
     "Autore": "Autore 5",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -183,8 +183,8 @@
     "Id": 19,
     "Path": "https://www.ansa.it/webimages/img_547x547/2024/3/17/3c511501b9171105f4a7423d630c38ca.jpg",
     "Titolo": "Titolo 19",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 19",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Sport"
@@ -443,8 +443,8 @@
     "Id": 45,
     "Path": "https://images2.corriereobjects.it/methode_image/2014/08/20/Tecnologia/Foto%20Gallery/01_uncomfortable_MGZOOM.jpg",
     "Titolo": "Titolo 45",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 45",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -603,8 +603,8 @@
     "Id": 61,
     "Path": "https://www.my-personaltrainer.it/2023/09/08/maltrattamento-di-animali_900x760.jpeg",
     "Titolo": "Titolo 61",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 2.0,
+    "NumeroVoti": 4,
     "Autore": "Autore 61",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
@@ -638,5 +638,105 @@
     "Autore": "Autore 64",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
+  },
+  {
+    "Id": 65,
+    "Path": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7NHjfUm6YuvJd21HUNx_ds5m2oHp_DLYhAVwRZ8YiCQ&s",
+    "Titolo": "dasdsadsad",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "cscsasaa",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 66,
+    "Path": "https://www.energybasketball.it/img/sport.jpg",
+    "Titolo": "Titolo 66",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 66",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 67,
+    "Path": "https://www.energybasketball.it/img/sport.jpg",
+    "Titolo": "Titolo 67",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 67",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 68,
+    "Path": "https://www.ancilazio.it/wp-content/uploads/2021/04/Sport.jpg",
+    "Titolo": "Titolo 68",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 68",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 69,
+    "Path": "https://www.istitutopsicoterapie.com/wp-content/uploads/2021/12/sport2.jpeg",
+    "Titolo": "Titolo 69",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 69",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 70,
+    "Path": "https://cdn.skuola.net/news_foto/2021/11/cibo-spazzatura.jpg",
+    "Titolo": "Titolo 70",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 70",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 71,
+    "Path": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/cibomorbido.jpg?w=713&a=c&h=407",
+    "Titolo": "Titolo 71",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 71",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 72,
+    "Path": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/cibomorbido.jpg?w=713&a=c&h=407",
+    "Titolo": "Titolo 72",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 72",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 73,
+    "Path": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/cibomorbido.jpg?w=713&a=c&h=407",
+    "Titolo": "Titolo 73",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 73",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 74,
+    "Path": "https://i0.wp.com/www.giacomocusano.com/wp-content/uploads/2016/07/coastal-wash-web.jpg?resize=1024%2C675&ssl=1",
+    "Titolo": "Titolo 74",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 74",
+    "Data": "2024-03-25T00:00:00+01:00",
+    "Categoria": "Paesaggi"
   }
 ]
