@@ -650,26 +650,6 @@
     "Categoria": "Sport"
   },
   {
-    "Id": 66,
-    "Path": "https://www.energybasketball.it/img/sport.jpg",
-    "Titolo": "Titolo 66",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 66",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
-    "Id": 67,
-    "Path": "https://www.energybasketball.it/img/sport.jpg",
-    "Titolo": "Titolo 67",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 67",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
     "Id": 68,
     "Path": "https://www.ancilazio.it/wp-content/uploads/2021/04/Sport.jpg",
     "Titolo": "Titolo 68",
@@ -688,46 +668,6 @@
     "Autore": "Autore 69",
     "Data": "2024-03-25T00:00:00+01:00",
     "Categoria": "Sport"
-  },
-  {
-    "Id": 70,
-    "Path": "https://cdn.skuola.net/news_foto/2021/11/cibo-spazzatura.jpg",
-    "Titolo": "Titolo 70",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 70",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
-    "Id": 71,
-    "Path": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/cibomorbido.jpg?w=713&a=c&h=407",
-    "Titolo": "Titolo 71",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 71",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
-    "Id": 72,
-    "Path": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/cibomorbido.jpg?w=713&a=c&h=407",
-    "Titolo": "Titolo 72",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 72",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
-    "Id": 73,
-    "Path": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/cibomorbido.jpg?w=713&a=c&h=407",
-    "Titolo": "Titolo 73",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 73",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Cibo"
   },
   {
     "Id": 74,

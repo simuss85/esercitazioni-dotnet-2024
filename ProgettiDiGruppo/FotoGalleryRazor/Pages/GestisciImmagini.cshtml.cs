@@ -7,8 +7,9 @@ namespace FotoGalleryRazor.Pages;
 
 public class GestisciImmaginiModel : PageModel
 {
+    public required List<int> Selezione { get; set; }
     public required int NumeroPagine { get; set; }
-    public required int? PageModifica { get; set; }
+    public required int? PageGestione { get; set; }
     public required IEnumerable<Immagine> Immagini { get; set; }
     public required IEnumerable<string> Categorie { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
@@ -23,9 +24,9 @@ public class GestisciImmaginiModel : PageModel
     }
     #endregion
 
-    public void OnGet(int? pageModifica)
+    public void OnGet(int? pageGestione)
     {
-        PageModifica = pageModifica;
+        PageGestione = pageGestione;
 
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.OrderByDescending(i => i.Id);
@@ -34,6 +35,6 @@ public class GestisciImmaginiModel : PageModel
         Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFile3)!;
 
         NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / 10);
-        Immagini = Immagini.Skip(((pageModifica ?? 1) - 1) * 10).Take(10);
+        Immagini = Immagini.Skip(((pageGestione ?? 1) - 1) * 10).Take(10);
     }
 }
