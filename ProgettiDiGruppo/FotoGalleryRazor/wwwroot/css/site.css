@@ -176,4 +176,33 @@ label.star:before {
 
 #carosello img {
   object-fit: cover;
+  width: 80%;
+  height: 30rem;
+}
+
+/* --------------------- elimina immagine --------------------- */
+.img-elimina {
+  height: 20rem;
+  width: 20rem;
+  vertical-align: middle;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ---------------------- modifica immagine -------------------- */
+.card-modifica {
+  height: 32rem;
+  width: 18rem;
+  border-radius: 1rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.067);
+  box-shadow: 1px 1px 6px 0px black;
+}
+
+.card-img-top {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  width: 18rem;
+  height: 12rem;
+  object-fit: cover;
+
 }

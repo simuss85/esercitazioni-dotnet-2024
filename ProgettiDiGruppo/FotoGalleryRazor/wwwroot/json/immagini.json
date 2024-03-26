@@ -200,16 +200,6 @@
     "Categoria": "Cibo"
   },
   {
-    "Id": 23,
-    "Path": "https://www.triesteprima.it/~media/horizontal-hi/10057634608377/cibo-spazzatura-2.jpg",
-    "Titolo": "Titolo 23",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 23",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
     "Id": 24,
     "Path": "https://www.fondazioneveronesi.it/uploads/thumbs/2017/01/13/dieta%20ernia%20iatale_1_thumb_720_480.jpg",
     "Titolo": "Titolo 24",
@@ -226,16 +216,6 @@
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Autore 25",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
-    "Id": 26,
-    "Path": "https://www.curarsiconilcibo.com/wp-content/uploads/2020/11/curarsi-con-il-cibo-copertina-alimentazione-prima-dei-farmaci.jpeg",
-    "Titolo": "Titolo 26",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 26",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Cibo"
   },
@@ -596,6 +576,16 @@
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Bau",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 66,
+    "Path": "https://mypetmall.net/pub/media/resized/450x450/beagle-min.webp",
+    "Titolo": "Titolo 66",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 66",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Animali"
   }

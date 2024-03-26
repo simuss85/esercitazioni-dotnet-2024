@@ -8,7 +8,7 @@ namespace FotoGalleryRazor.Pages;
 public class EliminaImmagineModel : PageModel
 {
     [BindProperty]
-    public required List<int> Selezione { get; set; }
+    public required List<int> Selezione { get; set; }   //lista di id da eliminare
     public required List<Immagine> Immagini { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
 
@@ -20,6 +20,7 @@ public class EliminaImmagineModel : PageModel
         _logger = logger;
     }
     #endregion
+
     public void OnGet(List<int> selezione)
     {
         Selezione = selezione;
