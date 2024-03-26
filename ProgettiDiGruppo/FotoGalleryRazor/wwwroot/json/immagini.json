@@ -668,5 +668,65 @@
     "Autore": "Autore 74",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Animali"
+  },
+  {
+    "Id": 75,
+    "Path": "https://sweetest.it/wp-content/uploads/2021/06/sushi-01.jpeg",
+    "Titolo": "Titolo 75",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 75",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 76,
+    "Path": "https://www.yoursushiroma.it/it/wp-content/uploads/2018/11/sushi-sesso-1.jpg",
+    "Titolo": "Titolo 76",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 76",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 77,
+    "Path": "https://www.authentico-ita.org/wp-content/uploads/2017/06/lasagne_cibo_italiano_mondo_2018.jpg",
+    "Titolo": "Titolo 77",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 77",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 78,
+    "Path": "https://media.gqitalia.it/photos/61485d5339e4836e1abf29c2/16:9/w_2560%2Cc_limit/Italia%2520volley.jpg",
+    "Titolo": "Titolo 78",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 78",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 79,
+    "Path": "https://cdn-italiani-media.italiani.it/site-italiani/2021/08/Gianmarco-Tamberi-marcell-jacobs.jpeg",
+    "Titolo": "Titolo 79",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 79",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 80,
+    "Path": "https://www.onrugby.it/wp-content/uploads/2022/03/Quanti-sono-gli-interessati-allo-sport-e-al-rugby-in-Italia.jpg",
+    "Titolo": "Titolo 80",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 80",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Sport"
   }
 ]
