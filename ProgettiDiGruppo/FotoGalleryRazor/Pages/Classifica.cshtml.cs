@@ -7,11 +7,11 @@ namespace FotoGalleryRazor.Pages;
 
 public class ClassificaModel : PageModel
 {
-    public required int NumeroPagine { get; set; }
-    public required int? PageIndex { get; set; }
-    public required int ElementiPerPagina { get; set; }
-    public required bool Reverse { get; set; }
-    public required int TotaleImmagini { get; set; }
+    public int NumeroPagine { get; set; }
+    public int? PageIndex { get; set; }
+    public int ElementiPerPagina { get; set; }
+    public bool Reverse { get; set; }
+    public int TotaleImmagini { get; set; }
     public required IEnumerable<Immagine> Immagini { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
 

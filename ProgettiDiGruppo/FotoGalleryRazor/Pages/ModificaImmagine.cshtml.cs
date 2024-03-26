@@ -72,8 +72,6 @@ public class ModificaImmagineModel : PageModel
             System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(Immagini, Formatting.Indented));
         }
 
-
-
         return RedirectToPage("/GestisciImmagini");
     }
 }

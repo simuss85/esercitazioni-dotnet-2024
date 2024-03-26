@@ -588,5 +588,85 @@
     "Autore": "Autore 66",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Animali"
+  },
+  {
+    "Id": 67,
+    "Path": "https://www.my-personaltrainer.it/2023/11/10/razze-di-cani-che-soffrono-meno-la-solitudine_900x760.jpeg",
+    "Titolo": "Titolo 67",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 67",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 68,
+    "Path": "https://www.focusjunior.it/content/uploads/2018/10/giraffe-2222908_960_720-e1548405712185.jpg",
+    "Titolo": "Titolo 68",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 68",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 69,
+    "Path": "https://www.my-personaltrainer.it/2023/09/19/come-scegliere-animale-domestico-orig.jpeg",
+    "Titolo": "Titolo 69",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 69",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 70,
+    "Path": "https://www.changethefuture.it/assets/uploads/2020/05/animali-selvatici.jpg",
+    "Titolo": "Titolo 70",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 70",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 71,
+    "Path": "https://statickodami.akamaized.net/wp-content/uploads/sites/31/2022/03/iStock-90851578.jpg?im=AspectCrop=(16,9);",
+    "Titolo": "Titolo 71",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 71",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 72,
+    "Path": "https://www.focus.it/images/2022/08/18/-1131346997-orig.jpeg",
+    "Titolo": "Titolo 72",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 72",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 73,
+    "Path": "https://www.pandaclub.ch/wp-content/uploads/2019/06/skeeze-auf-Pixabay.jpg",
+    "Titolo": "Titolo 73",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 73",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 74,
+    "Path": "https://img-prod.tgcom24.mediaset.it/images/2023/10/04/094701246-e9b858c5-808a-4a47-9e52-f81202d3fa58.jpg",
+    "Titolo": "Titolo 74",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 74",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
   }
 ]

@@ -8,7 +8,7 @@ namespace FotoGalleryRazor.Pages;
 public class AggiungiImmagineModel : PageModel
 {
     [BindProperty]
-    public Immagine? Immagine { get; set; }
+    public required Immagine Immagine { get; set; }
     public required IEnumerable<string> Categorie { get; set; }
 
     public string jsonPath = @"wwwroot/json/immagini.json";

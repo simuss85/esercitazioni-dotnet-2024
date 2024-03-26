@@ -7,8 +7,8 @@ namespace FotoGalleryRazor.Pages;
 
 public class GestisciImmaginiModel : PageModel
 {
-    public required int NumeroPagine { get; set; }
-    public required int? PageGestione { get; set; }
+    public int NumeroPagine { get; set; }
+    public int? PageGestione { get; set; }
     public required IEnumerable<Immagine> Immagini { get; set; }
     public required IEnumerable<string> Categorie { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";

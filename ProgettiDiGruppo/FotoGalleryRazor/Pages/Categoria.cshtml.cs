@@ -7,9 +7,9 @@ namespace FotoGalleryRazor.Pages;
 
 public class CategoriaModel : PageModel
 {
-    public required int NumeroPagine { get; set; }  //totale pagine per la paginazione
-    public required string? Categoria { get; set; } //categoria attuale
-    public required int? PageCategoria { get; set; }//pagina attuale
+    public int NumeroPagine { get; set; }  //totale pagine per la paginazione
+    public string? Categoria { get; set; } //categoria attuale
+    public int? PageCategoria { get; set; }//pagina attuale
     public required IEnumerable<Immagine> Immagini { get; set; }
 
     public string jsonPath = @"wwwroot/json/immagini.json";

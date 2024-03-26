@@ -34,16 +34,12 @@ public class EliminaImmagineModel : PageModel
     }
     public IActionResult OnPost()
     {
-        foreach (var id in Selezione)
-        {
-            _logger.LogInformation("Selezione: {0}", id);
-        }
-
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
 
         foreach (var id in Selezione)
         {
+            _logger.LogInformation("Selezione: {0}", id);
             Immagini.Remove(Immagini.First(i => i.Id == id));
         }
         System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(Immagini, Formatting.Indented));
