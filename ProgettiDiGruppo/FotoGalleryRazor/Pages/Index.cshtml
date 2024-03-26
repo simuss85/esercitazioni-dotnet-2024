@@ -30,16 +30,16 @@
     <div class="row">
         @for (int i = 0; i < Model.Immagini.Count(); i++)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-0 m-0 align-items-center border border-2">
-                <div class="d-flex flex-wrap flex-row-reverse">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-0 m-0 align-items-center">
+                <div class="card-index d-flex flex-wrap flex-row-reverse m-1 border-1">
                     <div class="image-container">
                         <a asp-page="/Immagine" asp-route-id="@Model.Immagini.ElementAt(i).Id">
                             <img src="@Model.Immagini.ElementAt(i).Path" class="img-fluid" /></a>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
                     </div>
-                    <div class="position-absolute pt-2 pe-1">
+                    <div class="position-absolute pt-2 pe-2">
                         <span class="bi bi-star-fill"></span>
-                        <span class="index-voto px-1 rounded-1">@Model.Immagini.ElementAt(i).Voto</span>
+                        <span class="index-voto">@Model.Immagini.ElementAt(i).Voto</span>
                     </div>
                 </div>
             </div>
