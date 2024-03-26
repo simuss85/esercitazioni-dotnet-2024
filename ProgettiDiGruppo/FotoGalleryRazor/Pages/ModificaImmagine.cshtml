@@ -1,0 +1,69 @@
+@page
+@model ModificaImmagineModel
+@{
+    ViewData["Title"] = "Modifica Immagine";
+
+}
+<div class="mx-5">
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+
+    <div class="container mt-5">
+        <form method="post">
+            <div class="row text-center mt-5">
+                @foreach (var id in Model.Selezione)
+                {
+                    var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
+                    if (immagine != null)
+                    {
+                    <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
+                        <div class="card" style="width: 18rem;">
+                            <img src="@immagine.Path" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text"></p>
+                                <div class="form-group">
+                                    <label for="autore">Autore</label>
+                                    <input type="text" class="form-control" name="Autore"
+                                        placeholder="@immagine.Autore" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="titolo">Titolo</label>
+                                    <input type="text" class="form-control" name="Titolo"
+                                        placeholder="@immagine.Titolo" required />
+
+                                </div>
+                                <label for="categoria">Categoria</label>
+                                <select class="form-control" id="categoria" name="Categoria">
+                                    <option value="">Seleziona una categoria</option>
+                                    @foreach (var cat in Model.Categorie)
+                                    {
+                                        <option value="@cat">@cat</option>
+                                    }
+                                </select>
+                                <br>
+                                <span asp-validation-for="@immagine.Categoria"
+                                    class="text-danger"></span>
+                                <input type="hidden" name="Id" value="@id">
+                                <div class="form-group">
+                                    <label for="path">Link Immagine</label>
+                                    <input type="text" class="form-control" name="Path"
+                                        value="@immagine.Path"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    }
+                }
+            </div>
+            <div class="d-flex flex-row">
+                <button type="submit" class="btn btn-success">Invia</button>
+        </form>
+
+        <a class="btn btn-primary" asp-page="/GestisciImmagini">Annulla</a>
+    </div>
+</div>
+</div>

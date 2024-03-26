@@ -7,7 +7,6 @@ namespace FotoGalleryRazor.Pages;
 
 public class GestisciImmaginiModel : PageModel
 {
-    public required List<int> Selezione { get; set; }
     public required int NumeroPagine { get; set; }
     public required int? PageGestione { get; set; }
     public required IEnumerable<Immagine> Immagini { get; set; }
@@ -24,7 +23,7 @@ public class GestisciImmaginiModel : PageModel
     }
     #endregion
 
-    public void OnGet(int? pageGestione)
+    public void OnGet(int? pageGestione, List<int>? selezione)
     {
         PageGestione = pageGestione;
 
@@ -37,4 +36,5 @@ public class GestisciImmaginiModel : PageModel
         NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / 10);
         Immagini = Immagini.Skip(((pageGestione ?? 1) - 1) * 10).Take(10);
     }
+
 }

@@ -370,16 +370,6 @@
     "Categoria": "Persone"
   },
   {
-    "Id": 38,
-    "Path": "https://www.focus.it/site_stored/imgs/0006/049/shutterstock_1029061423.1020x680.jpg",
-    "Titolo": "Titolo 38",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 38",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": null
-  },
-  {
     "Id": 39,
     "Path": "https://www.psicologionline.net/uploads/article/cover/personeaffascinanti20210628095844.jpg",
     "Titolo": "Titolo 39",
@@ -672,11 +662,11 @@
   {
     "Id": 74,
     "Path": "https://i0.wp.com/www.giacomocusano.com/wp-content/uploads/2016/07/coastal-wash-web.jpg?resize=1024%2C675&ssl=1",
-    "Titolo": "Titolo 74",
+    "Titolo": "bcvbvc",
     "Voto": 0.0,
     "NumeroVoti": 0,
-    "Autore": "Autore 74",
+    "Autore": "vbvcb",
     "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Paesaggi"
+    "Categoria": "Cibo"
   }
 ]
