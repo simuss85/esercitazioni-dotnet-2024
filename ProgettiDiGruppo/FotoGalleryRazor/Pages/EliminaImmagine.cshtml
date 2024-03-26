@@ -11,26 +11,40 @@
 
 
     <div class="container mt-5">
-        <h2>Vuoi eliminare le immagini?</h2>
-        <div class="row text-center mt-5">
-            @foreach (var id in Model.Selezione)
-            {
+        @if (Model.Selezione.Count == 0)
+        {
+            <div class="text-center">
+                <h2 class="mb-5" style="color: red;">Devi selezionare almeno un immagine</h2>
+                <a class="btn btn-primary" asp-page="/GestisciImmagini">Torna alle Immagini</a>
+            </div>
+        }
+        else
+        {
+            <h2>Vuoi eliminare le immagini?</h2>
+            <div class="row text-center mt-5">
+                @for (int i = 0; i < Model.Selezione.Count; i++)
+                {
+                    var id = Model.Selezione[i];
+                    var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
+                    if (immagine != null)
+                    {
+                        <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
+                            <div class="img-categoria rounded"
+                                style="background-image: url(@Model.Immagini.First(i => i.Id == id).Path);">
 
-                <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
-                    <div class="img-categoria rounded"
-                        style="background-image: url(@Model.Immagini.First(i => i.Id == id).Path);">
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="d-flex flex-row">
+                <form method="post">
+                    <button type="submit" class="btn btn-danger">Elimina</button>
 
-                    </div>
-                </div>
-            }
-        </div>
-        <div class="d-flex flex-row">
-            <form method="post">
-                <button type="submit" class="btn btn-danger">Elimina</button>
+                </form>
 
-            </form>
-
-            <a class="btn btn-primary" asp-page="/GestisciImmagini">Annulla</a>
-        </div>
+                <a class="btn btn-primary" asp-page="/GestisciImmagini">Annulla</a>
+            </div>
+        }
     </div>
 </div>

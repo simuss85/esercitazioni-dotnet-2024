@@ -54,11 +54,14 @@ public class ModificaImmagineModel : PageModel
         {
             foreach (var immagineModificata in ImmaginiModificate)
             {
+                _logger.LogInformation("ID: {0}", immagineModificata.Id);
                 foreach (var i in Immagini)
                 {
                     if (i.Id == immagineModificata.Id)
                     {
+                        _logger.LogInformation("pre-Autore: {0}", i.Autore);
                         i.Autore = immagineModificata.Autore;
+                        _logger.LogInformation("post-Autore: {0}", i.Autore);
                         i.Titolo = immagineModificata.Titolo;
                         i.Categoria = immagineModificata.Categoria;
                         i.Path = immagineModificata.Path;
@@ -66,8 +69,11 @@ public class ModificaImmagineModel : PageModel
                     }
                 }
             }
+            System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(Immagini, Formatting.Indented));
         }
-        System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(Immagini, Formatting.Indented));
+
+
+
         return RedirectToPage("/GestisciImmagini");
     }
 }

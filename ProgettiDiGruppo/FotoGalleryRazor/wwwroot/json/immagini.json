@@ -41,21 +41,11 @@
   },
   {
     "Id": 5,
-    "Path": "",
+    "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
     "Titolo": "Immagine 5",
     "Voto": 4.8,
     "NumeroVoti": 21,
     "Autore": "Autore 5",
-    "Data": "2024-02-23T00:00:00",
-    "Categoria": "Paesaggi"
-  },
-  {
-    "Id": 6,
-    "Path": "/img/img_06.jpg",
-    "Titolo": "Immagine 6",
-    "Voto": 4.6,
-    "NumeroVoti": 20,
-    "Autore": "Autore 6",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
   },
@@ -86,16 +76,6 @@
     "Voto": 2.8,
     "NumeroVoti": 21,
     "Autore": "Autore 9",
-    "Data": "2024-02-23T00:00:00",
-    "Categoria": "Paesaggi"
-  },
-  {
-    "Id": 10,
-    "Path": "/img/img_10.jpg",
-    "Titolo": "Immagine 10",
-    "Voto": 4.8,
-    "NumeroVoti": 20,
-    "Autore": "Autore 10",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
   },
@@ -580,16 +560,6 @@
     "Categoria": "Animali"
   },
   {
-    "Id": 60,
-    "Path": "https://www.chimicifisici.it/wp-content/uploads/2019/04/animali-da-reddito.jpg",
-    "Titolo": "Titolo 60",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 60",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": "Animali"
-  },
-  {
     "Id": 61,
     "Path": "https://www.my-personaltrainer.it/2023/09/08/maltrattamento-di-animali_900x760.jpeg",
     "Titolo": "Titolo 61",
@@ -610,16 +580,6 @@
     "Categoria": "Animali"
   },
   {
-    "Id": 63,
-    "Path": "https://citynews-today.stgy.ovh/~media/horizontal-hi/13934925314473/san-valentino-animali-2.jpg",
-    "Titolo": "Titolo 63",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 63",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": "Animali"
-  },
-  {
     "Id": 64,
     "Path": "https://naturopet.it/wp-content/uploads/2023/08/jack-russell.jpg",
     "Titolo": "Titolo 64",
@@ -631,42 +591,12 @@
   },
   {
     "Id": 65,
-    "Path": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7NHjfUm6YuvJd21HUNx_ds5m2oHp_DLYhAVwRZ8YiCQ&s",
-    "Titolo": "dasdsadsad",
+    "Path": "https://media.cnn.com/api/v1/images/stellar/prod/191006152638-01-pets-and-our-health.jpg?q=w_2000,h_1125,x_0,y_0,c_fill/h_618",
+    "Titolo": "Cane brutto",
     "Voto": 0.0,
     "NumeroVoti": 0,
-    "Autore": "cscsasaa",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
-    "Id": 68,
-    "Path": "https://www.ancilazio.it/wp-content/uploads/2021/04/Sport.jpg",
-    "Titolo": "Titolo 68",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 68",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
-    "Id": 69,
-    "Path": "https://www.istitutopsicoterapie.com/wp-content/uploads/2021/12/sport2.jpeg",
-    "Titolo": "Titolo 69",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 69",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
-    "Id": 74,
-    "Path": "https://i0.wp.com/www.giacomocusano.com/wp-content/uploads/2016/07/coastal-wash-web.jpg?resize=1024%2C675&ssl=1",
-    "Titolo": "bcvbvc",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "vbvcb",
-    "Data": "2024-03-25T00:00:00+01:00",
-    "Categoria": "Cibo"
+    "Autore": "Bau",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
   }
 ]

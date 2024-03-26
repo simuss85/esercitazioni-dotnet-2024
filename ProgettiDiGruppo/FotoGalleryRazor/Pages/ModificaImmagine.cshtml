@@ -11,59 +11,73 @@
 
 
     <div class="container mt-5">
-        <form method="post">
-            <div class="row text-center mt-5">
-                @foreach (var id in Model.Selezione)
-                {
-                    var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
-                    if (immagine != null)
+        @if (Model.Selezione.Count == 0)
+        {
+            <div class="text-center">
+                <h2 class="mb-5" style="color: red;">Devi selezionare almeno un immagine</h2>
+                <a class="btn btn-primary" asp-page="/GestisciImmagini">Torna alle Immagini</a>
+            </div>
+        }
+        else
+        {
+            <form method="post">
+                <div class="row text-center mt-5">
+                    @for (int i = 0; i < Model.Selezione.Count; i++)
                     {
-                    <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
-                        <div class="card" style="width: 18rem;">
-                            <img src="@immagine.Path" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <p class="card-text"></p>
-                                <div class="form-group">
-                                    <label for="autore">Autore</label>
-                                    <input type="text" class="form-control" name="Autore"
-                                        placeholder="@immagine.Autore" required />
-                                </div>
-                                <div class="form-group">
-                                    <label for="titolo">Titolo</label>
-                                    <input type="text" class="form-control" name="Titolo"
-                                        placeholder="@immagine.Titolo" required />
+                        var id = Model.Selezione[i];
+                        var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
+                        if (immagine != null)
+                        {
+                            <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="@immagine.Path" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text"></p>
+                                        <div class="form-group">
+                                            <input type="hidden" name="ImmaginiModificate[@i].Id" value="@id">
 
-                                </div>
-                                <label for="categoria">Categoria</label>
-                                <select class="form-control" id="categoria" name="Categoria">
-                                    <option value="">Seleziona una categoria</option>
-                                    @foreach (var cat in Model.Categorie)
-                                    {
-                                        <option value="@cat">@cat</option>
-                                    }
-                                </select>
-                                <br>
-                                <span asp-validation-for="@immagine.Categoria"
-                                    class="text-danger"></span>
-                                <input type="hidden" name="Id" value="@id">
-                                <div class="form-group">
-                                    <label for="path">Link Immagine</label>
-                                    <input type="text" class="form-control" name="Path"
-                                        value="@immagine.Path"/>
+                                            <label for="titolo">Titolo</label>
+                                            <input type="text" class="form-control" name="ImmaginiModificate[@i].Titolo"
+                                                placeholder="@immagine.Titolo" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="autore">Autore</label>
+                                            <input type="text" class="form-control" name="ImmaginiModificate[@i].Autore"
+                                                placeholder="@immagine.Autore" required />
+                                        </div>
+                                        <label for="categoria">Categoria</label>
+                                        <select class="form-control" id="categoria" name="ImmaginiModificate[@i].Categoria"
+                                            required>
+                                            <option value="">Seleziona una categoria</option>
+                                            @foreach (var cat in Model.Categorie)
+                                            {
+                                                <option value="@cat">@cat</option>
+                                            }
+                                        </select>
+                                        <br>
+                                        <span asp-validation-for="@immagine.Categoria" class="text-danger"></span>
+
+                                        <div class="form-group">
+                                            <label for="path">Link Immagine</label>
+                                            <input type="text" class="form-control" name="ImmaginiModificate[@i].Path"
+                                                value="@immagine.Path" />
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
+                        }
                     }
-                }
-            </div>
-            <div class="d-flex flex-row">
-                <button type="submit" class="btn btn-success">Invia</button>
-        </form>
+                </div>
+                <div class="d-flex flex-row">
+                    <button type="submit" class="btn btn-success">Invia</button>
+            </form>
+            <a class="btn btn-primary" asp-page="/GestisciImmagini">Annulla</a>
 
-        <a class="btn btn-primary" asp-page="/GestisciImmagini">Annulla</a>
+
+        }
+
     </div>
 </div>
 </div>

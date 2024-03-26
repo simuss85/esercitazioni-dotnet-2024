@@ -167,3 +167,13 @@ label.star:before {
   text-decoration: none;
   color: black;
 }
+
+/*------------------ carosello ------------------------ */
+#carosello {
+  text-align: -webkit-center;
+
+}
+
+#carosello img {
+  object-fit: cover;
+}

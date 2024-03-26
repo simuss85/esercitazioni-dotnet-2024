@@ -58,6 +58,6 @@ public class AggiungiImmagineModel : PageModel
         immagini.Add(Immagine);
 
         System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(immagini, Formatting.Indented));
-        return RedirectToPage("/Index");
+        return RedirectToPage("/GestisciImmagini");
     }
 }
