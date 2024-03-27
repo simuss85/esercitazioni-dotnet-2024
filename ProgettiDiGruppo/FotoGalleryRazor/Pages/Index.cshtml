@@ -7,7 +7,16 @@
 <div class="mx-5">
     <!-------------------------- titolo della pagina ---------------------------->
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
+
+        @if (string.IsNullOrEmpty(categoria))
+        {
+            <h1 class="display-4">Benvenuti</h1>
+        }
+        else
+        {
+            <h1 class="display-4">@categoria</h1>
+        }
+
     </div>
     <!-------------------------- dropdown filtro categorie ------------------------>
     <div class="dropdown text-end">
@@ -27,7 +36,7 @@
         </ul>
     </div>
     <!---------------------- row delle immagini ------------------------>
-    <div class="row">
+    <div class="d-flex justify-content-center flex-wrap">
         @for (int i = 0; i < Model.Immagini.Count(); i++)
         {
             var immagine = Model.Immagini.ElementAt(i); //memorizzo l'imamgine i-esima

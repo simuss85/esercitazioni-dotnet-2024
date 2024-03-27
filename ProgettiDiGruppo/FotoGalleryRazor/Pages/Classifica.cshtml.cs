@@ -26,6 +26,7 @@ public class ClassificaModel : PageModel
 
     public void OnGet(int? pageIndex, bool reverse)
     {
+        ElementiPerPagina = 10;
         PageIndex = pageIndex;
         Reverse = reverse;
 
@@ -39,7 +40,7 @@ public class ClassificaModel : PageModel
             Immagini = Immagini.Reverse();
         }
 
-        ElementiPerPagina = 10;
+
 
         NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / ElementiPerPagina);
         Immagini = Immagini.Skip(((pageIndex ?? 1) - 1) * ElementiPerPagina).Take(ElementiPerPagina);

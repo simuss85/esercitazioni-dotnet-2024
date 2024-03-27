@@ -50,8 +50,8 @@
     "ImmagineId": 1,
     "Stelle": 5.0,
     "Data": "2024-03-22T00:00:00+01:00",
-    "Commento": "w la figa",
-    "Visibile": true
+    "Commento": "w la figaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "Visibile": false
   },
   {
     "Id": 7,
@@ -68,7 +68,7 @@
     "ImmagineId": 12,
     "Stelle": 2.0,
     "Data": "2024-03-22T00:00:00+01:00",
-    "Commento": "djkpsghzkgbsr",
+    "Commento": "djkpsghzkgbsrdfnsdfbsdobfsobfafa fsugfsuoagfosa fioagfoisagf soufg sofgso fsaoufg sof sofg soufg soaufg suofg sofgsofg saofgs fosa ",
     "Visibile": true
   },
   {
@@ -465,6 +465,24 @@
     "Stelle": 4.0,
     "Data": "2024-03-27T00:00:00+01:00",
     "Commento": "dfdfd",
+    "Visibile": true
+  },
+  {
+    "Id": 53,
+    "Nome": "alex",
+    "ImmagineId": 18,
+    "Stelle": 4.0,
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Commento": "esdreererweew  gregret òfhòo fehfòeo fweof ",
+    "Visibile": true
+  },
+  {
+    "Id": 54,
+    "Nome": "ererer",
+    "ImmagineId": 18,
+    "Stelle": 1.0,
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Commento": "wetwerewrwe",
     "Visibile": true
   }
 ]

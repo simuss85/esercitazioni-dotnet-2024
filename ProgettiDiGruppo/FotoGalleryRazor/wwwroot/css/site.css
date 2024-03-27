@@ -126,7 +126,7 @@ label.star:before {
   padding: 0.25rem;
 }
 
-/*----------------------- generi ------------------*/
+/*----------------------- categorie ------------------*/
 .link-categoria {
   text-decoration: none;
   color: rgba(32, 30, 30, 0.733);
@@ -178,6 +178,11 @@ label.star:before {
 }
 
 /*------------------ carosello ------------------------ */
+.link-categoria {
+  text-decoration: none;
+  color: black;
+}
+
 .carosel-label {
   text-align: -webkit-center;
 }
@@ -228,9 +233,6 @@ label.star:before {
 }
 
 /* ------------------------ modale immagini --------------------- */
-/* .modal-body {
-  height: max-content;
-} */
 @media (max-width: 576px) {
   .modal-img {
     height: 20vh;

@@ -153,8 +153,8 @@
     "Id": 18,
     "Path": "https://www.pwc.com/it/it/industries/sport/img/pwc-sport-anteprima.jpg",
     "Titolo": "Titolo 18",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 2.5,
+    "NumeroVoti": 2,
     "Autore": "Autore 18",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Sport"
@@ -660,73 +660,43 @@
     "Categoria": "Animali"
   },
   {
-    "Id": 74,
-    "Path": "https://img-prod.tgcom24.mediaset.it/images/2023/10/04/094701246-e9b858c5-808a-4a47-9e52-f81202d3fa58.jpg",
-    "Titolo": "Titolo 74",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 74",
-    "Data": "2024-03-26T00:00:00+01:00",
-    "Categoria": "Animali"
-  },
-  {
     "Id": 75,
     "Path": "https://sweetest.it/wp-content/uploads/2021/06/sushi-01.jpeg",
-    "Titolo": "Titolo 75",
+    "Titolo": "rtrt",
     "Voto": 0.0,
     "NumeroVoti": 0,
-    "Autore": "Autore 75",
-    "Data": "2024-03-26T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
-    "Id": 76,
-    "Path": "https://www.yoursushiroma.it/it/wp-content/uploads/2018/11/sushi-sesso-1.jpg",
-    "Titolo": "Titolo 76",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 76",
+    "Autore": "rttr",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Cibo"
   },
   {
     "Id": 77,
     "Path": "https://www.authentico-ita.org/wp-content/uploads/2017/06/lasagne_cibo_italiano_mondo_2018.jpg",
-    "Titolo": "Titolo 77",
+    "Titolo": "rtrt",
     "Voto": 0.0,
     "NumeroVoti": 0,
-    "Autore": "Autore 77",
+    "Autore": "trtr",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Cibo"
   },
   {
-    "Id": 78,
-    "Path": "https://media.gqitalia.it/photos/61485d5339e4836e1abf29c2/16:9/w_2560%2Cc_limit/Italia%2520volley.jpg",
-    "Titolo": "Titolo 78",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 78",
-    "Data": "2024-03-26T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
     "Id": 79,
     "Path": "https://cdn-italiani-media.italiani.it/site-italiani/2021/08/Gianmarco-Tamberi-marcell-jacobs.jpeg",
-    "Titolo": "Titolo 79",
+    "Titolo": "rtret",
     "Voto": 0.0,
     "NumeroVoti": 0,
-    "Autore": "Autore 79",
+    "Autore": "rtrt",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Sport"
   },
   {
-    "Id": 80,
-    "Path": "https://www.onrugby.it/wp-content/uploads/2022/03/Quanti-sono-gli-interessati-allo-sport-e-al-rugby-in-Italia.jpg",
-    "Titolo": "Titolo 80",
+    "Id": 81,
+    "Path": "https://t4.ftcdn.net/jpg/05/54/52/13/360_F_554521329_ngmDQSjSrUSRnbK2xK0bkcprsinG9Xdv.jpg",
+    "Titolo": "sdsadsa",
     "Voto": 0.0,
     "NumeroVoti": 0,
-    "Autore": "Autore 80",
-    "Data": "2024-03-26T00:00:00+01:00",
-    "Categoria": "Sport"
+    "Autore": "sdsds",
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Categoria": "Animali"
   }
 ]

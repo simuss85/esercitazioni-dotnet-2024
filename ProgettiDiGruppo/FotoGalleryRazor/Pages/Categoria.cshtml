@@ -1,15 +1,18 @@
 ﻿@page
 @model CategoriaModel
 @{
-    ViewData["Title"] = "Home page";
+
     string categoria = Model.Categoria!;
+    ViewData["Title"] = categoria;
     int index = 0;
 }
 
 <div class="mx-5">
     <!-------------------------- titolo della pagina ---------------------------->
     <div class="text-center">
-        <h1 class="display-4">@categoria</h1>
+        <a class="link-categoria" asp-page="index" asp-route-categoria="@categoria">
+            <h1 class="display-4">@categoria</h1>
+        </a>
     </div>
 
     <!----------------------- carosello di immagini --------------------->
