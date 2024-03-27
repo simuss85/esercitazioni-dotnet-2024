@@ -19,6 +19,7 @@
                 <th>Immagine</th>
                 <th>Titolo</th>
                 <th>Autore</th>
+                <th>Data pubblicazione</th>
                 <th>
                     <div class="dropdown text-center">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,12 +56,52 @@
         <tbody>
             @foreach (var img in Model.Immagini)
                 {
+                    //memorizzo id diversi per ogni modale
+                    string idModale = "modal" + img.Id.ToString();
                     <tr>
                         <td>@img.Id</td>
-                        <td><a asp-page="/Immagine" asp-route-id="@img.Id"><img class="img-classifica" src="@img.Path" alt="@img.Titolo" width="80"
-                                height="60" /></a></td>
+                        <td>
+                            <!-- inserimento della modale per visualizzare la foto -->
+                        <!-- Button trigger modal -->
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#@idModale">
+                            <img class="img-classifica" src="@img.Path" alt="@img.Titolo" width="80" height="60" />
+                        </a>
+
+                        <!-- Modale -->
+                        <div class="modal fade" id="@idModale" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <h1 class="modal-title fs-5 text-center
+                                         m-auto" id="exampleModalLabel">@img.Titolo
+                                        </h1>
+                                        <button type="button" class="btn-close end-0" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <img class="modal-img img-fluid" src="@img.Path" alt="@img.Titolo" />
+                                        <!-- Stella e voto sopra l'immagine -->
+                                        <div class="modal-voto">
+                                            <span class="bi bi-star-fill"></span>
+                                            <span class="index-voto">@img.Voto</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a class="btn btn-primary" asp-page="/Immagine" asp-route-id="@img.Id">Dettaglio
+                                            immgine
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </td>
                         <td>@img.Titolo</td>
                         <td>@img.Autore</td>
+                        <td>@img.Data.ToString("d")</td>
                         <td><input type="checkbox" name="Selezione" value="@img.Id"></td>
                         
                     </tr>

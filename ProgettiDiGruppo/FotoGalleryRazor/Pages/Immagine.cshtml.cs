@@ -15,7 +15,8 @@ public class ImmagineModel : PageModel
     public int Stars { get; set; }
     [BindProperty]
     public string? Commento { get; set; }
-
+    [BindProperty]
+    public int HistoryGo { get; set; }
     public required Immagine Immagine { get; set; }
     public required IEnumerable<Voto> Voti { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
@@ -32,10 +33,14 @@ public class ImmagineModel : PageModel
 
     public void OnGet(int id)
     {
+        // setto il valore di historyGo per andare indietro di 1 pagina
+        HistoryGo = -1;
+
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.First(i => i.Id == id);
         var jsonFile2 = System.IO.File.ReadAllText(jsonPath2);
         Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
+
     }
     public IActionResult OnPost()
     {
@@ -84,6 +89,10 @@ public class ImmagineModel : PageModel
             }
         }
         System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(immagini, Formatting.Indented));
+
+
+        // setto il valore di historyback per andare indietro di 1 pagina
+        HistoryGo = -2;
         return Page();
     }
 }

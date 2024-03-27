@@ -7,6 +7,7 @@
     {
         stelleImmagine = Model.Immagine.Voto;
     }
+    int hGo = Model.HistoryGo; //gestisce history back
 }
 
 <div class="container">
@@ -57,8 +58,8 @@
             aria-expanded="false" aria-controls="collapseCommenta">
             Vota
         </a>
-        <a asp-page="/Index" class="btn btn-primary" type="button">
-            Torna alle immagini
+        <a href="javascript:history.go(@hGo)" class="btn btn-primary" type="button">
+            Torna indietro
         </a>
     </p>
     <div class="collapse" id="collapseCommenta">

@@ -24,15 +24,15 @@
         {
             <h2 class="text-center">Vuoi eliminare le seguenti immagini?</h2>
             <!-- sezione dei tasti di elimina o annulla -->
-            <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex flex-row justify-content-center pt-3 pb-2">
 
                 <form method="post">
                     <button type="submit" class="btn btn-danger">Elimina</button>
                 </form>
-                <a class="btn btn-primary ms-2" asp-page="/GestisciImmagini">Annulla</a>
+                <a class="btn btn-primary ms-3" asp-page="/GestisciImmagini">Annulla</a>
             </div>
 
-            <div class="row text-center mt-5">
+            <div class=" d-flex justify-content-center flex-wrap text-center mt-4">
                 @for (int i = 0; i < Model.Selezione.Count; i++)
                 {
                     //scansiono tutti gli id nella lista Selezione e carico tutte le immagini
@@ -43,7 +43,7 @@
                     if (immagine != null)
                     {
                         <!-- card immagine arrotondata -->
-                        <div class="d-flex justify-content-center mb-3 px-3">
+                        <div class=" mb-3 px-3">
                             <div class="img-elimina rounded" style="background-image: url(@immagine.Path);"></div>
                         </div>
                     }

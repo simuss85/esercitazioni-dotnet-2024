@@ -178,6 +178,18 @@ label.star:before {
 }
 
 /*------------------ carosello ------------------------ */
+.carosel-label {
+  text-align: -webkit-center;
+}
+
+.carosel-voto {
+  background-color: #258cfb;
+  width: fit-content;
+  background-color: rgba(240, 248, 255, 0.508);
+  border-radius: 1rem;
+  padding: 0.50rem;
+}
+
 #carosello {
   text-align: -webkit-center;
 
@@ -185,8 +197,8 @@ label.star:before {
 
 #carosello img {
   object-fit: cover;
-  width: 80%;
-  height: 30rem;
+  width: 75%;
+  height: 75vh;
 }
 
 /* --------------------- elimina immagine --------------------- */
@@ -213,5 +225,47 @@ label.star:before {
   width: 18rem;
   height: 12rem;
   object-fit: cover;
+}
 
+/* ------------------------ modale immagini --------------------- */
+/* .modal-body {
+  height: max-content;
+} */
+@media (max-width: 576px) {
+  .modal-img {
+    height: 20vh;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-img {
+    height: 25vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-img {
+    height: 30vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal-img {
+    height: 70vh;
+  }
+}
+
+.modal-img {
+  object-fit: contain;
+}
+
+.modal-title {
+  position: absolute;
+}
+
+.modal-voto {
+  position: absolute;
+  top: 7%;
+  right: 8%;
+  font-size: larger;
 }

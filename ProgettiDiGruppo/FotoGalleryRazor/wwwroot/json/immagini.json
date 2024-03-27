@@ -14,7 +14,7 @@
     "Path": "/img/img_02.jpg",
     "Titolo": "Immagine 2",
     "Voto": 4.6,
-    "NumeroVoti": 20,
+    "NumeroVoti": 22,
     "Autore": "Autore 2",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -44,7 +44,7 @@
     "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
     "Titolo": "Immagine 5",
     "Voto": 4.8,
-    "NumeroVoti": 21,
+    "NumeroVoti": 22,
     "Autore": "Autore 5",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -394,7 +394,7 @@
     "Path": "https://images2.corriereobjects.it/methode_image/2014/08/20/Tecnologia/Foto%20Gallery/01_uncomfortable_MGZOOM.jpg",
     "Titolo": "Titolo 45",
     "Voto": 5.0,
-    "NumeroVoti": 1,
+    "NumeroVoti": 2,
     "Autore": "Autore 45",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -443,8 +443,8 @@
     "Id": 50,
     "Path": "https://hips.hearstapps.com/hmg-prod/images/17-lma-lick-my-ass-a-chair-by-pettersen-and-hein-ph-mindcraftanders-sune-berg-1584710330.jpg",
     "Titolo": "Titolo 50",
-    "Voto": 5.0,
-    "NumeroVoti": 2,
+    "Voto": 4.3,
+    "NumeroVoti": 4,
     "Autore": "Autore 50",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -503,8 +503,8 @@
     "Id": 56,
     "Path": "https://staticfanpage.akamaized.net/wp-content/uploads/sites/34/2023/10/ruggitoleone-1200x675.jpg",
     "Titolo": "Titolo 56",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.5,
+    "NumeroVoti": 2,
     "Autore": "Autore 56",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
@@ -523,8 +523,8 @@
     "Id": 58,
     "Path": "https://www.tempi.it/wp-content/uploads/2021/04/cane-unsplash-1-1024x840.jpg",
     "Titolo": "Titolo 58",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.8,
+    "NumeroVoti": 4,
     "Autore": "Autore 58",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
@@ -534,7 +534,7 @@
     "Path": "https://www.legambiente.it/wp-content/uploads/2022/12/animali-in-citta-report.jpg",
     "Titolo": "Titolo 59",
     "Voto": 5.0,
-    "NumeroVoti": 1,
+    "NumeroVoti": 3,
     "Autore": "Autore 59",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"

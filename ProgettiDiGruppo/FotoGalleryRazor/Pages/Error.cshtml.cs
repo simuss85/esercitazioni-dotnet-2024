@@ -8,20 +8,21 @@ namespace FotoGalleryRazor.Pages;
 [IgnoreAntiforgeryToken]
 public class ErrorModel : PageModel
 {
-    public string? RequestId { get; set; }
+    [BindProperty]
+    public required string ReturnUrl { get; set; }
+    public required string Message { get; set; }
 
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-    private readonly ILogger<ErrorModel> _logger;
-
-    public ErrorModel(ILogger<ErrorModel> logger)
+    public IActionResult OnGet(string message, string returnUrl)
     {
-        _logger = logger;
+        Message = message;
+        ReturnUrl = returnUrl;
+        return Page();
     }
 
-    public void OnGet()
+    public IActionResult OnPost()
     {
-        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+        return Redirect(ReturnUrl);
     }
 }
 
