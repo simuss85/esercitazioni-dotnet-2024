@@ -15,7 +15,6 @@ public class ImmagineModel : PageModel
     public int Stars { get; set; }
     [BindProperty]
     public string? Commento { get; set; }
-    [BindProperty]
     public string? UrlBack { get; set; }
     public required Immagine Immagine { get; set; }
     public required IEnumerable<Voto> Voti { get; set; }
