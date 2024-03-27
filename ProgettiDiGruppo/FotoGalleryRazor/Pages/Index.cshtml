@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home page";
     string categoria = Model.Categoria!;
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
 }
 <div class="mx-5">
     <!-------------------------- titolo della pagina ---------------------------->
@@ -44,7 +45,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-0 m-0 align-items-center">
                 <div class="card-index d-flex flex-wrap flex-row-reverse m-1 border-1">
                     <div class="image-container">
-                        <a asp-page="/Immagine" asp-route-id="@immagine.Id">
+                        <a asp-page="/Immagine" asp-route-id="@immagine.Id" asp-route-urlback="@url">
                             <img src="@immagine.Path" class="img-fluid" />
                         </a>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>

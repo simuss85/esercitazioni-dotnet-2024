@@ -484,5 +484,41 @@
     "Data": "2024-03-27T00:00:00+01:00",
     "Commento": "wetwerewrwe",
     "Visibile": true
+  },
+  {
+    "Id": 55,
+    "Nome": "12",
+    "ImmagineId": 3,
+    "Stelle": 5.0,
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Commento": "ee",
+    "Visibile": true
+  },
+  {
+    "Id": 56,
+    "Nome": "222",
+    "ImmagineId": 3,
+    "Stelle": 5.0,
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Commento": null,
+    "Visibile": true
+  },
+  {
+    "Id": 57,
+    "Nome": "21",
+    "ImmagineId": 79,
+    "Stelle": 4.0,
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Commento": null,
+    "Visibile": true
+  },
+  {
+    "Id": 58,
+    "Nome": "cxcx",
+    "ImmagineId": 55,
+    "Stelle": 5.0,
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Commento": null,
+    "Visibile": true
   }
 ]

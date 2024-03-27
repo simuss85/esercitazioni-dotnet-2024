@@ -2,6 +2,7 @@
 @model GestisciImmaginiModel
 @{
     ViewData["Title"] = "Gestisci Immagini";
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
 }
 
 <div class="container">
@@ -91,7 +92,7 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a class="btn btn-primary" asp-page="/Immagine" asp-route-id="@img.Id">Dettaglio
+                                        <a class="btn btn-primary" asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">Dettaglio
                                             immgine
                                         </a>
                                     </div>

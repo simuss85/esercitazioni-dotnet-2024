@@ -1,9 +1,10 @@
 ﻿@page
 @model CategoriaModel
 @{
-
     string categoria = Model.Categoria!;
     ViewData["Title"] = categoria;
+
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
     int index = 0;
 }
 
@@ -46,7 +47,7 @@
                     if (index == 0)
                     {
                         <div class="carousel-item active" data-bs-interval="10000">
-                            <a asp-page="/Immagine" asp-route-id="@img.Id">
+                            <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
                                 <img src="@img.Path" class="d-block" alt="@img.Titolo"></a>
                             <div class="carosel-label carousel-caption d-none d-md-block">
 
@@ -81,7 +82,7 @@
                     else
                     {
                         <div class="carousel-item" data-bs-interval="2000">
-                            <a asp-page="/Immagine" asp-route-id="@img.Id">
+                            <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
                                 <img src="@img.Path" class="d-block" alt="@img.Titolo"></a>
                             <div class="carosel-label carousel-caption d-none d-md-block">
                                 <!------------- sezione titolo carosello ------------------>

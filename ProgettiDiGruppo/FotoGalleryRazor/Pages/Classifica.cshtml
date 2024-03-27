@@ -2,6 +2,8 @@
 @model ClassificaModel
 @{
     ViewData["Title"] = "Classifica";
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
+
     //calcola il numero N progressivo da inserire nella tabella classifica per ogni paginazione
     bool reverse = Model.Reverse;
     int n;
@@ -90,7 +92,8 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a class="btn btn-primary" asp-page="/Immagine" asp-route-id="@img.Id">Dettaglio
+                                        <a class="btn btn-primary" asp-page="/Immagine" asp-route-id="@img.Id"
+                                            asp-route-urlback="@url">Dettaglio
                                             immgine
                                         </a>
                                     </div>

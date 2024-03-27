@@ -23,8 +23,8 @@
     "Id": 3,
     "Path": "/img/img_03.jpg",
     "Titolo": "Immagine 3",
-    "Voto": 1.2,
-    "NumeroVoti": 21,
+    "Voto": 1.6,
+    "NumeroVoti": 23,
     "Autore": "Autore 3",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -493,8 +493,8 @@
     "Id": 55,
     "Path": "https://amicidicasa.it/wp-content/uploads/2023/08/quokka-curiosita-1024x670.jpg",
     "Titolo": "Titolo 55",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 55",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
@@ -683,8 +683,8 @@
     "Id": 79,
     "Path": "https://cdn-italiani-media.italiani.it/site-italiani/2021/08/Gianmarco-Tamberi-marcell-jacobs.jpeg",
     "Titolo": "rtret",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.0,
+    "NumeroVoti": 1,
     "Autore": "rtrt",
     "Data": "2024-03-26T00:00:00+01:00",
     "Categoria": "Sport"
