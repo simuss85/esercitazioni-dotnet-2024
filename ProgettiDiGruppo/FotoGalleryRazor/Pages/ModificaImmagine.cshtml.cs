@@ -69,6 +69,8 @@ public class ModificaImmagineModel : PageModel
                     }
                 }
             }
+
+            //salvo i dati aggiornati nel file immagini.json
             System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(Immagini, Formatting.Indented));
         }
 

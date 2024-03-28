@@ -9,5 +9,6 @@ public class Voto
     public DateTime Data { get; set; }
     public string? Commento { get; set; }
     public bool Visibile { get; set; }
+    public bool Moderato { get; set; }
 
 }

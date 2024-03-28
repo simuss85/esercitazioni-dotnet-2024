@@ -17,14 +17,11 @@
     </div>
 
     <!----------------------- carosello di immagini --------------------->
-    @if (Model.Immagini.Count() == 0) //se la categoria è vuota
+    <!-- se la categoria è vuota non viene in ogni caso visualizzata questa pagina -->
+    <!-- perchè il link è disabilitato nella selezione delle categorie -->
+    @if (Model.Immagini.Count() != 0)
     {
-
-    }
-    else //la categoria ha delle immagini
-    {
-
-        <div id="carosello" class="carousel carousel-dark slide pt-3">
+        <div id="carosello" class="carousel carousel-dark slide pt-3" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 @for (int i = 0; i < Model.Immagini.Count(); i++)
                 {
@@ -46,7 +43,7 @@
                     var stelle = @img.Voto;
                     if (index == 0)
                     {
-                        <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="carousel-item active" data-bs-interval="1500">
                             <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
                                 <img src="@img.Path" class="d-block" alt="@img.Titolo"></a>
                             <div class="carosel-label carousel-caption d-none d-md-block">
@@ -81,7 +78,7 @@
                     }
                     else
                     {
-                        <div class="carousel-item" data-bs-interval="2000">
+                        <div class="carousel-item" data-bs-interval="1500">
                             <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
                                 <img src="@img.Path" class="d-block" alt="@img.Titolo"></a>
                             <div class="carosel-label carousel-caption d-none d-md-block">

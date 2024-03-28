@@ -15,6 +15,7 @@ public class ImmagineModel : PageModel
     public int Stars { get; set; }
     [BindProperty]
     public string? Commento { get; set; }
+    [BindProperty]
     public string? UrlBack { get; set; }
     public required Immagine Immagine { get; set; }
     public required IEnumerable<Voto> Voti { get; set; }
@@ -35,7 +36,9 @@ public class ImmagineModel : PageModel
         // memorizzo il valore passato dalla pagina precedente
         UrlBack = urlBack;
 
+        //verifica log
         _logger.LogInformation("url back : {0}", urlBack);
+
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.First(i => i.Id == id);
         var jsonFile2 = System.IO.File.ReadAllText(jsonPath2);
@@ -65,7 +68,7 @@ public class ImmagineModel : PageModel
         double stelle = Stars;
 
         //salvo il voto nel file voti.json
-        voti.Add(new Voto { Id = idVoto, Nome = Nome, ImmagineId = Id, Stelle = stelle, Data = DateTime.Today, Commento = Commento, Visibile = true });
+        voti.Add(new Voto { Id = idVoto, Nome = Nome, ImmagineId = Id, Stelle = stelle, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
         System.IO.File.WriteAllText(jsonPath2, JsonConvert.SerializeObject(voti, Formatting.Indented));
 
         //recupero i dati del voto prima di aggiungere quello nuovo

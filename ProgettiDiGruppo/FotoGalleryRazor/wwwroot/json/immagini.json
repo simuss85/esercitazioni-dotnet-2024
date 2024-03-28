@@ -3,8 +3,8 @@
     "Id": 1,
     "Path": "/img/img_01.jpg",
     "Titolo": "Immagine 1",
-    "Voto": 2.3,
-    "NumeroVoti": 20,
+    "Voto": 2.4,
+    "NumeroVoti": 21,
     "Autore": "Autore 1",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -14,7 +14,7 @@
     "Path": "/img/img_02.jpg",
     "Titolo": "Immagine 2",
     "Voto": 4.6,
-    "NumeroVoti": 22,
+    "NumeroVoti": 23,
     "Autore": "Autore 2",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -473,8 +473,8 @@
     "Id": 53,
     "Path": "https://aircs3.imgix.net/uploads/rischio-morte-mondo-animale-paradosso-di-Peto.jpg",
     "Titolo": "Titolo 53",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 53",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
@@ -660,26 +660,6 @@
     "Categoria": "Animali"
   },
   {
-    "Id": 75,
-    "Path": "https://sweetest.it/wp-content/uploads/2021/06/sushi-01.jpeg",
-    "Titolo": "rtrt",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "rttr",
-    "Data": "2024-03-26T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
-    "Id": 77,
-    "Path": "https://www.authentico-ita.org/wp-content/uploads/2017/06/lasagne_cibo_italiano_mondo_2018.jpg",
-    "Titolo": "rtrt",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "trtr",
-    "Data": "2024-03-26T00:00:00+01:00",
-    "Categoria": "Cibo"
-  },
-  {
     "Id": 79,
     "Path": "https://cdn-italiani-media.italiani.it/site-italiani/2021/08/Gianmarco-Tamberi-marcell-jacobs.jpeg",
     "Titolo": "rtret",
@@ -692,10 +672,10 @@
   {
     "Id": 81,
     "Path": "https://t4.ftcdn.net/jpg/05/54/52/13/360_F_554521329_ngmDQSjSrUSRnbK2xK0bkcprsinG9Xdv.jpg",
-    "Titolo": "sdsadsa",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "sdsds",
+    "Titolo": "Panda coccoloso",
+    "Voto": 4.7,
+    "NumeroVoti": 3,
+    "Autore": "Panda 1",
     "Data": "2024-03-27T00:00:00+01:00",
     "Categoria": "Animali"
   }
