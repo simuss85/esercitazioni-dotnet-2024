@@ -272,4 +272,11 @@ label.star:before {
   font-size: larger;
 }
 
-/* ---------------- modale commento --------------- */
+/* ---------------- moderatore e gestisci immagini --------------- */
+.check-td {
+  width: 0.25rem;
+}
+
+.form-check {
+  padding-left: 0.5rem;
+}

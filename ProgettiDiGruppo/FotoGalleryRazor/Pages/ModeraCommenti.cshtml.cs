@@ -31,24 +31,16 @@ public class ModeraCommentiModel : PageModel
     }
     #endregion
 
-    public void OnGet(int? pageIndex, List<int> selezione, string urlBack)
+    public void OnGet(int? pageIndex, string urlBack)
     {
         // memorizzo il valore passato dalla pagina precedente
         UrlBack = urlBack;
-        Selezione = selezione;
 
         //verifica log
         _logger.LogInformation("url back : {0}", urlBack);
-        _logger.LogInformation("Selezione : {0}", selezione);
 
         ElementiPerPagina = 20;
         PageIndex = pageIndex;
-
-        // verifica log
-        foreach (var id in Selezione)
-        {
-            _logger.LogInformation("GET - Selezione: {0}", id);
-        }
 
         var jsonFile = System.IO.File.ReadAllText(jsonPath2);
 

@@ -65,19 +65,20 @@
                         <td>
 
                             <!------ visualizzo solo le prime 15 stringhe del commento ------->
-                                @* @if (voto.Commento!.Length > 15)
-                        {
-                        <!-- Button trigger modal -->
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#@idModale">
-                        @(voto.Commento.Substring(0, 15) + "...")
-                        </a>
-                        }
-                        else
-                        {
-                        @voto.Commento
-                        ;
-                        } *@
-                                @voto.Commento
+                                @if (voto.Commento != null && voto.Commento!.Length > 15)
+                                {
+                                <!-- Button trigger modal -->
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#@idModale">
+                                        @(voto.Commento.Substring(0, 15) + "...")
+                                </a>
+                                }
+                                else
+                                {
+                                    @voto.Commento
+                                    ;
+
+                                }
+
                             <!-- inserimento della modale per visualizzare il commento -->
                             <div class="modal" id="@idModale" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
@@ -97,16 +98,27 @@
 
                         </td>
                         <td>@voto.Data.ToString("d")</td>
-                        <td>
+                        <td class="check-td">
                             <!-- sezione checkbox -->
-                                @if (voto.Moderato == false)
-                                {
-                                <input type="checkbox" name="Selezione" value="@voto.Id">
-                                }
-                                else
-                                {
-                                <input type="checkbox" checked disabled>
-                                }
+                            <div class="form-check">
+                                    @if (voto.Moderato == false)
+                                    {
+                                    <input class="form-check-input m-0 p-2" type="checkbox" name="Selezione" id="flexCheckDefault" value="@voto.Id">
+                                    }
+                                    else
+                                    {
+                                        if (voto.Visibile == true)
+                                        {
+                                        <input class="form-check-input m-0 p-2 bg-success" type="checkbox" class="check-true" checked disabled>
+                                        }
+                                        else
+                                        {
+                                        <input class="form-check-input m-0 p-2 bg-danger" type="checkbox" class="check-false" checked disabled>
+                                        }
+
+                                    }
+                                    <label class="form-check-label p-2 m-0" for="flexCheckDefault"></label>
+                            </div>
                         </td>
                     </tr>
                     }

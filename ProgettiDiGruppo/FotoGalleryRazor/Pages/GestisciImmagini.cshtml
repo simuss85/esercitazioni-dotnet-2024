@@ -116,7 +116,12 @@
                         <td>@img.Titolo</td>
                         <td>@img.Autore</td>
                         <td>@img.Data.ToString("d")</td>
-                        <td><input type="checkbox" name="Selezione" value="@img.Id"></td>
+                        <td class="check-td">
+                            <!-- sezione checkbox -->
+                            <div class="form-check">
+                                <input class="form-check-input m-0 p-2" type="checkbox" name="Selezione" value="@img.Id">
+                            </div>
+                        </td>
 
                     </tr>
                     }
