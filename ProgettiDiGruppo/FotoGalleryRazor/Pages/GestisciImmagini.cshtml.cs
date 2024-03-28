@@ -23,7 +23,7 @@ public class GestisciImmaginiModel : PageModel
     }
     #endregion
 
-    public void OnGet(int? pageIndex, List<int>? selezione)
+    public void OnGet(int? pageIndex)
     {
         PageIndex = pageIndex;
 
