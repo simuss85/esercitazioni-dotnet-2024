@@ -26,6 +26,9 @@ public class ClassificaModel : PageModel
 
     public void OnGet(int? pageIndex, bool reverse)
     {
+        //log che visualizza la pagina selezionata
+        _logger.LogInformation("Classifica - PageIndex: {0}", pageIndex);
+
         ElementiPerPagina = 10;
         PageIndex = pageIndex;
         Reverse = reverse;

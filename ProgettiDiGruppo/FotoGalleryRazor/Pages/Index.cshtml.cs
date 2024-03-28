@@ -26,6 +26,13 @@ public class IndexModel : PageModel
 
     public void OnGet(int? pageIndex, string? categoria)
     {
+        //log che visualizza la pagina selezionata
+        _logger.LogInformation("Index - PageIndex: {0}", pageIndex);
+
+        //per la gestione del frontend copio i valori attuali nelgli attributi di classe
+        Categoria = categoria;
+        PageIndex = pageIndex;
+
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
 
@@ -34,12 +41,6 @@ public class IndexModel : PageModel
 
         //elimino le categorie senza immagini
         Categorie.RemoveAll(c => Immagini.All(i => i.Categoria != c));
-
-        _logger.LogInformation("Index Numero pagina: {0}", pageIndex);
-
-        //per la gestione del frontend copio i valori attuali nelgli attributi di classe
-        Categoria = categoria;
-        PageIndex = pageIndex;
 
         //filtro le immagini per categoria
         if (!string.IsNullOrEmpty(Categoria))

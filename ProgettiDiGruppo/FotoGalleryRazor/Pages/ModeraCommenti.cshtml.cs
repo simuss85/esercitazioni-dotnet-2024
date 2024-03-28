@@ -14,7 +14,7 @@ public class ModeraCommentiModel : PageModel
     [BindProperty]
     public required IEnumerable<Voto> Voti { get; set; }
     [BindProperty]
-    public string? UrlBack { get; set; }
+    public required string UrlBack { get; set; }
     public int NumeroPagine { get; set; }
     public int? PageIndex { get; set; }
     public int ElementiPerPagina { get; set; }
@@ -31,13 +31,10 @@ public class ModeraCommentiModel : PageModel
     }
     #endregion
 
-    public void OnGet(int? pageIndex, string urlBack)
+    public void OnGet(int? pageIndex)
     {
-        // memorizzo il valore passato dalla pagina precedente
-        UrlBack = urlBack;
-
-        //verifica log
-        _logger.LogInformation("url back : {0}", urlBack);
+        //log che visualizza la pagina selezionata
+        _logger.LogInformation("ModeraCommento - PageIndex: {0}", pageIndex);
 
         ElementiPerPagina = 20;
         PageIndex = pageIndex;
@@ -108,7 +105,9 @@ public class ModeraCommentiModel : PageModel
         //salvo i dati aggiornati nel file voti.json
         System.IO.File.WriteAllText(jsonPath2, JsonConvert.SerializeObject(Voti, Formatting.Indented));
 
-        return RedirectToPage(UrlBack);
+        //verifica log
+        _logger.LogInformation("POST - url back : {0}", UrlBack);
 
+        return Redirect(UrlBack);
     }
 }

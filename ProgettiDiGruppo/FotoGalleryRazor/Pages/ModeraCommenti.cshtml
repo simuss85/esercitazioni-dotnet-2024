@@ -2,17 +2,7 @@
 @model ModeraCommentiModel
 @{
     ViewData["Title"] = "Moderatore";
-    //gestione url per poter ritornare alla pagina corrente dopo il form
-    string url = "";
-    if (Model.UrlBack == null)
-    {
-        url = HttpContext.Request.Path; //memorizzo url
-    }
-    else
-    {
-        url += HttpContext.Request.Path; //memorizzo la query url
-    }
-
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
 }
 
 <div class="container">
@@ -23,6 +13,7 @@
 
     <!---------------------- tabella di modifica ---------------->
     <form method="post">
+        <input type="hidden" name="UrlBack" value=@url>
         <table class="table text-center table-striped align-middle mt-5">
             <thead>
                 <tr>
@@ -131,8 +122,7 @@
     <nav class="mt-4" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" asp-page="/ModeraCommenti" asp-route-pageindex="1"
-                    asp-route-urlback="@url">
+                <a class="page-link" aria-label="Previous" asp-page="/ModeraCommenti" asp-route-pageindex="1">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -140,19 +130,17 @@
             {
                 if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
                 {
-                    <li class="page-item active"><a class="page-link" asp-page="/ModeraCommenti" asp-route-pageindex="@i"
-                            asp-route-urlback="@url">@i</a></li>
+                    <li class="page-item active"><a class="page-link" asp-page="/ModeraCommenti" asp-route-pageindex="@i">@i</a></li>
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" asp-page="/ModeraCommenti" asp-route-pageindex="@i"
-                            asp-route-urlback="@url">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-page="/ModeraCommenti" asp-route-pageindex="@i">@i</a></li>
                 }
 
             }
             <li class="page-item">
                 <a class="page-link" aria-label="Next" asp-page="/ModeraCommenti"
-                    asp-route-pageindex="@Model.NumeroPagine" asp-route-urlback="@url">
+                    asp-route-pageindex="@Model.NumeroPagine">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

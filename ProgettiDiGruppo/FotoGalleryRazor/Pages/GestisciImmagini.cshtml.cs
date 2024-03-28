@@ -25,6 +25,9 @@ public class GestisciImmaginiModel : PageModel
 
     public void OnGet(int? pageIndex)
     {
+        //log che visualizza la pagina selezionata
+        _logger.LogInformation("GestisciImmagini - PageIndex: {0}", pageIndex);
+
         PageIndex = pageIndex;
 
         var jsonFile = System.IO.File.ReadAllText(jsonPath);

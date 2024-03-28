@@ -678,5 +678,35 @@
     "Autore": "Panda 1",
     "Data": "2024-03-27T00:00:00+01:00",
     "Categoria": "Animali"
+  },
+  {
+    "Id": 82,
+    "Path": "https://res.cloudinary.com/lastminute-contenthub/s--zba-tI0n--/c_crop,h_1333,w_2000,x_0,y_0/c_limit,h_999999,w_1920/f_auto/q_auto:eco/v1/Hub-Live/VolaGratis/blog/images/EE3QG3_pizza",
+    "Titolo": "Pizza",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 82",
+    "Data": "2024-03-28T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 83,
+    "Path": "https://citynews-today.stgy.ovh/~media/horizontal-mid/12474931350201/pasta-bandiera-2.jpg",
+    "Titolo": "Pasta",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 83",
+    "Data": "2024-03-28T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 84,
+    "Path": "https://www.gazzettadelgusto.it/wp-content/uploads/2020/12/Cucina-italiana-all-estero-amata-ma-sconosciuta-e-contraffatta.jpg",
+    "Titolo": "Pasta ",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 84",
+    "Data": "2024-03-28T00:00:00+01:00",
+    "Categoria": "Cibo"
   }
 ]
