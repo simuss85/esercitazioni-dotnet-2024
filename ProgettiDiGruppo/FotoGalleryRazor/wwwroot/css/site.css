@@ -31,6 +31,11 @@ body {
   margin-bottom: 60px;
 }
 
+tbody tr:hover {
+  background-color: aliceblue;
+}
+
+/*------ rating stars -------*/
 .bi-star-fill {
   color: orange;
 }
@@ -43,11 +48,6 @@ body {
   color: orange;
 }
 
-tbody tr:hover {
-  background-color: aliceblue;
-}
-
-/*------ rating stars -------*/
 div.stars {
   width: 270px;
   display: inline-block;
@@ -129,13 +129,19 @@ label.star:before {
 /*----------------------- categorie ------------------*/
 .link-categoria {
   text-decoration: none;
-  color: rgba(32, 30, 30, 0.733);
+  color: rgba(0, 0, 0, 0.212);
   background-color: rgba(240, 255, 253, 0.342);
   border-radius: 1rem;
   padding: 2%;
+}
 
-  &:hover {
-    color: rgba(0, 0, 0, 0.986);
+.link-categoria-carosello {
+  text-decoration: none;
+  color: black;
+  background-color: white;
+
+  & :active {
+    background-color: white;
   }
 }
 
