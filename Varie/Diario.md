@@ -1168,6 +1168,74 @@ Argomenti:
     <summary><h3>20 mar 2024 ✔️</h3></summary>
 
 Argomenti:
-- Razor: progetto a coppie.
+- Razor: progetto a coppie giorno 1.
 
 </details>
+
+<!-- ******************************************  21 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>21 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie giorno 2.
+
+</details>
+
+<!-- ******************************************  22 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>22 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie giorno 3.
+
+</details>
+
+<!-- ******************************************  25 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>25 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie giorno 4.
+
+</details>
+
+<!-- ******************************************  26 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>26 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie giorno 5.
+
+</details>
+
+<!-- ******************************************  27 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>27 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie giorno 6.
+
+</details>
+
+<!-- ******************************************  28 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>28 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Razor: progetto a coppie giorno 7.
+
+</details>
+
+<!-- ******************************************  29 mar 2024   ****************************************** -->
+<details>
+    <summary><h3>29 mar 2024 ✔️</h3></summary>
+
+Argomenti:
+- Identity Framework.
+
+</details>
+
+
+
+
+
