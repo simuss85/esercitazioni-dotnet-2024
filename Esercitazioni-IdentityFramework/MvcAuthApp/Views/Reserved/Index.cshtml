@@ -5,3 +5,13 @@
 <h2>Pagina Riservata</h2>
 
 <p>Questa pagina è visibile solo agli utenti autenticati.</p>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>Questo testo è visibile per l'utente Admin</p>
+}
+
+@if (User.IsInRole("User"))
+{
+    <p>Questo testo è visibile per l'utente User</p>
+}

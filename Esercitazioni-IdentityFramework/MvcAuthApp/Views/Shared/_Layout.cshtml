@@ -36,6 +36,22 @@
                             </li>
                         }
 
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reserved"
+                                    asp-action="Admin">Riservato Admin</a>
+                            </li>
+                        }
+
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Reserved"
+                                    asp-action="Users">Riservato Users</a>
+                            </li>
+                        }
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">

@@ -56,6 +56,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+//!!! Aggiuto per utilizzare la pagina di Error
+app.UseStatusCodePagesWithReExecute("/Home/Error");
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

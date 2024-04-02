@@ -11,4 +11,18 @@ public class ReservedController : Controller
     {
         return View();
     }
+
+    //GET: /Reserved/Admin
+    [Authorize(Roles = "Admin")]
+    public IActionResult Admin()
+    {
+        return View();
+    }
+
+    //GET: /Reserved/User
+    [Authorize(Roles = "User")]
+    public IActionResult Users()
+    {
+        return View();
+    }
 }
