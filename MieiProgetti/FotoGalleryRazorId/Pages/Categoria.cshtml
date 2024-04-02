@@ -1,0 +1,129 @@
+﻿@page
+@model CategoriaModel
+@{
+    string categoria = Model.Categoria!;
+    ViewData["Title"] = categoria;
+
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
+    int index = 0;
+}
+
+<div class="mx-5">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+
+        <h1 class="display-4">
+            <a class="link-categoria-carosello" asp-page="index" asp-route-categoria="@categoria">@categoria</a>
+        </h1>
+
+    </div>
+
+    <!----------------------- carosello di immagini --------------------->
+    <!-- se la categoria è vuota non viene in ogni caso visualizzata questa pagina -->
+    <!-- perchè il link è disabilitato nella selezione delle categorie -->
+    @if (Model.Immagini.Count() != 0)
+    {
+        <div id="carosello" class="carousel carousel-dark slide pt-3" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                @for (int i = 0; i < Model.Immagini.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        <button type="button" data-bs-target="#carosello" data-bs-slide-to="@i" class="active" aria-current="true"
+                            aria-label="Slide 1"></button>
+                    }
+                    else
+                    {
+                        <button type="button" data-bs-target="#carosello" data-bs-slide-to="@i" aria-label="Slide 2"></button>
+                    }
+                }
+            </div>
+            <div class="carousel-inner">
+
+                @foreach (var img in Model.Immagini)
+                {
+                    var stelle = @img.Voto;
+                    if (index == 0)
+                    {
+                        <div class="carousel-item active" data-bs-interval="1500">
+                            <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
+                                <img src="@img.Path" class="d-block" alt="@img.Titolo"></a>
+                            <div class="carosel-label carousel-caption d-none d-md-block">
+
+                                <!------------- sezione titolo carosello ------------------>
+                                <h2 class="carosel-voto">@img.Titolo</h2>
+                                <h5 class="carosel-voto">
+
+                                    <!------------- sezione stelle carosello ------------------>
+                                    <span class="px-1 start-0">@img.Voto</span>
+                                    @* Gestione delle stelle dinamiche per la sezione Voto *@
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (stelle >= 1)
+                                        {
+                                            <span class="bi bi-star-fill"></span>
+                                        }
+                                        else if (stelle > 0)
+                                        {
+                                            <span class="bi bi-star-half"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="bi bi-star"></span>
+                                        }
+                                        stelle--;
+                                    }
+                                    <span class="numero-voti px-1">(@img.NumeroVoti)</span>
+                                </h5>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="carousel-item" data-bs-interval="1500">
+                            <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
+                                <img src="@img.Path" class="d-block" alt="@img.Titolo"></a>
+                            <div class="carosel-label carousel-caption d-none d-md-block">
+                                <!------------- sezione titolo carosello ------------------>
+                                <h2 class="carosel-voto">@img.Titolo</h2>
+                                <h5 class="carosel-voto">
+
+                                    <!------------- sezione stelle carosello ------------------>
+                                    <span class="px-1 start-0">@img.Voto</span>
+                                    @* Gestione delle stelle dinamiche per la sezione Voto *@
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (stelle >= 1)
+                                        {
+                                            <span class="bi bi-star-fill"></span>
+                                        }
+                                        else if (stelle > 0)
+                                        {
+                                            <span class="bi bi-star-half"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="bi bi-star"></span>
+                                        }
+                                        stelle--;
+                                    }
+                                    <span class="numero-voti px-1">(@img.NumeroVoti)</span>
+                                </h5>
+                            </div>
+                        </div>
+                    }
+                    index++;
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carosello" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carosello" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    }
+
+</div>

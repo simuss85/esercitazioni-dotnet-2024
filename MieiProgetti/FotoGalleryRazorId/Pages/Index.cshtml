@@ -1,0 +1,92 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    string categoria = Model.Categoria!;
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
+}
+<div class="mx-5">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+
+        @if (string.IsNullOrEmpty(categoria))
+        {
+            <h1 class="display-4">Benvenuti</h1>
+        }
+        else
+        {
+            <h1 class="display-4">@categoria</h1>
+        }
+
+    </div>
+    <!-------------------------- dropdown filtro categorie ------------------------>
+    <div class="dropdown text-end">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-archive-fill"></i>
+        </button>
+        <ul class="dropdown-menu" style=" min-width: 8rem;">
+            <li><a class="dropdown-item" asp-page="/Index">Tutte</a></li>
+            @foreach (var c in Model.Categorie)
+            {
+                <li><a class="dropdown-item" asp-page="/Index" asp-route-categoria="@c">@c</a></li>
+            }
+        </ul>
+    </div>
+    <!---------------------- row delle immagini ------------------------>
+    <div class="d-flex justify-content-center flex-wrap">
+        @for (int i = 0; i < Model.Immagini.Count(); i++)
+        {
+            var immagine = Model.Immagini.ElementAt(i); //memorizzo l'imamgine i-esima
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-0 m-0 align-items-center">
+                <div class="card-index d-flex flex-wrap flex-row-reverse m-1 border-1">
+                    <div class="image-container">
+                        <a asp-page="/Immagine" asp-route-id="@immagine.Id" asp-route-urlback="@url">
+                            <img src="@immagine.Path" class="img-fluid" />
+                        </a>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
+                    </div>
+
+                    <!-- Stella e voto sopra l'immagine -->
+                    <div class="position-absolute pt-3 pe-2">
+                        <span class="bi bi-star-fill"></span>
+                        <span class="index-voto">@immagine.Voto</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!---------------------------- tasti paginazione -------------------------->
+    <nav class="mt-4" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" asp-page="/Index" asp-route-pageindex="1"
+                    asp-route-categoria="@categoria">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.NumeroPagine; i++)
+            {
+                if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
+                {
+                    <li class="page-item active"><a class="page-link" asp-page="/Index" asp-route-pageindex="@i"
+                            asp-route-categoria="@categoria">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-page="/Index" asp-route-pageindex="@i"
+                            asp-route-categoria="@categoria">@i</a></li>
+                }
+
+            }
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" asp-page="/Index" asp-route-pageindex="@Model.NumeroPagine"
+                    asp-route-categoria="@categoria">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+</div>

@@ -1,0 +1,91 @@
+@page
+@model ModificaImmagineModel
+@{
+    ViewData["Title"] = "Modifica Immagine";
+
+}
+<div class="mx-5">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <!--------------------------- sezione delle card con form modifica immagina -------------------->
+    <div class="container mt-5">
+        @if (Model.Selezione.Count == 0) // se non ho selezionato alcuna immagine scrive un messaggio
+        {
+            <div class="text-center">
+                <h2 class="mb-5" style="color: red;">Devi selezionare almeno un immagine</h2>
+                <a class="btn btn-primary" asp-page="/GestisciImmagini">Torna alle Immagini</a>
+            </div>
+        }
+        else //carico la pagina con le card e i form post
+        {
+            <form method="post">
+
+                <!-- preparo il contenitore per le card di tipo flex -->
+                <div class="d-flex justify-content-center flex-wrap text-center mt-5 mb-3">
+                    @for (int i = 0; i < Model.Selezione.Count; i++)
+                    {
+                        var id = Model.Selezione[i];
+                        var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
+                        if (immagine != null)
+                        {
+                            <!-- card che contiene i dati del form per ogni immagine selezionata -->
+                            <div class="card-modifica card me-4 mb-5">
+
+                                <!-- Immagine -->
+                                <img src="@immagine.Path" class="card-img-top img-modifica" alt="@immagine.Titolo">
+                                <div class="card-body">
+
+                                    <!-- Id dell'immagine passato in hidden -->
+                                    <input type="hidden" name="ImmaginiModificate[@i].Id" value="@id">
+
+                                    <!-- Titolo dell' immagine -->
+                                    <div class="form-group mb-1">
+                                        <label for="titolo">Titolo</label>
+                                        <input type="text" class="form-control" name="ImmaginiModificate[@i].Titolo"
+                                            placeholder="@immagine.Titolo" required />
+                                    </div>
+
+                                    <!-- Autore dell'immagine -->
+                                    <div class="form-group mb-1">
+                                        <label for="autore">Autore</label>
+                                        <input type="text" class="form-control" name="ImmaginiModificate[@i].Autore"
+                                            placeholder="@immagine.Autore" required />
+                                    </div>
+
+                                    <!-- Select Categoria -->
+                                    <label for="categoria">Categoria</label>
+                                    <select class="form-control mb-1" id="categoria" name="ImmaginiModificate[@i].Categoria"
+                                        required>
+                                        <option value="">Seleziona una categoria</option>
+                                        @foreach (var cat in Model.Categorie)
+                                        {
+                                            <option value="@cat">@cat</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="@immagine.Categoria" class="text-danger"></span>
+
+                                    <!-- Link dell'immagine -->
+                                    <div class="form-group mb-1">
+                                        <label for="path">Link Immagine</label>
+                                        <input type="text" class="form-control" name="ImmaginiModificate[@i].Path"
+                                            value="@immagine.Path" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Submit Salva e tasto Annulla -->
+                <div class="d-flex flex-row justify-content-center">
+                    <button type="submit" class="btn btn-success">Salva</button>
+                    <a class="btn btn-primary ms-2" asp-page="/GestisciImmagini">Annulla</a>
+                </div>
+            </form>
+        }
+    </div>
+</div>
