@@ -11,13 +11,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddRoles<IdentityRole>()   //!!! aggiunto per gestire i ruoli
+    .AddRoles<IdentityRole>()   //!!! aggiunto per gestire i ruoli (1/3)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-//!!! crea un ambito di servizio
+//!!! crea un ambito di servizio    (2/3)
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -66,7 +66,7 @@ app.MapRazorPages();
 
 app.Run();
 
-//!!! classe che crea i ruoli nel dbContext
+//!!! classe che crea i ruoli nel dbContext (3/3)
 public static class ApplicationDbInitializer
 {
     public static async Task EnsureRolesAsync(RoleManager<IdentityRole> roleManager)
