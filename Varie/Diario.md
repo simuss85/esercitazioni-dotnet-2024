@@ -1235,7 +1235,68 @@ Argomenti:
 
 </details>
 
+<!-- ******************************************  02 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>02 apr 2024 ✔️</h3></summary>
 
+Argomenti:
+- Identity Framework: utilizzo dello scaffolding.
 
+</details>
+
+## Note
+- Esegui la procedura per lo **scaffolding**
+```sh
+    dotnet tool install --global dotnet-aspnet-codegenerator
+```
+- Poi digita:
+```sh
+    dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+```
+- Eseguire lo scaffolding:
+```sh
+    dotnet aspnet-codegenerator identity -dc MvcProgetto2.Data.ApplicationDbContext
+```
+
+## Info
+- Nel Progmra.cs inserisco generatore di Admin:
+```c#
+    //!!! script di seed per la creazione admin (3/5)
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await SeedAdminUser(userManager, roleManager);
+    }
+    // ..............................
+
+    //!!! classe che crea l'admin (4/5)
+    async Task SeedAdminUser(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    {
+        //controllo che il ruolo admin esiste
+        if (!await roleManager.RoleExistsAsync("Admin"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+        }
+
+        //crea l'utente se non esiste
+        if (await userManager.FindByEmailAsync("admin1@yahoo.it") == null)
+        {
+            var user = new IdentityUser
+            {
+                UserName = "admin1@yahoo.it",
+                Email = "admin1@yahoo.it",
+                EmailConfirmed = true,
+            };
+
+            var result = await userManager.CreateAsync(user, "Admin123!");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "Admin");
+            }
+        }
+    }
+```
 
 
