@@ -53,7 +53,7 @@
 <!--------------- sezione inserimento voto collapse -------------------------->
 <div class="container mt-4 ps-4">
     <p class="d-inline-flex gap-1">
-        @if (User!.Identity!.IsAuthenticated)
+        @if (User!.IsInRole("User"))
         {
             <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
                 aria-expanded="false" aria-controls="collapseCommenta">

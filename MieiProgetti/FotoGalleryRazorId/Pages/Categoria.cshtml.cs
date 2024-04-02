@@ -5,10 +5,11 @@ using Newtonsoft.Json;
 
 namespace FotoGalleryRazorId.Pages;
 
+#nullable disable
 public class CategoriaModel : PageModel
 {
-    public string? Categoria { get; set; } //categoria attuale
-    public required IEnumerable<Immagine> Immagini { get; set; }
+    public string Categoria { get; set; } //categoria attuale
+    public IEnumerable<Immagine> Immagini { get; set; }
 
     public string jsonPath = @"wwwroot/json/immagini.json";
 
@@ -21,7 +22,7 @@ public class CategoriaModel : PageModel
     }
     #endregion
 
-    public void OnGet(string? categoria)
+    public void OnGet(string categoria)
     {
         // carico il file categorie.json e seleziono solo la categoria passata al get
         var jsonFile = System.IO.File.ReadAllText(jsonPath);

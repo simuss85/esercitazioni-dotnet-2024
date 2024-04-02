@@ -12,19 +12,19 @@ public class AccountController : Controller
         _userManager = userManager;
     }
 
-    // gestione del ruolo Amministratore/modertatore
+    //GET: /Account/AddToRoleAdmin
     public async Task<IActionResult> AddToRoleAdmin()
     {
         var user = await _userManager.FindByNameAsync(User.Identity!.Name!);
         await _userManager.AddToRoleAsync(user!, "Admin");
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Pages");
     }
 
-    //gestione del ruolo User/utente registrato
+    //GET: /Account/AddToRoleUser
     public async Task<IActionResult> AddToRoleUser()
     {
         var user = await _userManager.FindByNameAsync(User.Identity!.Name!);
         await _userManager.AddToRoleAsync(user!, "User");
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Pages");
     }
 }
