@@ -1,0 +1,712 @@
+[
+  {
+    "Id": 1,
+    "Path": "/img/img_01.jpg",
+    "Titolo": "Immagine 1",
+    "Voto": 2.4,
+    "NumeroVoti": 21,
+    "Autore": "Autore 1",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 2,
+    "Path": "/img/img_02.jpg",
+    "Titolo": "Immagine 2",
+    "Voto": 4.6,
+    "NumeroVoti": 23,
+    "Autore": "Autore 2",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 3,
+    "Path": "/img/img_03.jpg",
+    "Titolo": "Immagine 3",
+    "Voto": 1.6,
+    "NumeroVoti": 23,
+    "Autore": "Autore 3",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 4,
+    "Path": "/img/img_05.jpg",
+    "Titolo": "Immagine 4",
+    "Voto": 1.3,
+    "NumeroVoti": 20,
+    "Autore": "Autore 4",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 5,
+    "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
+    "Titolo": "Immagine 5",
+    "Voto": 4.8,
+    "NumeroVoti": 22,
+    "Autore": "Autore 5",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 7,
+    "Path": "/img/img_07.jpg",
+    "Titolo": "Immagine 7",
+    "Voto": 3.4,
+    "NumeroVoti": 20,
+    "Autore": "Autore 7",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 8,
+    "Path": "/img/img_08.jpg",
+    "Titolo": "Immagine 8",
+    "Voto": 1.4,
+    "NumeroVoti": 21,
+    "Autore": "Autore 8",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 9,
+    "Path": "/img/img_09.jpg",
+    "Titolo": "Immagine 9",
+    "Voto": 2.8,
+    "NumeroVoti": 21,
+    "Autore": "Autore 9",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 11,
+    "Path": "/img/img_11.jpg",
+    "Titolo": "Immagine 11",
+    "Voto": 1.9,
+    "NumeroVoti": 20,
+    "Autore": "Autore 11",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 12,
+    "Path": "/img/img_12.jpg",
+    "Titolo": "Immagine 12",
+    "Voto": 4.2,
+    "NumeroVoti": 30,
+    "Autore": "Autore 12",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 13,
+    "Path": "/img/img_13.jpg",
+    "Titolo": "Immagine 13",
+    "Voto": 3.5,
+    "NumeroVoti": 20,
+    "Autore": "Autore 13",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 14,
+    "Path": "/img/img_14.jpg",
+    "Titolo": "Immagine 14",
+    "Voto": 2.3,
+    "NumeroVoti": 20,
+    "Autore": "Autore 14",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 15,
+    "Path": "/img/img_15.jpg",
+    "Titolo": "Immagine 15",
+    "Voto": 4.3,
+    "NumeroVoti": 20,
+    "Autore": "Autore 15",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 16,
+    "Path": "/img/img_16.jpg",
+    "Titolo": "Immagine 16",
+    "Voto": 4.3,
+    "NumeroVoti": 20,
+    "Autore": "Autore 16",
+    "Data": "2024-02-23T00:00:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 17,
+    "Path": "https://www.istitutopsicoterapie.com/wp-content/uploads/2021/12/sport.jpeg",
+    "Titolo": "Titolo 17",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 17",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 18,
+    "Path": "https://www.pwc.com/it/it/industries/sport/img/pwc-sport-anteprima.jpg",
+    "Titolo": "Titolo 18",
+    "Voto": 2.5,
+    "NumeroVoti": 2,
+    "Autore": "Autore 18",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 19,
+    "Path": "https://www.ansa.it/webimages/img_547x547/2024/3/17/3c511501b9171105f4a7423d630c38ca.jpg",
+    "Titolo": "Titolo 19",
+    "Voto": 5.0,
+    "NumeroVoti": 1,
+    "Autore": "Autore 19",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 20,
+    "Path": "https://i0.wp.com/cms.babbel.news/wp-content/uploads/2021/07/Most_Popular_Sports_By_Country-2.png",
+    "Titolo": "Titolo 20",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 20",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 21,
+    "Path": "https://www.visitmorocco.com/sites/default/files/thumbnails/image/maigrir-vite-sans-r%C3%A9gime-sans-sport-niaque-gain-vitesse-reussir-success.jpg",
+    "Titolo": "Titolo 21",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 21",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 22,
+    "Path": "https://aws.imagelinenetwork.com/agronotizie/materiali/ArticoliImg/agroalimentare-cibo-verdure-olio-pomodori-peperoni-aglio-generata-con-intelligenza-artificiale-by-sasint-adobe-stock-1200x800.jpeg",
+    "Titolo": "Titolo 22",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 22",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 24,
+    "Path": "https://www.fondazioneveronesi.it/uploads/thumbs/2017/01/13/dieta%20ernia%20iatale_1_thumb_720_480.jpg",
+    "Titolo": "Titolo 24",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 24",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 25,
+    "Path": "https://www.authentico-ita.org/wp-content/uploads/2019/01/cibo-italiano-%C3%A8-il-pi%C3%B9-amato-al-mondo.jpg",
+    "Titolo": "Titolo 25",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 25",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 27,
+    "Path": "https://www.globalvoices.com/wp-content/uploads/2014/11/shutterstock_115926238.jpg",
+    "Titolo": "Titolo 27",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 27",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 28,
+    "Path": "https://www.focus.it/images/2021/11/06/junk-food_1020x680.jpg",
+    "Titolo": "Titolo 28",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 28",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 29,
+    "Path": "https://acquariofilia.org/wp-content/uploads/2022/06/cibo-pesci-copertina1.jpg",
+    "Titolo": "Titolo 29",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 29",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 30,
+    "Path": "https://cdn.sanity.io/images/8w7zugx0/production/04f24acfc3ca4f4b01cc7a27a2efe2e3f50e0f2e-6000x4000.jpg?rect=0%2C313%2C6000%2C3375&w=2880&h=1620&q=50&fit=min&auto=format&width=2880",
+    "Titolo": "Titolo 30",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 30",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 31,
+    "Path": "https://ilfattoalimentare.it/wp-content/uploads/2020/04/condividere-cibo-pizza-fette-AdobeStock_144798719-scaled.jpeg",
+    "Titolo": "Titolo 31",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 31",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 32,
+    "Path": "https://previews.123rf.com/images/warrengoldswain/warrengoldswain1308/warrengoldswain130800070/21847675-gruppo-di-persone-reali-diversit%C3%A0-casual-isolato-su-sfondo-bianco.jpg",
+    "Titolo": "Titolo 32",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 32",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 33,
+    "Path": "https://www.thewom.it/content/uploads/2021/09/persone-di-cui-abbiamo-bisogno.jpg",
+    "Titolo": "Titolo 33",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 33",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 34,
+    "Path": "https://media.istockphoto.com/id/1368965646/it/foto/ragazzi-e-ragazze-multietnici-che-scattano-selfie-allaperto-con-retroilluminazione-concetto-di.jpg?s=612x612&w=0&k=20&c=t3WLrQvKE-6R3_X7GSU8B1mJmXKozm6VOw8S_0o3i94=",
+    "Titolo": "Titolo 34",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 34",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 35,
+    "Path": "https://media.paginemediche.it/punti-di-vista/cosa-spinge-le-persone-a-condividere-foto-e-pensieri-personali-sui-social/cosa-spinge-le-persone-a-condividere-foto-e-pensieri-personali-sui-social-1200-900.jpg",
+    "Titolo": "Titolo 35",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 35",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 36,
+    "Path": "https://www.unicusano.it/blog/wp-content/uploads/2018/11/come-conoscere-nuove-persone-1.jpg",
+    "Titolo": "Titolo 36",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 36",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 37,
+    "Path": "https://www.notaiochiambretti.it/wp-content/uploads/2019/04/famiglia.jpg",
+    "Titolo": "Titolo 37",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 37",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 39,
+    "Path": "https://www.psicologionline.net/uploads/article/cover/personeaffascinanti20210628095844.jpg",
+    "Titolo": "Titolo 39",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 39",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 40,
+    "Path": "https://staticfanpage.akamaized.net/wp-content/uploads/sites/11/2019/05/iStock-953470700.jpg",
+    "Titolo": "Titolo 40",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 40",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 41,
+    "Path": "https://media.istockphoto.com/id/1346125184/it/foto/gruppo-di-business-multietnico-di-successo.jpg?s=612x612&w=0&k=20&c=IHi2Rjl0VkQnr0JjUameTrwR6JvCs9lyGRZWcRt7e0c=",
+    "Titolo": "Titolo 41",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 41",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 42,
+    "Path": "https://img.freepik.com/free-photo/medium-shot-people-with-glasses-posing-studio_23-2150169338.jpg",
+    "Titolo": "Titolo 42",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 42",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 43,
+    "Path": "https://www.blacklemon.com/images/pages/thumb/Gadget-e-Oggetti-Promozionali-18.jpg",
+    "Titolo": "Titolo 43",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 43",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 44,
+    "Path": "https://www.focusjunior.it/content/uploads/2017/01/oggetti-vintage-11.jpg",
+    "Titolo": "Titolo 44",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 44",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 45,
+    "Path": "https://images2.corriereobjects.it/methode_image/2014/08/20/Tecnologia/Foto%20Gallery/01_uncomfortable_MGZOOM.jpg",
+    "Titolo": "Titolo 45",
+    "Voto": 5.0,
+    "NumeroVoti": 2,
+    "Autore": "Autore 45",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 46,
+    "Path": "https://www.aluminiumpoint.it/image/catalog/OGGETTISTICA%20ALLUMINIO/OGGETTISTICA-ALLUMINIO-ECOMMERCE-ALUMINIUM-POINT-COPERTINA.jpg",
+    "Titolo": "Titolo 46",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 46",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 47,
+    "Path": "https://citynews-cibotoday.stgy.ovh/~media/square-hi/11663408603508/cavatappi-mendini-alessi.jpg",
+    "Titolo": "Titolo 47",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 47",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 48,
+    "Path": "https://media-assets.ad-italia.it/photos/60f13f85b34e1abd5fad8cf5/master/w_1600%2Cc_limit/MOKA.jpg",
+    "Titolo": "Titolo 48",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 48",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 49,
+    "Path": "https://thumbs.dreamstime.com/z/oggetti-di-gomma-5056360.jpg",
+    "Titolo": "Titolo 49",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 49",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 50,
+    "Path": "https://hips.hearstapps.com/hmg-prod/images/17-lma-lick-my-ass-a-chair-by-pettersen-and-hein-ph-mindcraftanders-sune-berg-1584710330.jpg",
+    "Titolo": "Titolo 50",
+    "Voto": 4.3,
+    "NumeroVoti": 4,
+    "Autore": "Autore 50",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 51,
+    "Path": "https://media-assets.wired.it/photos/615daa1035c15c27e8b01570/16:9/w_320%2Cc_limit/Calendario-design-evidenza.jpg",
+    "Titolo": "Titolo 51",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 51",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 52,
+    "Path": "data:image/jpeg;base64,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",
+    "Titolo": "Titolo 52",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 52",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 53,
+    "Path": "https://aircs3.imgix.net/uploads/rischio-morte-mondo-animale-paradosso-di-Peto.jpg",
+    "Titolo": "Titolo 53",
+    "Voto": 4.0,
+    "NumeroVoti": 1,
+    "Autore": "Autore 53",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 54,
+    "Path": "https://rivistanatura.com/wp-content/uploads/2021/07/Panda-770x470.jpg",
+    "Titolo": "Titolo 54",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 54",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 55,
+    "Path": "https://amicidicasa.it/wp-content/uploads/2023/08/quokka-curiosita-1024x670.jpg",
+    "Titolo": "Titolo 55",
+    "Voto": 5.0,
+    "NumeroVoti": 1,
+    "Autore": "Autore 55",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 56,
+    "Path": "https://staticfanpage.akamaized.net/wp-content/uploads/sites/34/2023/10/ruggitoleone-1200x675.jpg",
+    "Titolo": "Titolo 56",
+    "Voto": 4.5,
+    "NumeroVoti": 2,
+    "Autore": "Autore 56",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 57,
+    "Path": "https://www.montecarlonews.it/typo3temp/pics/n_5a66d5ec72.jpg",
+    "Titolo": "Titolo 57",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 57",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 58,
+    "Path": "https://www.tempi.it/wp-content/uploads/2021/04/cane-unsplash-1-1024x840.jpg",
+    "Titolo": "Titolo 58",
+    "Voto": 4.8,
+    "NumeroVoti": 4,
+    "Autore": "Autore 58",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 59,
+    "Path": "https://www.legambiente.it/wp-content/uploads/2022/12/animali-in-citta-report.jpg",
+    "Titolo": "Titolo 59",
+    "Voto": 5.0,
+    "NumeroVoti": 3,
+    "Autore": "Autore 59",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 61,
+    "Path": "https://www.my-personaltrainer.it/2023/09/08/maltrattamento-di-animali_900x760.jpeg",
+    "Titolo": "Titolo 61",
+    "Voto": 2.0,
+    "NumeroVoti": 4,
+    "Autore": "Autore 61",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 62,
+    "Path": "https://italianoperstranieri.loescher.it/image/7504_1.jpg",
+    "Titolo": "Titolo 62",
+    "Voto": 3.7,
+    "NumeroVoti": 3,
+    "Autore": "Autore 62",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 64,
+    "Path": "https://naturopet.it/wp-content/uploads/2023/08/jack-russell.jpg",
+    "Titolo": "Titolo 64",
+    "Voto": 5.0,
+    "NumeroVoti": 1,
+    "Autore": "Autore 64",
+    "Data": "2024-03-24T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 65,
+    "Path": "https://media.cnn.com/api/v1/images/stellar/prod/191006152638-01-pets-and-our-health.jpg?q=w_2000,h_1125,x_0,y_0,c_fill/h_618",
+    "Titolo": "Cane brutto",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Bau",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 66,
+    "Path": "https://mypetmall.net/pub/media/resized/450x450/beagle-min.webp",
+    "Titolo": "Titolo 66",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 66",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 67,
+    "Path": "https://www.my-personaltrainer.it/2023/11/10/razze-di-cani-che-soffrono-meno-la-solitudine_900x760.jpeg",
+    "Titolo": "Titolo 67",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 67",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 68,
+    "Path": "https://www.focusjunior.it/content/uploads/2018/10/giraffe-2222908_960_720-e1548405712185.jpg",
+    "Titolo": "Titolo 68",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 68",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 69,
+    "Path": "https://www.my-personaltrainer.it/2023/09/19/come-scegliere-animale-domestico-orig.jpeg",
+    "Titolo": "Titolo 69",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 69",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 70,
+    "Path": "https://www.changethefuture.it/assets/uploads/2020/05/animali-selvatici.jpg",
+    "Titolo": "Titolo 70",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 70",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 71,
+    "Path": "https://statickodami.akamaized.net/wp-content/uploads/sites/31/2022/03/iStock-90851578.jpg?im=AspectCrop=(16,9);",
+    "Titolo": "Titolo 71",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 71",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 72,
+    "Path": "https://www.focus.it/images/2022/08/18/-1131346997-orig.jpeg",
+    "Titolo": "Titolo 72",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 72",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 73,
+    "Path": "https://www.pandaclub.ch/wp-content/uploads/2019/06/skeeze-auf-Pixabay.jpg",
+    "Titolo": "Titolo 73",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 73",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 79,
+    "Path": "https://cdn-italiani-media.italiani.it/site-italiani/2021/08/Gianmarco-Tamberi-marcell-jacobs.jpeg",
+    "Titolo": "rtret",
+    "Voto": 4.0,
+    "NumeroVoti": 1,
+    "Autore": "rtrt",
+    "Data": "2024-03-26T00:00:00+01:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 81,
+    "Path": "https://t4.ftcdn.net/jpg/05/54/52/13/360_F_554521329_ngmDQSjSrUSRnbK2xK0bkcprsinG9Xdv.jpg",
+    "Titolo": "Panda coccoloso",
+    "Voto": 4.7,
+    "NumeroVoti": 3,
+    "Autore": "Panda 1",
+    "Data": "2024-03-27T00:00:00+01:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 82,
+    "Path": "https://res.cloudinary.com/lastminute-contenthub/s--zba-tI0n--/c_crop,h_1333,w_2000,x_0,y_0/c_limit,h_999999,w_1920/f_auto/q_auto:eco/v1/Hub-Live/VolaGratis/blog/images/EE3QG3_pizza",
+    "Titolo": "Pizza",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 82",
+    "Data": "2024-03-28T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 83,
+    "Path": "https://citynews-today.stgy.ovh/~media/horizontal-mid/12474931350201/pasta-bandiera-2.jpg",
+    "Titolo": "Pasta",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 83",
+    "Data": "2024-03-28T00:00:00+01:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 84,
+    "Path": "https://www.gazzettadelgusto.it/wp-content/uploads/2020/12/Cucina-italiana-all-estero-amata-ma-sconosciuta-e-contraffatta.jpg",
+    "Titolo": "Pasta ",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 84",
+    "Data": "2024-03-28T00:00:00+01:00",
+    "Categoria": "Cibo"
+  }
+]
