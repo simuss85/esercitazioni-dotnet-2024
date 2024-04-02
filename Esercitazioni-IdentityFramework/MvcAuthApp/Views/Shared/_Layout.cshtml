@@ -34,58 +34,38 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Reserved"
                                     asp-action="Index">Riservato</a>
                             </li>
-                        }
 
-                        @if (User.Identity!.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Reserved"
                                     asp-action="Admin">Riservato Admin</a>
                             </li>
-                        }
 
-                        @if (User.Identity!.IsAuthenticated)
-                        {
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Reserved"
                                     asp-action="Users">Riservato Users</a>
                             </li>
-                        }
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account"
                                     asp-action="GetRole">Ruolo</a>
                             </li>
-                        }
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account"
                                     asp-action="AddToRoleAdmin">Aggiungi Admin</a>
                             </li>
-                        }
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account"
                                     asp-action="AddToRoleUser">Aggiungi User</a>
                             </li>
-                        }
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account"
                                     asp-action="RemoveFromRoleAdmin">Rimuovi da Admin</a>
                             </li>
-                        }
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account"
                                     asp-action="RemoveFromRoleUser">Rimuovi da User</a>
