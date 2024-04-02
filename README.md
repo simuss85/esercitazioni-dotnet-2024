@@ -27,6 +27,10 @@ Esempi di pagine html
 > - Es3
 > - TracciaAlimentiFrigorifero
 
+## Esercitazioni-IdentityFramework
+
+> - MvcAuthApp
+
 ## Esercitazioni-MVC
 
 Esempi di pattern MVC
@@ -45,6 +49,10 @@ Elenco dei miei progetti personali svolti al corso.
 > - Progetto database 01
 > - Progetto database 02
 > - Traccia Alimenti Frigorifero
+
+## ProgettiDiGruppo
+Elenco dei progetti svolti in gruppo
+> - FotoGalleryRazor
 
 ## Varie
 
