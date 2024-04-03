@@ -36,8 +36,8 @@
             <!-- Select Categoria -->
             <label asp-for="Input.Categoria"></label> <!-------------- leggi sopra (*)---------->
             <select asp-for="Input.Categoria" asp-items="Model.Categorie"
-                class="form-control @(ViewData.ModelState["Input.Categoria"]?.Errors.Any() ?? false ? "box-danger" : "")" />
-            <option value="">Seleziona categoria</option>
+                class="form-control @(ViewData.ModelState["Input.Categoria"]?.Errors.Any() ?? false ? "box-danger" : "")">
+                <option value="">Scegli categoria</option>
             </select>
             <span asp-validation-for="Input.Categoria" class="text-danger"></span>
 

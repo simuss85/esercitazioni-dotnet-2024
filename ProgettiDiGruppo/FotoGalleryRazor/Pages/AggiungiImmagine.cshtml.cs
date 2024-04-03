@@ -11,7 +11,8 @@ public class AggiungiImmagineModel : PageModel
 {
     [BindProperty]
     public required InputModel Input { get; set; }
-    public IEnumerable<SelectListItem> Categorie { get; set; } = new List<SelectListItem>();
+    public IList<SelectListItem> Categorie { get; set; } = []; // Inizializza la lista vuota
+
 
     private readonly string jsonPath = @"wwwroot/json/immagini.json";
     private readonly string jsonPath3 = @"wwwroot/json/categorie.json";
@@ -22,17 +23,22 @@ public class AggiungiImmagineModel : PageModel
     {
         _logger = logger;
 
-        //spostandolo nel costruttore, si crea l'oggetto Categorie nel modo corretto
+        // Leggi le categorie dal file JSON
         var jsonFile3 = System.IO.File.ReadAllText(jsonPath3);
-        //se ho problemi con il file json...
-        var categorie = JsonConvert.DeserializeObject<List<string>>(jsonFile3) ?? new List<string> { "Nessuna categoria" };
+        // Se ho problemi con il file JSON...
+        var categorie = JsonConvert.DeserializeObject<List<string>>(jsonFile3) ?? new List<string>();
 
+        // Costruisci oggetti SelectListItem e assegnali a Categorie
         foreach (var c in categorie)
         {
-            Categorie = Categorie.Append(new SelectListItem { Value = c, Text = c });
+            Categorie.Add(new SelectListItem { Value = c, Text = c });
         }
     }
 
+    public void OnGet()
+    {
+
+    }
 
     public IActionResult OnPost()
     {
@@ -82,11 +88,14 @@ public class AggiungiImmagineModel : PageModel
     {
         [Display(Name = "Titolo ")]
         public string? Titolo { get; set; }
+
         [Display(Name = "Autore ")]
         public string? Autore { get; set; }
+
         [Required(ErrorMessage = "Devi selezionare una categoria")]
         [Display(Name = "Categoria")]
         public string? Categoria { get; set; }
+
         [Required(ErrorMessage = "Devi inserire un link")]
         [Display(Name = "Link immagine")]
         public string? Path { get; set; }
