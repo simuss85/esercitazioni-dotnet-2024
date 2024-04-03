@@ -1,10 +1,13 @@
 using FotoGalleryRazorId.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 
 namespace FotoGalleryRazorId.Pages;
 
+//GET: /Reserved/User
+[Authorize(Roles = "User")]
 public class CategorieModel : PageModel
 {
     public required IEnumerable<Immagine> Immagini { get; set; }

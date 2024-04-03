@@ -286,8 +286,8 @@
     "Stelle": 5.0,
     "Data": "2024-03-24T00:00:00+01:00",
     "Commento": "vdscdscs",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 30,
@@ -296,8 +296,8 @@
     "Stelle": 5.0,
     "Data": "2024-03-24T00:00:00+01:00",
     "Commento": "ccsaca",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 31,
@@ -316,8 +316,8 @@
     "Stelle": 5.0,
     "Data": "2024-03-25T00:00:00+01:00",
     "Commento": "cane",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 33,
@@ -337,7 +337,7 @@
     "Data": "2024-03-25T00:00:00+01:00",
     "Commento": "bello",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 35,
@@ -347,7 +347,7 @@
     "Data": "2024-03-25T00:00:00+01:00",
     "Commento": "bello",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 36,
@@ -635,6 +635,16 @@
     "ImmagineId": 53,
     "Stelle": 4.0,
     "Data": "2024-03-28T00:00:00+01:00",
+    "Commento": null,
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 65,
+    "Nome": "simo",
+    "ImmagineId": 19,
+    "Stelle": 5.0,
+    "Data": "2024-04-03T00:00:00+02:00",
     "Commento": null,
     "Visibile": true,
     "Moderato": false

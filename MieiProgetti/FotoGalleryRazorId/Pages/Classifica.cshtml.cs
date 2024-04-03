@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using FotoGalleryRazorId.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FotoGalleryRazorId.Pages;
 
+//GET: /Reserved/User
+[Authorize(Roles = "User")]
 public class ClassificaModel : PageModel
 {
     public int NumeroPagine { get; set; }

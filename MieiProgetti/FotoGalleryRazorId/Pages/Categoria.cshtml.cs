@@ -1,4 +1,5 @@
 using FotoGalleryRazorId.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
@@ -6,6 +7,8 @@ using Newtonsoft.Json;
 namespace FotoGalleryRazorId.Pages;
 
 #nullable disable
+//GET: /Reserved/User
+[Authorize(Roles = "User")]
 public class CategoriaModel : PageModel
 {
     public string Categoria { get; set; } //categoria attuale
