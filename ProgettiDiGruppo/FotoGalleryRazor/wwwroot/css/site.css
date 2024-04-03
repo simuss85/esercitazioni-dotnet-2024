@@ -35,6 +35,14 @@ tbody tr:hover {
   background-color: aliceblue;
 }
 
+/* -------- gestione validazione input ASP-VALIDATION-FOR --------- */
+.box-danger {
+  border: 1px solid red;
+  /* Evidenzia il bordo in rosso */
+  box-shadow: 0 0 5px red;
+  /* Aggiunge una leggera ombra rossa */
+}
+
 /*------ rating stars -------*/
 .bi-star-fill {
   color: orange;
