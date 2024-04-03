@@ -1299,9 +1299,9 @@ Argomenti:
 
 </details>
 
-<!-- ******************************************  02 apr 2024   ****************************************** -->
+<!-- ******************************************  03 apr 2024   ****************************************** -->
 <details>
-    <summary><h3>02 apr 2024 ✔️</h3></summary>
+    <summary><h3>03 apr 2024 ✔️</h3></summary>
 
 Argomenti:
 - Identity Framework: utilizzo dello scaffolding.
