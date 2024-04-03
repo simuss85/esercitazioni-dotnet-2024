@@ -1,11 +1,11 @@
 ﻿@page
-@model CategoriaModel
+@model CaroselloModel
 @{
     string categoria = Model.Categoria!;
     ViewData["Title"] = categoria;
 
     string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
-    int index = 0;
+    int indexImmagine = 0;
 }
 
 <div class="mx-5">
@@ -13,12 +13,21 @@
     <div class="text-center">
 
         <h1 class="display-4">
-            <a class="link-categoria-carosello" asp-page="index" asp-route-categoria="@categoria">@categoria</a>
+            @if (categoria != "Tutte")
+            {
+                <a class="link-categoria-carosello" asp-page="index" asp-route-categoria="@categoria">@categoria</a>
+            }
+            else
+            {
+                <a class="link-categoria-carosello" asp-page="index">@categoria</a>
+            }
+
         </h1>
 
     </div>
 
     <!----------------------- carosello di immagini --------------------->
+
     <!-- se la categoria è vuota non viene in ogni caso visualizzata questa pagina -->
     <!-- perchè il link è disabilitato nella selezione delle categorie -->
     @if (Model.Immagini.Count() != 0)
@@ -43,7 +52,7 @@
                 @foreach (var img in Model.Immagini)
                 {
                     var stelle = @img.Voto;
-                    if (index == 0)
+                    if (indexImmagine == 0)
                     {
                         <div class="carousel-item active" data-bs-interval="1500">
                             <a asp-page="/Immagine" asp-route-id="@img.Id" asp-route-urlback="@url">
@@ -112,7 +121,7 @@
                             </div>
                         </div>
                     }
-                    index++;
+                    indexImmagine++;
                 }
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carosello" data-bs-slide="prev">
