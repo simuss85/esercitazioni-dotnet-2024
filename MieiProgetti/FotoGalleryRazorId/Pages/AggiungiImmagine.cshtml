@@ -1,0 +1,55 @@
+@page
+@model AggiungiImmagineModel
+@{
+    ViewData["Title"] = "Aggiungi Immagine";
+}
+
+<div class="container">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <!-------------------------- form aggiungi immagine ------------------------>
+    <div class="d-flex justify-content-center mt-5">
+        <form method="post">
+
+            <!-- Titolo -->
+            <div class="form-group">
+                <label for="titolo">Titolo</label>
+                <input type="text" class="form-control" name="titolo" />
+            </div>
+
+            <!-- Autore -->
+            <div class="form-group">
+                <label for="autore">Autore</label>
+                <input type="text" class="form-control" name="autore" />
+            </div>
+
+            <!-- Select Categoria -->
+            <label for="categoria">Categoria</label>
+            <select class="form-control" id="categoria" name="categoria" required>
+                <option value="">Seleziona una categoria</option>
+                @foreach (var cat in Model.Categorie)
+                {
+                    <option value="@cat">@cat</option>
+                }
+            </select>
+            <span asp-validation-for="Immagine!.Categoria" class="text-danger"></span>
+
+            <!-- Path -->
+            <div class="form-group">
+                <label for="path">Link Immagine</label>
+                <input type="text" class="form-control" name="path" required />
+            </div>
+            <span asp-validation-for="Immagine!.Path" class="text-danger"></span>
+            <br>
+
+            <!-- Submit Aggiungi -->
+            <button type="submit" class="btn btn-primary">Aggiungi</button>
+            <a asp-page="/Index" class="btn btn-primary" type="button">
+                Torna alle immagini
+            </a>
+        </form>
+    </div>
+</div>

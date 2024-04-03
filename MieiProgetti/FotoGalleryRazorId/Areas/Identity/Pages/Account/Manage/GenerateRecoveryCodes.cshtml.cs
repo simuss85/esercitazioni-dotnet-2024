@@ -50,7 +50,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
             var isTwoFactorEnabled = await _userManager.GetTwoFactorEnabledAsync(user);
             if (!isTwoFactorEnabled)
             {
-                throw new InvalidOperationException($"Cannot generate recovery codes for user because they do not have 2FA enabled.");
+                throw new InvalidOperationException($"Impossibile generare codici di ripristino per l'utente perché non ha la 2FA abilitata.");
             }
 
             return Page();
@@ -68,14 +68,14 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             if (!isTwoFactorEnabled)
             {
-                throw new InvalidOperationException($"Cannot generate recovery codes for user as they do not have 2FA enabled.");
+                throw new InvalidOperationException($"Impossibile generare codici di ripristino per l'utente poiché non ha la 2FA abilitata.");
             }
 
             var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
             RecoveryCodes = recoveryCodes.ToArray();
 
-            _logger.LogInformation("User with ID '{UserId}' has generated new 2FA recovery codes.", userId);
-            StatusMessage = "You have generated new recovery codes.";
+            _logger.LogInformation("L'utente con ID '{UserId}' ha generato nuovi codici di ripristino 2FA.", userId);
+            StatusMessage = "Hai generato nuovi codici di ripristino.";
             return RedirectToPage("./ShowRecoveryCodes");
         }
     }

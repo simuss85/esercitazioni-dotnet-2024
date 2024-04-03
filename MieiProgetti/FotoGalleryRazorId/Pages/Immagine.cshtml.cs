@@ -7,8 +7,8 @@ namespace FotoGalleryRazorId.Pages;
 
 public class ImmagineModel : PageModel
 {
-    [BindProperty]
-    public string? Nome { get; set; }
+    // [BindProperty]
+    // public string? Nome { get; set; }
     [BindProperty]
     public int Id { get; set; }
     [BindProperty]
@@ -67,8 +67,10 @@ public class ImmagineModel : PageModel
         idVoto++;
         double stelle = Stars;
 
+        string nome = User.Identity?.Name!.Split("@")[0]!;
+
         //salvo il voto nel file voti.json
-        voti.Add(new Voto { Id = idVoto, Nome = Nome, ImmagineId = Id, Stelle = stelle, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
+        voti.Add(new Voto { Id = idVoto, Nome = nome, ImmagineId = Id, Stelle = stelle, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
         System.IO.File.WriteAllText(jsonPath2, JsonConvert.SerializeObject(voti, Formatting.Indented));
 
         //recupero i dati del voto prima di aggiungere quello nuovo

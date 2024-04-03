@@ -19,6 +19,13 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+
+        /// <summary>
+        /// !!!
+        /// Memorizzo l'url di ritorno all'immagine precedente
+        /// </summary>
+        [BindProperty]
+        public string UrlBack { get; set; } //url di ritorno alla pagina
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
@@ -84,8 +91,11 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string urlBack, string returnUrl = null)
         {
+            _logger.LogInformation("UrlBack: {0}", urlBack);
+            UrlBack = urlBack;
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -115,7 +125,17 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+
+                    //!!! se la stringa urlBack non è nulla, dopo il login torna alla pagina che stava visualizzando
+                    if (!string.IsNullOrEmpty(UrlBack))
+                    {
+                        return LocalRedirect(UrlBack);  //torno all'immagine da commentare
+                    }
+                    else
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -132,7 +152,6 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
                     return Page();
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return Page();
         }

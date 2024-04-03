@@ -33,8 +33,8 @@
     "Id": 4,
     "Path": "/img/img_05.jpg",
     "Titolo": "Immagine 4",
-    "Voto": 1.3,
-    "NumeroVoti": 20,
+    "Voto": 1.4,
+    "NumeroVoti": 21,
     "Autore": "Autore 4",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -63,8 +63,8 @@
     "Id": 8,
     "Path": "/img/img_08.jpg",
     "Titolo": "Immagine 8",
-    "Voto": 1.4,
-    "NumeroVoti": 21,
+    "Voto": 1.6,
+    "NumeroVoti": 23,
     "Autore": "Autore 8",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -393,8 +393,8 @@
     "Id": 45,
     "Path": "https://images2.corriereobjects.it/methode_image/2014/08/20/Tecnologia/Foto%20Gallery/01_uncomfortable_MGZOOM.jpg",
     "Titolo": "Titolo 45",
-    "Voto": 5.0,
-    "NumeroVoti": 2,
+    "Voto": 4.7,
+    "NumeroVoti": 3,
     "Autore": "Autore 45",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -708,5 +708,15 @@
     "Autore": "Autore 84",
     "Data": "2024-03-28T00:00:00+01:00",
     "Categoria": "Cibo"
+  },
+  {
+    "Id": 85,
+    "Path": "https://media.gettyimages.com/id/555907555/it/foto/jack-russel-dog.jpg?s=612x612&w=gi&k=20&c=qxg__E9fXGbH-1j7PK2SJjAlui9pX8itGhpWZ7BCHco=",
+    "Titolo": "Pongo",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Boh",
+    "Data": "2024-04-03T00:00:00+02:00",
+    "Categoria": "Animali"
   }
 ]

@@ -69,7 +69,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [EmailAddress]
-            [Display(Name = "New email")]
+            [Display(Name = "Nuova email")]
             public string NewEmail { get; set; }
         }
 

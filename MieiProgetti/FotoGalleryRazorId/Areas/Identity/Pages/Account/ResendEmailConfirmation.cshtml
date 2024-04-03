@@ -1,15 +1,16 @@
 ﻿@page
 @model ResendEmailConfirmationModel
 @{
-    ViewData["Title"] = "Resend email confirmation";
+    ViewData["Title"] = "Reinvia email di conferma";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2>Enter your email.</h2>
-<hr />
-<div class="row">
+<h1 class="text-center mb-5">@ViewData["Title"]</h1>
+<h2 class="text-center">Inserisci la tua emali.</h2>
+
+<div class="row justify-content-center">
     <div class="col-md-4">
         <form method="post">
+            <hr>
             <div asp-validation-summary="All" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />

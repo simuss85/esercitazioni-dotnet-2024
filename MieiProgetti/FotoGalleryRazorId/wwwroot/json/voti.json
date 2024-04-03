@@ -648,5 +648,45 @@
     "Commento": null,
     "Visibile": true,
     "Moderato": false
+  },
+  {
+    "Id": 66,
+    "Nome": null,
+    "ImmagineId": 8,
+    "Stelle": 4.0,
+    "Data": "2024-04-03T00:00:00+02:00",
+    "Commento": "che bello",
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 67,
+    "Nome": "s.ussi",
+    "ImmagineId": 8,
+    "Stelle": 4.0,
+    "Data": "2024-04-03T00:00:00+02:00",
+    "Commento": "che bello",
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 68,
+    "Nome": "2s.ussi",
+    "ImmagineId": 4,
+    "Stelle": 4.0,
+    "Data": "2024-04-03T00:00:00+02:00",
+    "Commento": "sdsadsadas",
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 69,
+    "Nome": "s.ussi",
+    "ImmagineId": 45,
+    "Stelle": 4.0,
+    "Data": "2024-04-03T00:00:00+02:00",
+    "Commento": "fgfdgfdgd",
+    "Visibile": true,
+    "Moderato": false
   }
 ]

@@ -23,26 +23,11 @@
                     <th>Titolo</th>
                     <th>Autore</th>
                     <th>Data pubblicazione</th>
-                    <th>
-                        <div class="dropdown text-center">
-                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="bi bi-tools" /></i>
-                            </button>
-                            <!---------------------- bottone modifica -------------------------->
-                            <ul class="dropdown-menu p-0 ps-1 pb-1 pt-1" style="min-width: 8rem;">
-                                <li><button type="submit" class="dropdown-item" asp-page="/ModificaImmagine">
-                                        <i class="bi bi-command" /></i>
-                                        Modifica </button>
-                                        </ li>
-                            <!----------------------bottone elimina-------------------->
-                                <li><button type="submit" class="dropdown-item" asp-page="/EliminaImmagine"
-                                    style="color: red;">
-                                    <i class="bi bi-trash" /></i>Elimina
-                        </button></li>
-                            </ul>
-                        </div>
-                    </th>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <partial name="_DropdownModifica"></partial>
+                    }
+                    
 
                     </tr>
                 <tbody>
@@ -96,7 +81,7 @@
                         <td>@img.Autore</td>
                         <td>@img.Data.ToString("d")</td>
 
-                        <!------- nascondo i checkbox per l'utente user ------->
+            <!------- nascondo i checkbox per l'utente user ------->
             @if (User.IsInRole("Admin"))
             {
                             <td class="check-td">
@@ -106,7 +91,7 @@
                                 </div>
                             </td>
             }
-                        <!------------------------fine----------------------------------->
+            <!------------------------fine----------------------------------->
                     </tr>
     }
             </tbody>

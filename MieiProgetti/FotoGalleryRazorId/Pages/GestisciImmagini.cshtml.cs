@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace FotoGalleryRazorId.Pages;
 
 //GET: /Reserved/User
-[Authorize(Roles = "User")]
+[Authorize(Roles = "User, Admin")]
 public class GestisciImmaginiModel : PageModel
 {
     public int NumeroPagine { get; set; }

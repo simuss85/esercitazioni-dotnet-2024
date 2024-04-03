@@ -7,6 +7,7 @@
     {
         stelleImmagine = Model.Immagine.Voto;
     }
+    string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url
 }
 
 <div class="container">
@@ -62,7 +63,7 @@
         }
         else
         {
-            <a class="btn btn-danger text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login" asp-route-urlback="@url">Login</a>
 
         }
 
@@ -73,12 +74,15 @@
     <div class="collapse" id="collapseCommenta">
         <div class="card card-body w-75">
             <form method="post">
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="campoNome">Nome</label>
-                        <input id="campoNome" type="text" class="form-control" name="Nome" placeholder="Nome" required>
-                    </div>
+
+                <!--------------- sezione disabilitata a seguito del login -------------------->
+                @* <div class="row">
+                <div class="form-group col-6">
+                <label for="campoNome">Nome</label>
+                <input id="campoNome" type="text" class="form-control" name="Nome" placeholder="Nome" required>
                 </div>
+                </div> *@
+
                 <div class="form-group">
                     <label for="campoCommento">Commento</label>
                     <textarea id="campoCommento" class="form-control" name="Commento" rows="3"></textarea>
