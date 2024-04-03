@@ -1242,8 +1242,6 @@ Argomenti:
 Argomenti:
 - Identity Framework: utilizzo dello scaffolding.
 
-</details>
-
 ## Note
 - Esegui la procedura per lo **scaffolding**
 ```sh
@@ -1299,4 +1297,13 @@ Argomenti:
     }
 ```
 
+</details>
 
+<!-- ******************************************  02 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>02 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Identity Framework: utilizzo dello scaffolding.
+
+</details>
