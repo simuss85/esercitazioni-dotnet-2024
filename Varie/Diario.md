@@ -1307,3 +1307,12 @@ Argomenti:
 - Identity Framework: utilizzo dello scaffolding.
 
 </details>
+
+<!-- ******************************************  04 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>04 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Identity Framework.
+
+</details>
