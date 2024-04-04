@@ -17,14 +17,13 @@ public class GestisciImmaginiModel : PageModel
     public string jsonPath = @"wwwroot/json/immagini.json";
     public string jsonPath3 = @"wwwroot/json/categorie.json";
 
-    #region  Logger
     private readonly ILogger<GestisciImmaginiModel> _logger;
 
     public GestisciImmaginiModel(ILogger<GestisciImmaginiModel> logger)
     {
         _logger = logger;
     }
-    #endregion
+
 
     public void OnGet(int? pageIndex)
     {

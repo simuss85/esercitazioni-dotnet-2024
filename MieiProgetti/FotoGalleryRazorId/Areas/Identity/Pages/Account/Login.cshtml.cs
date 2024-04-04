@@ -71,7 +71,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Email richiesta")]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -79,7 +79,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Password richiesta")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -87,7 +87,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Mantieni l'accesso")]
             public bool RememberMe { get; set; }
         }
 

@@ -4,6 +4,14 @@
     ViewData["Title"] = "Modifica Immagine";
 
 }
+
+<!--Info (*) 
+    verifica il ModelState che contiene gli errori, cerca quello relativo all'oggetto che sto controllando
+    se ci sono errori, restituisce true, quindi seleziona l'opzione ternaria A = box-danger, nel caso 
+    invece l'errore non è esiste è null quindi il risultato dell'if ternario è false e scelgo l'opzione
+    B = "" cioè nessuna classe 
+-->
+
 <div class="mx-5">
     <!-------------------------- titolo della pagina ---------------------------->
     <div class="text-center">
@@ -27,8 +35,9 @@
                 <div class="d-flex justify-content-center flex-wrap text-center mt-5 mb-3">
                     @for (int i = 0; i < Model.Selezione.Count; i++)
                     {
-                        var id = Model.Selezione[i];
+                        var id = Model.Selezione[i]; //scelgo l'immagine corrispondente all'id selezionato
                         var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
+
                         if (immagine != null)
                         {
                             <!-- card che contiene i dati del form per ogni immagine selezionata -->
@@ -39,42 +48,42 @@
                                 <div class="card-body">
 
                                     <!-- Id dell'immagine passato in hidden -->
-                                    <input type="hidden" name="ImmaginiModificate[@i].Id" value="@id">
+                                    <input type="hidden" asp-for="ImgMod[i].Id" value="@id">
 
-                                    <!-- Titolo dell' immagine -->
+                                    <!-- Titolo -->
                                     <div class="form-group mb-1">
-                                        <label for="titolo">Titolo</label>
-                                        <input type="text" class="form-control" name="ImmaginiModificate[@i].Titolo"
-                                            placeholder="@immagine.Titolo" required />
+                                        <label asp-for="ImgMod[i].Titolo"></label>
+                                        <input asp-for="ImgMod[i].Titolo" placeholder="@immagine.Titolo"
+                                            onfocus="setPlaceholderToValue(this)" type="text"
+                                            class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Titolo"]?.Errors.Any() ?? false ? "box-danger" : "")" />
+                                        <span asp-validation-for="ImgMod[i].Titolo" class="text-danger"></span>
                                     </div>
 
-                                    <!-- Autore dell'immagine -->
+                                    <!-- Autore -->
                                     <div class="form-group mb-1">
-                                        <label for="autore">Autore</label>
-                                        <input type="text" class="form-control" name="ImmaginiModificate[@i].Autore"
-                                            placeholder="@immagine.Autore" required />
+                                        <label asp-for="ImgMod[i].Autore"></label>
+                                        <input asp-for="ImgMod[i].Autore" placeholder="@immagine.Autore"
+                                            onfocus="setPlaceholderToValue(this)" type="text"
+                                            class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Autore"]?.Errors.Any() ?? false ? "box-danger" : "")" />
+                                        <span asp-validation-for="ImgMod[i].Autore" class="text-danger"></span>
                                     </div>
 
                                     <!-- Select Categoria -->
-                                    <label for="categoria">Categoria</label>
-                                    <select class="form-control mb-1" id="categoria" name="ImmaginiModificate[@i].Categoria"
-                                        required>
-                                        <option value="">Seleziona una categoria</option>
-                                        @foreach (var cat in Model.Categorie)
-                                        {
-                                            <option value="@cat">@cat</option>
-                                        }
+                                    <label asp-for="ImgMod[i].Categoria"></label> <!-------------- leggi sopra (*)---------->
+                                    <select asp-for="ImgMod[i].Categoria" asp-items="Model.Categorie"
+                                        class="form-control mb-1 @(ViewData.ModelState["ImgMod["+@i+"].Categoria"]?.Errors.Any() ?? false ? "box-danger" : "")">
+                                        <option value="">Scegli categoria</option>
                                     </select>
-                                    <span asp-validation-for="@immagine.Categoria" class="text-danger"></span>
+                                    <span asp-validation-for="ImgMod[i].Categoria" class="text-danger"></span>
 
-                                    <!-- Link dell'immagine -->
-                                    <div class="form-group mb-1">
-                                        <label for="path">Link Immagine</label>
-                                        <input type="text" class="form-control" name="ImmaginiModificate[@i].Path"
-                                            value="@immagine.Path" />
+                                    <!-- Path -->
+                                    <div class="form-group">
+                                        <label asp-for="ImgMod[i].Path"></label> <!--------------- leggi sopra (*)---------->
+                                        <input asp-for="ImgMod[i].Path" value="@immagine.Path" type="text"
+                                            class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Path"]?.Errors.Any() ?? false ? "box-danger" : "")" />
                                     </div>
+                                    <span asp-validation-for="ImgMod[i].Path" class="text-danger"></span>
                                 </div>
-
                             </div>
                         }
                     }

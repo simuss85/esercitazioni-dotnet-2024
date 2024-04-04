@@ -1,0 +1,54 @@
+@page
+@model EliminaImmagineModel
+@{
+    ViewData["Title"] = "Elimina Immagine";
+}
+
+<div class="mx-5">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <!-------------------------- conferma di elimina immagini -------------------->
+    <div class="container mt-5">
+
+        @if (Model.Selezione.Count == 0) //se non ho selezionato alcuna immagine da eliminare
+        {
+            <div class="text-center">
+                <h2 class="mb-5" style="color: red;">Devi selezionare almeno un immagine</h2>
+                <a class="btn btn-primary" asp-page="/GestisciImmagini">Torna alle Immagini</a>
+            </div>
+        }
+        else //se ho selezionato 1 o piu immagini chiedo conferma di eliminazione
+        {
+            <h2 class="text-center">Vuoi eliminare le seguenti immagini?</h2>
+            <!-- sezione dei tasti di elimina o annulla -->
+            <div class="d-flex flex-row justify-content-center pt-3 pb-2">
+
+                <form method="post">
+                    <button type="submit" class="btn btn-danger">Elimina</button>
+                </form>
+                <a class="btn btn-primary ms-3" asp-page="/GestisciImmagini">Annulla</a>
+            </div>
+
+            <div class=" d-flex justify-content-center flex-wrap text-center mt-4">
+                @for (int i = 0; i < Model.Selezione.Count; i++)
+                {
+                    //scansiono tutti gli id nella lista Selezione e carico tutte le immagini
+                    //corrispondenti a questi id
+                    var id = Model.Selezione[i];
+                    var immagine = Model.Immagini.FirstOrDefault(i => i.Id == id);
+
+                    if (immagine != null)
+                    {
+                        <!-- card immagine arrotondata -->
+                        <div class=" mb-3 px-3">
+                            <div class="img-elimina rounded" style="background-image: url(@immagine.Path);"></div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>

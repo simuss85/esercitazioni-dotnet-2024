@@ -42,6 +42,7 @@ public class AggiungiImmagineModel : PageModel
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
         {
+            //log errore selezione
             _logger.LogInformation("Errore validazione modulo - " + DateTime.Now.ToString("T"));
             return Page();
         }
@@ -81,20 +82,4 @@ public class AggiungiImmagineModel : PageModel
         return RedirectToPage("/GestisciImmagini");
     }
 
-    public class InputModel
-    {
-        [Display(Name = "Titolo ")]
-        public string? Titolo { get; set; }
-
-        [Display(Name = "Autore ")]
-        public string? Autore { get; set; }
-
-        [Required(ErrorMessage = "Devi selezionare una categoria")]
-        [Display(Name = "Categoria")]
-        public string? Categoria { get; set; }
-
-        [Required(ErrorMessage = "Devi inserire un link")]
-        [Display(Name = "Link immagine")]
-        public string? Path { get; set; }
-    }
 }

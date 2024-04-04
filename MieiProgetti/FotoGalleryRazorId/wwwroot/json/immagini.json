@@ -728,5 +728,15 @@
     "Autore": "Autore 86",
     "Data": "2024-04-04T09:27:31.352798+02:00",
     "Categoria": "Sport"
+  },
+  {
+    "Id": 87,
+    "Path": "https://cms-imgp.jw-cdn.org/img/p/1102023313/univ/art/1102023313_univ_lsr_md.jpg",
+    "Titolo": "Persone 1",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 87",
+    "Data": "2024-04-04T09:38:32.9431425+02:00",
+    "Categoria": "Persone"
   }
 ]
