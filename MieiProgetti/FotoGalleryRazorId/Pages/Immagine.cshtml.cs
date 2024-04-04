@@ -7,16 +7,18 @@ namespace FotoGalleryRazorId.Pages;
 
 public class ImmagineModel : PageModel
 {
-    // [BindProperty]
-    // public string? Nome { get; set; }
     [BindProperty]
     public int Id { get; set; }
+
     [BindProperty]
-    public int Stars { get; set; }
+    public double Stars { get; set; }
+
     [BindProperty]
     public string? Commento { get; set; }
+
     [BindProperty]
     public string? UrlBack { get; set; }
+
     public required Immagine Immagine { get; set; }
     public required IEnumerable<Voto> Voti { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
@@ -39,47 +41,48 @@ public class ImmagineModel : PageModel
         //verifica log
         _logger.LogInformation("url back : {0}", urlBack);
 
+        // seleziono da tutte le immagini quella attuale
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.First(i => i.Id == id);
+
+        //carico i voti per la view della card immagine
         var jsonFile2 = System.IO.File.ReadAllText(jsonPath2);
         Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
 
     }
     public IActionResult OnPost()
     {
-        //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
+        //validazione input anche se non necessaria in questo caso
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        // _logger.LogInformation("Nome: {0}, Voto: {1}{2}{3}{4}{5}, Commento: {6}, IdImmagine: {7}", Nome, Stars[0].ToString(), Stars[1].ToString(), Stars[2].ToString(), Stars[3].ToString(), Stars[4].ToString(), Commento, Id);
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
         var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
         Immagine = immagini.First(i => i.Id == Id);
 
         var jsonFile2 = System.IO.File.ReadAllText(jsonPath2);
         var voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
-
         Voti = voti;
 
         int idVoto = voti.Count();
         idVoto++;
-        double stelle = Stars;
 
         string nome = User.Identity?.Name!.Split("@")[0]!;
 
         //salvo il voto nel file voti.json
-        voti.Add(new Voto { Id = idVoto, Nome = nome, ImmagineId = Id, Stelle = stelle, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
+        voti.Add(new Voto { Id = idVoto, Nome = nome, ImmagineId = Id, Stelle = Stars, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
         System.IO.File.WriteAllText(jsonPath2, JsonConvert.SerializeObject(voti, Formatting.Indented));
 
+        #region Modifica voto
         //recupero i dati del voto prima di aggiungere quello nuovo
         int numeroDiVoti = Immagine.NumeroVoti;
         double sommaVoti = Immagine.Voto * numeroDiVoti;
 
         //aggiorno con il nuovo voto
         numeroDiVoti++;
-        sommaVoti += stelle;
+        sommaVoti += Stars;
 
         double votoAggiornato = Math.Round(sommaVoti / numeroDiVoti * 1.0, 1);
 
@@ -94,6 +97,7 @@ public class ImmagineModel : PageModel
             }
         }
         System.IO.File.WriteAllText(jsonPath, JsonConvert.SerializeObject(immagini, Formatting.Indented));
+        #endregion
 
         return Page();
     }

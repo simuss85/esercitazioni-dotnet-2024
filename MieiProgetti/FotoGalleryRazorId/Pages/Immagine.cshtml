@@ -23,7 +23,7 @@
             <img src="@Model.Immagine!.Path" class="card-img-top" alt="@Model.Immagine.Titolo">
         </div>
         <div class="col-2 card-body p-2 mt-2">
-            <h5 class="card-text">@Model.Immagine.Titolo</h5>
+            <h5 class="card-text">@Model.Immagine!.Titolo</h5>
             <p class="card-text">Autore: @Model.Immagine.Autore</p>
             <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
             <p class="card-text">
@@ -73,16 +73,8 @@
     </p>
     <div class="collapse" id="collapseCommenta">
         <div class="card card-body w-75">
+
             <form method="post">
-
-                <!--------------- sezione disabilitata a seguito del login -------------------->
-                @* <div class="row">
-                <div class="form-group col-6">
-                <label for="campoNome">Nome</label>
-                <input id="campoNome" type="text" class="form-control" name="Nome" placeholder="Nome" required>
-                </div>
-                </div> *@
-
                 <div class="form-group">
                     <label for="campoCommento">Commento</label>
                     <textarea id="campoCommento" class="form-control" name="Commento" rows="3"></textarea>
@@ -97,7 +89,7 @@
                     <label class="star star-3" for="star-3"></label>
                     <input class="star star-2" id="star-2" type="radio" name="Stars" value="2" />
                     <label class="star star-2" for="star-2"></label>
-                    <input class="star star-1" id="star-1" type="radio" name="Stars" value="1" />
+                    <input class="star star-1" id="star-1" type="radio" name="Stars" value="1" required />
                     <label class="star star-1" for="star-1"></label>
                 </div>
                 <div>

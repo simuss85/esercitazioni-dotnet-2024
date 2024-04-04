@@ -688,5 +688,15 @@
     "Commento": "fgfdgfdgd",
     "Visibile": true,
     "Moderato": false
+  },
+  {
+    "Id": 70,
+    "Nome": "s.ussi",
+    "ImmagineId": 11,
+    "Stelle": 4.0,
+    "Data": "2024-04-04T00:00:00+02:00",
+    "Commento": null,
+    "Visibile": true,
+    "Moderato": false
   }
 ]

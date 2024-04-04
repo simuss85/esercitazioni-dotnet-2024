@@ -63,6 +63,7 @@ public class AggiungiImmagineModel : PageModel
         {
             Input.Titolo = $"Titolo {id}";
         }
+
         Immagine img = new()
         {
             Id = id,
@@ -73,7 +74,6 @@ public class AggiungiImmagineModel : PageModel
             Autore = Input.Autore,
             Data = DateTime.Now,
             Categoria = Input.Categoria
-
         };
 
         immagini.Add(img);
