@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using FotoGalleryRazorId.Models;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FotoGalleryRazorId.Pages;
 
@@ -11,25 +14,28 @@ public class ImmagineModel : PageModel
     // public string? Nome { get; set; }
     [BindProperty]
     public int Id { get; set; }
+
     [BindProperty]
+    [Range(1, 5, ErrorMessage = "Seleziona almeno 1 stella")]
     public int Stars { get; set; }
+
     [BindProperty]
     public string? Commento { get; set; }
+
     [BindProperty]
     public string? UrlBack { get; set; }
+
     public required Immagine Immagine { get; set; }
     public required IEnumerable<Voto> Voti { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
     public string jsonPath2 = @"wwwroot/json/voti.json";
 
-    #region Logger
     private readonly ILogger<ImmagineModel> _logger;
 
     public ImmagineModel(ILogger<ImmagineModel> logger)
     {
         _logger = logger;
     }
-    #endregion
 
     public void OnGet(int id, string urlBack)
     {
@@ -66,6 +72,8 @@ public class ImmagineModel : PageModel
         int idVoto = voti.Count();
         idVoto++;
         double stelle = Stars;
+
+        _logger.LogInformation("Stelle assegnate: {0}", Stars);
 
         string nome = User.Identity?.Name!.Split("@")[0]!;
 

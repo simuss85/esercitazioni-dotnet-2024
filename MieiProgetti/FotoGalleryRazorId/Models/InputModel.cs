@@ -16,7 +16,6 @@ public class InputModel
     [Display(Name = "Categoria")]
     public string? Categoria { get; set; }
 
-
     [Required(ErrorMessage = "Devi inserire un link")]
     [Display(Name = "Link immagine")]
     [Url(ErrorMessage = "Url non valido")]
