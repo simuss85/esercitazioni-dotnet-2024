@@ -19,19 +19,19 @@ public class ImmagineModel : PageModel
     [BindProperty]
     public string? UrlBack { get; set; }
 
+    public string? NomeUtente { get; set; }
+    public bool VotoAttivo { get; set; }
     public required Immagine Immagine { get; set; }
     public required IEnumerable<Voto> Voti { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
     public string jsonPath2 = @"wwwroot/json/voti.json";
 
-    #region Logger
     private readonly ILogger<ImmagineModel> _logger;
 
     public ImmagineModel(ILogger<ImmagineModel> logger)
     {
         _logger = logger;
     }
-    #endregion
 
     public void OnGet(int id, string urlBack)
     {
@@ -48,6 +48,27 @@ public class ImmagineModel : PageModel
         //carico i voti per la view della card immagine
         var jsonFile2 = System.IO.File.ReadAllText(jsonPath2);
         Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
+
+        if (User.IsInRole("User"))
+        {
+            //ottengo il nome dell'utente
+            NomeUtente = User.Identity?.Name!;
+
+            _logger.LogInformation("NomeUtente: {0} - ImmagineId: {1}", NomeUtente, id);
+
+            //verifico se l'utente ha gia votato l'immagine
+            if (Voti.FirstOrDefault(v => v.Nome == NomeUtente && v.ImmagineId == id) == null)
+            {
+                _logger.LogInformation("Voto attivo");
+                VotoAttivo = true;
+            }
+            else
+            {
+                _logger.LogInformation("Voto disabilitato");
+                VotoAttivo = false;
+            }
+        }
+
 
     }
     public IActionResult OnPost()
@@ -69,10 +90,11 @@ public class ImmagineModel : PageModel
         int idVoto = voti.Count();
         idVoto++;
 
-        string nome = User.Identity?.Name!.Split("@")[0]!;
+        //carico il nome utente attuale (completo)
+        NomeUtente = User.Identity?.Name!;
 
         //salvo il voto nel file voti.json
-        voti.Add(new Voto { Id = idVoto, Nome = nome, ImmagineId = Id, Stelle = Stars, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
+        voti.Add(new Voto { Id = idVoto, Nome = NomeUtente, ImmagineId = Id, Stelle = Stars, Data = DateTime.Today, Commento = Commento, Visibile = true, Moderato = false });
         System.IO.File.WriteAllText(jsonPath2, JsonConvert.SerializeObject(voti, Formatting.Indented));
 
         #region Modifica voto

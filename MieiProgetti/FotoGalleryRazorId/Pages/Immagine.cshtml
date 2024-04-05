@@ -56,10 +56,14 @@
     <p class="d-inline-flex gap-1">
         @if (User!.IsInRole("User"))
         {
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
-                aria-expanded="false" aria-controls="collapseCommenta">
-                Vota
-            </a>
+            if (Model.VotoAttivo)
+            {
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
+                    aria-expanded="false" aria-controls="collapseCommenta">
+                    Vota
+                </a>
+            }
+
         }
         else
         {
