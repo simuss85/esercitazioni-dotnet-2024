@@ -36,7 +36,7 @@ public class ModeraCommentiModel : PageModel
         //log che visualizza la pagina selezionata
         _logger.LogInformation("ModeraCommento - PageIndex: {0}", pageIndex);
 
-        ElementiPerPagina = 20;
+        ElementiPerPagina = 17;
         PageIndex = pageIndex;
         Reverse = reverse;
 
@@ -45,7 +45,7 @@ public class ModeraCommentiModel : PageModel
         //seleziono solo i commenti che non sono vuoti ordinati per ultimo commento
         Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile)!.Where(v => !string.IsNullOrWhiteSpace(v.Commento));
 
-        //gestione ordinamneto tabella
+        //gestione ordinameneto tabella
         switch (reverse)
         {
             case "idOff":

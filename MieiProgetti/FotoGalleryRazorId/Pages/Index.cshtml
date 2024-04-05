@@ -29,30 +29,32 @@
         }
 
     </div>
+    <div class="row mb-md-2">
+        <!----------------------------- controlli per gli utenti registrati -------------->
+        @if (User.IsInRole("User"))
+        {
+            <!--------------------------- tato play carosello ---------------------------->
+            <div class="col-6 col-md-11 text-center text-md-end">
+                <a class="btn" asp-page="/Carosello" asp-route-categoria="@categoria"
+                    style="color: blue; width: fit-content;"><i class="bi bi-collection-play-fill"></i> Play </a>
+            </div>
 
-    <!----------------------------- controlli per gli utenti registrati -------------->
-    @if (User.IsInRole("User"))
-    {
-        <!--------------------------- tato play carosello ---------------------------->
-        <div class="text-end me-5">
-            <a class="btn" asp-page="/Carosello" asp-route-categoria="@categoria"
-                style="color: blue; width: fit-content;"><i class="bi bi-collection-play-fill"></i> Play </a>
-        </div>
+            <!-------------------------- dropdown filtro categorie ------------------------>
+            <div class="col-6 col-md-1 dropdown text-center text-md-end">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-archive-fill"></i>
+                </button>
+                <ul class="dropdown-menu" style=" min-width: 8rem;">
+                    <li><a class="dropdown-item" asp-page="/Index">Tutte</a></li>
+                    @foreach (var c in Model.Categorie)
+                    {
+                        <li><a class="dropdown-item" asp-page="/Index" asp-route-categoria="@c">@c</a></li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
 
-        <!-------------------------- dropdown filtro categorie ------------------------>
-        <div class="dropdown text-end">
-            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-archive-fill"></i>
-            </button>
-            <ul class="dropdown-menu" style=" min-width: 8rem;">
-                <li><a class="dropdown-item" asp-page="/Index">Tutte</a></li>
-                @foreach (var c in Model.Categorie)
-                {
-                    <li><a class="dropdown-item" asp-page="/Index" asp-route-categoria="@c">@c</a></li>
-                }
-            </ul>
-        </div>
-    }
 
     <!---------------------- row delle immagini ------------------------>
     <div class="d-flex justify-content-center flex-wrap">

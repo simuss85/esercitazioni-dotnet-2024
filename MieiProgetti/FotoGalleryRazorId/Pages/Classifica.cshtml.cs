@@ -40,7 +40,7 @@ public class ClassificaModel : PageModel
         TotaleImmagini = Immagini.Count();
         _logger.LogInformation("Totale immagini: {0}", TotaleImmagini);
 
-        //gestione ordinamneto tabella
+        //gestione ordinameneto tabella
         switch (reverse)
         {
             case "votoOff":

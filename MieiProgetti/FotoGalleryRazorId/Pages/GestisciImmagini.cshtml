@@ -18,17 +18,64 @@
         <table class="table text-center table-striped align-middle mt-1">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Id
+                        @if (Model.Reverse != "idOn")
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="idOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="idOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
                     <th>Immagine</th>
-                    <th>Titolo</th>
-                    <th>Autore</th>
-                    <th>Data pubblicazione</th>
+
+                    <th>Titolo
+                        @if (Model.Reverse != "titoloOn")
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="titoloOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="titoloOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Autore
+                        @if (Model.Reverse != "autoreOn")
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="autoreOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="autoreOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Data pubblicazione
+                        @if (Model.Reverse != "dataOn")
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="dataOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-page="/GestisciImmagini" asp-route-reverse="dataOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
                     @if (User.IsInRole("Admin"))
                     {
                         <partial name="_DropdownModifica"></partial>
                     }
-                    
-
                     </tr>
                 <tbody>
         @foreach (var img in Model.Immagini)
@@ -109,7 +156,7 @@
             </li>
         @for (int i = 1; i <= Model.NumeroPagine; i++)
         {
-            if (i == Model.PageIndex) //indica la pagina attiva
+            if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
             {
                     <li class="page-item active"><a class="page-link" asp-page="/GestisciImmagini"
                             asp-route-pageindex="@i">@i</a></li>
