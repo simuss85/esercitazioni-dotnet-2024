@@ -48,12 +48,12 @@
                                 <div class="card-body">
 
                                     <!-- Id dell'immagine passato in hidden -->
-                                    <input type="hidden" asp-for="ImgMod[i].Id" value="@id">
+                                    <input asp-for="ImgMod[i].Id" value="@id">
 
                                     <!-- Titolo -->
                                     <div class="form-group mb-1">
                                         <label asp-for="ImgMod[i].Titolo"></label>
-                                        <input asp-for="ImgMod[i].Titolo" placeholder="@immagine.Titolo"
+                                        <input type="text" asp-for="ImgMod[i].Titolo" placeholder="@immagine.Titolo"
                                             onfocus="setPlaceholderToValue(this)" type="text"
                                             class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Titolo"]?.Errors.Any() ?? false ? "box-danger" : "")" />
                                         <span asp-validation-for="ImgMod[i].Titolo" class="text-danger"></span>
@@ -62,7 +62,7 @@
                                     <!-- Autore -->
                                     <div class="form-group mb-1">
                                         <label asp-for="ImgMod[i].Autore"></label>
-                                        <input asp-for="ImgMod[i].Autore" placeholder="@immagine.Autore"
+                                        <input type="text" asp-for="ImgMod[i].Autore" placeholder="@immagine.Autore"
                                             onfocus="setPlaceholderToValue(this)" type="text"
                                             class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Autore"]?.Errors.Any() ?? false ? "box-danger" : "")" />
                                         <span asp-validation-for="ImgMod[i].Autore" class="text-danger"></span>
@@ -79,7 +79,7 @@
                                     <!-- Path -->
                                     <div class="form-group">
                                         <label asp-for="ImgMod[i].Path"></label> <!--------------- leggi sopra (*)---------->
-                                        <input asp-for="ImgMod[i].Path" value="@immagine.Path" type="text"
+                                        <input type="text" asp-for="ImgMod[i].Path" value="@immagine.Path" type="text"
                                             class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Path"]?.Errors.Any() ?? false ? "box-danger" : "")" />
                                     </div>
                                     <span asp-validation-for="ImgMod[i].Path" class="text-danger"></span>

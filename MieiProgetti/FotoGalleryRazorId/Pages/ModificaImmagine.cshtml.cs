@@ -98,6 +98,7 @@ public class ModificaImmagineModel : PageModel
 
     public class InputModelMod : InputModel
     {
+        [HiddenInput]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Devi inserire un titolo")]
