@@ -137,19 +137,14 @@ label.star:before {
 /*----------------------- categorie ------------------*/
 .link-categoria {
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.212);
-  background-color: rgba(240, 255, 253, 0.342);
+  color: white;
+  background-color: #5f99c3a1;
+  border: ridge;
   border-radius: 1rem;
   padding: 2%;
-}
 
-.link-categoria-carosello {
-  text-decoration: none;
-  color: black;
-  background-color: white;
-
-  & :active {
-    background-color: white;
+  &:hover {
+    color: #0a1522;
   }
 }
 
@@ -192,9 +187,14 @@ label.star:before {
 }
 
 /*------------------ carosello ------------------------ */
-.link-categoria {
+.link-categoria-carosello {
   text-decoration: none;
   color: black;
+  background-color: white;
+
+  & :active {
+    background-color: white;
+  }
 }
 
 .carosel-label {
