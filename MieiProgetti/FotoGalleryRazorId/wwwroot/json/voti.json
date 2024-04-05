@@ -978,5 +978,25 @@
     "Commento": "hhfghfghfg",
     "Visibile": false,
     "Moderato": true
+  },
+  {
+    "Id": 99,
+    "Nome": "2s.ussi@yahoo.it",
+    "ImmagineId": 2,
+    "Stelle": 3.0,
+    "Data": "2024-04-05T00:00:00+02:00",
+    "Commento": null,
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 100,
+    "Nome": "2s.ussi@yahoo.it",
+    "ImmagineId": 3,
+    "Stelle": 2.0,
+    "Data": "2024-04-05T00:00:00+02:00",
+    "Commento": null,
+    "Visibile": true,
+    "Moderato": false
   }
 ]

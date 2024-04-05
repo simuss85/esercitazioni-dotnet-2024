@@ -14,7 +14,7 @@
     "Path": "/img/img_02.jpg",
     "Titolo": "Immagine 2",
     "Voto": 4.3,
-    "NumeroVoti": 27,
+    "NumeroVoti": 28,
     "Autore": "Autore 2",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -24,7 +24,7 @@
     "Path": "/img/img_03.jpg",
     "Titolo": "Immagine 3",
     "Voto": 1.6,
-    "NumeroVoti": 23,
+    "NumeroVoti": 24,
     "Autore": "Autore 3",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -170,16 +170,6 @@
     "Categoria": "Sport"
   },
   {
-    "Id": 20,
-    "Path": "https://i0.wp.com/cms.babbel.news/wp-content/uploads/2021/07/Most_Popular_Sports_By_Country-2.png",
-    "Titolo": "Titolo 20",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 20",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": "Sport"
-  },
-  {
     "Id": 21,
     "Path": "https://www.visitmorocco.com/sites/default/files/thumbnails/image/maigrir-vite-sans-r%C3%A9gime-sans-sport-niaque-gain-vitesse-reussir-success.jpg",
     "Titolo": "Titolo 21",
@@ -312,7 +302,7 @@
   {
     "Id": 36,
     "Path": "https://www.unicusano.it/blog/wp-content/uploads/2018/11/come-conoscere-nuove-persone-1.jpg",
-    "Titolo": "Titolo 36",
+    "Titolo": "Titolo 36x",
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Autore 36",
@@ -322,7 +312,7 @@
   {
     "Id": 37,
     "Path": "https://www.notaiochiambretti.it/wp-content/uploads/2019/04/famiglia.jpg",
-    "Titolo": "Titolo 37",
+    "Titolo": "Titolo 37x",
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Autore 37",
@@ -332,7 +322,7 @@
   {
     "Id": 39,
     "Path": "https://www.psicologionline.net/uploads/article/cover/personeaffascinanti20210628095844.jpg",
-    "Titolo": "Titolo 39",
+    "Titolo": "Titolo 39x",
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Autore 39",
@@ -747,6 +737,16 @@
     "NumeroVoti": 1,
     "Autore": "Autore 89",
     "Data": "2024-04-05T10:30:26.496196+02:00",
+    "Categoria": "Animali"
+  },
+  {
+    "Id": 90,
+    "Path": "https://www.viridea.it/wp-content/uploads/2019/06/consiglio-cosa-fare-casa-arriva-gatto.jpg",
+    "Titolo": "Gatto",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Cat",
+    "Data": "2024-04-05T11:53:44.633818+02:00",
     "Categoria": "Animali"
   }
 ]

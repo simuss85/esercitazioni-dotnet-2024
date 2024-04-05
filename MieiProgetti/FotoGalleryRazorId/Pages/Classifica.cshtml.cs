@@ -13,7 +13,7 @@ public class ClassificaModel : PageModel
     public int NumeroPagine { get; set; }
     public int? PageIndex { get; set; }
     public int ElementiPerPagina { get; set; }
-    public bool Reverse { get; set; }
+    public string? Reverse { get; set; }
     public int TotaleImmagini { get; set; }
     public required IEnumerable<Immagine> Immagini { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
@@ -27,7 +27,7 @@ public class ClassificaModel : PageModel
     }
     #endregion
 
-    public void OnGet(int? pageIndex, bool reverse)
+    public void OnGet(int? pageIndex, string reverse = "votoOff")
     {
         //log che visualizza la pagina selezionata
         _logger.LogInformation("Classifica - PageIndex: {0}", pageIndex);
@@ -36,17 +36,52 @@ public class ClassificaModel : PageModel
         PageIndex = pageIndex;
         Reverse = reverse;
 
-        _logger.LogInformation("Classifica - Numero Pagina: {0}, Reverse {1}", PageIndex, reverse);
+        _logger.LogInformation("Classifica - Numero Pagina: {0}, Reverse: {1}", PageIndex, reverse);
         var jsonFile = System.IO.File.ReadAllText(jsonPath);
-        Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.OrderByDescending(i => i.Voto);
+        Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
+
         TotaleImmagini = Immagini.Count();
         _logger.LogInformation("Totale immagini: {0}", TotaleImmagini);
-        if (reverse)
+
+        //gestione ordinamneto tabella
+
+        switch (reverse)
         {
-            Immagini = Immagini.Reverse();
+            case "votoOff":
+                Immagini = Immagini.OrderByDescending(i => i.Voto);
+                break;
+
+            case "votoOn":
+                Immagini = Immagini.OrderBy(i => i.Voto);
+                break;
+
+            case "dataOff":
+                Immagini = Immagini.OrderByDescending(i => i.Data);
+                break;
+
+            case "dataOn":
+                Immagini = Immagini.OrderBy(i => i.Data);
+                break;
+
+            case "titoloOff":
+                Immagini = Immagini.OrderByDescending(i => i.Titolo);
+                break;
+
+            case "titoloOn":
+                Immagini = Immagini.OrderBy(i => i.Titolo);
+                break;
+
+            case "autoreOff":
+                Immagini = Immagini.OrderByDescending(i => i.Autore);
+                break;
+
+            case "autoreOn":
+                Immagini = Immagini.OrderBy(i => i.Autore);
+                break;
+
+            default:
+                break;
         }
-
-
 
         NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / ElementiPerPagina);
         Immagini = Immagini.Skip(((pageIndex ?? 1) - 1) * ElementiPerPagina).Take(ElementiPerPagina);
