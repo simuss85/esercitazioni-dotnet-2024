@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace FotoGalleryRazorId.Pages;
 
-//GET: /Reserved/User
+//GET: /Reserved/Admin
 [Authorize(Roles = "Admin")]
 public class ModeraCommentiModel : PageModel
 {
@@ -21,32 +21,71 @@ public class ModeraCommentiModel : PageModel
     public int NumeroPagine { get; set; }
     public int? PageIndex { get; set; }
     public int ElementiPerPagina { get; set; }
-
+    public string? Reverse { get; set; }    //gestisce filtri di ordinamento
 
     public string jsonPath2 = @"wwwroot/json/voti.json";
 
-    #region  Logger
     private readonly ILogger<ModeraCommentiModel> _logger;
-
     public ModeraCommentiModel(ILogger<ModeraCommentiModel> logger)
     {
         _logger = logger;
     }
-    #endregion
 
-    public void OnGet(int? pageIndex)
+    public void OnGet(int? pageIndex, string reverse = "idOff")
     {
         //log che visualizza la pagina selezionata
         _logger.LogInformation("ModeraCommento - PageIndex: {0}", pageIndex);
 
         ElementiPerPagina = 20;
         PageIndex = pageIndex;
+        Reverse = reverse;
 
         var jsonFile = System.IO.File.ReadAllText(jsonPath2);
 
         //seleziono solo i commenti che non sono vuoti ordinati per ultimo commento
-        Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile)!.Where(v => !string.IsNullOrWhiteSpace(v.Commento)).OrderByDescending(i => i.Id);
+        Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile)!.Where(v => !string.IsNullOrWhiteSpace(v.Commento));
 
+        //gestione ordinamneto tabella
+        switch (reverse)
+        {
+            case "idOff":
+                Voti = Voti.OrderByDescending(v => v.Id);
+                break;
+
+            case "idOn":
+                Voti = Voti.OrderBy(v => v.Id);
+                break;
+
+            case "dataOff":
+                Voti = Voti.OrderByDescending(v => v.Data);
+                break;
+
+            case "dataOn":
+                Voti = Voti.OrderBy(v => v.Data);
+                break;
+
+            case "utenteOff":
+                Voti = Voti.OrderByDescending(v => v.Nome);
+                break;
+
+            case "utenteOn":
+                Voti = Voti.OrderBy(v => v.Nome);
+                break;
+
+            case "commentoOff":
+                Voti = Voti.OrderByDescending(v => v.Commento);
+                break;
+
+            case "commentoOn":
+                Voti = Voti.OrderBy(v => v.Commento);
+                break;
+
+            default:
+                Voti = Voti.OrderByDescending(v => v.Id);
+                break;
+        }
+
+        //paginazione
         NumeroPagine = (int)Math.Ceiling((double)Voti.Count() / ElementiPerPagina);
         Voti = Voti.Skip(((pageIndex ?? 1) - 1) * ElementiPerPagina).Take(ElementiPerPagina);
     }

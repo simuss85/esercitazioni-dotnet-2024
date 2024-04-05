@@ -13,19 +13,16 @@ public class ClassificaModel : PageModel
     public int NumeroPagine { get; set; }
     public int? PageIndex { get; set; }
     public int ElementiPerPagina { get; set; }
-    public string? Reverse { get; set; }
     public int TotaleImmagini { get; set; }
+    public string? Reverse { get; set; }    //gestisce filtri di ordinamento
     public required IEnumerable<Immagine> Immagini { get; set; }
     public string jsonPath = @"wwwroot/json/immagini.json";
 
-    #region Logger
     private readonly ILogger<ClassificaModel> _logger;
-
     public ClassificaModel(ILogger<ClassificaModel> logger)
     {
         _logger = logger;
     }
-    #endregion
 
     public void OnGet(int? pageIndex, string reverse = "votoOff")
     {
@@ -44,7 +41,6 @@ public class ClassificaModel : PageModel
         _logger.LogInformation("Totale immagini: {0}", TotaleImmagini);
 
         //gestione ordinamneto tabella
-
         switch (reverse)
         {
             case "votoOff":
@@ -80,9 +76,11 @@ public class ClassificaModel : PageModel
                 break;
 
             default:
+                Immagini = Immagini.OrderByDescending(i => i.Voto);
                 break;
         }
 
+        //paginazione 
         NumeroPagine = (int)Math.Ceiling((double)Immagini.Count() / ElementiPerPagina);
         Immagini = Immagini.Skip(((pageIndex ?? 1) - 1) * ElementiPerPagina).Take(ElementiPerPagina);
     }
