@@ -14,14 +14,12 @@ public class IndexModel : PageModel
     public string jsonPath = @"wwwroot/json/immagini.json";
     public string jsonPath3 = @"wwwroot/json/categorie.json";
 
-    #region  Logger
     private readonly ILogger<IndexModel> _logger;
 
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
     }
-    #endregion
 
     public void OnGet(int? pageIndex, string? categoria)
     {
