@@ -98,6 +98,21 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public string Alias { get; set; }
+
+            [Required]
+            [Display(Name = "Nome")]
+            public string Nome { get; set; }
+
+            [Required]
+            [Display(Name = "Cognome")]
+            public string Cognome { get; set; }
+
+            [Required]
+            [Range(18, 99, ErrorMessage = "Devi avere 18 anni!!!")]
+            [Display(Name = "Età")]
+            public int Eta { get; set; }
         }
 
 
@@ -113,15 +128,25 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new AppUser
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Alias = Input.Email.Split("@")[0],
+                    Nome = Input.Nome,
+                    Cognome = Input.Cognome,
+                    Eta = Input.Eta
+                };
+                // var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                // await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                // await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    await _userManager.AddToRoleAsync(user, "User");    //!!! aggiungo il ruolo User
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
