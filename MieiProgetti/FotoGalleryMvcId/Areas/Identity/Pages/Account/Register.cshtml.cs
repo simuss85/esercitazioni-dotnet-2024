@@ -85,7 +85,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Il {0} deve contenere almeno {2} e un massimo di {1} caratteri.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -95,8 +95,8 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Conferma password")]
+            [Compare("Password", ErrorMessage = "La password e la password di conferma non corrispondono.")]
             public string ConfirmPassword { get; set; }
 
             public string Alias { get; set; }
@@ -128,24 +128,21 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AppUser
-                {
-                    UserName = Input.Email,
-                    Email = Input.Email,
-                    Alias = Input.Email.Split("@")[0],
-                    Nome = Input.Nome,
-                    Cognome = Input.Cognome,
-                    Eta = Input.Eta
-                };
-                // var user = CreateUser();
 
-                // await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                // await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                var user = CreateUser();
+                //!!! Inseriti i nuovi attributi
+                user.Alias = Input.Email.Split("@")[0];
+                user.Nome = Input.Nome;
+                user.Cognome = Input.Cognome;
+                user.Eta = Input.Eta;
+
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("L'utente ha creato un nuovo account con password.");
                     await _userManager.AddToRoleAsync(user, "User");    //!!! aggiungo il ruolo User
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -158,7 +155,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        $"Per favore conferma il tuo account tramite <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>cliccando qui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
