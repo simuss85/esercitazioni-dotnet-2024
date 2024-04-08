@@ -84,7 +84,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Il {0} deve contenere almeno {2} e un massimo di {1} caratteri.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -94,8 +94,8 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Conferma password")]
+            [Compare("Password", ErrorMessage = "La password e la password di conferma non corrispondono.")]
             public string ConfirmPassword { get; set; }
         }
 

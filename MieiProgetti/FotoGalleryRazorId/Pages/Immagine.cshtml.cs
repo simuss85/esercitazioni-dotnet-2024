@@ -68,8 +68,6 @@ public class ImmagineModel : PageModel
                 VotoAttivo = false;
             }
         }
-
-
     }
     public IActionResult OnPost()
     {
