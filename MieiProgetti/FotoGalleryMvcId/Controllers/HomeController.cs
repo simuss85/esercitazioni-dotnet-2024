@@ -47,9 +47,26 @@ public class HomeController : Controller
     }
 
 
-    public IActionResult Privacy()
+    public IActionResult Immagine(int id, string urlBack)
     {
-        return View();
+        var model = new ImmagineViewModel
+        {
+            // memorizzo il valore passato dalla pagina precedente
+            UrlBack = urlBack,
+
+        };
+
+        //verifica log
+        _logger.LogInformation("url back : {0}", urlBack);
+
+        // seleziono da tutte le immagini quella attuale
+        var jsonFile = System.IO.File.ReadAllText(model.jsonPath);
+        model.Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.First(i => i.Id == id);
+
+        //carico i voti per la view della card immagine
+        var jsonFile2 = System.IO.File.ReadAllText(model.jsonPath2);
+        model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
+        return View(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
