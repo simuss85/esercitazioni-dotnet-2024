@@ -6,7 +6,7 @@
     {
         stelleImmagine = Model.Immagine.Voto;
     }
-    @* string url = HttpContext.Request.Path + HttpContext.Request.QueryString; //memorizzo url *@
+
 }
 
 <div class="container">
@@ -20,32 +20,36 @@
     <div class="row border border-2 mx-2">
         <div class="col-12 col-md-10 p-2 my-2">
             <img src="@Model.Immagine!.Path" class="card-img-top" alt="@Model.Immagine.Titolo">
+
         </div>
         <div class="col-2 card-body p-2 mt-2">
-            <h5 class="card-text">@Model.Immagine!.Titolo</h5>
-            <p class="card-text">Autore: @Model.Immagine.Autore</p>
-            <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
-            <p class="card-text">
+            @if (Model.Immagine != null)
+            {
+                <h5 class="card-text">@Model.Immagine.Titolo</h5>
+                <p class="card-text">Autore: @Model.Immagine.Autore</p>
+                <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
+                <p class="card-text">
 
-                <span class="px-1">@Model.Immagine.Voto</span>
-                @for (int i = 0; i < 5; i++)
-                {
-                    if (stelleImmagine >= 1)
+                    <span class="px-1">@Model.Immagine.Voto</span>
+                    @for (int i = 0; i < 5; i++)
                     {
-                        <span class="bi bi-star-fill"></span>
+                        if (stelleImmagine >= 1)
+                        {
+                            <span class="bi bi-star-fill"></span>
+                        }
+                        else if (stelleImmagine > 0)
+                        {
+                            <span class="bi bi-star-half"></span>
+                        }
+                        else
+                        {
+                            <span class="bi bi-star"></span>
+                        }
+                        stelleImmagine--;
                     }
-                    else if (stelleImmagine > 0)
-                    {
-                        <span class="bi bi-star-half"></span>
-                    }
-                    else
-                    {
-                        <span class="bi bi-star"></span>
-                    }
-                    stelleImmagine--;
-                }
-                <span class="numero-voti px-1">(@Model.Immagine.NumeroVoti)</span>
-            </p>
+                    <span class="numero-voti px-1">(@Model.Immagine.NumeroVoti)</span>
+                </p>
+            }
         </div>
     </div>
 </div>
@@ -53,21 +57,12 @@
 <!--------------- sezione inserimento voto collapse -------------------------->
 <div class="container mt-4 ps-4">
     <p class="d-inline-flex gap-1">
-        @if (User!.IsInRole("User"))
+        @if (Model.VotoAttivo)
         {
-            if (Model.VotoAttivo)
-            {
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
-                    aria-expanded="false" aria-controls="collapseCommenta">
-                    Vota
-                </a>
-            }
-
-        }
-        else
-        {
-            <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login"> @*asp-route-urlback="@url"*@Login</a>
-
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
+                aria-expanded="false" aria-controls="collapseCommenta">
+                Vota
+            </a>
         }
 
         <a href="@Model.UrlBack" class="btn btn-primary" type="button">
@@ -106,7 +101,7 @@
 
         @foreach (var voto in Model.Voti!)
         {
-            if (Model.Immagine.Id == voto.ImmagineId)
+            if (Model.Immagine!.Id == voto.ImmagineId)
             {
                 var stelle = @voto.Stelle;
                 <div class="card">
@@ -141,7 +136,6 @@
                             <p class="card-text moderato">Commento censurato</p>
 
                         }
-
 
                     </div>
                 </div>

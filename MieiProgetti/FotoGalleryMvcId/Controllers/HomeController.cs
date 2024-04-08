@@ -5,22 +5,32 @@ using Newtonsoft.Json;
 
 namespace FotoGalleryMvcId.Controllers;
 
+/// <summary>
+/// Controller principale utenti non registrati.
+/// </summary>
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
+    /// <summary>
+    /// Costruttore del controller HomeController.
+    /// </summary>
+    /// <param name="logger">Logger per la registrazione di informazioni, avvisi, errori, ecc.</param>
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
     }
 
     /// <summary>
-    /// GET: Utenti non registrati
+    /// Azione per la visualizzazione della pagina principale con l'elenco delle immagini.
     /// </summary>
-    /// <param name="pageIndex">La pagina attuale attiva</param>
-    /// <returns>Home/Index</returns>
-    public IActionResult Index(int? pageIndex)
+    /// <param name="pageIndex">Indice della pagina selezionata.</param>
+    /// <returns>La vista Index con il modello IndexViewModel.</returns>
+    public IActionResult Index(int? pageIndex = 1)
     {
+        //memorizzo url per il ritorno
+        string url = HttpContext.Request.Path + HttpContext.Request.QueryString;
+        ViewBag.Url = url;
 
         //log che visualizza la pagina selezionata
         _logger.LogInformation("Index - PageIndex: {0}", pageIndex);
@@ -46,9 +56,17 @@ public class HomeController : Controller
         return View(model);
     }
 
-
+    /// <summary>
+    /// Azione per la visualizzazione di una singola immagine.
+    /// </summary>
+    /// <param name="id">ID dell'immagine da visualizzare.</param>
+    /// <param name="urlBack">URL della pagina precedente.</param>
+    /// <returns>La vista Immagine con il modello ImmagineViewModel.</returns>
     public IActionResult Immagine(int id, string urlBack)
     {
+        //memorizzo url per il ritorno
+        ViewBag.Url = HttpContext.Request.Path + HttpContext.Request.QueryString;
+
         var model = new ImmagineViewModel
         {
             // memorizzo il valore passato dalla pagina precedente
@@ -69,6 +87,10 @@ public class HomeController : Controller
         return View(model);
     }
 
+    // <summary>
+    /// Azione per la gestione degli errori.
+    /// </summary>
+    /// <returns>La vista Error con il modello ErrorViewModel.</returns>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

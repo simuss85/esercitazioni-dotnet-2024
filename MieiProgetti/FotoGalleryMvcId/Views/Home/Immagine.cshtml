@@ -6,12 +6,13 @@
     {
         stelleImmagine = Model.Immagine.Voto;
     }
+
 }
 
 <div class="container">
     <!-------------------------- titolo della pagina ---------------------------->
     <div class="text-center">
-        <h1 class="display-4">Ciao</h1>
+        <h1 class="display-4">@ViewData["Title"]</h1>
     </div>
     <br>
 
@@ -57,22 +58,8 @@
 <!--------------- sezione inserimento voto collapse -------------------------->
 <div class="container mt-4 ps-4">
     <p class="d-inline-flex gap-1">
-        @if (User!.IsInRole("User"))
-        {
-            if (Model.VotoAttivo)
-            {
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
-                    aria-expanded="false" aria-controls="collapseCommenta">
-                    Vota
-                </a>
-            }
-
-        }
-        else
-        {
-            <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login"> @*asp-route-urlback="@url"*@Login</a>
-
-        }
+        <a class="btn btn-danger" asp-area="Identity" asp-page="/Account/Login" asp-route-urlback="@ViewBag.Url">
+            Login </a>
 
         <a href="@Model.UrlBack" class="btn btn-primary" type="button">
             Torna indietro
@@ -145,7 +132,6 @@
                             <p class="card-text moderato">Commento censurato</p>
 
                         }
-
 
                     </div>
                 </div>

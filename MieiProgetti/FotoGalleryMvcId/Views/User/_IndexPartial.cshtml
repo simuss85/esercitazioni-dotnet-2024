@@ -1,0 +1,21 @@
+<div class="row mb-md-2">
+    <!--------------------------- tasto play carosello ---------------------------->
+    <div class="col-6 col-md-11 text-center text-md-end">
+        <a class="btn" asp-controller="User" asp-action="/Carosello" asp-route-categoria="@Model.Categoria"
+            style="color: blue; width: fit-content;"><i class="bi bi-collection-play-fill"></i> Play </a>
+    </div>
+
+    <!-------------------------- dropdown filtro categorie ------------------------>
+    <div class="col-6 col-md-1 dropdown text-center text-md-end">
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-archive-fill"></i>
+        </button>
+        <ul class="dropdown-menu" style=" min-width: 8rem;">
+            <li><a class="dropdown-item" asp-route-categoria="">Tutte</a></li>
+            @foreach (var c in Model.Categorie!)
+            {
+                <li><a class="dropdown-item" asp-route-categoria="@c">@c</a></li>
+            }
+        </ul>
+    </div>
+</div>
