@@ -10,5 +10,5 @@ public class AppUser : IdentityUser
     public string Nome { get; set; }
     public string Cognome { get; set; }
     public int Eta { get; set; }
-
+    public bool Status { get; set; }
 }
