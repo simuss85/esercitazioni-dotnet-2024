@@ -1,0 +1,205 @@
+@model ClassificaViewModel
+@{
+    ViewData["Title"] = "Classifica";
+
+    //calcola il numero N progressivo da inserire nella tabella classifica per ogni paginazione
+    int n;
+    if (Model.Reverse!.EndsWith("Off"))
+    {
+        n = ((Model.PageIndex ?? 1) - 1) * 10;
+    }
+    else
+    {
+        n = Model.TotaleImmagini - (((Model.PageIndex ?? 1) - 1) * 10);
+    }
+}
+
+<div class="container">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+    <br>
+
+    <!------------------- tabella classifica ----------------------->
+    <table class="table text-center table-striped align-middle">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Immagine</th>
+                <th>Titolo
+                    @if (Model.Reverse != "titoloOn")
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="titoloOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="titoloOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Autore
+                    @if (Model.Reverse != "autoreOn")
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="autoreOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="autoreOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Data pubblicazione
+                    @if (Model.Reverse != "dataOn")
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="dataOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="dataOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Voto
+                    @if (Model.Reverse != "votoOn")
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="votoOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="User" asp-action="Classifica" asp-route-reverse="votoOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var img in Model.Immagini!)
+            {
+                if (Model.Reverse!.EndsWith("Off"))
+                {
+                    n++;
+                }
+
+                //memorizzo id diversi per ogni modale
+                string idModale = "modal" + img.Id.ToString();
+                var stelle = @img.Voto;
+                <tr>
+                    <td>@n</td>
+                    <td>
+                        <!-- inserimento della modale per visualizzare la foto -->
+                        <!-- Button trigger modal -->
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#@idModale">
+                            <img class="img-classifica" src="@img.Path" alt="@img.Titolo" width="80" height="60" />
+                        </a>
+
+                        <!-- Modale -->
+                        <div class="modal fade" id="@idModale" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <h1 class="modal-title fs-5 text-center
+                                         m-auto" id="exampleModalLabel">@img.Titolo
+                                        </h1>
+                                        <button type="button" class="btn-close end-0" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <img class="modal-img img-fluid" src="@img.Path" alt="@img.Titolo" />
+                                        <!-- Stella e voto sopra l'immagine -->
+                                        <div class="modal-voto">
+                                            <span class="bi bi-star-fill"></span>
+                                            <span class="index-voto">@img.Voto</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a class="btn btn-primary" asp-controller="User" asp-action="Immagine" asp-route-id="@img.Id"
+                                            asp-route-urlback="@ViewBag.UrlBack">Dettaglio
+                                            immgine
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>@img.Titolo</td>
+
+                    <td>@img.Autore</td>
+
+                    <td>@img.Data.ToString("d")</td>
+
+                    <td><span class="px-1 start-0">@img.Voto</span>
+                        @* Gestione delle stelle dinamiche per la sezione Voto *@
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            if (stelle >= 1)
+                            {
+                                <span class="bi bi-star-fill"></span>
+                            }
+                            else if (stelle > 0)
+                            {
+                                <span class="bi bi-star-half"></span>
+                            }
+                            else
+                            {
+                                <span class="bi bi-star"></span>
+                            }
+                            stelle--;
+                        }
+                        <span class="numero-voti px-1">(@img.NumeroVoti)</span>
+                    </td>
+
+                </tr>
+                if (Model.Reverse.EndsWith("On"))
+                {
+                    n--;
+                }
+            }
+        </tbody>
+    </table>
+
+    <!---------------------------- tasti paginazione -------------------------->
+    <nav class="mt-4" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" asp-controller="User" asp-action="Classifica"
+                    asp-route-reverse="@Model.Reverse" asp-route-pageindex="1">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.NumeroPagine; i++)
+            {
+                if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
+                {
+                    <li class="page-item active"><a class="page-link" asp-controller="User" asp-action="Classifica"
+                            asp-route-reverse="@Model.Reverse" asp-route-pageindex="@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-controller="User" asp-action="Classifica"
+                            asp-route-reverse="@Model.Reverse" asp-route-pageindex="@i">@i</a></li>
+                }
+
+            }
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" asp-controller="User" asp-action="Classifica"
+                    asp-route-reverse="@Model.Reverse" asp-route-pageindex="@Model.NumeroPagine">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

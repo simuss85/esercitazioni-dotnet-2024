@@ -216,9 +216,15 @@ public class UserController : Controller
         return View(model);
     }
 
+    /// <summary>
+    /// Azione che crea la vista delle categorie
+    /// </summary>
+    /// <returns>La vista categorie con il modello CategorieViewModel</returns>
     [HttpGet]
     public IActionResult Categorie()
     {
+        _logger.LogInformation("{0} - Categorie --> ()", DateTime.Now.ToString("T"));
+
         // creo il modello per gestire la view
         var model = new CategorieViewModel { };
 
@@ -227,6 +233,74 @@ public class UserController : Controller
 
         var jsonFileCat = System.IO.File.ReadAllText(model.PathCategorie);
         model.Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat)!;
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult Classifica(int? pageIndex, string reverse = "votoOff")
+    {
+        //memorizzo UrlBack in un ViewBag
+        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
+
+        // creo il modello per gestire la view
+        var model = new ClassificaViewModel
+        {
+            ElementiPerPagina = 10,
+            PageIndex = pageIndex,
+            Reverse = reverse
+        };
+
+        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+        model.TotaleImmagini = model.Immagini.Count();
+
+        _logger.LogInformation("{0} - Classifica --> (PageIndex: {1} - Reverse: {2} - TotaleImmagini: {3})", DateTime.Now.ToString("T"), pageIndex, reverse, model.TotaleImmagini);
+
+        //gestione ordinameneto tabella
+        switch (reverse)
+        {
+            case "votoOff":
+                model.Immagini = model.Immagini.OrderByDescending(i => i.Voto);
+                break;
+
+            case "votoOn":
+                model.Immagini = model.Immagini.OrderBy(i => i.Voto);
+                break;
+
+            case "dataOff":
+                model.Immagini = model.Immagini.OrderByDescending(i => i.Data);
+                break;
+
+            case "dataOn":
+                model.Immagini = model.Immagini.OrderBy(i => i.Data);
+                break;
+
+            case "titoloOff":
+                model.Immagini = model.Immagini.OrderByDescending(i => i.Titolo);
+                break;
+
+            case "titoloOn":
+                model.Immagini = model.Immagini.OrderBy(i => i.Titolo);
+                break;
+
+            case "autoreOff":
+                model.Immagini = model.Immagini.OrderByDescending(i => i.Autore);
+                break;
+
+            case "autoreOn":
+                model.Immagini = model.Immagini.OrderBy(i => i.Autore);
+                break;
+
+            default:
+                model.Immagini = model.Immagini.OrderByDescending(i => i.Voto);
+                break;
+        }
+
+        //paginazione 
+        model.NumeroPagine = (int)Math.Ceiling((double)model.Immagini.Count() / model.ElementiPerPagina);
+        model.Immagini = model.Immagini.Skip(((pageIndex ?? 1) - 1) * model.ElementiPerPagina).Take(model.ElementiPerPagina);
 
         return View(model);
     }
