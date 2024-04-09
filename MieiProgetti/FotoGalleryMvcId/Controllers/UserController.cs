@@ -27,7 +27,7 @@ public class UserController : Controller
     /// <param name="categoria">La categoria attualmente selezionata</param>
     /// <returns>La vista delle immagini con il modello ImmaginiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> Immagini(int? pageIndex = 1, string? categoria = "")
+    public async Task<IActionResult> Immagini(int pageIndex = 1, string categoria = "")
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
@@ -70,7 +70,7 @@ public class UserController : Controller
 
         // Calcola il numero di pagine e la paginazione
         model.NumeroPagine = (int)Math.Ceiling((double)model.Immagini.Count() / 12);
-        model.Immagini = model.Immagini.Skip(((pageIndex ?? 1) - 1) * 12).Take(12).ToList();
+        model.Immagini = model.Immagini.Skip((pageIndex - 1) * 12).Take(12).ToList();
 
         return View(model);
     }
@@ -95,6 +95,12 @@ public class UserController : Controller
             UrlBack = urlBack
         };
 
+        //memorizzo il nome utente attuale come email
+        if (user != null)
+        {
+            model.NomeUtente = user!.ToString();
+        }
+
         // seleziono da tutte le immagini quella attuale
         var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
         model.Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!.First(i => i.Id == id);
@@ -102,12 +108,6 @@ public class UserController : Controller
         //carico i voti per la view della card immagine
         var jsonFileVoti = System.IO.File.ReadAllText(model.PathVoti);
         model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
-
-        if (user != null)
-        {
-            //memorizzo il nome utente attuale come email
-            model.NomeUtente = user!.ToString();
-        }
 
         //verifico se l'utente ha gia votato l'immagine
         if (model.Voti.FirstOrDefault(v => v.Nome == model.NomeUtente && v.ImmagineId == id) == null)
@@ -179,7 +179,7 @@ public class UserController : Controller
         System.IO.File.WriteAllText(model.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
         #endregion
 
-        return RedirectToAction("Immagine", "User");
+        return RedirectToAction("Immagine", "User", new { model.Id, model.UrlBack });
     }
 
     /// <summary>
@@ -237,6 +237,12 @@ public class UserController : Controller
         return View(model);
     }
 
+    /// <summary>
+    /// Azione che crea la vista classifica con una tabella con ordinamento
+    /// </summary>
+    /// <param name="pageIndex">Il numero attuale della pagina</param>
+    /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>
+    /// <returns>La vista classifica con il modello ClassificaViewModel</returns>
     [HttpGet]
     public IActionResult Classifica(int? pageIndex, string reverse = "votoOff")
     {
@@ -303,6 +309,20 @@ public class UserController : Controller
         model.Immagini = model.Immagini.Skip(((pageIndex ?? 1) - 1) * model.ElementiPerPagina).Take(model.ElementiPerPagina);
 
         return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult Gestisci(int? pageIndex, string reverse = "idOff")
+    {
+        // creo il modello per gestire la view
+        var model = new ClassificaViewModel
+        {
+            PageIndex = pageIndex,
+            Reverse = reverse
+        };
+        _logger.LogInformation("{0} - GestioneImmagine --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
+        return View(model);
+
     }
 
     public IActionResult Privacy()

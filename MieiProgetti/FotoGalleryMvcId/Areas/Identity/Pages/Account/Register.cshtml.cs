@@ -101,7 +101,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
 
             public string Alias { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Devi inserire un nome")]
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 

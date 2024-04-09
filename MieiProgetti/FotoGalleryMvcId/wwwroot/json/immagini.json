@@ -44,7 +44,7 @@
     "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
     "Titolo": "Immagine 5",
     "Voto": 4.8,
-    "NumeroVoti": 23,
+    "NumeroVoti": 24,
     "Autore": "Autore 5",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -63,8 +63,8 @@
     "Id": 8,
     "Path": "/img/img_08.jpg",
     "Titolo": "Immagine 8",
-    "Voto": 1.7,
-    "NumeroVoti": 24,
+    "Voto": 1.8,
+    "NumeroVoti": 25,
     "Autore": "Autore 8",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -74,7 +74,7 @@
     "Path": "/img/img_09.jpg",
     "Titolo": "Immagine 9",
     "Voto": 2.9,
-    "NumeroVoti": 22,
+    "NumeroVoti": 23,
     "Autore": "Autore 9",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -84,7 +84,7 @@
     "Path": "/img/img_11.jpg",
     "Titolo": "Immagine 11",
     "Voto": 2.1,
-    "NumeroVoti": 22,
+    "NumeroVoti": 23,
     "Autore": "Autore 11",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -104,7 +104,7 @@
     "Path": "/img/img_13.jpg",
     "Titolo": "Immagine 13",
     "Voto": 3.6,
-    "NumeroVoti": 21,
+    "NumeroVoti": 22,
     "Autore": "Autore 13",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -153,8 +153,8 @@
     "Id": 18,
     "Path": "https://www.pwc.com/it/it/industries/sport/img/pwc-sport-anteprima.jpg",
     "Titolo": "Titolo 18",
-    "Voto": 2.5,
-    "NumeroVoti": 2,
+    "Voto": 3.0,
+    "NumeroVoti": 3,
     "Autore": "Autore 18",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Sport"
@@ -164,7 +164,7 @@
     "Path": "https://www.ansa.it/webimages/img_547x547/2024/3/17/3c511501b9171105f4a7423d630c38ca.jpg",
     "Titolo": "Titolo 19",
     "Voto": 5.0,
-    "NumeroVoti": 3,
+    "NumeroVoti": 4,
     "Autore": "Autore 19",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Sport"
@@ -203,8 +203,8 @@
     "Id": 25,
     "Path": "https://www.authentico-ita.org/wp-content/uploads/2019/01/cibo-italiano-%C3%A8-il-pi%C3%B9-amato-al-mondo.jpg",
     "Titolo": "Titolo 25",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 25",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Cibo"
@@ -273,8 +273,8 @@
     "Id": 33,
     "Path": "https://www.thewom.it/content/uploads/2021/09/persone-di-cui-abbiamo-bisogno.jpg",
     "Titolo": "Titolo 33",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 33",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Persone"
@@ -383,8 +383,8 @@
     "Id": 45,
     "Path": "https://images2.corriereobjects.it/methode_image/2014/08/20/Tecnologia/Foto%20Gallery/01_uncomfortable_MGZOOM.jpg",
     "Titolo": "Titolo 45",
-    "Voto": 4.7,
-    "NumeroVoti": 3,
+    "Voto": 4.8,
+    "NumeroVoti": 4,
     "Autore": "Autore 45",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -403,8 +403,8 @@
     "Id": 47,
     "Path": "https://citynews-cibotoday.stgy.ovh/~media/square-hi/11663408603508/cavatappi-mendini-alessi.jpg",
     "Titolo": "Titolo 47",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 3.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 47",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -423,8 +423,8 @@
     "Id": 49,
     "Path": "https://thumbs.dreamstime.com/z/oggetti-di-gomma-5056360.jpg",
     "Titolo": "Titolo 49",
-    "Voto": 3.0,
-    "NumeroVoti": 1,
+    "Voto": 2.5,
+    "NumeroVoti": 2,
     "Autore": "Autore 49",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Oggetti"
@@ -483,8 +483,8 @@
     "Id": 55,
     "Path": "https://amicidicasa.it/wp-content/uploads/2023/08/quokka-curiosita-1024x670.jpg",
     "Titolo": "Titolo 55",
-    "Voto": 5.0,
-    "NumeroVoti": 2,
+    "Voto": 4.7,
+    "NumeroVoti": 3,
     "Autore": "Autore 55",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Animali"
@@ -664,7 +664,7 @@
     "Path": "https://t4.ftcdn.net/jpg/05/54/52/13/360_F_554521329_ngmDQSjSrUSRnbK2xK0bkcprsinG9Xdv.jpg",
     "Titolo": "Panda coccoloso",
     "Voto": 4.8,
-    "NumeroVoti": 4,
+    "NumeroVoti": 5,
     "Autore": "Panda 1",
     "Data": "2024-03-27T00:00:00+01:00",
     "Categoria": "Animali"
@@ -673,8 +673,8 @@
     "Id": 82,
     "Path": "https://res.cloudinary.com/lastminute-contenthub/s--zba-tI0n--/c_crop,h_1333,w_2000,x_0,y_0/c_limit,h_999999,w_1920/f_auto/q_auto:eco/v1/Hub-Live/VolaGratis/blog/images/EE3QG3_pizza",
     "Titolo": "Pizza",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 82",
     "Data": "2024-03-28T00:00:00+01:00",
     "Categoria": "Cibo"
@@ -683,8 +683,8 @@
     "Id": 83,
     "Path": "https://citynews-today.stgy.ovh/~media/horizontal-mid/12474931350201/pasta-bandiera-2.jpg",
     "Titolo": "Pasta",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 83",
     "Data": "2024-03-28T00:00:00+01:00",
     "Categoria": "Cibo"
