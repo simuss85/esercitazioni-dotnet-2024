@@ -1,0 +1,52 @@
+@model AggiungiImmaginiViewModel
+@{
+    ViewData["Title"] = "Aggiungi Immagine";
+}
+
+<div class="container">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <!-------------------------- form aggiungi immagine ------------------------>
+    <div class="d-flex justify-content-center mt-5">
+        <form method="post" asp-controller="User" asp-action="AggiungiImmagini">
+
+            <!-- Titolo -->
+            <div class="form-group">
+                <label asp-for="Titolo"></label>
+                <input asp-for="Titolo " type="text" class="form-control" />
+            </div>
+
+            <!-- Autore -->
+            <div class="form-group">
+                <label asp-for="Autore"></label>
+                <input asp-for="Autore " type="text" class="form-control" />
+            </div>
+
+            <!-- Select Categoria -->
+            <label asp-for="Categoria"></label>
+            <select asp-for="Categoria" asp-items="Model.Categorie"
+                class="form-control @(ViewData.ModelState["Input.Categoria"]?.Errors.Any() ?? false ? "box-danger" : "")">
+                <option value="">Scegli categoria</option>
+            </select>
+            <span asp-validation-for="Categoria" class="text-danger"></span>
+
+            <!-- Path -->
+            <div class="form-group">
+                <label asp-for="Path"></label>
+                <input asp-for="Path" type="text"
+                    class="form-control @(ViewData.ModelState["Input.Path"]?.Errors.Any() ?? false ? "box-danger" : "")" />
+            </div>
+            <span asp-validation-for="Path" class="text-danger"></span>
+            <br>
+
+            <!-- Submit Aggiungi -->
+            <button type="submit" class="btn btn-primary">Aggiungi</button>
+            <a asp-controller="User" asp-action="Immagini" class="btn btn-primary" type="button">
+                Torna alle immagini
+            </a>
+        </form>
+    </div>
+</div>

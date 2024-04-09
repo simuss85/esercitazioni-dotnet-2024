@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FotoGalleryMvcId.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity;
 
 namespace FotoGalleryMvcId.Controllers;
 
@@ -22,13 +23,34 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Azione per la visualizzazione della pagina principale con l'elenco delle immagini.
+    /// Azione per la visualizzazione della pagina. Nel caso l'utente sia loggato in precedenza, viene reindirizzato <br/>
+    /// alla route corrette.
     /// </summary>
     /// <param name="pageIndex">Indice della pagina selezionata.</param>
-    /// <returns>La vista Index con il modello IndexViewModel.</returns>
+    /// <returns>La view principale a seconda dell'utente autenticato oppure no.</returns>
     public IActionResult Index()
     {
-        return View();
+        if (User.Identity!.IsAuthenticated)
+        {
+            if (User.IsInRole("User"))
+            {
+                return RedirectToAction("Immagini", "User");
+            }
+            else if (User.IsInRole("Moderatore"))
+            {
+                return RedirectToAction("Modera", "Moderatore");
+            }
+            else
+            {
+                return RedirectToAction("GestioneUtenti", "Admin");
+            }
+
+        }
+        else
+        {
+            return View();
+        }
+
     }
 
     // <summary>

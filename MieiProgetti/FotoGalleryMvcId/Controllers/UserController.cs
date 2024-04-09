@@ -4,12 +4,17 @@ using FotoGalleryMvcId.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FotoGalleryMvcId.Controllers;
 
 [Authorize(Roles = "User")]
 public class UserController : Controller
 {
+    //per la gestione dei file json
+    private readonly Paths paths = new();
+
+    //per la gestione dell'utente
     private readonly UserManager<AppUser> _userManager;
     private readonly ILogger<UserController> _logger;
 
@@ -52,11 +57,11 @@ public class UserController : Controller
         };
 
         // Leggi il file JSON delle immagini
-        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
 
         // Leggi il file JSON delle categorie e riordina le categorie in ordine alfabetico
-        var jsonFileCat = System.IO.File.ReadAllText(model.PathCategorie);
+        var jsonFileCat = System.IO.File.ReadAllText(paths.PathCategorie);
         model.Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat)!.OrderBy(c => c).ToList();
 
         //elimino le categorie senza immagini
@@ -102,11 +107,11 @@ public class UserController : Controller
         }
 
         // seleziono da tutte le immagini quella attuale
-        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         model.Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!.First(i => i.Id == id);
 
         //carico i voti per la view della card immagine
-        var jsonFileVoti = System.IO.File.ReadAllText(model.PathVoti);
+        var jsonFileVoti = System.IO.File.ReadAllText(paths.PathVoti);
         model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
 
         //verifico se l'utente ha gia votato l'immagine
@@ -140,11 +145,11 @@ public class UserController : Controller
             return View();
         }
 
-        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
         model.Immagine = immagini.First(i => i.Id == model.Id);
 
-        var jsonFileVoti = System.IO.File.ReadAllText(model.PathVoti);
+        var jsonFileVoti = System.IO.File.ReadAllText(paths.PathVoti);
         var voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
         model.Voti = voti;
 
@@ -153,7 +158,7 @@ public class UserController : Controller
 
         //salvo il voto nel file voti.json
         voti.Add(new Voto { Id = idVoto, Nome = model.NomeUtente, ImmagineId = model.Id, Stelle = model.Stars, Data = DateTime.Today, Commento = model.Commento, Visibile = true, Moderato = false });
-        System.IO.File.WriteAllText(model.PathVoti, JsonConvert.SerializeObject(voti, Formatting.Indented));
+        System.IO.File.WriteAllText(paths.PathVoti, JsonConvert.SerializeObject(voti, Formatting.Indented));
 
         #region Modifica voto
         //recupero i dati del voto prima di aggiungere quello nuovo
@@ -176,7 +181,7 @@ public class UserController : Controller
                 break;
             }
         }
-        System.IO.File.WriteAllText(model.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
+        System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
         #endregion
 
         return RedirectToAction("Immagine", "User", new { model.Id, model.UrlBack });
@@ -199,7 +204,7 @@ public class UserController : Controller
         var model = new CaroselloViewModel { };
 
         // carico il file categorie.json e seleziono solo la categoria passata al get
-        var jsonFileCat = System.IO.File.ReadAllText(model.PathImmagini);
+        var jsonFileCat = System.IO.File.ReadAllText(paths.PathImmagini);
 
         //verifica sul tipo di categoria pasata
         if (!string.IsNullOrEmpty(categoria))
@@ -228,10 +233,10 @@ public class UserController : Controller
         // creo il modello per gestire la view
         var model = new CategorieViewModel { };
 
-        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
 
-        var jsonFileCat = System.IO.File.ReadAllText(model.PathCategorie);
+        var jsonFileCat = System.IO.File.ReadAllText(paths.PathCategorie);
         model.Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat)!;
 
         return View(model);
@@ -257,7 +262,7 @@ public class UserController : Controller
             Reverse = reverse
         };
 
-        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
 
         model.TotaleImmagini = model.Immagini.Count();
@@ -311,70 +316,84 @@ public class UserController : Controller
         return View(model);
     }
 
+    /// <summary>
+    /// Azione che crea la vista aggiungi immagini con il form di inserimento
+    /// </summary>
+    /// <returns>La vista aggiungi immagini con il modello AggiungiImmaginiViewModel</returns>
     [HttpGet]
-    public IActionResult GestisciImmagini(int pageIndex = 1, string reverse = "idOff")
+    public IActionResult AggiungiImmagini()
     {
-        //memorizzo UrlBack in un ViewBag
-        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
-
         // creo il modello per gestire la view
-        var model = new GestisciImmaginiViewModel
+        var model = new AggiungiImmaginiViewModel { };
+
+        // Leggi le categorie dal file JSON
+        var jsonFileCat = System.IO.File.ReadAllText(paths.PathCategorie);
+        // Se ho problemi con il file JSON...
+        var categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat) ?? new List<string>();
+
+        // Costruisci oggetti SelectListItem e assegnali a Categorie
+        foreach (var c in categorie)
         {
-            PageIndex = pageIndex,
-            Reverse = reverse
-        };
-
-        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
-        model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!.OrderByDescending(i => i.Id);
-
-        //gestione ordinameneto tabella
-        switch (reverse)
-        {
-            case "idOff":
-                model.Immagini = model.Immagini.OrderByDescending(i => i.Id);
-                break;
-
-            case "idOn":
-                model.Immagini = model.Immagini.OrderBy(i => i.Id);
-                break;
-
-            case "dataOff":
-                model.Immagini = model.Immagini.OrderByDescending(i => i.Data);
-                break;
-
-            case "dataOn":
-                model.Immagini = model.Immagini.OrderBy(i => i.Data);
-                break;
-
-            case "autoreOff":
-                model.Immagini = model.Immagini.OrderByDescending(i => i.Autore);
-                break;
-
-            case "autoreOn":
-                model.Immagini = model.Immagini.OrderBy(i => i.Autore);
-                break;
-
-            case "titoloOff":
-                model.Immagini = model.Immagini.OrderByDescending(i => i.Titolo);
-                break;
-
-            case "titoloOn":
-                model.Immagini = model.Immagini.OrderBy(i => i.Titolo);
-                break;
-
-            default:
-                model.Immagini = model.Immagini.OrderByDescending(v => v.Id);
-                break;
+            model.Categorie.Add(new SelectListItem { Value = c, Text = c });
         }
 
-        //paginazione
-        model.NumeroPagine = (int)Math.Ceiling((double)model.Immagini.Count() / 10);
-        model.Immagini = model.Immagini.Skip((pageIndex - 1) * 10).Take(10);
-
-        _logger.LogInformation("{0} - GestioneImmagine --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
+        _logger.LogInformation("{0} - AggiungiImmagini --> ()", DateTime.Now.ToString("T"));
 
         return View(model);
     }
+
+    [HttpPost]
+    public IActionResult AggiungiImmagini(AggiungiImmaginiViewModel model)
+    {
+        //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
+        if (!ModelState.IsValid)
+        {
+            //log errore selezione
+            _logger.LogInformation("{0} - Errore validazione modulo", DateTime.Now.ToString("T"));
+            return View();
+        }
+        else
+        {
+            _logger.LogInformation("Categoria: {0}", model.Categoria);
+
+            var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
+            var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+            int id = immagini.Max(i => i.Id);
+            id++;
+
+            if (string.IsNullOrEmpty(model.Autore))
+            {
+                model.Autore = $"Autore {id}";
+            }
+            if (string.IsNullOrEmpty(model.Titolo))
+            {
+                model.Titolo = $"Titolo {id}";
+            }
+
+            Immagine img = new()
+            {
+                Id = id,
+                Path = model.Path,
+                Titolo = model.Titolo,
+                Voto = 0,
+                NumeroVoti = 0,
+                Autore = model.Autore,
+                Data = DateTime.Now,
+                Categoria = model.Categoria
+            };
+
+            immagini.Add(img);
+
+            System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
+
+            _logger.LogInformation("Immagine aggiunta Id: {0}", id);
+            return RedirectToAction("AggiungiImmagini", "User");
+        }
+
+
+    }
+
 
     public IActionResult Privacy()
     {

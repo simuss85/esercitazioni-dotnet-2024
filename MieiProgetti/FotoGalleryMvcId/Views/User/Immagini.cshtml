@@ -27,15 +27,21 @@
         }
     </div>
 
+    <!----------------------------- controlli per gli utenti registrati -------------->
     <div class="row mb-md-2">
-        <!----------------------------- controlli per gli utenti registrati -------------->
-
+        <!----------------------------- tasto aggiungi immagine -------------------------->
+        <div class="col-6 col-md-1 text-start">
+            <a class="dropdown-item btn btn-primary" asp-controller="User" asp-action="AggiungiImmagini"
+                style="color: blue; width: fit-content;">
+                <i class="bi bi-plus-circle-fill" />
+                </i> Aggiungi
+            </a>
+        </div>
         <!--------------------------- tato play carosello ---------------------------->
-        <div class="col-6 col-md-11 text-center text-md-end">
+        <div class="col-6 col-md-10 text-center text-md-end">
             <a class="btn" asp-controller="User" asp-action="Carosello" asp-route-categoria="@Model.Categoria"
                 style="color: blue; width: fit-content;"><i class="bi bi-collection-play-fill"></i> Play </a>
         </div>
-
         <!-------------------------- dropdown filtro categorie ------------------------>
         <div class="col-6 col-md-1 dropdown text-center text-md-end">
             <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
