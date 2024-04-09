@@ -193,8 +193,8 @@
     "Id": 24,
     "Path": "https://www.fondazioneveronesi.it/uploads/thumbs/2017/01/13/dieta%20ernia%20iatale_1_thumb_720_480.jpg",
     "Titolo": "Titolo 24",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Autore 24",
     "Data": "2024-03-24T00:00:00+01:00",
     "Categoria": "Cibo"
@@ -703,8 +703,8 @@
     "Id": 85,
     "Path": "https://media.gettyimages.com/id/555907555/it/foto/jack-russel-dog.jpg?s=612x612&w=gi&k=20&c=qxg__E9fXGbH-1j7PK2SJjAlui9pX8itGhpWZ7BCHco=",
     "Titolo": "Pongo",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 5.0,
+    "NumeroVoti": 1,
     "Autore": "Boh",
     "Data": "2024-04-03T00:00:00+02:00",
     "Categoria": "Animali"
@@ -743,8 +743,8 @@
     "Id": 90,
     "Path": "https://www.viridea.it/wp-content/uploads/2019/06/consiglio-cosa-fare-casa-arriva-gatto.jpg",
     "Titolo": "Gatto",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
+    "Voto": 4.0,
+    "NumeroVoti": 1,
     "Autore": "Cat",
     "Data": "2024-04-05T11:53:44.633818+02:00",
     "Categoria": "Animali"

@@ -90,7 +90,7 @@
             </li>
             @for (int i = 1; i <= Model.NumeroPagine; i++)
             {
-                if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
+                if (i == Model.PageIndex) //indica la pagina attiva
                 {
                     <li class="page-item active"><a class="page-link" asp-controller="User" asp-action="Immagini"
                             asp-route-pageindex="@i" asp-route-categoria="@Model.Categoria">@i</a></li>
