@@ -14,7 +14,7 @@
     "Path": "/img/img_02.jpg",
     "Titolo": "Immagine 2",
     "Voto": 4.3,
-    "NumeroVoti": 28,
+    "NumeroVoti": 29,
     "Autore": "Autore 2",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -23,8 +23,8 @@
     "Id": 3,
     "Path": "/img/img_03.jpg",
     "Titolo": "Immagine 3",
-    "Voto": 1.6,
-    "NumeroVoti": 24,
+    "Voto": 2.0,
+    "NumeroVoti": 28,
     "Autore": "Autore 3",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"

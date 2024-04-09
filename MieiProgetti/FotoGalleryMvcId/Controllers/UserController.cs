@@ -25,7 +25,7 @@ public class UserController : Controller
     /// </summary>
     /// <param name="pageIndex">Il numero attuale della pagina</param>
     /// <param name="categoria">La categoria attualmente selezionata</param>
-    /// <returns>La vista con il modello ImmagineViewModel</returns>
+    /// <returns>La vista delle immagini con il modello ImmaginiViewModel</returns>
     [HttpGet]
     public async Task<IActionResult> Immagini(int? pageIndex = 1, string? categoria = "")
     {
@@ -81,7 +81,7 @@ public class UserController : Controller
     /// </summary>
     /// <param name="id"></param>
     /// <param name="urlBack"></param>
-    /// <returns></returns>
+    /// <returns>La vista del dettaglio immagine con il modello ImmagineViewModel</returns>
     [HttpGet]
     public async Task<IActionResult> Immagine(int id, string urlBack)
     {
@@ -94,8 +94,6 @@ public class UserController : Controller
             // memorizzo il valore passato dalla pagina precedente
             UrlBack = urlBack
         };
-
-
 
         // seleziono da tutte le immagini quella attuale
         var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
@@ -127,93 +125,62 @@ public class UserController : Controller
         return View(model);
     }
 
+    /// <summary>
+    /// Azione che gestisce il form di votazione dell'immagine
+    /// </summary>
+    /// <param name="model">Il modello da caricare dopo l'invio dei dati dal form</param>
+    /// <returns>La vista del dettaglio immagine con il modello ImmagineViewModel</returns>
+    [HttpPost]
+    public IActionResult VotaImmagine(ImmagineViewModel model)
+    {
+        _logger.LogInformation("{0} - (POST)Dettaglio Immagine --> (NomeUtente: {1} - UrlBack: {2} - IdImmagine: {3} - Stars: {4} - Commento: {5})", DateTime.Now.ToString("T"), model.NomeUtente, model.UrlBack, model.Id, model.Stars, model.Commento);
+        //validazione input anche se non necessaria in questo caso
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
 
+        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+        model.Immagine = immagini.First(i => i.Id == model.Id);
 
-    // /// <summary>
-    // /// Azione per la visualizzazione di una singola immagine.
-    // /// </summary>
-    // /// <param name="id">ID dell'immagine da visualizzare.</param>
-    // /// <param name="urlBack">URL della pagina precedente.</param>
-    // /// <returns>La vista Immagine con il modello ImmagineViewModel.</returns>
-    // public IActionResult Immagine(int id, string urlBack)
-    // {
-    //     //memorizzo url per il ritorno
-    //     ViewBag.Url = HttpContext.Request.Path + HttpContext.Request.QueryString;
+        var jsonFileVoti = System.IO.File.ReadAllText(model.PathVoti);
+        var voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
+        model.Voti = voti;
 
-    //     var model = new ImmagineViewModel
-    //     {
-    //         // memorizzo il valore passato dalla pagina precedente
-    //         UrlBack = urlBack,
+        int idVoto = voti.Count();
+        idVoto++;
 
-    //     };
+        //salvo il voto nel file voti.json
+        voti.Add(new Voto { Id = idVoto, Nome = model.NomeUtente, ImmagineId = model.Id, Stelle = model.Stars, Data = DateTime.Today, Commento = model.Commento, Visibile = true, Moderato = false });
+        System.IO.File.WriteAllText(model.PathVoti, JsonConvert.SerializeObject(voti, Formatting.Indented));
 
-    //     //verifica log
-    //     _logger.LogInformation("url back : {0}", urlBack);
+        #region Modifica voto
+        //recupero i dati del voto prima di aggiungere quello nuovo
+        int numeroDiVoti = model.Immagine.NumeroVoti;
+        double sommaVoti = model.Immagine.Voto * numeroDiVoti;
 
-    //     // seleziono da tutte le immagini quella attuale
-    //     var jsonFile = System.IO.File.ReadAllText(model.jsonPath);
-    //     model.Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!.First(i => i.Id == id);
+        //aggiorno con il nuovo voto
+        numeroDiVoti++;
+        sommaVoti += model.Stars;
 
-    //     //carico i voti per la view della card immagine
-    //     var jsonFile2 = System.IO.File.ReadAllText(model.jsonPath2);
-    //     model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
-    //     return View(model);
-    // }
+        double votoAggiornato = Math.Round(sommaVoti / numeroDiVoti * 1.0, 1);
 
-    // [HttpPost]
-    // public IActionResult Immagine()
-    // {
-    //     var model = new ImmagineViewModel { };
-    //     //validazione input anche se non necessaria in questo caso
-    //     if (!ModelState.IsValid)
-    //     {
-    //         return View();
-    //     }
+        //scansiono le immagini per caricare il nuovo voto
+        foreach (var i in immagini)
+        {
+            if (i.Id == model.Id)
+            {
+                i.Voto = votoAggiornato;
+                i.NumeroVoti = numeroDiVoti;
+                break;
+            }
+        }
+        System.IO.File.WriteAllText(model.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
+        #endregion
 
-    //     var jsonFile = System.IO.File.ReadAllText(model.jsonPath);
-    //     var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFile)!;
-    //     model.Immagine = immagini.First(i => i.Id == model.Id);
-
-    //     var jsonFile2 = System.IO.File.ReadAllText(model.jsonPath2);
-    //     var voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFile2)!;
-    //     model.Voti = voti;
-
-    //     int idVoto = voti.Count();
-    //     idVoto++;
-
-    //     //carico il nome utente attuale (completo)
-    //     model.NomeUtente = User.Identity?.Name!;
-
-    //     //salvo il voto nel file voti.json
-    //     voti.Add(new Voto { Id = idVoto, Nome = model.NomeUtente, ImmagineId = model.Id, Stelle = model.Stars, Data = DateTime.Today, Commento = model.Commento, Visibile = true, Moderato = false });
-    //     System.IO.File.WriteAllText(model.jsonPath2, JsonConvert.SerializeObject(voti, Formatting.Indented));
-
-    //     #region Modifica voto
-    //     //recupero i dati del voto prima di aggiungere quello nuovo
-    //     int numeroDiVoti = model.Immagine.NumeroVoti;
-    //     double sommaVoti = model.Immagine.Voto * numeroDiVoti;
-
-    //     //aggiorno con il nuovo voto
-    //     numeroDiVoti++;
-    //     sommaVoti += model.Stars;
-
-    //     double votoAggiornato = Math.Round(sommaVoti / numeroDiVoti * 1.0, 1);
-
-    //     //scansiono le immagini per caricare il nuovo voto
-    //     foreach (var i in immagini)
-    //     {
-    //         if (i.Id == model.Id)
-    //         {
-    //             i.Voto = votoAggiornato;
-    //             i.NumeroVoti = numeroDiVoti;
-    //             break;
-    //         }
-    //     }
-    //     System.IO.File.WriteAllText(model.jsonPath, JsonConvert.SerializeObject(immagini, Formatting.Indented));
-    //     #endregion
-
-    //     return View(model);
-    // }
+        return RedirectToAction("Immagine", "User");
+    }
 
     public IActionResult Privacy()
     {

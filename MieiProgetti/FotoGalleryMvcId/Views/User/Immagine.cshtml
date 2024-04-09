@@ -67,24 +67,29 @@
     <div class="collapse" id="collapseCommenta">
         <div class="card card-body w-75">
 
-            <form method="post">
+            <form method="post" asp-controller="User" asp-action="VotaImmagine">
+                <!---------------- input commento ------------------->
                 <div class="form-group">
                     <label for="campoCommento">Commento</label>
-                    <textarea id="campoCommento" class="form-control" name="Commento" rows="3"></textarea>
+                    <textarea id="campoCommento" class="form-control" asp-for="Commento" rows="3"></textarea>
                 </div>
                 <!---------------- input stars ------------------->
                 <div class="stars">
-                    <input type="radio" class="star star-5" id="star-5" name="Stars" value="5" />
+                    <input type="radio" class="star star-5" id="star-5" asp-for="Stars" value="5" />
                     <label class="star star-5" for="star-5"></label>
-                    <input type="radio" class="star star-4" id="star-4" name="Stars" value="4" />
+                    <input type="radio" class="star star-4" id="star-4" asp-for="Stars" value="4" />
                     <label class="star star-4" for="star-4"></label>
-                    <input type="radio" class="star star-3" id="star-3" name="Stars" value="3" />
+                    <input type="radio" class="star star-3" id="star-3" asp-for="Stars" value="3" />
                     <label class="star star-3" for="star-3"></label>
-                    <input type="radio" class="star star-2" id="star-2" name="Stars" value="2" />
+                    <input type="radio" class="star star-2" id="star-2" asp-for="Stars" value="2" />
                     <label class="star star-2" for="star-2"></label>
-                    <input type="radio" class="star star-1" id="star-1" name="Stars" value="1" required />
+                    <input type="radio" class="star star-1" id="star-1" asp-for="Stars" value="1" required />
                     <label class="star star-1" for="star-1"></label>
                 </div>
+                <!---------------- input hidden ------------------->
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="UrlBack" />
+                <input type="hidden" asp-for="NomeUtente" />
                 <div>
                     <button type="submit" class="btn btn-success">Invia</button>
                 </div>
