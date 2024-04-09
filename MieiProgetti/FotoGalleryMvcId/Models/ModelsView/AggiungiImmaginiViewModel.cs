@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace FotoGalleryMvcId.Models;
 
@@ -29,4 +30,20 @@ public class AggiungiImmaginiViewModel
 
     //attibuti per le view GET
     public IList<SelectListItem> Categorie { get; set; } = []; // Inizializza la lista vuota
+    public string? Messaggio { get; set; }
+
+    public AggiungiImmaginiViewModel()
+    {
+        Paths paths = new();
+        // Leggi le categorie dal file JSON
+        var jsonFileCat = System.IO.File.ReadAllText(paths.PathCategorie);
+        // Se ho problemi con il file JSON...
+        var categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat) ?? new List<string>();
+
+        // Costruisci oggetti SelectListItem e assegnali a Categorie
+        foreach (var c in categorie)
+        {
+            Categorie.Add(new SelectListItem { Value = c, Text = c });
+        }
+    }
 }

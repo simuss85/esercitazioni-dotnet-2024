@@ -568,5 +568,15 @@
     "Commento": null,
     "Visibile": true,
     "Moderato": false
+  },
+  {
+    "Id": 58,
+    "Nome": "s.ussi@yahoo.it",
+    "ImmagineId": 91,
+    "Stelle": 5.0,
+    "Data": "2024-04-09T00:00:00+02:00",
+    "Commento": null,
+    "Visibile": true,
+    "Moderato": false
   }
 ]

@@ -11,7 +11,7 @@
 
     <!-------------------------- form aggiungi immagine ------------------------>
     <div class="d-flex justify-content-center mt-5">
-        <form method="post" asp-controller="User" asp-action="AggiungiImmagini">
+        <form method="post">
 
             <!-- Titolo -->
             <div class="form-group">
@@ -36,7 +36,7 @@
             <!-- Path -->
             <div class="form-group">
                 <label asp-for="Path"></label>
-                <input asp-for="Path" type="text"
+                <input asp-for="Path" type="text" autocomplete="path"
                     class="form-control @(ViewData.ModelState["Input.Path"]?.Errors.Any() ?? false ? "box-danger" : "")" />
             </div>
             <span asp-validation-for="Path" class="text-danger"></span>
@@ -48,5 +48,9 @@
                 Torna alle immagini
             </a>
         </form>
+    </div>
+
+    <div>
+        <span>@Model.Messaggio</span>
     </div>
 </div>

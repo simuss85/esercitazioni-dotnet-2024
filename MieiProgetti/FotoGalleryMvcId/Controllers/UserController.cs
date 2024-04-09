@@ -321,23 +321,15 @@ public class UserController : Controller
     /// </summary>
     /// <returns>La vista aggiungi immagini con il modello AggiungiImmaginiViewModel</returns>
     [HttpGet]
-    public IActionResult AggiungiImmagini()
+    public IActionResult AggiungiImmagini(string messaggio = "prova")
     {
         // creo il modello per gestire la view
-        var model = new AggiungiImmaginiViewModel { };
-
-        // Leggi le categorie dal file JSON
-        var jsonFileCat = System.IO.File.ReadAllText(paths.PathCategorie);
-        // Se ho problemi con il file JSON...
-        var categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat) ?? new List<string>();
-
-        // Costruisci oggetti SelectListItem e assegnali a Categorie
-        foreach (var c in categorie)
+        var model = new AggiungiImmaginiViewModel
         {
-            model.Categorie.Add(new SelectListItem { Value = c, Text = c });
-        }
+            Messaggio = messaggio
+        };
 
-        _logger.LogInformation("{0} - AggiungiImmagini --> ()", DateTime.Now.ToString("T"));
+        _logger.LogInformation("{0} - AggiungiImmagini --> (Form: attivo))", DateTime.Now.ToString("T"));
 
         return View(model);
     }
@@ -350,7 +342,7 @@ public class UserController : Controller
         {
             //log errore selezione
             _logger.LogInformation("{0} - Errore validazione modulo", DateTime.Now.ToString("T"));
-            return View();
+            return View(model);
         }
         else
         {
@@ -388,7 +380,7 @@ public class UserController : Controller
             System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
 
             _logger.LogInformation("Immagine aggiunta Id: {0}", id);
-            return RedirectToAction("AggiungiImmagini", "User");
+            return RedirectToAction("AggiungiImmagini", "User", new { messaggio = $"Immagine {model.Titolo} inserita!!!" });
         }
 
 
