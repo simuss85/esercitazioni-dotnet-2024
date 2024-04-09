@@ -44,7 +44,7 @@ public class UserController : Controller
         //log che visualizza la pagina selezionata, user e orario
         _logger.LogInformation("{0} - Immagini --> (User: {1} - PageIndex: {2})", DateTime.Now.ToString("T"), user, pageIndex);
 
-        // Inizializza gli attributi di classe nel modello
+        // creo il modello per gestire la view
         var model = new ImmaginiViewModel
         {
             PageIndex = pageIndex,
@@ -88,7 +88,7 @@ public class UserController : Controller
         //memorizzo l'Utente attuale
         var user = await _userManager.GetUserAsync(User);
 
-        // Inizializza gli attributi di classe nel modello
+        // creo il modello per gestire la view
         var model = new ImmagineViewModel
         {
             // memorizzo il valore passato dalla pagina precedente
@@ -180,6 +180,55 @@ public class UserController : Controller
         #endregion
 
         return RedirectToAction("Immagine", "User");
+    }
+
+    /// <summary>
+    /// Azione che crea la vista del carosello di immagini
+    /// </summary>
+    /// <param name="categoria">La categoria selezionata in precedenza</param>
+    /// <returns>La vista del carosello di immagini con il modello CaroselloViewModel</returns>
+    [HttpGet]
+    public IActionResult Carosello(string categoria)
+    {
+        //memorizzo UrlBack in un ViewBag
+        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
+
+        _logger.LogInformation("{0} - Carosello --> (Categoria: {1})", DateTime.Now.ToString("T"), categoria);
+
+        // creo il modello per gestire la view
+        var model = new CaroselloViewModel { };
+
+        // carico il file categorie.json e seleziono solo la categoria passata al get
+        var jsonFileCat = System.IO.File.ReadAllText(model.PathImmagini);
+
+        //verifica sul tipo di categoria pasata
+        if (!string.IsNullOrEmpty(categoria))
+        {
+            model.Categoria = categoria;
+            model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileCat)!.Where(i => i.Categoria == categoria);
+        }
+        else
+        {
+            model.Categoria = "Tutte";
+            model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileCat)!;
+        }
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult Categorie()
+    {
+        // creo il modello per gestire la view
+        var model = new CategorieViewModel { };
+
+        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+        var jsonFileCat = System.IO.File.ReadAllText(model.PathCategorie);
+        model.Categorie = JsonConvert.DeserializeObject<List<string>>(jsonFileCat)!;
+
+        return View(model);
     }
 
     public IActionResult Privacy()

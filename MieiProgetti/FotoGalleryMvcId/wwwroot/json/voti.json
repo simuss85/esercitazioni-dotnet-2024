@@ -338,5 +338,35 @@
     "Commento": null,
     "Visibile": true,
     "Moderato": false
+  },
+  {
+    "Id": 35,
+    "Nome": "s.ussi@yahoo.it",
+    "ImmagineId": 4,
+    "Stelle": 5.0,
+    "Data": "2024-04-09T00:00:00+02:00",
+    "Commento": "bellla!!!",
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 36,
+    "Nome": "s.ussi@yahoo.it",
+    "ImmagineId": 52,
+    "Stelle": 5.0,
+    "Data": "2024-04-09T00:00:00+02:00",
+    "Commento": "che cariniiii!!!",
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 37,
+    "Nome": "s.ussi@yahoo.it",
+    "ImmagineId": 22,
+    "Stelle": 5.0,
+    "Data": "2024-04-09T00:00:00+02:00",
+    "Commento": "cibooooooooooooo",
+    "Visibile": true,
+    "Moderato": false
   }
 ]

@@ -1,0 +1,48 @@
+@model CategorieViewModel
+@{
+    ViewData["Title"] = "Categorie";
+    //per la gestione dinamica random delle immagini di ogni categoria
+    string? path;
+    int max, n;
+    Random random = new();
+}
+
+<div class="container">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4"> @ViewData["Title"]</h1>
+    </div>
+
+    <!-------------------------- caselle categorie ------------------------------>
+    <div class="row text-center mt-5">
+        @foreach (var c in Model.Categorie!)
+        {
+            //calcolo quante immagini contiene ogni categoria
+            max = Model.Immagini!.Count(i => i.Categoria == c);
+            if (max != 0)
+            {
+                n = random.Next(1, max); //scelgo un id a caso tra i possibili della categoria
+
+                <!----------- seleziona random un immagine per ogni categoia --------->
+                path = Model.Immagini!.Where(i => i.Categoria == c).Skip(n).First().Path;
+
+                <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
+                    <div class="img-categoria rounded" style="background-image: url(@path);">
+                        <h1 class="text-categoria"><a class="link-categoria" asp-controller="User" asp-action="Immagini"
+                                asp-route-categoria="@c">@c</a>
+                        </h1>
+                    </div>
+                </div>
+            }
+            else //se la categoria non contiene immagini non inserisce la foto e disabilita il link
+            {
+                <div class="col-12 col-sm-6 col-lg-4 align-items-center p-0 m-0 mb-3 px-3">
+                    <div class="img-categoria rounded">
+                        <h1 class="text-categoria"><a class="link-categoria">@c</a>
+                        </h1>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
