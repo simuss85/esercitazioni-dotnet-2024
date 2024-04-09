@@ -42,10 +42,11 @@
                 <i class="bi bi-archive-fill"></i>
             </button>
             <ul class="dropdown-menu" style=" min-width: 8rem;">
-                <li><a class="dropdown-item" asp-route-categoria="">Tutte</a></li>
+                <li><a class="dropdown-item" asp-controller="User" asp-action="Immagini"
+                        asp-route-categoria="">Tutte</a></li>
                 @foreach (var c in Model.Categorie!)
                 {
-                    <li><a class="dropdown-item" asp-route-categoria="@c">@c</a>
+                    <li><a class="dropdown-item" asp-controller="User" asp-action="Immagini" asp-route-categoria="@c">@c</a>
                     </li>
                 }
             </ul>
@@ -61,7 +62,8 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-0 m-0 align-items-center">
                 <div class="card-index d-flex flex-wrap flex-row-reverse m-1 border-1">
                     <div class="image-container">
-                        <a asp-page="/Immagine" asp-route-id="@immagine.Id"> @*asp-route-urlback="@url"*@
+                        <a asp-controller="User" asp-action="Immagine" asp-route-id="@immagine.Id"
+                            asp-route-urlback="@ViewBag.UrlBack">
                             <img src="@immagine.Path" class="img-fluid" />
                         </a>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
@@ -81,8 +83,8 @@
     <nav class="mt-4" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" asp-route-pageindex="1"
-                    asp-route-categoria="@Model.Categoria">
+                <a class="page-link" aria-label="Previous" asp-controller="User" asp-action="Immagini"
+                    asp-route-pageindex="1" asp-route-categoria="@Model.Categoria">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -90,19 +92,19 @@
             {
                 if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
                 {
-                    <li class="page-item active"><a class="page-link" asp-route-pageindex="@i"
-                            asp-route-categoria="@Model.Categoria">@i</a></li>
+                    <li class="page-item active"><a class="page-link" asp-controller="User" asp-action="Immagini"
+                            asp-route-pageindex="@i" asp-route-categoria="@Model.Categoria">@i</a></li>
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" asp-route-pageindex="@i"
-                            asp-route-categoria="@Model.Categoria">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-controller="User" asp-action="Immagini"
+                            asp-route-pageindex="@i" asp-route-categoria="@Model.Categoria">@i</a></li>
                 }
 
             }
             <li class="page-item">
-                <a class="page-link" aria-label="Next" asp-route-pageindex="@Model.NumeroPagine"
-                    asp-route-categoria="@Model.Categoria">
+                <a class="page-link" aria-label="Next" asp-controller="User" asp-action="Immagini"
+                    asp-route-pageindex="@Model.NumeroPagine" asp-route-categoria="@Model.Categoria">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

@@ -1,0 +1,142 @@
+@model ImmagineViewModel
+@{
+    ViewData["Title"] = "Dettaglio Immagine";
+    //TO DO da migliorare con i ViewBag
+    double stelleImmagine = 0;
+    if (Model.Immagine != null)
+    {
+        stelleImmagine = Model.Immagine.Voto;
+    }
+}
+
+<div class="container">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+    <br>
+
+    <!----------------- sezione card immagine ---------------------------->
+    <div class="row border border-2 mx-2">
+        <div class="col-12 col-md-10 p-2 my-2">
+            <img src="@Model.Immagine!.Path" class="card-img-top" alt="@Model.Immagine.Titolo">
+        </div>
+        <div class="col-2 card-body p-2 mt-2">
+            <h5 class="card-text">@Model.Immagine!.Titolo</h5>
+            <p class="card-text">Autore: @Model.Immagine.Autore</p>
+            <p class="card-text">Data pubblicazione: @Model.Immagine.Data.ToString("d")</p>
+            <p class="card-text">
+
+                <span class="px-1">@Model.Immagine.Voto</span>
+                @for (int i = 0; i < 5; i++)
+                {
+                    if (stelleImmagine >= 1)
+                    {
+                        <span class="bi bi-star-fill"></span>
+                    }
+                    else if (stelleImmagine > 0)
+                    {
+                        <span class="bi bi-star-half"></span>
+                    }
+                    else
+                    {
+                        <span class="bi bi-star"></span>
+                    }
+                    stelleImmagine--;
+                }
+                <span class="numero-voti px-1">(@Model.Immagine.NumeroVoti)</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!--------------- sezione inserimento voto collapse -------------------------->
+<div class="container mt-4 ps-4">
+    <p class="d-inline-flex gap-1">
+        @if (Model.VotoAttivo)
+        {
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCommenta" role="button"
+                aria-expanded="false" aria-controls="collapseCommenta">
+                Vota
+            </a>
+        }
+        <a href="@Model.UrlBack" class="btn btn-primary" type="button">
+            Torna indietro
+        </a>
+    </p>
+    <div class="collapse" id="collapseCommenta">
+        <div class="card card-body w-75">
+
+            <form method="post">
+                <div class="form-group">
+                    <label for="campoCommento">Commento</label>
+                    <textarea id="campoCommento" class="form-control" name="Commento" rows="3"></textarea>
+                </div>
+                <!---------------- input stars ------------------->
+                <div class="stars">
+                    <input type="radio" class="star star-5" id="star-5" name="Stars" value="5" />
+                    <label class="star star-5" for="star-5"></label>
+                    <input type="radio" class="star star-4" id="star-4" name="Stars" value="4" />
+                    <label class="star star-4" for="star-4"></label>
+                    <input type="radio" class="star star-3" id="star-3" name="Stars" value="3" />
+                    <label class="star star-3" for="star-3"></label>
+                    <input type="radio" class="star star-2" id="star-2" name="Stars" value="2" />
+                    <label class="star star-2" for="star-2"></label>
+                    <input type="radio" class="star star-1" id="star-1" name="Stars" value="1" required />
+                    <label class="star star-1" for="star-1"></label>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Invia</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!------------------------ sezione dei commenti --------------------->
+    <div class="commenti w-75">
+
+        @foreach (var voto in Model.Voti!)
+        {
+            if (Model.Immagine.Id == voto.ImmagineId)
+            {
+                var stelle = @voto.Stelle;
+                <div class="card">
+                    <div class="card-header">
+                        @voto.Nome
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (stelle >= 1)
+                                {
+                                    <span class="bi bi-star-fill"></span>
+                                }
+                                else if (stelle > 0)
+                                {
+                                    <span class="bi bi-star-half"></span>
+                                }
+                                else
+                                {
+                                    <span class="bi bi-star"></span>
+                                }
+                                stelle--;
+                            }
+                        </h5>
+                        @if (voto.Visibile)
+                        {
+                            <p class="card-text">@voto.Commento</p>
+                        }
+                        else
+                        {
+                            <p class="card-text moderato">Commento censurato</p>
+
+                        }
+
+
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

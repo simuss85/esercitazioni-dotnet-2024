@@ -19,9 +19,19 @@ public class UserController : Controller
         _userManager = userManager;
     }
 
+    /// <summary>
+    /// Azione per la visualizzazione della home page che contiene tutte le immagini, il saluto all'utente <br/>
+    /// o il titolo della categoria, i tasti per la scelta della categoria e il play per il carosello.
+    /// </summary>
+    /// <param name="pageIndex">Il numero attuale della pagina</param>
+    /// <param name="categoria">La categoria attualmente selezionata</param>
+    /// <returns>La vista con il modello ImmagineViewModel</returns>
     [HttpGet]
     public async Task<IActionResult> Immagini(int? pageIndex = 1, string? categoria = "")
     {
+        //memorizzo UrlBack in un ViewBag
+        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
+
         //memorizzo l'Utente attuale
         var user = await _userManager.GetUserAsync(User);
 
@@ -64,6 +74,60 @@ public class UserController : Controller
 
         return View(model);
     }
+
+    /// <summary>
+    /// Azione per la visualizzazione del dettaglio immagine che contiene la card immagine, i tasto <br/>
+    /// i tasti per la scelta della categoria e il play per il carosello.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="urlBack"></param>
+    /// <returns></returns>
+    [HttpGet]
+    public async Task<IActionResult> Immagine(int id, string urlBack)
+    {
+        //memorizzo l'Utente attuale
+        var user = await _userManager.GetUserAsync(User);
+
+        // Inizializza gli attributi di classe nel modello
+        var model = new ImmagineViewModel
+        {
+            // memorizzo il valore passato dalla pagina precedente
+            UrlBack = urlBack
+        };
+
+
+
+        // seleziono da tutte le immagini quella attuale
+        var jsonFileImm = System.IO.File.ReadAllText(model.PathImmagini);
+        model.Immagine = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!.First(i => i.Id == id);
+
+        //carico i voti per la view della card immagine
+        var jsonFileVoti = System.IO.File.ReadAllText(model.PathVoti);
+        model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
+
+        if (user != null)
+        {
+            //memorizzo il nome utente attuale come email
+            model.NomeUtente = user!.ToString();
+        }
+
+        //verifico se l'utente ha gia votato l'immagine
+        if (model.Voti.FirstOrDefault(v => v.Nome == model.NomeUtente && v.ImmagineId == id) == null)
+        {
+            //log che visualizza la pagina selezionata, user, urlBack e orario
+            _logger.LogInformation("{0} - Dettaglio Immagine --> (User: {1} - UrlBack: {2} - IdImmagine: {3} - Voto: Attivo!)", DateTime.Now.ToString("T"), user, urlBack, id);
+            model.VotoAttivo = true;
+        }
+        else
+        {
+            _logger.LogInformation("{0} - Dettaglio Immagine --> (User: {1} - UrlBack: {2} - IdImmagine: {3} - Voto: Non Attivo!)", DateTime.Now.ToString("T"), user, urlBack, id);
+            model.VotoAttivo = false;
+        }
+
+        return View(model);
+    }
+
+
 
     // /// <summary>
     // /// Azione per la visualizzazione di una singola immagine.
