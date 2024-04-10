@@ -2,6 +2,7 @@ using FotoGalleryMvcId.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 
 namespace FotoGalleryMvcId.Controllers;
@@ -33,6 +34,9 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff")
     {
+        //memorizzo UrlBack in un ViewBag
+        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
+
         //seleziono l'utene attuale
         var user = await _userManager.GetUserAsync(User);
 
@@ -116,7 +120,7 @@ public class AdminController : Controller
     /// </summary>
     /// <param name="id">Il codice identificativo dell'utente da modificare</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo la modifica dello status</returns>
-    public async Task<IActionResult> GestisciStatus(string id)
+    public async Task<IActionResult> GestisciStatus(string id, bool cardBack = false)
     {
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
@@ -127,20 +131,40 @@ public class AdminController : Controller
         user.Status = !user.Status;
         await _userManager.UpdateAsync(user);
 
-        return RedirectToAction(nameof(GestioneUtenti));
+        //reindirizza alla pagina corretta
+        if (cardBack == true)
+        {
+            return RedirectToAction(nameof(CardUtente), new { id = user.Id });
+        }
+        else
+        {
+            return RedirectToAction(nameof(GestioneUtenti));
+        }
+
     }
 
+    /// <summary>
+    /// (PRE) Azione per l'eliminazione di un utente
+    /// </summary>
+    /// <param name="id">Il codice identificativo dell'utente da modificare</param>
+    /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel</returns>
     public async Task<IActionResult> EliminaUtente(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
         {
-            return NotFound();
+            return NotFound("Utente non trovato");
         }
 
         return View(user);
     }
 
+    /// <summary>
+    /// (POST) Azione per l'eliminazione di un utente
+    /// </summary>
+    /// <param name="id">Il codice identificativo dell'utente da modificare</param>
+    /// <param name="conferma">Valore true di conferma per l'eliminiazione utente</param>
+    /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo l'eliminazione dell'utente</returns>
     [HttpPost]
     public async Task<IActionResult> EliminaUtente(string id, bool conferma)
     {
@@ -157,6 +181,28 @@ public class AdminController : Controller
         }
 
         return RedirectToAction(nameof(GestioneUtenti));
+    }
+
+    public async Task<IActionResult> CardUtente(string id, string urlBack = "")
+    {
+        // Trova l'utente
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            // Se l'utente non esiste, ritorna una vista di errore o reindirizza a una pagina di errore
+            return NotFound("Utente non trovato");
+        }
+
+        // Passa l'utente al modello
+        var model = new CardUtenteViewModel
+        {
+            Utente = user,
+            UrlBack = urlBack
+        };
+
+        //log che visualizza la pagina selezionata, user, urlBack e orario
+        _logger.LogInformation("{0} - Dettaglio Immagine --> (UserId: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
+        return View(model);
     }
 
 }

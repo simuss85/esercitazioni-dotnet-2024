@@ -87,7 +87,8 @@
                     <td>@u.Id</td>
 
                     <td>
-                        <a asp-controller="Admin" asp-action="DettagliUtente" asp-route-id="@u.Id">@u.Alias</a>
+                        <a asp-controller="Admin" asp-action="CardUtente" asp-route-id="@u.Id"
+                            asp-route-urlback="@ViewBag.UrlBack">@u.Alias</a>
                     </td>
 
                     <td>@u.Ruoli</td>
@@ -96,10 +97,18 @@
 
                     <td>@u.Status</td>
                     <td>
-                        <a class="btn btn-primary" asp-controller="Admin" asp-action="GestisciStatus"
-                            asp-route-id="@u.Id">Attiva/Disattiva</a>
+                        <a class="btn btn-primary" asp-controller="Admin" asp-action="GestisciStatus" asp-route-id="@u.Id">
+                            @if (u.Status == false)
+                            {
+                                <span>Attiva</span>
+                            }
+                            else
+                            {
+                                <span>Blocca</span>
+                            }
+                        </a>
                         <a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli"
-                            asp-route-id="@u.Id">Gestisci Ruoli</a>
+                            asp-route-id="@u.Id">Ruoli</a>
                         <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente"
                             asp-route-id="@u.Id">Elimina</a>
                     </td>
