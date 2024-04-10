@@ -23,7 +23,7 @@ public class SeedData
             var adminUser = new AppUser
             {
                 UserName = "admin@admin.com",
-                Email = "admin@amin.com",
+                Email = "admin@admin.com",
                 Nome = "Admin",
                 Cognome = "Admin",
                 Eta = 18,
