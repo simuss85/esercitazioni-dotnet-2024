@@ -1,0 +1,16 @@
+@model AppUser
+
+<td>
+    <a class="btn btn-primary" asp-controller="Admin" asp-action="GestisciStatus" asp-route-id="@Model.Id">
+        @if (Model.Status == false)
+        {
+            <span>Attiva</span>
+        }
+        else
+        {
+            <span>Blocca</span>
+        }
+    </a>
+    <a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli" asp-route-id="@Model.Id">Ruoli</a>
+    <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente" asp-route-id="@Model.Id">Elimina</a>
+</td>

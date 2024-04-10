@@ -96,22 +96,15 @@
                     <td>@u.Email</td>
 
                     <td>@u.Status</td>
-                    <td>
-                        <a class="btn btn-primary" asp-controller="Admin" asp-action="GestisciStatus" asp-route-id="@u.Id">
-                            @if (u.Status == false)
-                            {
-                                <span>Attiva</span>
-                            }
-                            else
-                            {
-                                <span>Blocca</span>
-                            }
-                        </a>
-                        <a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli"
-                            asp-route-id="@u.Id">Ruoli</a>
-                        <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente"
-                            asp-route-id="@u.Id">Elimina</a>
-                    </td>
+                    @* ------------ richiamo i tasti di controllo ----------- *@
+                    @if (Model.Partial == "tutti")
+                    {
+                        <partial name="_AzioniPartial" for="@u" />
+                    }
+                    else
+                    {
+                        <partial name="__CheckRuoliPartial" for="@u" />
+                    }
 
                 </tr>
             }

@@ -32,7 +32,7 @@ public class AdminController : Controller
     /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff")
+    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff", string partial = "tutti")
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
@@ -47,7 +47,8 @@ public class AdminController : Controller
             Utenti = await _userManager.Users.ToListAsync(),
             ElementiPerPagina = 10,
             PageIndex = pageIndex,
-            Reverse = reverse
+            Reverse = reverse,
+            Partial = partial
         };
 
         //rimuovo l'utente attuale dalla lista
@@ -119,6 +120,7 @@ public class AdminController : Controller
     /// Azione che permette di modificare lo status di ogni utente.
     /// </summary>
     /// <param name="id">Il codice identificativo dell'utente da modificare</param>
+    /// <param name="cardBack">Se true invia la richiesta alla view CardUtente</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo la modifica dello status</returns>
     public async Task<IActionResult> GestisciStatus(string id, bool cardBack = false)
     {
@@ -142,6 +144,23 @@ public class AdminController : Controller
         }
 
     }
+
+    public async Task<IActionResult> GestisciRuoli(string id, bool modifica)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        if (modifica)
+        {
+
+        }
+
+        return RedirectToAction();
+    }
+
 
     /// <summary>
     /// (PRE) Azione per l'eliminazione di un utente
@@ -183,6 +202,14 @@ public class AdminController : Controller
         return RedirectToAction(nameof(GestioneUtenti));
     }
 
+
+    /// <summary>
+    /// Azione che permette di visualizzare la card dei dettagli utente.
+    /// </summary>
+    /// <param name="id">Il codice identificativo dell'utente da modificare</param>
+    /// <param name="urlBack"></param>
+    /// <returns>La vista card utente con il modello CardUtentiViewModel</returns>
+    [HttpGet]
     public async Task<IActionResult> CardUtente(string id, string urlBack = "")
     {
         // Trova l'utente
@@ -204,5 +231,7 @@ public class AdminController : Controller
         _logger.LogInformation("{0} - Dettaglio Immagine --> (UserId: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
         return View(model);
     }
+
+
 
 }

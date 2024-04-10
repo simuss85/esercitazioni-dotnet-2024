@@ -1,0 +1,23 @@
+@model CardUtenteViewModel
+@{
+    ViewData["Title"] = "Assegna ruolo utente";
+}
+
+<div class="mx-5">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <h2 class="text-center mt-5 pt-3">Vuoi cambiare ruoli all'utente?</h2>
+    @* <h2 class="text-center mt-4 mb-3">@Model.Email</h2> *@
+    <!-- sezione dei tasti di elimina o annulla -->
+    <div class="d-flex flex-row justify-content-center pt-3 pb-2">
+
+
+        <form method="post">
+            <button type="submit" class="btn btn-danger" name="conferma" value="true">Elimina</button>
+            <a class="btn btn-primary ms-3" asp-controller="Admin" asp-action="GestioneUtenti">Annulla</a>
+        </form>
+    </div>
+</div>

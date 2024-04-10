@@ -39,21 +39,8 @@
                 <li class="list-group-item "><b>Status:</b>@(Model.Utente.Status == true ? " Attivo" : " Bloccato")</li>
             </ul>
             <div class="card-body text-center">
-                <a class="btn btn-primary" asp-controller="Admin" asp-action="GestisciStatus" asp-route-cardback="true"
-                    asp-route-id="@Model.Utente.Id" class="card-link">
-                    @if (Model.Utente.Status == false)
-                    {
-                        <span>Attiva</span>
-                    }
-                    else
-                    {
-                        <span>Blocca</span>
-                    }
-                </a>
-                <a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli"
-                    asp-route-id="@Model.Utente.Id">Ruoli</a>
-                <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente"
-                    asp-route-id="@Model.Utente.Id" class="card-link">Elimina</a>
+                @* ------------ richiamo i tasti di controllo ----------- *@
+                <partial name="_AzioniPartial" for="@Model.Utente" />
             </div>
         </div>
     </div>
