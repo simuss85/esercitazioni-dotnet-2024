@@ -32,9 +32,9 @@ public class HomeController : Controller
     {
         if (User.Identity!.IsAuthenticated)
         {
-            if (User.IsInRole("User"))
+            if (User.IsInRole("Admin"))
             {
-                return RedirectToAction("Immagini", "User");
+                return RedirectToAction("GestioneUtenti", "Admin");
             }
             else if (User.IsInRole("Moderatore"))
             {
@@ -42,8 +42,9 @@ public class HomeController : Controller
             }
             else
             {
-                return RedirectToAction("GestioneUtenti", "Admin");
+                return RedirectToAction("Immagini", "User");
             }
+
 
         }
         else

@@ -2,6 +2,40 @@ html {
   font-size: 14px;
 }
 
+/* ---------------- index immagini link ------------------- */
+#img-xxl,
+#img-lg,
+#img-md,
+#img-sm {
+  display: none;
+  height: 58rem;
+}
+
+@media (max-width: 767px) {
+  #img-sm {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #img-md {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1399px) {
+  #img-lg {
+    display: block;
+  }
+}
+
+@media (min-width: 1400px) {
+  #img-xxl {
+    display: block;
+  }
+}
+
+/* ---------------------------------------------------------- */
 @media (min-width: 768px) {
   html {
     font-size: 16px;
