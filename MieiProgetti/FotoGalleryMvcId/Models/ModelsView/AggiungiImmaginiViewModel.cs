@@ -30,7 +30,10 @@ public class AggiungiImmaginiViewModel
 
     //attibuti per le view GET
     public IList<SelectListItem> Categorie { get; set; } = []; // Inizializza la lista vuota
+
+    //per la gestione dei messaggi a schermo
     public string? Messaggio { get; set; }
+    public string? Colore { get; set; }
 
     public AggiungiImmaginiViewModel()
     {

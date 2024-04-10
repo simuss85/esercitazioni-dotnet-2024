@@ -321,13 +321,30 @@ public class UserController : Controller
     /// </summary>
     /// <returns>La vista aggiungi immagini con il modello AggiungiImmaginiViewModel</returns>
     [HttpGet]
-    public IActionResult AggiungiImmagini(string messaggio = "prova")
+    public IActionResult AggiungiImmagini(string messaggio = "", string colore = "text-success")
     {
         // creo il modello per gestire la view
         var model = new AggiungiImmaginiViewModel
         {
-            Messaggio = messaggio
+            Messaggio = messaggio,
+            Colore = colore
         };
+
+        //TO DO versione con i placeholders
+        // //scansiono le immagini
+        // var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
+        // var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+        // //calcolo l'id max per i placeholder
+        // int id = immagini.Max(i => i.Id);
+        // id++;
+
+        // //setto il titolo per il placeholder
+        // model.Titolo = $"Titolo {id}";
+
+        // //setto autore per il placeholder
+        // model.Autore = $"Autore {id}";
+
 
         _logger.LogInformation("{0} - AggiungiImmagini --> (Form: attivo))", DateTime.Now.ToString("T"));
 
@@ -340,6 +357,8 @@ public class UserController : Controller
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
         {
+            model.Colore = "text-danger";
+            model.Messaggio = "Attenzione!!!";
             //log errore selezione
             _logger.LogInformation("{0} - Errore validazione modulo", DateTime.Now.ToString("T"));
             return View(model);
@@ -380,7 +399,7 @@ public class UserController : Controller
             System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
 
             _logger.LogInformation("Immagine aggiunta Id: {0}", id);
-            return RedirectToAction("AggiungiImmagini", "User", new { messaggio = $"Immagine {model.Titolo} inserita!!!" });
+            return RedirectToAction("AggiungiImmagini", "User", new { messaggio = $"Immagine inserita: \"{model.Titolo}\"" });
         }
 
 
