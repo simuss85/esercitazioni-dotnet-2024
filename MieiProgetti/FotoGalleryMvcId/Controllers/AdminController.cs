@@ -23,20 +23,140 @@ public class AdminController : Controller
         _roleManager = roleManager;
     }
 
+    /// <summary>
+    /// Azione che crea la vista per la gestione degli utenti con una tabella con ordinamento variabile <br/>
+    /// link per il dettaglio utenti, tasti per gestione status, ruoli e elimina utente.
+    /// </summary>
+    /// <param name="pageIndex">Il numero attuale della pagina</param>
+    /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>
+    /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1)
+    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff")
     {
+        //seleziono l'utene attuale
+        var user = await _userManager.GetUserAsync(User);
+
         //creo il modello per gestire la view
         var model = new GestioneUtentiViewModel
         {
             //genero la lista degli utenti del sistema
             Utenti = await _userManager.Users.ToListAsync(),
-            PageIndex = pageIndex
+            ElementiPerPagina = 10,
+            PageIndex = pageIndex,
+            Reverse = reverse
         };
 
+        //rimuovo l'utente attuale dalla lista
+        if (user != null)
+        {
+            model.Utenti = model.Utenti.Where(u => u.Id != user.Id).ToList();
+        }
+
+
         //log che visualizza la pagina selezionata, user e orario
-        _logger.LogInformation("{0} - GestioneUtenti --> (PageIndex: {1})", DateTime.Now.ToString("T"), pageIndex);
+        _logger.LogInformation("{0} - GestioneUtenti --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
+
+        //gestione ordinameneto tabella
+        switch (reverse)
+        {
+            case "idOff":
+                model.Utenti = model.Utenti.OrderByDescending(u => u.Id);
+                break;
+
+            case "idOn":
+                model.Utenti = model.Utenti.OrderBy(u => u.Id);
+                break;
+
+            case "aliasOff":
+                model.Utenti = model.Utenti.OrderByDescending(u => u.Alias);
+                break;
+
+            case "aliasOn":
+                model.Utenti = model.Utenti.OrderBy(u => u.Alias);
+                break;
+
+            case "ruoloOff":
+                model.Utenti = model.Utenti.OrderByDescending(u => u.Ruoli);
+                break;
+
+            case "ruoloOn":
+                model.Utenti = model.Utenti.OrderBy(u => u.Ruoli);
+                break;
+
+            case "emailOff":
+                model.Utenti = model.Utenti.OrderByDescending(u => u.Email);
+                break;
+
+            case "emailOn":
+                model.Utenti = model.Utenti.OrderBy(u => u.Email);
+                break;
+
+            case "statusOff":
+                model.Utenti = model.Utenti.OrderByDescending(u => u.Status);
+                break;
+
+            case "statusOn":
+                model.Utenti = model.Utenti.OrderBy(u => u.Status);
+                break;
+
+            default:
+                model.Utenti = model.Utenti.OrderByDescending(u => u.Id);
+                break;
+        }
+
+        // //paginazione 
+        model.NumeroPagine = (int)Math.Ceiling((double)model.Utenti.Count() / model.ElementiPerPagina);
+        model.Utenti = model.Utenti.Skip((pageIndex - 1) * model.ElementiPerPagina).Take(model.ElementiPerPagina);
 
         return View(model);
     }
+
+    /// <summary>
+    /// Azione che permette di modificare lo status di ogni utente.
+    /// </summary>
+    /// <param name="id">Il codice identificativo dell'utente da modificare</param>
+    /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo la modifica dello status</returns>
+    public async Task<IActionResult> GestisciStatus(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        user.Status = !user.Status;
+        await _userManager.UpdateAsync(user);
+
+        return RedirectToAction(nameof(GestioneUtenti));
+    }
+
+    public async Task<IActionResult> EliminaUtente(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return View(user);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EliminaUtente(string id, bool conferma)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        if (conferma)
+        {
+            await _userManager.DeleteAsync(user);
+            return RedirectToAction(nameof(GestioneUtenti));
+        }
+
+        return RedirectToAction(nameof(GestioneUtenti));
+    }
+
 }

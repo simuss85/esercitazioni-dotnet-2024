@@ -243,7 +243,7 @@ public class UserController : Controller
     }
 
     /// <summary>
-    /// Azione che crea la vista classifica con una tabella con ordinamento
+    /// Azione che crea la vista classifica con una tabella con ordinamento variabile
     /// </summary>
     /// <param name="pageIndex">Il numero attuale della pagina</param>
     /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>

@@ -9,10 +9,22 @@
     </div>
 
     <!------------------- tabella classifica ----------------------->
-    <table class="table text-center table-striped align-middle">
+    <table class="table text-center table-striped align-middle mt-5">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Id
+                    @if (Model.Reverse != "idOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="idOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="idOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
                 <th>Alias
                     @if (Model.Reverse != "aliasOn")
                     {
@@ -74,14 +86,23 @@
                 <tr>
                     <td>@u.Id</td>
 
-                    <td>@u.Alias</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="DettagliUtente" asp-route-id="@u.Id">@u.Alias</a>
+                    </td>
 
                     <td>@u.Ruoli</td>
 
                     <td>@u.Email</td>
 
                     <td>@u.Status</td>
-                    <td>Azioni</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Admin" asp-action="GestisciStatus"
+                            asp-route-id="@u.Id">Attiva/Disattiva</a>
+                        <a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli"
+                            asp-route-id="@u.Id">Gestisci Ruoli</a>
+                        <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente"
+                            asp-route-id="@u.Id">Elimina</a>
+                    </td>
 
                 </tr>
             }
