@@ -1,19 +1,18 @@
 @model AppUser
 <td>
+    <div class="d-flex justify-content-center"></div>
     <form action="post">
         <input type="checkbox" id="chkAdmin" name="role" value="Admin">
         <label for="chkAdmin">Admin</label>
-        <input type="checkbox" id="chkUser" name="role" value="User">
-        <label for="chkUser">User</label>
+
         <input type="checkbox" id="chkModerator" name="role" value="Moderatore">
         <label for="chkModerator">Moderatore</label>
-        <div class="row justify-content-center">
-            <button type="submit" class="btn btn-success col-6">Salva</button>
-            <a class="btn btn-primary col-6" asp-controller="Admin" asp-action="CardUtente"
-                asp-route-menuruoli="false">Annulla</a>
-        </div>
+
+        <button type="submit" class="btn btn-success">Salva</button>
+        <a class="btn btn-primary" asp-controller="Admin" asp-route-menuruoli="false">Annulla</a>
+
 
     </form>
-
+    </div>
 
 </td>
