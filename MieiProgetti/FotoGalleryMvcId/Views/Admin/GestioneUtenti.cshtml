@@ -101,7 +101,7 @@
                     <td class="@textColor">@status</td>
 
                     @* ------------ richiamo i tasti di controllo ----------- *@
-                    @if (Model.MenuRuoli)
+                    @if (Model.MenuRuoli == u.Email)
                     {
                         <partial name="_CheckRuoliPartial" for="@u" />
                     }

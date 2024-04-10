@@ -40,7 +40,7 @@
             </ul>
             <div class="card-body text-center">
                 @* ------------ richiamo i tasti di controllo ----------- *@
-                @if (Model.MenuRuoli)
+                @if (Model.MenuRuoli == Model.Utente.Email)
                 {
                     <partial name="_CheckRuoliPartial" for="@Model.Utente" />
                 }

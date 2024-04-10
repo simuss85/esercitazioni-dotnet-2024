@@ -32,7 +32,7 @@ public class AdminController : Controller
     /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff", bool menuRuoli = false)
+    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff", string menuRuoli = "")
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path;
@@ -162,12 +162,12 @@ public class AdminController : Controller
         // Controlla se l'URL contiene la stringa della pagina "CardUtente"
         if (urlBack.Contains("GestioneUtenti"))
         {
-            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = true });
+            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = user.Email });
         }
         else
         {
 
-            return RedirectToAction(nameof(CardUtente), new { id = user.Id, menuRuoli = true });
+            return RedirectToAction(nameof(CardUtente), new { id = user.Id, menuRuoli = user.Email });
         }
     }
 
@@ -220,7 +220,7 @@ public class AdminController : Controller
     /// <param name="urlBack">Gestisce il tasto di ritorno</param>
     /// <returns>La vista card utente con il modello CardUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> CardUtente(string id, bool menuRuoli = false)
+    public async Task<IActionResult> CardUtente(string id, string menuRuoli = "")
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path;
