@@ -1,3 +1,4 @@
+@model GestioneUtentiViewModel
 @{
     ViewData["Title"] = "Gestione utenti";
 }
@@ -6,5 +7,85 @@
     <div class="text-center">
         <h1 class="display-4">@ViewData["Title"]</h1>
     </div>
+
+    <!------------------- tabella classifica ----------------------->
+    <table class="table text-center table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Alias
+                    @if (Model.Reverse != "aliasOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="aliasOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="aliasOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Ruolo
+                    @if (Model.Reverse != "ruoloOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="ruoloOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="ruoloOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Email
+                    @if (Model.Reverse != "emailOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="emailOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="emailOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Status
+                    @if (Model.Reverse != "statusOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="statusOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="statusOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+                <th> Azione </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var u in Model.Utenti!)
+            {
+                <tr>
+                    <td>@u.Id</td>
+
+                    <td>@u.Alias</td>
+
+                    <td>@u.Ruoli</td>
+
+                    <td>@u.Email</td>
+
+                    <td>@u.Status</td>
+                    <td>Azioni</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 
 </div>

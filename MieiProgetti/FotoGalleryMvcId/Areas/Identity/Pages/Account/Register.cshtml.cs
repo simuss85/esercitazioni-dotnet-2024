@@ -24,6 +24,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly IUserStore<AppUser> _userStore;
@@ -32,12 +33,14 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
+            RoleManager<IdentityRole> roleManager,
             UserManager<AppUser> userManager,
             IUserStore<AppUser> userStore,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
+            _roleManager = roleManager;
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
@@ -99,6 +102,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "La password e la password di conferma non corrispondono.")]
             public string ConfirmPassword { get; set; }
 
+            [HiddenInput]
             public string Alias { get; set; }
 
             [Required(ErrorMessage = "Devi inserire un nome")]
@@ -135,6 +139,17 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                 user.Nome = Input.Nome;
                 user.Cognome = Input.Cognome;
                 user.Eta = Input.Eta;
+                user.Status = true;
+
+                //Verifico se esiste il ruolo e lo assegno all'utente registrato
+                if (await _roleManager.RoleExistsAsync("User"))
+                {
+                    user.Ruoli = "User";
+                }
+                else
+                {
+                    user.Ruoli = "error";
+                }
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

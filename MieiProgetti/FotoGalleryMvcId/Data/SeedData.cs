@@ -28,7 +28,10 @@ public class SeedData
                 Cognome = "Admin",
                 Eta = 18,
                 Alias = "Admin",
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                Status = true,
+                Ruoli = "Admin"
+
             };
             await userManager.CreateAsync(adminUser, "Admin123!");
             await userManager.AddToRoleAsync(adminUser, "Admin");
