@@ -35,7 +35,7 @@ public class AdminController : Controller
     public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff", string partial = "tutti")
     {
         //memorizzo UrlBack in un ViewBag
-        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
+        ViewBag.UrlBack = HttpContext.Request.Path;
 
         //seleziono l'utene attuale
         var user = await _userManager.GetUserAsync(User);
@@ -120,10 +120,11 @@ public class AdminController : Controller
     /// Azione che permette di modificare lo status di ogni utente.
     /// </summary>
     /// <param name="id">Il codice identificativo dell'utente da modificare</param>
-    /// <param name="cardBack">Se true invia la richiesta alla view CardUtente</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo la modifica dello status</returns>
-    public async Task<IActionResult> GestisciStatus(string id, bool cardBack = false)
+    public async Task<IActionResult> GestisciStatus(string id, string urlBack)
     {
+        _logger.LogInformation("_____________ returnUrl: {0}", urlBack);
+
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
         {
@@ -133,14 +134,15 @@ public class AdminController : Controller
         user.Status = !user.Status;
         await _userManager.UpdateAsync(user);
 
-        //reindirizza alla pagina corretta
-        if (cardBack == true)
+        // Controlla se l'URL contiene la stringa della pagina "CardUtente"
+        if (urlBack.Contains("GestioneUtenti"))
         {
-            return RedirectToAction(nameof(CardUtente), new { id = user.Id });
+            return RedirectToAction(nameof(GestioneUtenti));
         }
         else
         {
-            return RedirectToAction(nameof(GestioneUtenti));
+
+            return RedirectToAction(nameof(CardUtente), new { id = user.Id });
         }
 
     }
@@ -207,11 +209,14 @@ public class AdminController : Controller
     /// Azione che permette di visualizzare la card dei dettagli utente.
     /// </summary>
     /// <param name="id">Il codice identificativo dell'utente da modificare</param>
-    /// <param name="urlBack"></param>
+    /// <param name="urlBack">Gestisce il tasto di ritorno</param>
     /// <returns>La vista card utente con il modello CardUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> CardUtente(string id, string urlBack = "")
+    public async Task<IActionResult> CardUtente(string id, string urlBack)
     {
+        //memorizzo UrlBack in un ViewBag
+        ViewBag.UrlBack = HttpContext.Request.Path;
+
         // Trova l'utente
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)

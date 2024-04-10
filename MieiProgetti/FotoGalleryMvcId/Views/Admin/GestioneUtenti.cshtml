@@ -83,6 +83,9 @@
 
             @foreach (var u in Model.Utenti!)
             {
+                string textColor = u.Status == true ? "text-success" : "text-danger";
+                string status = u.Status == true ? "Attivo" : "Bloccato";
+
                 <tr>
                     <td>@u.Id</td>
 
@@ -95,7 +98,8 @@
 
                     <td>@u.Email</td>
 
-                    <td>@u.Status</td>
+                    <td class="@textColor">@status</td>
+
                     @* ------------ richiamo i tasti di controllo ----------- *@
                     @if (Model.Partial == "tutti")
                     {
