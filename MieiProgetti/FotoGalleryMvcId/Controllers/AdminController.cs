@@ -32,7 +32,7 @@ public class AdminController : Controller
     /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff", string partial = "tutti")
+    public async Task<IActionResult> GestioneUtenti(int pageIndex = 1, string reverse = "idOff", bool menuRuoli = false)
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path;
@@ -48,7 +48,7 @@ public class AdminController : Controller
             ElementiPerPagina = 10,
             PageIndex = pageIndex,
             Reverse = reverse,
-            Partial = partial
+            MenuRuoli = menuRuoli
         };
 
         //rimuovo l'utente attuale dalla lista
@@ -123,7 +123,7 @@ public class AdminController : Controller
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo la modifica dello status</returns>
     public async Task<IActionResult> GestisciStatus(string id, string urlBack)
     {
-        _logger.LogInformation("_____________ returnUrl: {0}", urlBack);
+        _logger.LogInformation("{0} - GestisciStatus --> (IdUtente: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
 
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
@@ -134,7 +134,7 @@ public class AdminController : Controller
         user.Status = !user.Status;
         await _userManager.UpdateAsync(user);
 
-        // Controlla se l'URL contiene la stringa della pagina "CardUtente"
+        // Controlla se l'URL contiene la stringa della pagina "GestioneUtenti"
         if (urlBack.Contains("GestioneUtenti"))
         {
             return RedirectToAction(nameof(GestioneUtenti));
@@ -147,20 +147,28 @@ public class AdminController : Controller
 
     }
 
-    public async Task<IActionResult> GestisciRuoli(string id, bool modifica)
+    public async Task<IActionResult> MenuRuoli(string id, string urlBack)
     {
+        _logger.LogInformation("{0} - MenuRuoli --> (IdUtente: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
+
+        //passo il valore per la partial
+
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
         {
             return NotFound();
         }
 
-        if (modifica)
+        // Controlla se l'URL contiene la stringa della pagina "CardUtente"
+        if (urlBack.Contains("GestioneUtenti"))
+        {
+            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = true });
+        }
+        else
         {
 
+            return RedirectToAction(nameof(CardUtente), new { id = user.Id, menuRuoli = true });
         }
-
-        return RedirectToAction();
     }
 
 
@@ -212,7 +220,7 @@ public class AdminController : Controller
     /// <param name="urlBack">Gestisce il tasto di ritorno</param>
     /// <returns>La vista card utente con il modello CardUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> CardUtente(string id, string urlBack)
+    public async Task<IActionResult> CardUtente(string id, bool menuRuoli = false)
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path;
@@ -229,14 +237,14 @@ public class AdminController : Controller
         var model = new CardUtenteViewModel
         {
             Utente = user,
-            UrlBack = urlBack
+            MenuRuoli = menuRuoli
         };
 
         //log che visualizza la pagina selezionata, user, urlBack e orario
-        _logger.LogInformation("{0} - Dettaglio Immagine --> (UserId: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
+        _logger.LogInformation("{0} - Card Utente --> (UserId: {1})", DateTime.Now.ToString("T"), id);
         return View(model);
     }
 
-
-
 }
+
+internal record NewRecord(string Id);

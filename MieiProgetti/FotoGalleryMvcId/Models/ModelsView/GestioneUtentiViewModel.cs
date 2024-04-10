@@ -7,7 +7,7 @@ public class GestioneUtentiViewModel
     public int ElementiPerPagina { get; set; }
     public int TotaleImmagini { get; set; }
     public string? Reverse { get; set; }    //gestisce filtri di ordinamento
-    public string? Partial { get; set; }    //gestisce i partial dei tasti
+    public bool MenuRuoli { get; set; }    //gestisce i partial dei tasti
     public IEnumerable<AppUser>? Utenti { get; set; }
 
 }

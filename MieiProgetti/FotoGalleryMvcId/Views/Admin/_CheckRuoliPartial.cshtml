@@ -1,6 +1,19 @@
 @model AppUser
+<td>
+    <form action="post">
+        <input type="checkbox" id="chkAdmin" name="role" value="Admin">
+        <label for="chkAdmin">Admin</label>
+        <input type="checkbox" id="chkUser" name="role" value="User">
+        <label for="chkUser">User</label>
+        <input type="checkbox" id="chkModerator" name="role" value="Moderatore">
+        <label for="chkModerator">Moderatore</label>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-success col-6">Salva</button>
+            <a class="btn btn-primary col-6" asp-controller="Admin" asp-action="CardUtente"
+                asp-route-menuruoli="false">Annulla</a>
+        </div>
 
+    </form>
 
-<a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli" asp-route-id="@Model.Id">Ruoli</a>
 
 </td>

@@ -9,6 +9,11 @@
         asp-route-urlback="@ViewBag.UrlBack">
         @ViewData["messaggio"]
     </a>
-    <a class="btn btn-info" asp-controller="Admin" asp-action="GestisciRuli" asp-route-id="@Model.Id">Ruoli</a>
-    <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente" asp-route-id="@Model.Id">Elimina</a>
+    <a class="btn btn-info" asp-controller="Admin" asp-action="MenuRuoli" asp-route-id="@Model.Id"
+        asp-route-urlback="@ViewBag.UrlBack">
+        Ruoli
+    </a>
+    <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente" asp-route-id="@Model.Id">
+        Elimina
+    </a>
 </td>
