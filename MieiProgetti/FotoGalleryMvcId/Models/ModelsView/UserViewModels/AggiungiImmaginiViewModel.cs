@@ -10,11 +10,11 @@ public class AggiungiImmaginiViewModel
     //attibuti per le view POST
     [BindProperty]
     [Display(Name = "Titolo ")]
-    public string? Titolo { get; set; }
+    public virtual string? Titolo { get; set; }
 
     [BindProperty]
     [Display(Name = "Autore ")]
-    public string? Autore { get; set; }
+    public virtual string? Autore { get; set; }
 
     [BindProperty]
     [Required(ErrorMessage = "Devi selezionare una categoria")]
@@ -35,6 +35,7 @@ public class AggiungiImmaginiViewModel
     public string? Messaggio { get; set; }
     public string? Colore { get; set; }
 
+    //costruttore per generare il SelectListItem
     public AggiungiImmaginiViewModel()
     {
         Paths paths = new();

@@ -117,6 +117,11 @@ public class ModeratoreController : Controller
         return View(model);
     }
 
+    /// <summary>
+    /// Azione che gestisce il form di eliminazione delleimmagine
+    /// </summary>
+    /// <param name="model">Il modello da caricare nella view dopo l'invio dei dati dal form</param>
+    /// <returns>La vista gestisci immagini con il modello EliminaImmagineViewModel dopo l'eliminazione</returns>
     [HttpPost]
     public IActionResult EliminaImmagine(EliminaImmagineViewModel model)
     {
@@ -131,5 +136,64 @@ public class ModeratoreController : Controller
         System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(model.Immagini, Formatting.Indented));
 
         return RedirectToAction(nameof(GestisciImmagini));
+    }
+
+    [HttpGet]
+    public IActionResult ModificaImmagini(List<int> selezione)
+    {
+        // creo il modello per gestire la view
+        var model = new ModificaImmaginiViewModel
+        {
+            Selezione = selezione
+        };
+
+        _logger.LogInformation("{0} - Modifica immagine --> (Oggetti selezionati: {1})", DateTime.Now.ToString("T"), selezione);
+
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
+        model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult ModificaImmagini(ModificaImmaginiViewModel model)
+    {
+        //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
+        if (!ModelState.IsValid)
+        {
+            //TO DO possibile implementazione come in aggiungi immagini
+            // model.Colore = "text-danger";
+            // model.Messaggio = "Attenzione!!!";
+            //log errore selezione
+            _logger.LogInformation("{0} - Errore validazione modulo", DateTime.Now.ToString("T"));
+            return View(model);
+        }
+        else
+        {
+            // Verifica se la lista delle immagini modificate è vuota
+            if (model.ImgMod != null && model.ImgMod.Any())
+            {
+                foreach (var img in model.ImgMod)
+                {
+                    _logger.LogInformation("ID: {0}", img.Id);
+                    foreach (var i in model.Immagini!)
+                    {
+                        if (i.Id == img.Id)
+                        {
+                            i.Autore = img.Autore;
+                            i.Titolo = img.Titolo;
+                            i.Categoria = img.Categoria;
+                            i.Path = img.Path;
+                            break;
+                        }
+                    }
+                }
+
+                //salvo i dati aggiornati nel file immagini.json
+                System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(model.Immagini, Formatting.Indented));
+            }
+            _logger.LogInformation("Immagini modificate");
+            return RedirectToAction(nameof(GestisciImmagini));
+        }
     }
 }

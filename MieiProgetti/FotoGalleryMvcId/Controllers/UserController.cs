@@ -133,7 +133,7 @@ public class UserController : Controller
     /// <summary>
     /// Azione che gestisce il form di votazione dell'immagine
     /// </summary>
-    /// <param name="model">Il modello da caricare dopo l'invio dei dati dal form</param>
+    /// <param name="model">Il modello da caricare nella view dopo l'invio dei dati dal form</param>
     /// <returns>La vista del dettaglio immagine con il modello ImmagineViewModel</returns>
     [HttpPost]
     public IActionResult VotaImmagine(ImmagineViewModel model)

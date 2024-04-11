@@ -1,0 +1,90 @@
+@model ModificaImmaginiViewModel
+@{
+    ViewData["Title"] = "Modifica Immagine";
+}
+
+<div class="mx-5">
+    <!-------------------------- titolo della pagina ---------------------------->
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+    <!--------------------------- sezione delle card con form modifica immagina -------------------->
+    <div class="container mt-5">
+        @if (Model.Selezione!.Count == 0) // se non ho selezionato alcuna immagine scrive un messaggio
+        {
+            <div class="text-center">
+                <h2 class="mb-5" style="color: red;">Devi selezionare almeno un immagine</h2>
+                <a class="btn btn-primary" asp-controller="Moderatore" asp-action="GestisciImmagini">Torna indietro</a>
+            </div>
+        }
+        else //carico la pagina con le card e i form post
+        {
+            <form method="post">
+
+                <!-- preparo il contenitore per le card di tipo flex -->
+                <div class="d-flex justify-content-center flex-wrap text-center mt-5 mb-3">
+                    @for (int i = 0; i < Model.Selezione.Count; i++)
+                    {
+                        var id = Model.Selezione[i]; //scelgo l'immagine corrispondente all'id selezionato
+                        var immagine = Model.Immagini!.FirstOrDefault(i => i.Id == id);
+
+                        if (immagine != null)
+                        {
+                            <!-- card che contiene i dati del form per ogni immagine selezionata -->
+                            <div class="card-modifica card me-4 mb-5">
+
+                                <!-- Immagine -->
+                                <img src="@immagine.Path" class="card-img-top img-modifica" alt="@immagine.Titolo">
+                                <div class="card-body">
+
+                                    <!-- Id dell'immagine passato in hidden -->
+                                    <input type="hidden" asp-for="ImgMod![i].Id" value="@id">
+
+                                    <!-- Titolo -->
+                                    <div class="form-group mb-1">
+                                        <label asp-for="ImgMod![i].Titolo"></label>
+                                        <input type="text" asp-for="ImgMod![i].Titolo" placeholder="@immagine.Titolo"
+                                            onfocus="setPlaceholderToValue(this)" type="text"
+                                            class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Titolo"]?.Errors.Any() ?? false ? "box-danger" : "")" />
+                                        <span asp-validation-for="ImgMod![i].Titolo" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- Autore -->
+                                    <div class="form-group mb-1">
+                                        <label asp-for="ImgMod![i].Autore"></label>
+                                        <input type="text" asp-for="ImgMod![i].Autore" placeholder="@immagine.Autore"
+                                            onfocus="setPlaceholderToValue(this)" type="text"
+                                            class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Autore"]?.Errors.Any() ?? false ? "box-danger" : "")" />
+                                        <span asp-validation-for="ImgMod![i].Autore" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- Select Categoria -->
+                                    <label asp-for="ImgMod![i].Categoria"></label> <!-------------- leggi sopra (*)---------->
+                                    <select asp-for="ImgMod![i].Categoria" asp-items="Model.Categorie"
+                                        class="form-control mb-1 @(ViewData.ModelState["ImgMod["+@i+"].Categoria"]?.Errors.Any() ?? false ? "box-danger" : "")">
+                                        <option value="">Scegli categoria</option>
+                                    </select>
+                                    <span asp-validation-for="ImgMod![i].Categoria" class="text-danger"></span>
+
+                                    <!-- Path -->
+                                    <div class="form-group">
+                                        <label asp-for="ImgMod![i].Path"></label> <!--------------- leggi sopra (*)---------->
+                                        <input type="text" asp-for="ImgMod![i].Path" value="@immagine.Path" type="text"
+                                            class="form-control @(ViewData.ModelState["ImgMod["+@i+"].Path"]?.Errors.Any() ?? false ? "box-danger" : "")" />
+                                    </div>
+                                    <span asp-validation-for="ImgMod![i].Path" class="text-danger"></span>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+                <!-- Submit Salva e tasto Annulla -->
+                <div class="d-flex flex-row justify-content-center">
+                    <button type="submit" class="btn btn-success">Salva</button>
+                    <a class="btn btn-primary ms-2" asp-controller="Moderatore" asp-action="GestisciImmagini">Annulla</a>
+                </div>
+            </form>
+        }
+    </div>
+</div>

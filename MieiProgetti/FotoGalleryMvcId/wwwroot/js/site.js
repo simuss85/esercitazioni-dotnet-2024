@@ -2,3 +2,9 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+// setta il value da placeholder (Pages/ModificaImmagine)
+function setPlaceholderToValue(input) {
+    if (input.placeholder && input.value === '') {
+        input.value = input.placeholder;
+    }
+}
