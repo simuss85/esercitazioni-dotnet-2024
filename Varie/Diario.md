@@ -1366,6 +1366,11 @@ Argomenti:
 Argomenti:
 - Progetto Mvc con Identity Framework: giorno 3.
 
+## Note Per l'esame.
+- Gestione json
+- Boostrap landing page con section, navbar, grid e responsività
+- Documentazione md, mermaid, gantt, tabelle db.
+
 </details>
 
 <!-- ******************************************  12 apr 2024   ****************************************** -->
