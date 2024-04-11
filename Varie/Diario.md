@@ -1339,5 +1339,40 @@ Scaffolding di un file:
 ```sh
 dotnet aspnet-codegenerator identity -dc FotoGalleryMvcId.Data.ApplicationDbContext --files "Account.Register"
 ```
+</details>
+
+<!-- ******************************************  09 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>09 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Progetto Mvc con Identity Framework: giorno 1.
+
+</details>
+
+<!-- ******************************************  10 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>10 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Progetto Mvc con Identity Framework: giorno 2.
+
+</details>
+
+<!-- ******************************************  11 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>11 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Progetto Mvc con Identity Framework: giorno 3.
+
+</details>
+
+<!-- ******************************************  12 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>12 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Progetto Mvc con Identity Framework: giorno 4.
 
 </details>
