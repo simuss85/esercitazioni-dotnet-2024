@@ -344,7 +344,7 @@ public class UserController : Controller
             model.Colore = "text-danger";
             model.Messaggio = "Attenzione!!!";
             //log errore selezione
-            _logger.LogInformation("{0} - Errore validazione modulo", DateTime.Now.ToString("T"));
+            _logger.LogInformation("{0} - Errore validazione modulo (Errori: {1})", DateTime.Now.ToString("T"), ModelState.ErrorCount.ToString());
             return View(model);
         }
         else
@@ -382,7 +382,9 @@ public class UserController : Controller
 
             System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
 
-            _logger.LogInformation("Immagine aggiunta Id: {0}", id);
+            //log immagine aggiunta correttamente 
+            _logger.LogInformation("{0} - Aggiungi Immagine --> (Immagine aggiunta Id: {1})", DateTime.Now.ToString("T"), id);
+
             return RedirectToAction("AggiungiImmagini", "User", new { messaggio = $"Immagine inserita: \"{model.Titolo}\"" });
         }
     }

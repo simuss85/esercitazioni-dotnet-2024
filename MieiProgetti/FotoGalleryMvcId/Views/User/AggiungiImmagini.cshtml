@@ -9,10 +9,12 @@
     <div class="text-center">
         <h1 class="display-4">@ViewData["TItle"]</h1>
     </div>
+
     <!--------------------------- messaggio di conferma per l'utente ----------->
     <div class="text-center mt-5 pb-0">
         <h4 class="@ViewData["Colore"]">@Model.Messaggio</h4>
     </div>
+
     <!-------------------------- form aggiungi immagine ------------------------>
     <div class=" d-flex justify-content-center mt-5">
         <form method="post">
@@ -49,7 +51,9 @@
             <br>
 
             <!-- Submit Aggiungi -->
-            <button type="submit" class="btn btn-primary">Aggiungi</button>
+            <button type="submit" class="btn btn-primary">
+                Aggiungi
+            </button>
             <a asp-controller="User" asp-action="Immagini" class="btn btn-primary" type="button">
                 Torna alle immagini
             </a>

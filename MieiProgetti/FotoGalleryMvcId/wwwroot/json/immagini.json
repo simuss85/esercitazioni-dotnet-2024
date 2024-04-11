@@ -752,7 +752,7 @@
   {
     "Id": 92,
     "Path": "https://www.piggypet.it/wp-content/uploads/2023/06/Progetto-senza-titolo-2023-07-06T174425.832.jpg",
-    "Titolo": "Titolo 92",
+    "Titolo": "Barboncino Toy",
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Autore 92",
@@ -768,5 +768,15 @@
     "Autore": "Autore 97",
     "Data": "2024-04-10T09:30:26.92805+02:00",
     "Categoria": "Animali"
+  },
+  {
+    "Id": 98,
+    "Path": "https://i.pinimg.com/236x/fa/bb/12/fabb1251c04d1d4e826e24524df0095c.jpg",
+    "Titolo": "Ganzo",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 98",
+    "Data": "2024-04-11T17:45:35.612903+02:00",
+    "Categoria": "Oggetti"
   }
 ]

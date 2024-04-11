@@ -161,22 +161,20 @@ public class ModeratoreController : Controller
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
         {
-            //TO DO possibile implementazione come in aggiungi immagini
-            // model.Colore = "text-danger";
-            // model.Messaggio = "Attenzione!!!";
             //log errore selezione
-            _logger.LogInformation("{0} - Errore validazione modulo", DateTime.Now.ToString("T"));
+            _logger.LogInformation("{0} - Errore validazione modulo (Errori: {1})", DateTime.Now.ToString("T"), ModelState.ErrorCount.ToString());
             return View(model);
         }
         else
         {
+            _logger.LogInformation("{0} - Modifica Immegini --> (Avvio salvataggio dati)", DateTime.Now.ToString("T"));
             // Verifica se la lista delle immagini modificate è vuota
-            if (model.ImgMod != null && model.ImgMod.Any())
+            if (model.ImgMod != null && model.ImgMod.Count != 0)
             {
-                foreach (var img in model.ImgMod)
+                foreach (var img in model.ImgMod!)
                 {
                     _logger.LogInformation("ID: {0}", img.Id);
-                    foreach (var i in model.Immagini!)
+                    foreach (var i in model.Immagini)
                     {
                         if (i.Id == img.Id)
                         {
@@ -191,8 +189,14 @@ public class ModeratoreController : Controller
 
                 //salvo i dati aggiornati nel file immagini.json
                 System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(model.Immagini, Formatting.Indented));
+
+                _logger.LogInformation("{0} - Modifica Immegini --> (Eseguito!!!)", DateTime.Now.ToString("T"));
             }
-            _logger.LogInformation("Immagini modificate");
+            else
+            {
+                _logger.LogInformation("{0} - Modifica Immegini --> (Problema con Lista ImgMod!!!)", DateTime.Now.ToString("T"));
+            }
+
             return RedirectToAction(nameof(GestisciImmagini));
         }
     }
