@@ -385,8 +385,6 @@ public class UserController : Controller
             _logger.LogInformation("Immagine aggiunta Id: {0}", id);
             return RedirectToAction("AggiungiImmagini", "User", new { messaggio = $"Immagine inserita: \"{model.Titolo}\"" });
         }
-
-
     }
 
 

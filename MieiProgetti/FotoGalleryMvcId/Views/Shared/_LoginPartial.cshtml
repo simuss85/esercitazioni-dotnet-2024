@@ -2,10 +2,17 @@
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 @{
+    //memorizzo Alias e icona dell'utente
     var user = await UserManager.GetUserAsync(User);
     if (user != null)
     {
         ViewBag.Alias = user.Alias;
+
+        ViewBag.Icona = user.Ruoli.Contains("Master") ? "bi-person-lock" : //icona master
+        user.Ruoli.Contains("Admin") ? "bi-person-gear" : //icona admin
+        user.Ruoli.Contains("Moderatore") ? "bi-person-plus" : //icona moderatore
+        "bi-person"; //icona user
+
     }
 
 }
@@ -14,8 +21,10 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link btn btn-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                @ViewBag.Alias</a>
+            <a class="nav-link btn btn-link text-dark p-1" asp-area="Identity" asp-page="/Account/Manage/Index"
+                title="Manage">
+                <i class="bi @ViewBag.Icona" style="font-size: 1.5rem;"> @ViewBag.Alias</i>
+            </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"

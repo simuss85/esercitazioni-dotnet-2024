@@ -30,7 +30,7 @@ public class SeedData
                 Alias = "Admin",
                 EmailConfirmed = true,
                 Status = true,
-                Ruoli = "Admin"
+                Ruoli = "Master"
 
             };
             await userManager.CreateAsync(adminUser, "Admin123!");

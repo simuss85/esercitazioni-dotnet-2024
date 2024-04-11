@@ -3,17 +3,35 @@
     ViewData["messaggio"] = Model.Status == false ? "Attiva" : "Blocca";
     ViewData["btn"] = Model.Status == false ? "btn-success" : "btn-warning";
 }
-
-<td>
-    <a class="btn @ViewData["btn"]" asp-controller="Admin" asp-action="GestisciStatus" asp-route-id="@Model.Id"
-        asp-route-urlback="@ViewBag.UrlBack">
-        @ViewData["messaggio"]
-    </a>
-    <a class="btn btn-info" asp-controller="Admin" asp-action="MenuRuoli" asp-route-id="@Model.Id"
-        asp-route-urlback="@ViewBag.UrlBack">
-        Ruoli
-    </a>
-    <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente" asp-route-id="@Model.Id">
-        Elimina
-    </a>
-</td>
+<!------------------------------ gestisco opzioni utente master -------------------------------------->
+@if (Model.Ruoli.Contains("Master"))
+{
+    <td>
+        <a class="btn btn-warning disabled">
+            @ViewData["messaggio"]
+        </a>
+        <a class="btn btn-info disabled ">
+            Ruoli
+        </a>
+        <a class="btn btn-danger disabled">
+            Elimina
+        </a>
+    </td>
+}
+else
+{
+    <!------------------------------ creo i tasti per la gestione utente ------------------------------------>
+    <td>
+        <a class="btn @ViewData["btn"]" asp-controller="Admin" asp-action="GestisciStatus" asp-route-id="@Model.Id"
+            asp-route-urlback="@ViewBag.UrlBack">
+            @ViewData["messaggio"]
+        </a>
+        <a class="btn btn-info" asp-controller="Admin" asp-action="MenuRuoli" asp-route-id="@Model.Id"
+            asp-route-urlback="@ViewBag.UrlBack">
+            Ruoli
+        </a>
+        <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminaUtente" asp-route-id="@Model.Id">
+            Elimina
+        </a>
+    </td>
+}

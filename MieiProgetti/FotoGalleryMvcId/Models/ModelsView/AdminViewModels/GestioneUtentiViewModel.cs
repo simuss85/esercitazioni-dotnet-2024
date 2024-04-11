@@ -2,6 +2,7 @@ namespace FotoGalleryMvcId.Models;
 
 public class GestioneUtentiViewModel
 {
+    //attibuti per le view GET
     public int NumeroPagine { get; set; }
     public int PageIndex { get; set; }
     public int ElementiPerPagina { get; set; }

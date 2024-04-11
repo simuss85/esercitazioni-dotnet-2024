@@ -290,16 +290,6 @@
     "Categoria": "Persone"
   },
   {
-    "Id": 35,
-    "Path": "https://media.paginemediche.it/punti-di-vista/cosa-spinge-le-persone-a-condividere-foto-e-pensieri-personali-sui-social/cosa-spinge-le-persone-a-condividere-foto-e-pensieri-personali-sui-social-1200-900.jpg",
-    "Titolo": "Titolo 35",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 35",
-    "Data": "2024-03-24T00:00:00+01:00",
-    "Categoria": "Persone"
-  },
-  {
     "Id": 36,
     "Path": "https://www.unicusano.it/blog/wp-content/uploads/2018/11/come-conoscere-nuove-persone-1.jpg",
     "Titolo": "Titolo 36x",
@@ -770,46 +760,6 @@
     "Categoria": "Animali"
   },
   {
-    "Id": 93,
-    "Path": "https://www.piggypet.it/wp-content/uploads/2023/06/Progetto-senza-titolo-2023-07-06T174425.832.jpg",
-    "Titolo": "Titolo 93",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 93",
-    "Data": "2024-04-09T21:42:00.527803+02:00",
-    "Categoria": "Animali"
-  },
-  {
-    "Id": 94,
-    "Path": "https://media.istockphoto.com/id/467923438/it/foto/divertente-cane-si-inclina-testa-davanti-barn.jpg?s=612x612&w=0&k=20&c=S7PN2i2sNFlBK3Qoja3c3vKrFGRkmB_qWeUme_CWA0I=",
-    "Titolo": "Titolo 94",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 94",
-    "Data": "2024-04-10T09:20:03.6197758+02:00",
-    "Categoria": "Animali"
-  },
-  {
-    "Id": 95,
-    "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
-    "Titolo": "Titolo 95",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 95",
-    "Data": "2024-04-10T09:23:38.0408482+02:00",
-    "Categoria": "Animali"
-  },
-  {
-    "Id": 96,
-    "Path": "https://media.istockphoto.com/id/467923438/it/foto/divertente-cane-si-inclina-testa-davanti-barn.jpg?s=612x612&w=0&k=20&c=S7PN2i2sNFlBK3Qoja3c3vKrFGRkmB_qWeUme_CWA0I=",
-    "Titolo": "Titolo 96",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 96",
-    "Data": "2024-04-10T09:23:45.0087742+02:00",
-    "Categoria": "Animali"
-  },
-  {
     "Id": 97,
     "Path": "https://media.istockphoto.com/id/467923438/it/foto/divertente-cane-si-inclina-testa-davanti-barn.jpg?s=612x612&w=0&k=20&c=S7PN2i2sNFlBK3Qoja3c3vKrFGRkmB_qWeUme_CWA0I=",
     "Titolo": "Titolo 97",
@@ -817,16 +767,6 @@
     "NumeroVoti": 0,
     "Autore": "Autore 97",
     "Data": "2024-04-10T09:30:26.92805+02:00",
-    "Categoria": "Animali"
-  },
-  {
-    "Id": 98,
-    "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
-    "Titolo": "Titolo 98",
-    "Voto": 0.0,
-    "NumeroVoti": 0,
-    "Autore": "Autore 98",
-    "Data": "2024-04-10T09:31:36.0716989+02:00",
     "Categoria": "Animali"
   }
 ]

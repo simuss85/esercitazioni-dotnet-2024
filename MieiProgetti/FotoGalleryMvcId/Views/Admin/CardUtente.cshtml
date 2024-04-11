@@ -16,15 +16,19 @@
             <!-------------- immagine dinamica in base al ruolo ------------->
             @if (Model.Utente!.Ruoli.Contains("Admin"))
             {
-                <img src="~/img/admin.png" class="card-img-top" alt="...">
+                <img src="~/img/admin.png" class="card-img-top" alt="admin.png">
             }
             else if (Model.Utente.Ruoli.Contains("Moderatore"))
             {
-                <img src="~/img/admin.png" class="card-img-top" alt="...">
+                <img src="~/img/moderatore.png" class="card-img-top" alt="moderatore.png">
             }
-            else //l'utente è User
+            else if (Model.Utente.Ruoli.Contains("User")) //l'utente è User
             {
-                <img src="~/img/user.png" class="card-img-top" alt="...">
+                <img src="~/img/user.png" class="card-img-top" alt="user.png">
+            }
+            else
+            {
+                <img src="~/img/master.png" class="card-img-top" alt="master.png">
             }
 
             <div class="card-body">

@@ -22,12 +22,12 @@
                     <th>Id
                         @if (Model.Reverse != "idOn")
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="idOn">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="idOn">
                                 <i class="bi bi-caret-down"></i></a>
                         }
                         else
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="idOff">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="idOff">
                                 <i class="bi bi-caret-up"></i></a>
                         }
                     </th>
@@ -37,12 +37,12 @@
                     <th>Titolo
                         @if (Model.Reverse != "titoloOn")
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="titoloOn">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="titoloOn">
                                 <i class="bi bi-caret-down"></i></a>
                         }
                         else
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="titoloOff">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="titoloOff">
                                 <i class="bi bi-caret-up"></i></a>
                         }
                     </th>
@@ -50,12 +50,12 @@
                     <th>Autore
                         @if (Model.Reverse != "autoreOn")
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="autoreOn">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="autoreOn">
                                 <i class="bi bi-caret-down"></i></a>
                         }
                         else
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="autoreOff">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="autoreOff">
                                 <i class="bi bi-caret-up"></i></a>
                         }
                     </th>
@@ -63,26 +63,43 @@
                     <th>Data pubblicazione
                         @if (Model.Reverse != "dataOn")
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="dataOn">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="dataOn">
                                 <i class="bi bi-caret-down"></i></a>
                         }
                         else
                         {
-                            <a class="voto" asp-controller="User" asp-action="GestisciImmagini" asp-route-reverse="dataOff">
+                            <a class="voto" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-reverse="dataOff">
                                 <i class="bi bi-caret-up"></i></a>
                         }
                     </th>
 
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <partial name="_DropdownModifica"></partial>
-                    }
-                    </tr>
-                <tbody>
-        @foreach (var img in Model.Immagini!)
-    {
-        //memorizzo id diversi per ogni modale
-        string idModale = "modal" + img.Id.ToString();
+                    <th>
+                        <div class="dropdown text-center">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-tools" /></i>
+                            </button>
+
+                            <!---------------------- bottone modifica -------------------------->
+                            <ul class="dropdown-menu p-0 ps-1 pb-1 pt-1" style="min-width: 8rem;">
+                                <li><button type="submit" class="dropdown-item" asp-controller="Moderatore" asp-action="">
+                                        <i class="bi bi-command" /></i>Modifica</button>
+                                </li>
+                                <!----------------------bottone elimina-------------------->
+                                <li>
+                                    <button type="submit" class="dropdown-item" asp-controller="Moderatore" asp-action="EliminaImmagine" style="color: red;">
+                                        <i class="bi bi-trash" />
+                                        </i>Elimina</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var img in Model.Immagini!)
+                {
+                //memorizzo id diversi per ogni modale
+                string idModale = "modal" + img.Id.ToString();
                     <tr>
                         <td>@img.Id</td>
                         <td>
@@ -99,7 +116,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header justify-content-center">
                                             <h1 class="modal-title fs-5 text-center
-                                         m-auto" id="exampleModalLabel">@img.Titolo
+                                            m-auto" id="exampleModalLabel">@img.Titolo
                                             </h1>
                                             <button type="button" class="btn-close end-0" data-bs-dismiss="modal"
                                                 aria-label="Close">
@@ -129,21 +146,15 @@
                         <td>@img.Autore</td>
                         <td>@img.Data.ToString("d")</td>
 
-            <!------- nascondo i checkbox per l'utente user ------->
-            @if (User.IsInRole("Moderatore"))
-            {
-                            <td class="check-td">
-                                <!-- sezione checkbox -->
-                                <div class="form-check">
-                                    <input class="form-check-input m-0 p-2" type="checkbox" name="Selezione" value="@img.Id">
-                                </div>
-                            </td>
-            }
-            <!------------------------fine----------------------------------->
+                        <td class="check-td">
+                            <!-- sezione checkbox -->
+                            <div class="form-check">
+                                <input class="form-check-input m-0 p-2" type="checkbox" name="Selezione" value="@img.Id">
+                            </div>
+                        </td>
                     </tr>
-    }
+                }
             </tbody>
-            </thead>
         </table>
     </form>
 
@@ -151,7 +162,7 @@
     <nav class="mt-4" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
-                <a class="page-link" aria-label="Previous" asp-controller="User" asp-action="GestisciImmagini" asp-route-pageindex="1">
+                <a class="page-link" aria-label="Previous" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-pageindex="1">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -159,17 +170,17 @@
         {
             if (i == Model.PageIndex) //indica la pagina attiva
             {
-                    <li class="page-item active"><a class="page-link" asp-controller="User" asp-action="GestisciImmagini"
+                    <li class="page-item active"><a class="page-link" asp-controller="Moderatore" asp-action="GestisciImmagini"
                             asp-route-pageindex="@i">@i</a></li>
             }
             else
             {
-                    <li class="page-item"><a class="page-link" asp-controller="User" asp-action="GestisciImmagini" asp-route-pageindex="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-controller="Moderatore" asp-action="GestisciImmagini" asp-route-pageindex="@i">@i</a></li>
             }
 
         }
             <li class="page-item">
-                <a class="page-link" aria-label="Next" asp-controller="User" asp-action="GestisciImmagini"
+                <a class="page-link" aria-label="Next" asp-controller="Moderatore" asp-action="GestisciImmagini"
                     asp-route-pageindex="@Model.NumeroPagine">
                     <span aria-hidden="true">&raquo;</span>
                 </a>

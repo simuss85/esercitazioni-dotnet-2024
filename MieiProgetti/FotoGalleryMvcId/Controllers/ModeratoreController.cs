@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FotoGalleryMvcId.Controllers;
 
-[Authorize(Roles = "Moderatore")]
+[Authorize(Roles = "Admin, Moderatore")]
 public class ModeratoreController : Controller
 {
     //per la gestione dei file json
@@ -23,6 +23,13 @@ public class ModeratoreController : Controller
         _userManager = userManager;
     }
 
+    /// <summary>
+    /// Azione che crea la vista gestione immagine con una tabella con ordinamento variabile <br/>
+    /// e tasti selezione checkbox e dropdown.
+    /// </summary>
+    /// <param name="pageIndex">Il numero attuale della pagina</param>
+    /// <param name="reverse">Il valore per la gestione dell'ordinamento tabella</param>
+    /// <returns>La vista gestione immagine con il modello ClassificaViewModel</returns>
     [HttpGet]
     public IActionResult GestisciImmagini(int pageIndex = 1, string reverse = "idOff")
     {
@@ -86,5 +93,43 @@ public class ModeratoreController : Controller
         _logger.LogInformation("{0} - GestioneImmagine --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
 
         return View(model);
+    }
+
+    /// <summary>
+    /// Azione che crea la vista elimina immagine con tasto elimina e annulla.
+    /// </summary>
+    /// <param name="selezione">La lista delle immagini selezionate per essere eliminate</param>
+    /// <returns>La vista elimina immagine con il modello EliminaImmagineViewModel</returns>
+    [HttpGet]
+    public IActionResult EliminaImmagine(List<int> selezione)
+    {
+        // creo il modello per gestire la view
+        var model = new EliminaImmagineViewModel
+        {
+            Selezione = selezione
+        };
+
+        _logger.LogInformation("{0} - Elimina immagine --> (Oggetti selezionati: {1})", DateTime.Now.ToString("T"), selezione);
+
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
+        model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult EliminaImmagine(EliminaImmagineViewModel model)
+    {
+        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
+        model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+
+        foreach (var id in model.Selezione!)
+        {
+            _logger.LogInformation("Selezione: {0}", id);
+            model.Immagini.Remove(model.Immagini.First(i => i.Id == id));
+        }
+        System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(model.Immagini, Formatting.Indented));
+
+        return RedirectToAction(nameof(GestisciImmagini));
     }
 }

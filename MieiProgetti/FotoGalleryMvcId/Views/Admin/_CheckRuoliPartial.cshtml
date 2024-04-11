@@ -4,6 +4,8 @@
     ViewData["checkedAdmin?"] = Model.Ruoli.Contains("Admin") ? "checked" : "";
     ViewData["checkedModeratore?"] = Model.Ruoli.Contains("Moderatore") ? "checked" : "";
 }
+
+<!------------------------- sezione checkbox per i ruoli ----------------------------------------->
 <td>
     <div class="d-flex justify-content-center"></div>
     <form asp-action="GestioneRuoli">
@@ -25,7 +27,6 @@
 
         <button type="submit" class="btn btn-success">Salva</button>
         <a class="btn btn-primary" asp-controller="Admin" asp-route-menuruoli="false">Annulla</a>
-
     </form>
     </div>
 

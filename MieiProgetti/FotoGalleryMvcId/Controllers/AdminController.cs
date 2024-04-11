@@ -306,5 +306,11 @@ public class AdminController : Controller
             return RedirectToAction(nameof(CardUtente), new { id = model.Id, menuRuoli = "" });
         }
     }
+
+    public async Task<IActionResult> Log()
+    {
+
+        return View();
+    }
 }
 
