@@ -109,7 +109,7 @@ public class ModeratoreController : Controller
             Selezione = selezione
         };
 
-        _logger.LogInformation("{0} - Elimina immagine --> (Oggetti selezionati: {1})", DateTime.Now.ToString("T"), selezione);
+        _logger.LogInformation("{0} - EliminaImmagine --> (Oggetti selezionati: {1})", DateTime.Now.ToString("T"), selezione);
 
         var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
@@ -198,6 +198,132 @@ public class ModeratoreController : Controller
             }
 
             return RedirectToAction(nameof(GestisciImmagini));
+        }
+    }
+
+    [HttpGet]
+    public IActionResult ModeraCommenti(int pageIndex = 1, string reverse = "idOff")
+    {
+        // creo il modello per gestire la view
+        var model = new ModeraCommentiViewModel
+        {
+            ElementiPerPagina = 16,
+            PageIndex = pageIndex,
+            Reverse = reverse
+        };
+
+        var jsonFileVoti = System.IO.File.ReadAllText(paths.PathVoti);
+
+        //seleziono solo i commenti che non sono vuoti ordinati per ultimo commento
+        model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!.Where(v => !string.IsNullOrWhiteSpace(v.Commento));
+
+        //gestione ordinameneto tabella
+        switch (reverse)
+        {
+            case "idOff":
+                model.Voti = model.Voti.OrderByDescending(v => v.Id);
+                break;
+
+            case "idOn":
+                model.Voti = model.Voti.OrderBy(v => v.Id);
+                break;
+
+            case "dataOff":
+                model.Voti = model.Voti.OrderByDescending(v => v.Data);
+                break;
+
+            case "dataOn":
+                model.Voti = model.Voti.OrderBy(v => v.Data);
+                break;
+
+            case "utenteOff":
+                model.Voti = model.Voti.OrderByDescending(v => v.Nome);
+                break;
+
+            case "utenteOn":
+                model.Voti = model.Voti.OrderBy(v => v.Nome);
+                break;
+
+            case "commentoOff":
+                model.Voti = model.Voti.OrderByDescending(v => v.Commento);
+                break;
+
+            case "commentoOn":
+                model.Voti = model.Voti.OrderBy(v => v.Commento);
+                break;
+
+            default:
+                model.Voti = model.Voti.OrderByDescending(v => v.Id);
+                break;
+        }
+
+        //paginazione
+        model.NumeroPagine = (int)Math.Ceiling((double)model.Voti.Count() / model.ElementiPerPagina);
+        model.Voti = model.Voti.Skip((pageIndex - 1) * model.ElementiPerPagina).Take(model.ElementiPerPagina);
+
+        _logger.LogInformation("{0} - ModeraCommenti --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public IActionResult ModeraCommenti(ModeraCommentiViewModel model)
+    {
+        //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+        else
+        {
+            // verifica log
+            _logger.LogInformation("{0} - ModeraCommenti --> (Oggetti selezionati: {1})", DateTime.Now.ToString("T"), model.Selezione);
+
+            //inizio la procedura di modifica del file voti.json
+            var jsonFileVoti = System.IO.File.ReadAllText(paths.PathVoti);
+            model.Voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
+
+            if (model.SubmitButton == "censura")
+            {
+                //verifica log
+                _logger.LogInformation("{0} - ModeraCommenti --> (Opzione Censura)", DateTime.Now.ToString("T"));
+
+                foreach (var id in model.Selezione!)   //per ogni checkbox (id del voto)
+                {
+                    foreach (var voto in model.Voti)  //cerco l'id e setto il voto a non visibile
+                    {
+                        if (voto.Id == id)
+                        {
+                            voto.Visibile = false;
+                            voto.Moderato = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (model.SubmitButton == "approva")
+            {
+                //verifica log
+                _logger.LogInformation("{0} - ModeraCommenti --> (Opzione Approva)", DateTime.Now.ToString("T"));
+
+                foreach (var id in model.Selezione!)   //per ogni checkbox (id del voto)
+                {
+                    foreach (var voto in model.Voti)  //cerco l'id e setto il voto a non visibile
+                    {
+                        if (voto.Id == id)
+                        {
+                            voto.Moderato = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            //salvo i dati aggiornati nel file voti.json
+            System.IO.File.WriteAllText(paths.PathVoti, JsonConvert.SerializeObject(model.Voti, Formatting.Indented));
+
+            return RedirectToAction("ModeraCommenti", "Moderatore", new { pageIndex = model.PageIndex });
+
         }
     }
 }

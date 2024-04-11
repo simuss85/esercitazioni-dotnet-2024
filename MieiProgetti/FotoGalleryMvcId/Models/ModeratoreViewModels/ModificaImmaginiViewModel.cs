@@ -7,6 +7,7 @@ namespace FotoGalleryMvcId.Models;
 
 public class ModificaImmaginiViewModel
 {
+    //attibuti per le view POST
     [BindProperty]
     public List<InputModel>? ImgMod { get; set; }
 

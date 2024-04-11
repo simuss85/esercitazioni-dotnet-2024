@@ -26,8 +26,8 @@
     "Stelle": 2.0,
     "Data": "2024-03-21T00:00:00+01:00",
     "Commento": "gdgdfsdfd",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 4,
@@ -67,7 +67,7 @@
     "Data": "2024-03-22T00:00:00+01:00",
     "Commento": "bell'albero",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 8,
@@ -217,7 +217,7 @@
     "Data": "2024-03-24T00:00:00+01:00",
     "Commento": "cdcdscd",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 23,
@@ -227,7 +227,7 @@
     "Data": "2024-03-24T00:00:00+01:00",
     "Commento": "cdcdscd",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 24,
@@ -597,7 +597,7 @@
     "Data": "2024-04-11T00:00:00+02:00",
     "Commento": "Insomma",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 61,
