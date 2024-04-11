@@ -2,6 +2,7 @@ using FotoGalleryMvcId.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 
@@ -307,8 +308,15 @@ public class AdminController : Controller
         }
     }
 
-    public async Task<IActionResult> Log()
+    [HttpGet]
+    public IActionResult Log(int pageIndex = 1, string reverse = "idOff")
     {
+        // creo il modello per gestire la view
+        var model = new LogViewModel
+        {
+            PageIndex = pageIndex,
+            Reverse = reverse
+        };
 
         return View();
     }

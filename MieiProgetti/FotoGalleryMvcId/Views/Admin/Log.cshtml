@@ -6,7 +6,64 @@
     <div class="text-center">
         <h1 class="display-4">@ViewData["Title"]</h1>
     </div>
-</div>
 
-<i class="bi bi-person-plus-fill"></i>
-<i class="bi bi-person-video2"></i>
+    <!---------------------- tabella di modifica ---------------->
+    <form method="post">
+
+        <table class="table text-center table-striped align-middle mt-5">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Data</th>
+                    <th>Ora</th>
+                    <th>Alias</th>
+                    <th>Email</th>
+                    <th>Operazione</th>
+                    <th>TastoAzione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tbody>
+
+        </table>
+    </form>
+
+    <!---------------------------- tasti paginazione -------------------------->
+    <nav class="mt-5" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" asp-controller="Admin" asp-action="Log"
+                    asp-route-pageindex="1">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.NumeroPagine; i++)
+            {
+                if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
+                {
+                    <li class="page-item active"><a class="page-link" asp-controller="Admin" asp-action="Log"
+                            asp-route-pageindex="@i">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-controller="Admin" asp-action="Log"
+                            asp-route-pageindex="@i">@i</a></li>
+                }
+
+            }
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" asp-controller="Admin" asp-action="Log"
+                    asp-route-pageindex="@Model.NumeroPagine">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
