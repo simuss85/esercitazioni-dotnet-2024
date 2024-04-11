@@ -245,6 +245,66 @@ public class AdminController : Controller
         return View(model);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> GestioneRuoli(GestioneRuoliViewModel model)
+    {
+        // Trova l'utente
+        var user = await _userManager.FindByIdAsync(model.Id!);
+        if (user == null)
+        {
+            // Se l'utente non esiste, ritorna una vista di errore o reindirizza a una pagina di errore
+            return NotFound("Utente non trovato");
+        }
+
+        //gestione della lista vuota per il log
+        int numeroRuoliScelti = 0;
+
+        if (model.Ruoli != null)    //se la lista non è vuota eseguo le operazioni
+        {
+            //per il log
+            numeroRuoliScelti = model.Ruoli.Count;
+
+            //memorizzo i ruoli attuali dell'utente (oppure utilizzo la proprietà Ruoli)
+            var ruoliUtente = await _userManager.GetRolesAsync(user);
+
+            //assegno i ruoli della lista e verifico che l'operazione vada a buon fine
+            var conferma = await _userManager.AddToRolesAsync(user, model.Ruoli.Except(ruoliUtente));
+
+            if (!conferma.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Impossibile aggiungere i ruoli selezionati all'utente.");
+                return View(model);
+            }
+            else
+            {
+                user.Ruoli = "";
+
+                //assegno anche alla proprietà Ruoli
+                user.Ruoli = string.Join(" ,", model.Ruoli);
+            }
+
+            conferma = await _userManager.RemoveFromRolesAsync(user, ruoliUtente.Except(model.Ruoli));
+            if (!conferma.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Impossibile rimuovere i ruoli selezionati dall'utente.");
+                return View(model);
+            }
+
+        }
+
+        //log che visualizza la pagina selezionata, user id, urlBack e orario
+        _logger.LogInformation("{0} - Gestione Ruoli --> (UserId: {1} - UrlBack: {2} - NumeroRuoliScelti: {3} - Ruoli: {4})", DateTime.Now.ToString("T"), model.Id, model.UrlBack, numeroRuoliScelti, user.Ruoli);
+
+        // Controlla se l'URL contiene la stringa della pagina "CardUtente"
+        if (model.UrlBack!.Contains("GestioneUtenti"))
+        {
+            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = "" });
+        }
+        else
+        {
+
+            return RedirectToAction(nameof(CardUtente), new { id = model.Id, menuRuoli = "" });
+        }
+    }
 }
 
-internal record NewRecord(string Id);

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FotoGalleryMvcId.Controllers;
 
-[Authorize(Roles = "User")]
+[Authorize(Roles = "Admin, Moderatore, User")]
 public class UserController : Controller
 {
     //per la gestione dei file json
@@ -329,22 +329,6 @@ public class UserController : Controller
             Messaggio = messaggio,
             Colore = colore
         };
-
-        //TO DO versione con i placeholders
-        // //scansiono le immagini
-        // var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
-        // var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
-
-        // //calcolo l'id max per i placeholder
-        // int id = immagini.Max(i => i.Id);
-        // id++;
-
-        // //setto il titolo per il placeholder
-        // model.Titolo = $"Titolo {id}";
-
-        // //setto autore per il placeholder
-        // model.Autore = $"Autore {id}";
-
 
         _logger.LogInformation("{0} - AggiungiImmagini --> (Form: attivo))", DateTime.Now.ToString("T"));
 

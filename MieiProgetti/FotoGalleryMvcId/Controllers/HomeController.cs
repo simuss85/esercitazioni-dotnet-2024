@@ -32,18 +32,18 @@ public class HomeController : Controller
     {
         if (User.Identity!.IsAuthenticated)
         {
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction("GestioneUtenti", "Admin");
-            }
-            else if (User.IsInRole("Moderatore"))
-            {
-                return RedirectToAction("Modera", "Moderatore");
-            }
-            else
-            {
-                return RedirectToAction("Immagini", "User");
-            }
+            // if (User.IsInRole("Admin"))
+            // {
+            //     return RedirectToAction("GestioneUtenti", "Admin");
+            // }
+            // else if (User.IsInRole("Moderatore"))
+            // {
+            //     return RedirectToAction("Modera", "Moderatore");
+            // }
+            // else
+            // {
+            return RedirectToAction("Immagini", "User");
+            // }
 
 
         }

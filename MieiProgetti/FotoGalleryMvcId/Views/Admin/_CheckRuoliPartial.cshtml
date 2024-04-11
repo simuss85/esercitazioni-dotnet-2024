@@ -1,16 +1,30 @@
 @model AppUser
+@{
+    ViewData["checkedUser?"] = Model.Ruoli.Contains("User") ? "checked" : "";
+    ViewData["checkedAdmin?"] = Model.Ruoli.Contains("Admin") ? "checked" : "";
+    ViewData["checkedModeratore?"] = Model.Ruoli.Contains("Moderatore") ? "checked" : "";
+}
 <td>
     <div class="d-flex justify-content-center"></div>
-    <form action="post">
-        <input type="checkbox" id="chkAdmin" name="role" value="Admin">
+    <form asp-action="GestioneRuoli">
+        <input class="form-check-input" type="checkbox" id="chkAdmin" name="Ruoli" value="User"
+        @(ViewData["checkedUser?"])>
+        <label for="chkAdmin">User</label>
+
+        <input class="form-check-input" type="checkbox" id="chkAdmin" name="Ruoli" value="Admin"
+        @(ViewData["checkedAdmin?"])>
         <label for="chkAdmin">Admin</label>
 
-        <input type="checkbox" id="chkModerator" name="role" value="Moderatore">
+        <input class="form-check-input" type="checkbox" id="chkModerator" name="Ruoli" value="Moderatore"
+        @(ViewData["checkedModeratore?"])>
         <label for="chkModerator">Moderatore</label>
+
+        @* per il corretto reindirizzamento alla pagina card o utenti*@
+        <input type="hidden" name="UrlBack" value=@ViewBag.UrlBack>
+        <input type="hidden" name="Id" value=@Model.Id>
 
         <button type="submit" class="btn btn-success">Salva</button>
         <a class="btn btn-primary" asp-controller="Admin" asp-route-menuruoli="false">Annulla</a>
-
 
     </form>
     </div>

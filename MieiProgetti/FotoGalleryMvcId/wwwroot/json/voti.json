@@ -588,5 +588,15 @@
     "Commento": "sssasaas",
     "Visibile": true,
     "Moderato": false
+  },
+  {
+    "Id": 60,
+    "Nome": "giada@gmail.com",
+    "ImmagineId": 3,
+    "Stelle": 4.0,
+    "Data": "2024-04-11T00:00:00+02:00",
+    "Commento": "Insomma",
+    "Visibile": true,
+    "Moderato": false
   }
 ]
