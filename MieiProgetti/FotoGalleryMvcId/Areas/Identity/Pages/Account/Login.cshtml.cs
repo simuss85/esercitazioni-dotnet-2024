@@ -131,13 +131,14 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                         Email = user.Email,
                         Ruoli = user.Ruoli,
                         OperazioneSvolta = "Login",
-                        Tipologia = false
+                        Tipologia = false   //true = UserExperience; false = Administrative
                     };
                     //salvo nel db
                     await _db.Logs.AddAsync(log);
                     await _db.SaveChangesAsync();
 
                     #endregion
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

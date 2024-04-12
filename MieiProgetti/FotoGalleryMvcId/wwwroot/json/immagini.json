@@ -54,7 +54,7 @@
     "Path": "/img/img_07.jpg",
     "Titolo": "Immagine 7",
     "Voto": 3.4,
-    "NumeroVoti": 21,
+    "NumeroVoti": 22,
     "Autore": "Autore 7",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -94,7 +94,7 @@
     "Path": "/img/img_12.jpg",
     "Titolo": "Immagine 12",
     "Voto": 4.2,
-    "NumeroVoti": 30,
+    "NumeroVoti": 31,
     "Autore": "Autore 12",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"

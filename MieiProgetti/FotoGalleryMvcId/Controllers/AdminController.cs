@@ -129,6 +129,7 @@ public class AdminController : Controller
     {
         _logger.LogInformation("{0} - GestisciStatus --> (IdUtente: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
 
+        //carico i dati dell'utente attuale
         var user = await _userManager.FindByIdAsync(id);
         if (user == null)
         {
@@ -137,6 +138,26 @@ public class AdminController : Controller
 
         user.Status = !user.Status;
         await _userManager.UpdateAsync(user);
+
+        #region db
+
+        //messaggio per status
+        string status = user.Status == false ? "Bloccato" : "Attivato";
+        //creo oggetto log per il db
+        Log log = new Log
+        {
+            DataOperazione = DateTime.Now,
+            Alias = user!.Alias,
+            Email = user.Email,
+            Ruoli = user.Ruoli,
+            OperazioneSvolta = $"Status modificato: utente {status}",
+            Tipologia = true   //true = UserExperience; false = Administrative
+        };
+        //salvo nel db
+        await _db.Logs.AddAsync(log);
+        await _db.SaveChangesAsync();
+
+        #endregion
 
         // Controlla se l'URL contiene la stringa della pagina "GestioneUtenti"
         if (urlBack.Contains("GestioneUtenti"))
@@ -210,6 +231,24 @@ public class AdminController : Controller
         if (conferma)
         {
             await _userManager.DeleteAsync(user);
+
+            #region db
+            //creo oggetto log per il db
+            Log log = new Log
+            {
+                DataOperazione = DateTime.Now,
+                Alias = user!.Alias,
+                Email = user.Email,
+                Ruoli = user.Ruoli,
+                OperazioneSvolta = $"Utente eliminato: utente {user.Email}",
+                Tipologia = true   //true = UserExperience; false = Administrative
+            };
+            //salvo nel db
+            await _db.Logs.AddAsync(log);
+            await _db.SaveChangesAsync();
+
+            #endregion
+
             return RedirectToAction(nameof(GestioneUtenti));
         }
 
@@ -259,6 +298,8 @@ public class AdminController : Controller
             // Se l'utente non esiste, ritorna una vista di errore o reindirizza a una pagina di errore
             return NotFound("Utente non trovato");
         }
+        //memorizzo i ruoli attuali dell'utente (oppure utilizzo la proprietà Ruoli)
+        var ruoliUtente = await _userManager.GetRolesAsync(user);
 
         //gestione della lista vuota per il log
         int numeroRuoliScelti = 0;
@@ -268,9 +309,6 @@ public class AdminController : Controller
             //per il log
             numeroRuoliScelti = model.Ruoli.Count;
 
-            //memorizzo i ruoli attuali dell'utente (oppure utilizzo la proprietà Ruoli)
-            var ruoliUtente = await _userManager.GetRolesAsync(user);
-
             //assegno i ruoli della lista e verifico che l'operazione vada a buon fine
             var conferma = await _userManager.AddToRolesAsync(user, model.Ruoli.Except(ruoliUtente));
 
@@ -279,7 +317,6 @@ public class AdminController : Controller
                 ModelState.AddModelError(string.Empty, "Impossibile aggiungere i ruoli selezionati all'utente.");
                 return View(model);
             }
-            else
             {
                 user.Ruoli = "";
 
@@ -287,7 +324,9 @@ public class AdminController : Controller
                 user.Ruoli = string.Join(" ,", model.Ruoli);
             }
 
+            //elimino ruoli dall'utente
             conferma = await _userManager.RemoveFromRolesAsync(user, ruoliUtente.Except(model.Ruoli));
+
             if (!conferma.Succeeded)
             {
                 ModelState.AddModelError(string.Empty, "Impossibile rimuovere i ruoli selezionati dall'utente.");
@@ -295,9 +334,45 @@ public class AdminController : Controller
             }
 
         }
+        else    //elimino tutti i ruoli (blocco l'utente)
+        {
+            user.Ruoli = "-----";
+            var blocca = await _userManager.RemoveFromRolesAsync(user, ruoliUtente);
+
+            if (!blocca.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Impossibile rimuovere i ruoli selezionati dall'utente.");
+                return View(model);
+            }
+        }
+
+        //Aggiorno i ruoli nel campo Ruoli
+        var ruoliAggiornati = await _userManager.GetRolesAsync(user);
+
 
         //log che visualizza la pagina selezionata, user id, urlBack e orario
-        _logger.LogInformation("{0} - Gestione Ruoli --> (UserId: {1} - UrlBack: {2} - NumeroRuoliScelti: {3} - Ruoli: {4})", DateTime.Now.ToString("T"), model.Id, model.UrlBack, numeroRuoliScelti, user.Ruoli);
+        _logger.LogInformation("{0} - Gestione Ruoli --> (User: {1} - UrlBack: {2} - NumeroRuoliScelti: {3} - (PRE)Ruoli Utente: {4} - (POST)Ruoli Utente: {5})", DateTime.Now.ToString("T"), user.Alias, model.UrlBack, numeroRuoliScelti, ruoliUtente, ruoliAggiornati);
+
+        #region db
+
+        //messaggio per status
+        string ruoliPre = string.Join(" ,", ruoliUtente);
+        string ruoliPost = ruoliAggiornati.Count > 0 ? string.Join(" ,", ruoliAggiornati) : "-----";
+        //creo oggetto log per il db
+        Log log = new Log
+        {
+            DataOperazione = DateTime.Now,
+            Alias = user!.Alias,
+            Email = user.Email,
+            Ruoli = user.Ruoli,
+            OperazioneSvolta = $"Ruoli modificati: da {ruoliPre} a {ruoliPost}",
+            Tipologia = false   //true = UserExperience; false = Administrative
+        };
+        //salvo nel db
+        await _db.Logs.AddAsync(log);
+        await _db.SaveChangesAsync();
+
+        #endregion
 
         // Controlla se l'URL contiene la stringa della pagina "CardUtente"
         if (model.UrlBack!.Contains("GestioneUtenti"))

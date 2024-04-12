@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using FotoGalleryMvcId.Data;
 
 namespace FotoGalleryMvcId.Controllers;
 
@@ -14,14 +15,18 @@ public class UserController : Controller
     //per la gestione dei file json
     private readonly Paths paths = new();
 
+    //per la gestione del db
+    private readonly ApplicationDbContext _db;
+
     //per la gestione dell'utente
     private readonly UserManager<AppUser> _userManager;
     private readonly ILogger<UserController> _logger;
 
-    public UserController(ILogger<UserController> logger, UserManager<AppUser> userManager)
+    public UserController(ILogger<UserController> logger, UserManager<AppUser> userManager, ApplicationDbContext db)
     {
         _logger = logger;
         _userManager = userManager;
+        _db = db;
     }
 
     /// <summary>
@@ -136,7 +141,7 @@ public class UserController : Controller
     /// <param name="model">Il modello da caricare nella view dopo l'invio dei dati dal form</param>
     /// <returns>La vista del dettaglio immagine con il modello ImmagineViewModel</returns>
     [HttpPost]
-    public IActionResult VotaImmagine(ImmagineViewModel model)
+    public async Task<IActionResult> VotaImmagine(ImmagineViewModel model)
     {
         _logger.LogInformation("{0} - (POST)Dettaglio Immagine --> (NomeUtente: {1} - UrlBack: {2} - IdImmagine: {3} - Stars: {4} - Commento: {5})", DateTime.Now.ToString("T"), model.NomeUtente, model.UrlBack, model.Id, model.Stars, model.Commento);
         //validazione input anche se non necessaria in questo caso
@@ -144,47 +149,71 @@ public class UserController : Controller
         {
             return View();
         }
-
-        var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
-        var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
-        model.Immagine = immagini.First(i => i.Id == model.Id);
-
-        var jsonFileVoti = System.IO.File.ReadAllText(paths.PathVoti);
-        var voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
-        model.Voti = voti;
-
-        int idVoto = voti.Count();
-        idVoto++;
-
-        //salvo il voto nel file voti.json
-        voti.Add(new Voto { Id = idVoto, Nome = model.NomeUtente, ImmagineId = model.Id, Stelle = model.Stars, Data = DateTime.Today, Commento = model.Commento, Visibile = true, Moderato = false });
-        System.IO.File.WriteAllText(paths.PathVoti, JsonConvert.SerializeObject(voti, Formatting.Indented));
-
-        #region Modifica voto
-        //recupero i dati del voto prima di aggiungere quello nuovo
-        int numeroDiVoti = model.Immagine.NumeroVoti;
-        double sommaVoti = model.Immagine.Voto * numeroDiVoti;
-
-        //aggiorno con il nuovo voto
-        numeroDiVoti++;
-        sommaVoti += model.Stars;
-
-        double votoAggiornato = Math.Round(sommaVoti / numeroDiVoti * 1.0, 1);
-
-        //scansiono le immagini per caricare il nuovo voto
-        foreach (var i in immagini)
+        else
         {
-            if (i.Id == model.Id)
-            {
-                i.Voto = votoAggiornato;
-                i.NumeroVoti = numeroDiVoti;
-                break;
-            }
-        }
-        System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
-        #endregion
+            var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
+            var immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
+            model.Immagine = immagini.First(i => i.Id == model.Id);
 
-        return RedirectToAction("Immagine", "User", new { model.Id, model.UrlBack });
+            var jsonFileVoti = System.IO.File.ReadAllText(paths.PathVoti);
+            var voti = JsonConvert.DeserializeObject<List<Voto>>(jsonFileVoti)!;
+            model.Voti = voti;
+
+            int idVoto = voti.Count();
+            idVoto++;
+
+            //salvo il voto nel file voti.json
+            voti.Add(new Voto { Id = idVoto, Nome = model.NomeUtente, ImmagineId = model.Id, Stelle = model.Stars, Data = DateTime.Today, Commento = model.Commento, Visibile = true, Moderato = false });
+            System.IO.File.WriteAllText(paths.PathVoti, JsonConvert.SerializeObject(voti, Formatting.Indented));
+
+            #region Modifica voto
+            //recupero i dati del voto prima di aggiungere quello nuovo
+            int numeroDiVoti = model.Immagine.NumeroVoti;
+            double sommaVoti = model.Immagine.Voto * numeroDiVoti;
+
+            //aggiorno con il nuovo voto
+            numeroDiVoti++;
+            sommaVoti += model.Stars;
+
+            double votoAggiornato = Math.Round(sommaVoti / numeroDiVoti * 1.0, 1);
+
+            //scansiono le immagini per caricare il nuovo voto
+            foreach (var i in immagini)
+            {
+                if (i.Id == model.Id)
+                {
+                    i.Voto = votoAggiornato;
+                    i.NumeroVoti = numeroDiVoti;
+                    break;
+                }
+            }
+            System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(immagini, Formatting.Indented));
+            #endregion
+
+            //log immagine aggiunta correttamente 
+            _logger.LogInformation("{0} - Voto Immagine --> (Immagine votata Id: {1})", DateTime.Now.ToString("T"), model.Immagine.Id);
+
+            #region db
+            var user = await _userManager.GetUserAsync(User);
+
+            //creo oggetto log per il db
+            Log log = new Log
+            {
+                DataOperazione = DateTime.Now,
+                Alias = user!.Alias,
+                Email = user.Email,
+                Ruoli = user.Ruoli,
+                OperazioneSvolta = $"Vota immagine: \"{model.Immagine.Titolo}\"",
+                Tipologia = true   //true = UserExperience; false = Administrative
+            };
+            //salvo nel db
+            await _db.Logs.AddAsync(log);
+            await _db.SaveChangesAsync();
+
+            #endregion
+
+            return RedirectToAction("Immagine", "User", new { model.Id, model.UrlBack });
+        }
     }
 
     /// <summary>
@@ -336,7 +365,7 @@ public class UserController : Controller
     }
 
     [HttpPost]
-    public IActionResult AggiungiImmagini(AggiungiImmaginiViewModel model)
+    public async Task<IActionResult> AggiungiImmagini(AggiungiImmaginiViewModel model)
     {
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
@@ -384,6 +413,25 @@ public class UserController : Controller
 
             //log immagine aggiunta correttamente 
             _logger.LogInformation("{0} - Aggiungi Immagine --> (Immagine aggiunta Id: {1})", DateTime.Now.ToString("T"), id);
+
+            #region db
+            var user = await _userManager.GetUserAsync(User);
+
+            //creo oggetto log per il db
+            Log log = new Log
+            {
+                DataOperazione = DateTime.Now,
+                Alias = user!.Alias,
+                Email = user.Email,
+                Ruoli = user.Ruoli,
+                OperazioneSvolta = $"Aggiungi immagine: \"{img.Titolo}\"",
+                Tipologia = true   //true = UserExperience; false = Administrative
+            };
+            //salvo nel db
+            await _db.Logs.AddAsync(log);
+            await _db.SaveChangesAsync();
+
+            #endregion
 
             return RedirectToAction("AggiungiImmagini", "User", new { messaggio = $"Immagine inserita: \"{model.Titolo}\"" });
         }

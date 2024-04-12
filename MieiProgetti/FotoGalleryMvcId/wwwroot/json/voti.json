@@ -546,8 +546,8 @@
     "Stelle": 5.0,
     "Data": "2024-04-09T00:00:00+02:00",
     "Commento": "Pongusooooo!!!!",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 56,
@@ -586,8 +586,8 @@
     "Stelle": 5.0,
     "Data": "2024-04-10T00:00:00+02:00",
     "Commento": "sssasaas",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 60,
@@ -608,5 +608,25 @@
     "Commento": null,
     "Visibile": true,
     "Moderato": false
+  },
+  {
+    "Id": 62,
+    "Nome": "emy@gmail.com",
+    "ImmagineId": 12,
+    "Stelle": 4.0,
+    "Data": "2024-04-12T00:00:00+02:00",
+    "Commento": "Bello",
+    "Visibile": true,
+    "Moderato": false
+  },
+  {
+    "Id": 63,
+    "Nome": "s.ussi@yahoo.it",
+    "ImmagineId": 7,
+    "Stelle": 3.0,
+    "Data": "2024-04-12T00:00:00+02:00",
+    "Commento": "Schifo",
+    "Visibile": true,
+    "Moderato": true
   }
 ]

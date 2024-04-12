@@ -4,6 +4,7 @@ using FotoGalleryMvcId.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using FotoGalleryMvcId.Data;
 
 namespace FotoGalleryMvcId.Controllers;
 
@@ -13,14 +14,18 @@ public class ModeratoreController : Controller
     //per la gestione dei file json
     private readonly Paths paths = new();
 
+    //per la gestione del db
+    private readonly ApplicationDbContext _db;
+
     //per la gestione dell'utente
     private readonly UserManager<AppUser> _userManager;
     private readonly ILogger<ModeratoreController> _logger;
 
-    public ModeratoreController(ILogger<ModeratoreController> logger, UserManager<AppUser> userManager)
+    public ModeratoreController(ILogger<ModeratoreController> logger, UserManager<AppUser> userManager, ApplicationDbContext db)
     {
         _logger = logger;
         _userManager = userManager;
+        _db = db;
     }
 
     /// <summary>
@@ -123,7 +128,7 @@ public class ModeratoreController : Controller
     /// <param name="model">Il modello da caricare nella view dopo l'invio dei dati dal form</param>
     /// <returns>La vista gestisci immagini con il modello EliminaImmagineViewModel dopo l'eliminazione</returns>
     [HttpPost]
-    public IActionResult EliminaImmagine(EliminaImmagineViewModel model)
+    public async Task<IActionResult> EliminaImmagine(EliminaImmagineViewModel model)
     {
         var jsonFileImm = System.IO.File.ReadAllText(paths.PathImmagini);
         model.Immagini = JsonConvert.DeserializeObject<List<Immagine>>(jsonFileImm)!;
@@ -134,6 +139,32 @@ public class ModeratoreController : Controller
             model.Immagini.Remove(model.Immagini.First(i => i.Id == id));
         }
         System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(model.Immagini, Formatting.Indented));
+
+        //log immagine aggiunta correttamente 
+        _logger.LogInformation("{0} - Elimina immagine --> (Immagini: {1})", DateTime.Now.ToString("T"), model.Selezione);
+
+        #region db
+        //carico i dati dell'utente attuale
+        var user = await _userManager.GetUserAsync(User);
+
+        //messaggio per immagini/immagine
+        string messaggio = model.Selezione.Count > 1 ? "immagini eliminate" : "immagine eliminata";
+
+        //creo oggetto log per il db
+        Log log = new Log
+        {
+            DataOperazione = DateTime.Now,
+            Alias = user!.Alias,
+            Email = user.Email,
+            Ruoli = user.Ruoli,
+            OperazioneSvolta = $"Elimina immagini: {model.Selezione.Count} {messaggio}",
+            Tipologia = true   //true = UserExperience; false = Administrative
+        };
+        //salvo nel db
+        await _db.Logs.AddAsync(log);
+        await _db.SaveChangesAsync();
+
+        #endregion
 
         return RedirectToAction(nameof(GestisciImmagini));
     }
@@ -156,7 +187,7 @@ public class ModeratoreController : Controller
     }
 
     [HttpPost]
-    public IActionResult ModificaImmagini(ModificaImmaginiViewModel model)
+    public async Task<IActionResult> ModificaImmagini(ModificaImmaginiViewModel model)
     {
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
@@ -191,6 +222,30 @@ public class ModeratoreController : Controller
                 System.IO.File.WriteAllText(paths.PathImmagini, JsonConvert.SerializeObject(model.Immagini, Formatting.Indented));
 
                 _logger.LogInformation("{0} - Modifica Immegini --> (Eseguito!!!)", DateTime.Now.ToString("T"));
+
+                #region db
+                //carico i dati dell'utente attuale
+                var user = await _userManager.GetUserAsync(User);
+
+                //messaggio per immagini/immagine
+                string messaggio = model.ImgMod.Count > 1 ? "immagini modificate" : "immagine modificata";
+
+                //creo oggetto log per il db
+                Log log = new Log
+                {
+                    DataOperazione = DateTime.Now,
+                    Alias = user!.Alias,
+                    Email = user.Email,
+                    Ruoli = user.Ruoli,
+                    OperazioneSvolta = $"Modifica immagini: {model.ImgMod.Count} {messaggio}",
+                    Tipologia = true   //true = UserExperience; false = Administrative
+                };
+                //salvo nel db
+                await _db.Logs.AddAsync(log);
+                await _db.SaveChangesAsync();
+
+                #endregion
+
             }
             else
             {
@@ -267,7 +322,7 @@ public class ModeratoreController : Controller
     }
 
     [HttpPost]
-    public IActionResult ModeraCommenti(ModeraCommentiViewModel model)
+    public async Task<IActionResult> ModeraCommenti(ModeraCommentiViewModel model)
     {
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
@@ -321,6 +376,31 @@ public class ModeratoreController : Controller
 
             //salvo i dati aggiornati nel file voti.json
             System.IO.File.WriteAllText(paths.PathVoti, JsonConvert.SerializeObject(model.Voti, Formatting.Indented));
+
+            #region db
+            //carico i dati dell'utente attuale
+            var user = await _userManager.GetUserAsync(User);
+
+            //messaggio per commento/commenti
+            string messaggio = model.Selezione!.Count > 1 ? "commenti" : "commento";
+            string censura = model.Selezione!.Count > 1 ? "censurati" : "censurato";
+            string approva = model.Selezione!.Count > 1 ? "approvati" : "approvato";
+            string azione = model.SubmitButton == "censura" ? censura : approva;
+            //creo oggetto log per il db
+            Log log = new Log
+            {
+                DataOperazione = DateTime.Now,
+                Alias = user!.Alias,
+                Email = user.Email,
+                Ruoli = user.Ruoli,
+                OperazioneSvolta = $"Modera commneti: {model.Selezione.Count} {messaggio} {azione}",
+                Tipologia = true   //true = UserExperience; false = Administrative
+            };
+            //salvo nel db
+            await _db.Logs.AddAsync(log);
+            await _db.SaveChangesAsync();
+
+            #endregion
 
             return RedirectToAction("ModeraCommenti", "Moderatore", new { pageIndex = model.PageIndex });
 
