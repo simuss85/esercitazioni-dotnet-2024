@@ -9,165 +9,171 @@
     </div>
 
     <!---------------------- tabella di modifica ---------------->
-    <form method="post">
 
-        <table class="table text-center table-striped align-middle mt-5">
-            <thead>
+    <table class="table text-center table-striped align-middle mt-5">
+        <thead>
+            <tr>
+                <th>Id
+                    @if (Model.Reverse != "idOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Data
+                    @if (Model.Reverse != "dataOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Ora</th>
+
+                <th>Alias
+                    @if (Model.Reverse != "aliasOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Email
+                    @if (Model.Reverse != "emailOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Ruolo
+                    @if (Model.Reverse != "ruoloOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Operazione
+                    @if (Model.Reverse != "operazioneOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Tipologia
+                    @if (Model.Reverse != "tipologiaOn")
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOn">
+                            <i class="bi bi-caret-down"></i></a>
+                    }
+                    else
+                    {
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOff">
+                            <i class="bi bi-caret-up"></i></a>
+                    }
+                </th>
+
+                <th>Azione</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var log in Model.Logs!)
+            {
                 <tr>
-                    <th>Id
-                        @if (Model.Reverse != "idOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@log.Id</td>
 
-                    <th>Data
-                        @if (Model.Reverse != "dataOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@log.DataOperazione!.Value.ToString("d")</td>
 
-                    <th>Ora</th>
+                    <td>@log.DataOperazione!.Value.ToString("T")</td>
 
-                    <th>Alias
-                        @if (Model.Reverse != "aliasOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@log.Alias</td>
 
-                    <th>Email
-                        @if (Model.Reverse != "emailOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@log.Email</td>
 
-                    <th>Ruolo
-                        @if (Model.Reverse != "ruoloOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@log.Ruoli</td>
 
-                    <th>Operazione
-                        @if (Model.Reverse != "operazioneOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@log.OperazioneSvolta</td>
 
-                    <th>Tipologia
-                        @if (Model.Reverse != "tipologiaOn")
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOn">
-                                <i class="bi bi-caret-down"></i></a>
-                        }
-                        else
-                        {
-                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOff">
-                                <i class="bi bi-caret-up"></i></a>
-                        }
-                    </th>
+                    <td>@(log.Tipologia ? "UserExperience" : "Administrative")</td>
 
-                    @* <th>Tasto</th> //TO IMPLEMENTS per un possibile utilizzo futuro*@
+                    <form method="post" asp-action="EliminaLog">
+                        <td>
+                            <input type="hidden" name="IdLog" value="@log.Id" />
+                            <input type="hidden" name="PageIndex" value="@Model.PageIndex" />
+                            <input type="hidden" name="Reverse" value="@Model.Reverse" />
+
+                            <button type="submit" class="btn btn-sm btn-danger" title="Elimina"><i class="bi bi-trash3"></i>
+                            </button>
+                        </td>
+                    </form>
+
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var log in Model.Logs!)
-                {
-                    <tr>
-                        <td>@log.Id</td>
+            }
 
-                        <td>@log.DataOperazione!.Value.ToString("d")</td>
+        </tbody>
 
-                        <td>@log.DataOperazione!.Value.ToString("T")</td>
+    </table>
 
-                        <td>@log.Alias</td>
-
-                        <td>@log.Email</td>
-
-                        <td>@log.Ruoli</td>
-
-                        <td>@log.OperazioneSvolta</td>
-
-                        <td>@(log.Tipologia ? "UserExperience" : "Administrative")</td>
-
-                        @* <td>
-                    <a class="btn btn-danger">ELIMINA</a>
-                    </td> *@
-
-                    </tr>
-                }
-
-            </tbody>
-
-        </table>
-    </form>
 
     <!---------------------------- tasti paginazione -------------------------->
     <nav class="mt-5" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
                 <a class="page-link" aria-label="Previous" asp-controller="Admin" asp-action="Log"
-                    asp-route-pageindex="1">
+                    asp-route-pageindex="1" asp-route-reverse="@Model.Reverse">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
             @for (int i = 1; i <= Model.NumeroPagine; i++)
             {
-                if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
+                if (i == Model.PageIndex) //indica la pagina attiva
                 {
                     <li class="page-item active"><a class="page-link" asp-controller="Admin" asp-action="Log"
-                            asp-route-pageindex="@i">@i</a></li>
+                            asp-route-pageindex="@i" asp-route-reverse="@Model.Reverse">@i</a></li>
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" asp-controller="Admin" asp-action="Log"
-                            asp-route-pageindex="@i">@i</a></li>
+                    <li class="page-item"><a class="page-link" asp-controller="Admin" asp-action="Log" asp-route-pageindex="@i"
+                            asp-route-reverse="@Model.Reverse">@i</a></li>
                 }
 
             }
             <li class="page-item">
                 <a class="page-link" aria-label="Next" asp-controller="Admin" asp-action="Log"
-                    asp-route-pageindex="@Model.NumeroPagine">
+                    asp-route-pageindex="@Model.NumeroPagine" asp-route-reverse="@Model.Reverse">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

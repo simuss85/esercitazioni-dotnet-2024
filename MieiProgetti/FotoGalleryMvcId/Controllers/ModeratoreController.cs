@@ -402,7 +402,7 @@ public class ModeratoreController : Controller
 
             #endregion
 
-            return RedirectToAction("ModeraCommenti", "Moderatore", new { pageIndex = model.PageIndex });
+            return RedirectToAction("ModeraCommenti", "Moderatore", new { pageIndex = model.PageIndex, reverse = model.Reverse });
 
         }
     }

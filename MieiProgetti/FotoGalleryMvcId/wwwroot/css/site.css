@@ -328,3 +328,8 @@ label.star:before {
 .form-check {
   padding-left: 0.5rem;
 }
+
+/* ---------------- form ruoli --------------------------- */
+.form-ruoli {
+  font-size: 12px;
+}

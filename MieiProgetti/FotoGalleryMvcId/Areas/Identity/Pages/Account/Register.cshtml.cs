@@ -145,6 +145,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                 user.Cognome = Input.Cognome;
                 user.Eta = Input.Eta;
                 user.Status = true; //true = UserExperience; false = Administrative
+                user.DataRegistrazione = DateTime.Now;
 
                 //Verifico se esiste il ruolo e lo assegno all'utente registrato
                 if (await _roleManager.RoleExistsAsync("User"))

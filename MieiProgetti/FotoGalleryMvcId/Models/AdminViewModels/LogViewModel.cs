@@ -1,7 +1,13 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace FotoGalleryMvcId.Models;
 
 public class LogViewModel
 {
+    //attributi per le view POST
+    [BindProperty]
+    public int IdLog { get; set; }
+
     //attibuti per le view GET
     public IEnumerable<Log>? Logs { get; set; }
     public int NumeroPagine { get; set; }

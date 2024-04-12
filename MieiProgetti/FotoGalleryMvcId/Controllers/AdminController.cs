@@ -398,7 +398,6 @@ public class AdminController : Controller
             Logs = await _db.Logs.ToListAsync()
         };
 
-        //log che visualizza la pagina selezionata, user e orario
         _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
 
         // //gestione ordinameneto tabella
@@ -470,6 +469,31 @@ public class AdminController : Controller
         model.Logs = model.Logs.Skip((pageIndex - 1) * model.ElementiPerPagina).Take(model.ElementiPerPagina);
 
         return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EliminaLog(LogViewModel model)
+    {
+        _logger.LogInformation("{0} - EliminaLog --> (IdLog: {1})", DateTime.Now.ToString("T"), model.IdLog);
+        //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction("Log", "Admin", new { pageIndex = model.PageIndex, reverse = model.Reverse });
+        }
+        else
+        {
+            //scansiono la tagbella dei logs
+            foreach (var log in _db.Logs)
+            {
+                if (log.Id == model.IdLog)
+                {
+                    _db.Logs.Remove(log);
+                    break;
+                }
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Log", "Admin", new { pageIndex = model.PageIndex, reverse = model.Reverse });
+        }
     }
 }
 
