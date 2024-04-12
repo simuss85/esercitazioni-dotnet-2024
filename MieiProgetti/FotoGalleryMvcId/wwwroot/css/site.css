@@ -200,7 +200,7 @@ label.star:before {
   box-shadow: 1px 1px 6px 0px black;
 }
 
-/*------------ classifica -------------*/
+/*------------------ classifica -------------*/
 .img-classifica {
   object-fit: cover;
   /* Copre il contenitore mantenendo il rapporto di aspetto */
@@ -249,8 +249,8 @@ label.star:before {
 }
 
 #carosello img {
-  object-fit: cover;
-  width: 95%;
+  object-fit: contain;
+  width: 100%;
   height: 75vh;
 }
 
