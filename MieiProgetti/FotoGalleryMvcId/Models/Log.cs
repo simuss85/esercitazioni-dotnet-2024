@@ -7,5 +7,6 @@ public class Log
     public string? Alias { get; set; }
     public string? Email { get; set; }
     public string? Ruoli { get; set; }
-    public string? Operazione { get; set; }
+    public string? OperazioneSvolta { get; set; }
+    public bool Tipologia { get; set; }    //indica se l'operazione è di tipo userExperience (true), amministrativa (false)
 }

@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using FotoGalleryMvcId.Data;
+using System.Data.Common;
 
 namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
 {
@@ -31,6 +33,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _db;
 
         public RegisterModel(
             RoleManager<IdentityRole> roleManager,
@@ -38,7 +41,8 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             IUserStore<AppUser> userStore,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext db)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -47,6 +51,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _db = db;
         }
 
         /// <summary>
@@ -132,14 +137,14 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-
+                //creazione utente di Identity
                 var user = CreateUser();
                 //!!! Inseriti i nuovi attributi
                 user.Alias = Input.Email.Split("@")[0];
                 user.Nome = Input.Nome;
                 user.Cognome = Input.Cognome;
                 user.Eta = Input.Eta;
-                user.Status = true;
+                user.Status = true; //true = UserExperience; false = Administrative
 
                 //Verifico se esiste il ruolo e lo assegno all'utente registrato
                 if (await _roleManager.RoleExistsAsync("User"))
@@ -158,6 +163,24 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("L'utente ha creato un nuovo account con password.");
+
+                    #region db
+                    //creo oggetto log per il db
+                    Log log = new Log
+                    {
+                        DataOperazione = DateTime.Now,
+                        Alias = user.Alias,
+                        Email = user.Email,
+                        Ruoli = user.Ruoli,
+                        OperazioneSvolta = "Registrazione",
+                        Tipologia = false
+                    };
+                    //salvo nel db
+                    await _db.Logs.AddAsync(log);
+                    await _db.SaveChangesAsync();
+
+                    #endregion
+
                     await _userManager.AddToRoleAsync(user, "User");    //!!! aggiungo il ruolo User
 
                     var userId = await _userManager.GetUserIdAsync(user);

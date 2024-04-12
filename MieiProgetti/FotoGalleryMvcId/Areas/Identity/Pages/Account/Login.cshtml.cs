@@ -15,18 +15,23 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using FotoGalleryMvcId.Data;
 
 namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly ApplicationDbContext _db;
+        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(UserManager<AppUser> userManager, ApplicationDbContext db, SignInManager<AppUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _db = db;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -115,6 +120,24 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    #region db
+                    var user = await _userManager.GetUserAsync(User);
+
+                    //creo oggetto log per il db
+                    Log log = new Log
+                    {
+                        DataOperazione = DateTime.Now,
+                        Alias = user.Alias,
+                        Email = user.Email,
+                        Ruoli = user.Ruoli,
+                        OperazioneSvolta = "Login",
+                        Tipologia = false
+                    };
+                    //salvo nel db
+                    await _db.Logs.AddAsync(log);
+                    await _db.SaveChangesAsync();
+
+                    #endregion
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

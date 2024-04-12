@@ -1,3 +1,4 @@
+using FotoGalleryMvcId.Data;
 using FotoGalleryMvcId.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,16 +14,18 @@ public class AdminController : Controller
 {
     //per la gestione dei file json
     private readonly Paths paths = new();
-
+    //per la gestione del database
+    private readonly ApplicationDbContext _db;
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly ILogger<AdminController> _logger;
 
-    public AdminController(ILogger<AdminController> logger, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+    public AdminController(ILogger<AdminController> logger, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext db)
     {
         _logger = logger;
         _userManager = userManager;
         _roleManager = roleManager;
+        _db = db;
     }
 
     /// <summary>
@@ -309,16 +312,89 @@ public class AdminController : Controller
     }
 
     [HttpGet]
-    public IActionResult Log(int pageIndex = 1, string reverse = "idOff")
+    public async Task<IActionResult> Log(int pageIndex = 1, string reverse = "idOff")
     {
         // creo il modello per gestire la view
         var model = new LogViewModel
         {
+            ElementiPerPagina = 15,
             PageIndex = pageIndex,
-            Reverse = reverse
+            Reverse = reverse,
+            Logs = await _db.Logs.ToListAsync()
         };
 
-        return View();
+        //log che visualizza la pagina selezionata, user e orario
+        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
+
+        // //gestione ordinameneto tabella
+        switch (reverse)
+        {
+            case "idOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.Id);
+                break;
+
+            case "idOn":
+                model.Logs = model.Logs.OrderBy(u => u.Id);
+                break;
+
+            case "dataOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.DataOperazione);
+                break;
+
+            case "dataOn":
+                model.Logs = model.Logs.OrderBy(u => u.DataOperazione);
+                break;
+
+            case "aliasOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.Alias);
+                break;
+
+            case "aliasOn":
+                model.Logs = model.Logs.OrderBy(u => u.Alias);
+                break;
+
+            case "emailOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.Email);
+                break;
+
+            case "emailOn":
+                model.Logs = model.Logs.OrderBy(u => u.Email);
+                break;
+
+            case "ruoloOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.Ruoli);
+                break;
+
+            case "ruoloOn":
+                model.Logs = model.Logs.OrderBy(u => u.Ruoli);
+                break;
+
+            case "operazioneOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.OperazioneSvolta);
+                break;
+
+            case "operazioneOn":
+                model.Logs = model.Logs.OrderBy(u => u.OperazioneSvolta);
+                break;
+
+            case "tipologiaOff":
+                model.Logs = model.Logs.OrderByDescending(u => u.Tipologia);
+                break;
+
+            case "tipologiaOn":
+                model.Logs = model.Logs.OrderBy(u => u.Tipologia);
+                break;
+
+            default:
+                model.Logs = model.Logs.OrderByDescending(u => u.Id);
+                break;
+        }
+
+        //paginazione dei logs
+        model.NumeroPagine = (int)Math.Ceiling((double)model.Logs.Count() / model.ElementiPerPagina);
+        model.Logs = model.Logs.Skip((pageIndex - 1) * model.ElementiPerPagina).Take(model.ElementiPerPagina);
+
+        return View(model);
     }
 }
 

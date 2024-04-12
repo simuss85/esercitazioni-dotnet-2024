@@ -1,10 +1,11 @@
+@model LogViewModel
 @{
     ViewData["Title"] = "Gestione log";
 }
 <div class="mx-5">
     <!-------------------------- titolo della pagina ---------------------------->
     <div class="text-center">
-        <h1 class="display-4">@ViewData["Title"]</h1>
+        <h1 class="display-5">@ViewData["Title"]</h1>
     </div>
 
     <!---------------------- tabella di modifica ---------------->
@@ -13,23 +14,129 @@
         <table class="table text-center table-striped align-middle mt-5">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Data</th>
+                    <th>Id
+                        @if (Model.Reverse != "idOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Data
+                        @if (Model.Reverse != "dataOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
                     <th>Ora</th>
-                    <th>Alias</th>
-                    <th>Email</th>
-                    <th>Operazione</th>
-                    <th>TastoAzione</th>
+
+                    <th>Alias
+                        @if (Model.Reverse != "aliasOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Email
+                        @if (Model.Reverse != "emailOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Ruolo
+                        @if (Model.Reverse != "ruoloOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Operazione
+                        @if (Model.Reverse != "operazioneOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    <th>Tipologia
+                        @if (Model.Reverse != "tipologiaOn")
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
+                    </th>
+
+                    @* <th>Tasto</th> //TO IMPLEMENTS per un possibile utilizzo futuro*@
                 </tr>
             </thead>
             <tbody>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                @foreach (var log in Model.Logs!)
+                {
+                    <tr>
+                        <td>@log.Id</td>
+
+                        <td>@log.DataOperazione!.Value.ToString("d")</td>
+
+                        <td>@log.DataOperazione!.Value.ToString("T")</td>
+
+                        <td>@log.Alias</td>
+
+                        <td>@log.Email</td>
+
+                        <td>@log.Ruoli</td>
+
+                        <td>@log.OperazioneSvolta</td>
+
+                        <td>@(log.Tipologia ? "UserExperience" : "Administrative")</td>
+
+                        @* <td>
+                    <a class="btn btn-danger">ELIMINA</a>
+                    </td> *@
+
+                    </tr>
+                }
+
             </tbody>
 
         </table>
