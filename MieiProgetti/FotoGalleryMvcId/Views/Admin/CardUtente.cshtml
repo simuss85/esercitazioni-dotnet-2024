@@ -12,7 +12,7 @@
 
     <!----------------- sezione card utente ---------------------------->
     <div class="row justify-content-center ">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 16rem;">
             <!-------------- immagine dinamica in base al ruolo ------------->
             @if (Model.Utente!.Ruoli.Contains("Admin"))
             {
@@ -26,14 +26,18 @@
             {
                 <img src="~/img/user.png" class="card-img-top" alt="user.png">
             }
-            else
+            else if (Model.Utente.Ruoli.Contains("Master")) //utente master
             {
                 <img src="~/img/master.png" class="card-img-top" alt="master.png">
+            }
+            else
+            {
+                <img src="~/img/bloccato.png" class="card-img-top" alt="bloccato.png">
             }
 
             <div class="card-body">
                 <h5 class="card-title">@Model.Utente.Alias</h5>
-                <p class="card-text">Utente registrato dal 11/11/1111</p>
+                <p class="card-text">utente registrato dal @Model.Utente.DataRegistrazione.ToString("d")</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item "><b>Nome: </b> @Model.Utente.Nome</li>
