@@ -83,8 +83,8 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Devi inserire un'email")]
+            [EmailAddress(ErrorMessage = "Il campo E-mail non è un indirizzo e-mail valido.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -92,7 +92,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Devi impostare una password")]
             [StringLength(100, ErrorMessage = "Il {0} deve contenere almeno {2} e un massimo di {1} caratteri.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -110,15 +110,15 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             [HiddenInput]
             public string Alias { get; set; }
 
-            [Required(ErrorMessage = "Devi inserire un nome")]
+            [Required(ErrorMessage = "Inserisci il tuo nome")]
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Inserisci il tuo cognome")]
             [Display(Name = "Cognome")]
             public string Cognome { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Inserisci la tua età")]
             [Range(18, 99, ErrorMessage = "Devi avere 18 anni!!!")]
             [Display(Name = "Età")]
             public int Eta { get; set; }
