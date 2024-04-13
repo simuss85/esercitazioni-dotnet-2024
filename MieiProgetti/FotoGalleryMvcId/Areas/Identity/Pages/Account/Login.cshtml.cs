@@ -70,15 +70,15 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Email richiesta")]
+            [EmailAddress(ErrorMessage = "Il campo E-mail non è un indirizzo e-mail valido.")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Password richiesta")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -86,7 +86,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Mantieni l'accesso")]
             public bool RememberMe { get; set; }
         }
 
@@ -155,7 +155,7 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        ModelState.AddModelError(string.Empty, "Tentativo di accesso non valido.");
                         return Page();
                     }
                 }
