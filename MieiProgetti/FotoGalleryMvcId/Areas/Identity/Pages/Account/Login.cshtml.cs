@@ -115,44 +115,53 @@ namespace FotoGalleryMvcId.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                //aggiungo controllo per utente Bloccato
+                var user = await _userManager.FindByEmailAsync(Input.Email);
+                if (user != null && user.Status) // Controlla se l'utente esiste e se l'account è attivo
                 {
-                    #region db
-                    var user = await _userManager.GetUserAsync(User);
-
-                    //creo oggetto log per il db
-                    Log log = new Log
+                    // This doesn't count login failures towards account lockout
+                    // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    if (result.Succeeded)
                     {
-                        DataOperazione = DateTime.Now,
-                        Alias = user.Alias,
-                        Email = user.Email,
-                        Ruoli = user.Ruoli,
-                        OperazioneSvolta = "Login",
-                        Tipologia = false   //true = UserExperience; false = Administrative
-                    };
-                    //salvo nel db
-                    await _db.Logs.AddAsync(log);
-                    await _db.SaveChangesAsync();
+                        #region db
 
-                    #endregion
+                        //creo oggetto log per il db
+                        Log log = new Log
+                        {
+                            DataOperazione = DateTime.Now,
+                            Alias = user.Alias,
+                            Email = user.Email,
+                            Ruoli = user.Ruoli,
+                            OperazioneSvolta = "Login",
+                            Tipologia = false   //true = UserExperience; false = Administrative
+                        };
+                        //salvo nel db
+                        await _db.Logs.AddAsync(log);
+                        await _db.SaveChangesAsync();
 
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                        #endregion
+
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Il tuo account risulta bloccato. Contatta l'assistenza per avere più informazioni.");
                     return Page();
                 }
             }
