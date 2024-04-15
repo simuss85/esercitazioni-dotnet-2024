@@ -263,7 +263,7 @@ public class AdminController : Controller
     /// <param name="urlBack">Gestisce il tasto di ritorno</param>
     /// <returns>La vista card utente con il modello CardUtentiViewModel</returns>
     [HttpGet]
-    public async Task<IActionResult> CardUtente(string id, string menuRuoli = "")
+    public async Task<IActionResult> CardUtente(string id, string urlBack, string menuRuoli = "")
     {
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path;
@@ -279,12 +279,13 @@ public class AdminController : Controller
         // Passa l'utente al modello
         var model = new CardUtenteViewModel
         {
+            UrlBack = urlBack,
             Utente = user,
             MenuRuoli = menuRuoli
         };
 
         //log che visualizza la pagina selezionata, user, urlBack e orario
-        _logger.LogInformation("{0} - Card Utente --> (UserId: {1})", DateTime.Now.ToString("T"), id);
+        _logger.LogInformation("{0} - Card Utente --> (UserId: {1}, UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
         return View(model);
     }
 

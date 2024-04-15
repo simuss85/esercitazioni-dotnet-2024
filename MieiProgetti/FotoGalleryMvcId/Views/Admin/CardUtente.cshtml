@@ -47,15 +47,18 @@
                 <li class="list-group-item "><b>Status:</b>@(Model.Utente.Status == true ? " Attivo" : " Bloccato")</li>
             </ul>
             <div class="card-body text-center">
-                @* ------------ richiamo i tasti di controllo ----------- *@
-                @if (Model.MenuRuoli == Model.Utente.Email)
-                {
-                    <partial name="_CheckRuoliPartial" for="@Model.Utente" />
-                }
-                else
-                {
-                    <partial name="_AzioniPartial" for="@Model.Utente" />
-                }
+                <td>
+                    @* ------------ richiamo i tasti di controllo ----------- *@
+                    @if (Model.MenuRuoli == Model.Utente.Email)
+                    {
+                        <partial name="_CheckRuoliPartial" for="@Model.Utente" />
+                    }
+                    else
+                    {
+                        <partial name="_AzioniPartial" for="@Model.Utente" />
+                        <a href="@Model.UrlBack" class="btn btn-sm btn-primary"><i class="bi bi-arrow-return-left"></i></a>
+                    }
+                </td>
             </div>
         </div>
     </div>
