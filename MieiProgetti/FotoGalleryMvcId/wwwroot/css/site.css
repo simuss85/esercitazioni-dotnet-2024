@@ -339,3 +339,16 @@ label.star:before {
 .form-ruoli {
   font-size: 12px;
 }
+
+/* ---------------- tabella logs ------------------------- */
+@media (max-width: 575px) {
+  .tabella-font-size {
+    font-size: xx-small !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .tabella-font-size {
+    font-size: smaller !important;
+  }
+}

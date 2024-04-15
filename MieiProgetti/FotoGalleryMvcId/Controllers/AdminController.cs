@@ -397,17 +397,8 @@ public class AdminController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Log(FiltroLogModel filtro, string ruoliString, int pageIndex = 1, string reverse = "idOff")
+    public async Task<IActionResult> Log(FiltroLogModel filtro, string ruoliJoin, int pageIndex = 1, string reverse = "idOff")
     {
-        if (!string.IsNullOrEmpty(ruoliString))
-        {
-            string[] ruoli = ruoliString.Split(",");
-            foreach (var ruolo in ruoli)
-            {
-                filtro.Ruoli!.Add(ruolo);
-            }
-        }
-
         // creo il modello per gestire la view
         var model = new LogViewModel
         {
@@ -417,6 +408,13 @@ public class AdminController : Controller
             Logs = await _db.Logs.ToListAsync(),
             Filtro = filtro
         };
+
+        //traduco ruoliJoin in List
+        if (!string.IsNullOrEmpty(ruoliJoin))
+        {
+            string[] ruoliSplit = ruoliJoin.Split(',');
+            model.Filtro.Ruoli = ruoliSplit.ToList();
+        }
 
         _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2} - [Filtri --> Id: {3}, DataInizio: {4}, DataFine: {5}], Alias: {6}, Email: {7}, Ruoli: {8})",
                 DateTime.Now.ToString("T"), pageIndex, reverse, model.Filtro.Id, model.Filtro.DataInizio, model.Filtro.DataFine, model.Filtro.Alias, model.Filtro.Email, model.Filtro.Ruoli);

@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Gestione utenti";
 }
-<div class="container">
+<div class="container  tabella-font-size">
     <!-------------------------- titolo della pagina ---------------------------->
     <div class="text-center">
         <h1 class="display-5">@ViewData["Title"]</h1>
@@ -101,15 +101,21 @@
                     <td class=" d-none d-lg-table-cell @textColor"> @status</td>
 
                     <td>
+
                         @* ------------ richiamo i tasti di controllo ----------- *@
                         @if (Model.MenuRuoli == u.Email)
                         {
-                            <partial name="_CheckRuoliPartial" for="@u" />
+                            <div class="d-flex row-cols-auto justify-content-center">
+                                <partial name="_CheckRuoliPartial" for="@u" />
+                            </div>
                         }
                         else
                         {
-                            <partial name="_AzioniPartial" for="@u" />
+                            <div class="d-flex justify-content-center">
+                                <partial name="_AzioniPartial" for="@u" />
+                            </div>
                         }
+
                     </td>
                 </tr>
             }
