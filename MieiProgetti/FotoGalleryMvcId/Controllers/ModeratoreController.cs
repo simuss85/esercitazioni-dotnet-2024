@@ -393,7 +393,7 @@ public class ModeratoreController : Controller
                 Alias = user!.Alias,
                 Email = user.Email,
                 Ruoli = user.Ruoli,
-                OperazioneSvolta = $"Modera commneti: {model.Selezione.Count} {messaggio} {azione}",
+                OperazioneSvolta = $"Modera commenti: {model.Selezione.Count} {messaggio} {azione}",
                 Tipologia = true   //true = UserExperience; false = Administrative
             };
             //salvo nel db

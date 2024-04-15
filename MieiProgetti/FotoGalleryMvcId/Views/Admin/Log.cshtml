@@ -19,28 +19,41 @@
     </div>
 
     <!----------------------- accordion di ricerca -------------------------->
-    <div class="accordion m-0 p-0 mb-4 w-75 float-end" id="accordionExample">
+    <div class="accordion m-0 p-0 mb-4 float-end w-75" id="accordionExample">
         <div class="accordion-item border-0">
-            <h2 class="accordion-header float-end">
+            <div class="accordion-header float-end">
                 <button class="accordion-button m-0 p-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <i class="bi bi-search"></i>
                 </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse @ViewData["show"]"
-                data-bs-parent="#accordionExample">
+            </div>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <h5 class="text-center">Ricerca:</h5>
 
                 <!------------------------ form di ricerca ---------------------->
+
                 <form method="get">
-                    <!-- Id -->
-                    <div class="form-group w-25">
-                        <label asp-for="Filtro!.Id"></label>
-                        <input type="number" asp-for="Filtro!.Id" class="form-control" />
+                    <div class="row">
+                        <!-- Id -->
+                        <div class="col-3 form-group w-25">
+                            <label asp-for="Filtro!.Id"></label>
+                            <input type="number" asp-for="Filtro!.Id" class="form-control" />
+                        </div>
+
+                        <!-- Alias -->
+                        <div class="col-3 form-group w-25">
+                            <label asp-for="Filtro!.Alias"></label>
+                            <input type="text" asp-for="Filtro!.Alias" class="form-control" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-6 form-group w-50">
+                            <label asp-for="Filtro!.Email"></label>
+                            <input type="text" asp-for="Filtro!.Email" class="form-control" />
+                        </div>
                     </div>
 
-                    <!-- Data -->
-                    <div class="form-group row">
+                    <div class="form-group row mt-1">
                         <!--Data min-->
                         <div class="col-6">
                             <label asp-for="Filtro!.DataInizio"></label>
@@ -53,39 +66,199 @@
                         </div>
                     </div>
 
-                    <!-- Alias -->
-                    <div class="form-group w-25">
-                        <label asp-for="Filtro!.Alias"></label>
-                        <input type="text" asp-for="Filtro!.Alias" class="form-control" />
-                    </div>
+                    <div class="form-group row mt-3 text-center">
+                        <!-- Tipologia -->
+                        <div class="col-6 w-50 p-0">
+                            <label for="tipologia">Scegli Tipologia:</label>
+                            <select name="Filtro.Tipologia" id="tipologia">
+                                @{
+                                    if (Model.Filtro.Tipologia == null)
+                                    {
+                                        <option value="" selecteed>Tutte</option>
+                                        <option value="true">UserExperience</option>
+                                        <option value="false">Administrative</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="">Tutte</option>
+                                        if (Model.Filtro.Tipologia == true)
+                                        {
+                                            <option value="true" selected>UserExperience</option>
+                                            <option value="false">Administrative</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="true">UserExperience</option>
+                                            <option value="false" selected>Administrative</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
 
-                    <!-- Email -->
-                    <div class="form-group w-50">
-                        <label asp-for="Filtro!.Email"></label>
-                        <input type="text" asp-for="Filtro!.Email" class="form-control" />
+                        <!-- Operazione -->
+                        <div class="col-6 w-50 p-0">
+                            <label for="operazione">Scegli Operazione:</label>
+                            <select name="Filtro.Operazione" id="operazione">
+                                @{
+                                    switch (Model.Filtro.Operazione)
+                                    {
+                                        case "Elimina immagini":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini" selected>Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Elimina utente":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente" selected>Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Login":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login" selected>Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Logout":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout" selected>Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Modera commenti":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti" selected>Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Registrazione":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione" selected>Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Ruoli modificati":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati" selected>Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Status modificato":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato" selected>Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+
+                                        case "Voto immagine":
+                                            <option value="">Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine" selected>Voto immagine</option>
+                                            break;
+
+                                        default:
+                                            <option value="" selected>Tutte</option>
+                                            <option value="Elimina immagini">Elimina immagini</option>
+                                            <option value="Elimina utente">Elimina utente</option>
+                                            <option value="Login">Login</option>
+                                            <option value="Logout">Logout</option>
+                                            <option value="Modera commenti">Modera commenti</option>
+                                            <option value="Registrazione">Registrazione</option>
+                                            <option value="Ruoli modificati">Ruoli modificati</option>
+                                            <option value="Status modificato">Status modificato</option>
+                                            <option value="Voto immagine">Voto immagine</option>
+                                            break;
+                                    }
+                                }
+                            </select>
+                        </div>
                     </div>
 
                     <!-- Ruoli -->
-                    <div class="form-group w-50">
+                    <div class="text-center mt-4">
                         <p class="p-0 m-0">Seleziona Ruoli:</p>
                         <label for="chkUser">User</label>
                         <input id="chkUser" type="checkbox" name="Filtro.Ruoli" value="User"
-                            @(ViewData["checkedUser?"]) />
+                        @(ViewData["checkedUser?"]) />
 
                         <label for="chkAdmin">Admin</label>
                         <input id="chkAdmin" type="checkbox" name="Filtro.Ruoli" value="Admin"
-                            @(ViewData["checkedAdmin?"]) />
+                        @(ViewData["checkedAdmin?"]) />
 
                         <label for="chkMod">Moderatore</label>
                         <input id="chkMod" type="checkbox" name="Filtro.Ruoli" value="Moderatore"
-                            @(ViewData["checkedMod?"]) />
-
+                        @(ViewData["checkedMod?"]) />
                     </div>
 
                     <button type="submit" class="btn btn-sm btn-primary float-end m-2">
                         Filtra
                     </button>
                 </form>
+
             </div>
         </div>
     </div>
@@ -101,7 +274,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -110,7 +284,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -122,7 +297,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -131,7 +307,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -145,7 +322,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -154,7 +332,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -166,7 +345,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -175,7 +355,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -187,7 +368,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -196,7 +378,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -208,7 +391,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -217,7 +401,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -229,7 +414,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -238,7 +424,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -251,7 +438,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
@@ -260,7 +448,8 @@
                             asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -295,6 +484,7 @@
                             <input type="hidden" name="IdLog" value="@log.Id" />
                             <input type="hidden" name="PageIndex" value="@Model.PageIndex" />
                             <input type="hidden" name="Reverse" value="@Model.Reverse" />
+                            <input type="hidden" asp-for="@Model.Filtro.Operazione" value="@Model.Filtro.Operazione" />
 
                             <button type="submit" class="btn btn-sm btn-danger" title="Elimina"><i class="bi bi-trash3"></i>
                             </button>
@@ -315,7 +505,8 @@
                     asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                     asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                     asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                    asp-route-ruolijoin="@ViewBag.Ruoli">
+                    asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                    asp-route-operazione="@Model.Filtro.Operazione">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -328,7 +519,8 @@
                             asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">@i</a>
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">@i</a>
                     </li>
                 }
                 else
@@ -338,7 +530,8 @@
                             asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
                             asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                             asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                            asp-route-ruolijoin="@ViewBag.Ruoli">@i</a>
+                            asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                            asp-route-operazione="@Model.Filtro.Operazione">@i</a>
                     </li>
                 }
 
@@ -349,7 +542,8 @@
                     asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
                     asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                     asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
-                    asp-route-ruolijoin="@ViewBag.Ruoli">
+                    asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
+                    asp-route-operazione="@Model.Filtro.Operazione">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

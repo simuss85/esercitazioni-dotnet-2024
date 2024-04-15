@@ -27,7 +27,5 @@ public class FiltroLogModel
 
     [Display(Name = "Operazione effettuata")]
     public string? Operazione { get; set; }
-
-    [Display(Name = "Tipo Operazione")]
-    public string? Tipologia { get; set; }
+    public bool? Tipologia { get; set; }
 }

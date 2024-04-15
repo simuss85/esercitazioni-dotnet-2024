@@ -249,7 +249,7 @@ public class AdminController : Controller
                 Alias = user!.Alias,
                 Email = user.Email,
                 Ruoli = user.Ruoli,
-                OperazioneSvolta = $"Utente eliminato: utente {user.Email}",
+                OperazioneSvolta = $"Elimina utente: utente {user.Email}",
                 Tipologia = true   //true = UserExperience; false = Administrative
             };
             //salvo nel db
@@ -416,8 +416,8 @@ public class AdminController : Controller
             model.Filtro.Ruoli = ruoliSplit.ToList();
         }
 
-        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2} - [Filtri --> Id: {3}, DataInizio: {4}, DataFine: {5}], Alias: {6}, Email: {7}, Ruoli: {8})",
-                DateTime.Now.ToString("T"), pageIndex, reverse, model.Filtro.Id, model.Filtro.DataInizio, model.Filtro.DataFine, model.Filtro.Alias, model.Filtro.Email, model.Filtro.Ruoli);
+        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2} - [Filtri --> Id: {3}, DataInizio: {4}, DataFine: {5}], Alias: {6}, Email: {7}, Ruoli: {8}, Tipologia: {9}, Operazione: {10})",
+                DateTime.Now.ToString("T"), pageIndex, reverse, model.Filtro.Id, model.Filtro.DataInizio, model.Filtro.DataFine, model.Filtro.Alias, model.Filtro.Email, model.Filtro.Ruoli, model.Filtro.Tipologia, model.Filtro.Operazione);
 
         #region Filtri
         //gestione dei filtri: Id
@@ -433,12 +433,25 @@ public class AdminController : Controller
             model.Logs = model.Logs.Where(l => l.Alias!.Contains(model.Filtro.Alias));
         }
 
-        //gestione dei filtri: Alias
+        //gestione dei filtri: Email
         if (!string.IsNullOrEmpty(model.Filtro.Email))
         {
             model.Logs = model.Logs.Where(l => l.Email!.Contains(model.Filtro.Email));
         }
 
+        //gestione dei filtri: Tipologia
+        if (model.Filtro.Tipologia != null)
+        {
+            model.Logs = model.Logs.Where(l => l.Tipologia! == model.Filtro.Tipologia);
+        }
+
+        //gestione dei filtri: Operazione
+        if (!string.IsNullOrEmpty(model.Filtro.Operazione))
+        {
+            model.Logs = model.Logs.Where(l => l.OperazioneSvolta!.Contains(model.Filtro.Operazione));
+        }
+
+        //gestione dei filtri: Ruoli
         if (model.Filtro.Ruoli != null)
         {
             foreach (var ruolo in model.Filtro.Ruoli)
@@ -529,7 +542,7 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> EliminaLog(LogViewModel model)
     {
-        _logger.LogInformation("{0} - EliminaLog --> (IdLog: {1})", DateTime.Now.ToString("T"), model.IdLog);
+        _logger.LogInformation("{0} - EliminaLog --> (IdLog: {1} - FIltri: {2})", DateTime.Now.ToString("T"), model.IdLog, model.Filtro!.Operazione);
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
         {
@@ -547,7 +560,7 @@ public class AdminController : Controller
                 }
             }
             await _db.SaveChangesAsync();
-            return RedirectToAction("Log", "Admin", new { pageIndex = model.PageIndex, reverse = model.Reverse });
+            return RedirectToAction("Log", "Admin", new { filtro = model.Filtro, pageIndex = model.PageIndex, reverse = model.Reverse });
         }
     }
 }

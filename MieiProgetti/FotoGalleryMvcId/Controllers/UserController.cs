@@ -203,7 +203,7 @@ public class UserController : Controller
                 Alias = user!.Alias,
                 Email = user.Email,
                 Ruoli = user.Ruoli,
-                OperazioneSvolta = $"Vota immagine: \"{model.Immagine.Titolo}\"",
+                OperazioneSvolta = $"Voto immagine: \"{model.Immagine.Titolo}\"",
                 Tipologia = true   //true = UserExperience; false = Administrative
             };
             //salvo nel db
