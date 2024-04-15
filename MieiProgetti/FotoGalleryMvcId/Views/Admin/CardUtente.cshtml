@@ -48,17 +48,19 @@
             </ul>
             <div class="card-body text-center">
                 <td>
-                    @* ------------ richiamo i tasti di controllo ----------- *@
-                    @if (Model.MenuRuoli == Model.Utente.Email)
-                    {
-                        <partial name="_CheckRuoliPartial" for="@Model.Utente" />
-                    }
-                    else
-                    {
-                        <partial name="_AzioniPartial" for="@Model.Utente" />
-                        <a asp-controller="Admin" asp-action="GestioneUtenti" class="btn btn-sm btn-primary"
-                            title="Torna indietro"><i class="bi bi-arrow-return-left"></i></a>
-                    }
+                    <div class="d-flex justify-content-center">
+                        @* ------------ richiamo i tasti di controllo ----------- *@
+                        @if (Model.MenuRuoli == Model.Utente.Email)
+                        {
+                            <partial name="_CheckRuoliPartial" for="@Model.Utente" />
+                        }
+                        else
+                        {
+                            <partial name="_AzioniPartial" for="@Model.Utente" />
+                            <a asp-controller="Admin" asp-action="GestioneUtenti" class="btn btn-sm btn-primary"
+                                title="Torna indietro"><i class="bi bi-arrow-return-left"></i></a>
+                        }
+                    </div>
                 </td>
             </div>
         </div>

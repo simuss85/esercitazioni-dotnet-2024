@@ -6,7 +6,6 @@
 }
 
 <!------------------------- sezione checkbox per i ruoli ----------------------------------------->
-<div class=""></div>
 <form asp-action="GestioneRuoli" class="form-ruoli ">
     <input class="form-check-input" type="checkbox" id="chkAdmin" name="Ruoli" value="User" @(ViewData["checkedUser?"])>
     <label for="chkAdmin">User</label>
@@ -21,12 +20,13 @@
 
     @* per il corretto reindirizzamento alla pagina card o utenti*@
     <input type="hidden" name="UrlBack" value=@ViewBag.UrlBack>
+    <input type="hidden" name="Reverse" value=@ViewBag.Reverse>
     <input type="hidden" name="Id" value=@Model.Id>
 
     <div>
         <button type="submit" class="btn btn-success btn-sm" title="Salva"><i class="bi bi-floppy"></i></button>
-        <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-route-menuruoli="false" title="Annulla"><i
-                class="bi bi-x-circle"></i></a>
+        <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-route-menuruoli="false"
+            asp-route-reverse="@ViewBag.Reverse" title="Annulla"><i class="bi bi-x-circle"></i></a>
     </div>
 
 </form>

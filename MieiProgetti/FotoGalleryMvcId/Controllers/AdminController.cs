@@ -44,6 +44,9 @@ public class AdminController : Controller
         //memorizzo UrlBack in un ViewBag
         ViewBag.UrlBack = HttpContext.Request.Path;
 
+        //memorizzo reverse in un ViewBag
+        ViewBag.Reverse = reverse;
+
         //seleziono l'utene attuale
         var user = await _userManager.GetUserAsync(User);
 
@@ -128,9 +131,10 @@ public class AdminController : Controller
     /// </summary>
     /// <param name="id">Il codice identificativo dell'utente da modificare</param>
     /// <returns>La vista gestione utenti con il modello GestioneUtentiViewModel dopo la modifica dello status</returns>
-    public async Task<IActionResult> GestisciStatus(string id, string urlBack)
+    public async Task<IActionResult> GestisciStatus(string id, string urlBack, string reverse)
     {
-        _logger.LogInformation("{0} - GestisciStatus --> (IdUtente: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
+        string rev = reverse;
+        _logger.LogInformation("{0} - GestisciStatus --> (IdUtente: {1} - UrlBack: {2} - Reverse: {3})", DateTime.Now.ToString("T"), id, urlBack, reverse);
 
         //carico i dati dell'utente attuale
         var user = await _userManager.FindByIdAsync(id);
@@ -165,7 +169,7 @@ public class AdminController : Controller
         // Controlla se l'URL contiene la stringa della pagina "GestioneUtenti"
         if (urlBack.Contains("GestioneUtenti"))
         {
-            return RedirectToAction(nameof(GestioneUtenti));
+            return RedirectToAction(nameof(GestioneUtenti), new { reverse = rev });
         }
         else
         {
@@ -175,9 +179,11 @@ public class AdminController : Controller
 
     }
 
-    public async Task<IActionResult> MenuRuoli(string id, string urlBack)
+    public async Task<IActionResult> MenuRuoli(string id, string urlBack, string reverse)
     {
-        _logger.LogInformation("{0} - MenuRuoli --> (IdUtente: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), id, urlBack);
+        string rev = reverse;
+
+        _logger.LogInformation("{0} - MenuRuoli --> (IdUtente: {1} - UrlBack: {2}- Reverse: {3})", DateTime.Now.ToString("T"), id, urlBack, reverse);
 
         //passo il valore per la partial
 
@@ -190,7 +196,7 @@ public class AdminController : Controller
         // Controlla se l'URL contiene la stringa della pagina "CardUtente"
         if (urlBack.Contains("GestioneUtenti"))
         {
-            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = user.Email });
+            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = user.Email, reverse = rev });
         }
         else
         {
@@ -381,7 +387,7 @@ public class AdminController : Controller
         // Controlla se l'URL contiene la stringa della pagina "CardUtente"
         if (model.UrlBack!.Contains("GestioneUtenti"))
         {
-            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = "" });
+            return RedirectToAction(nameof(GestioneUtenti), new { menuRuoli = "", reverse = model.Reverse });
         }
         else
         {

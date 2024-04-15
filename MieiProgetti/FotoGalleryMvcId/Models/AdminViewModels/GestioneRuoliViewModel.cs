@@ -13,4 +13,7 @@ public class GestioneRuoliViewModel
 
     [BindProperty]
     public string? UrlBack { get; set; }
+
+    [BindProperty]
+    public string? Reverse { get; set; }
 }

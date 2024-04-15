@@ -5,6 +5,7 @@
     ViewData["icona"] = Model.Status == false ? "bi-person-check-fill" : "bi-person-fill-slash";
 }
 <!------------------------------ gestisco opzioni utente master -------------------------------------->
+
 @if (Model.Ruoli.Contains("Master"))
 {
     <a class="btn btn-sm btn-warning disabled">
@@ -21,10 +22,12 @@ else
 {
     <!------------------------------ creo i tasti per la gestione utente ------------------------------------>
     <a class="btn btn-sm @ViewData["btn"]" asp-controller="Admin" asp-action="GestisciStatus" asp-route-id="@Model.Id"
-    asp-route-urlback="@ViewBag.UrlBack" title="@ViewData["messaggio"]"><i class="bi @ViewData["icona"]"></i>
+    asp-route-reverse="@ViewBag.Reverse" asp-route-urlback="@ViewBag.UrlBack" title="@ViewData["messaggio"]"><i
+        class="bi @ViewData["icona"]"></i>
 </a>
     <a class="btn btn-sm btn-info" asp-controller="Admin" asp-action="MenuRuoli" asp-route-id="@Model.Id"
-    asp-route-urlback="@ViewBag.UrlBack" title="Ruoli"><i class="bi bi-people-fill"></i>
+    asp-route-urlback="@ViewBag.UrlBack" asp-route-reverse="@ViewBag.Reverse" title="Ruoli"><i
+        class="bi bi-people-fill"></i>
 </a>
     <a class="btn btn-sm btn-danger" asp-controller="Admin" asp-action="EliminaUtente" asp-route-id="@Model.Id"
     title="Elimina"><i class="bi bi-trash3"></i>
