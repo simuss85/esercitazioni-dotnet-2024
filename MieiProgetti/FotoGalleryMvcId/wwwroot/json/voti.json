@@ -628,5 +628,15 @@
     "Commento": "Schifo",
     "Visibile": true,
     "Moderato": true
+  },
+  {
+    "Id": 64,
+    "Nome": "s.ussi@yahoo.it",
+    "ImmagineId": 14,
+    "Stelle": 5.0,
+    "Data": "2024-04-15T00:00:00+02:00",
+    "Commento": "asdashdha",
+    "Visibile": true,
+    "Moderato": false
   }
 ]

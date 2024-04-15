@@ -38,7 +38,7 @@
                     }
                 </th>
 
-                <th>Ruolo
+                <th class="d-none d-lg-table-cell">Ruolo
                     @if (Model.Reverse != "ruoloOn")
                     {
                         <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="ruoloOn">
@@ -64,7 +64,7 @@
                     }
                 </th>
 
-                <th>Status
+                <th class="d-none d-lg-table-cell">Status
                     @if (Model.Reverse != "statusOn")
                     {
                         <a class="voto" asp-controller="Admin" asp-action="GestioneUtenti" asp-route-reverse="statusOn">
@@ -94,11 +94,11 @@
                             asp-route-urlback="@ViewBag.UrlBack">@u.Alias</a>
                     </td>
 
-                    <td>@u.Ruoli</td>
+                    <td class="d-none d-lg-table-cell">@u.Ruoli</td>
 
                     <td>@u.Email</td>
 
-                    <td class="@textColor">@status</td>
+                    <td class=" d-none d-lg-table-cell @textColor"> @status</td>
 
                     <td>
                         @* ------------ richiamo i tasti di controllo ----------- *@

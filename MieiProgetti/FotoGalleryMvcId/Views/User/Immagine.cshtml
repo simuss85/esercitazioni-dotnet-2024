@@ -128,15 +128,25 @@
                                 stelle--;
                             }
                         </h5>
-                        @if (voto.Visibile)
+
+                        <!------------------ sezione commenti --------------------->
+                        @if (voto.Moderato)
                         {
-                            <p class="card-text">@voto.Commento</p>
+                            @if (voto.Visibile)
+                            {
+                                <p class="card-text">@voto.Commento</p>
+                            }
+                            else
+                            {
+                                <p class="card-text visibile">Commento censurato</p>
+
+                            }
                         }
                         else
                         {
-                            <p class="card-text moderato">Commento censurato</p>
-
+                            <p class="card-text moderato">... in attesa di moderazione ...</p>
                         }
+
 
 
                     </div>

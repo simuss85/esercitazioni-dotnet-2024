@@ -35,7 +35,8 @@ html {
   }
 }
 
-/* ---------------------------------------------------------- */
+/* __________________________________________________*/
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -130,9 +131,14 @@ label.star:before {
 
 /*-------- gestione commenti ----------- */
 
-.moderato {
+.visibile {
   color: red;
   background-color: rgba(236, 123, 123, 0.404);
+}
+
+.moderato {
+  color: rgb(255, 84, 84);
+  background-color: rgba(255, 166, 0, 0.315);
 }
 
 /*---------- index immagini ----------------*/
