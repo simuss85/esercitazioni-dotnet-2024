@@ -1,6 +1,20 @@
 @model LogViewModel
 @{
     ViewData["Title"] = "Gestione log";
+    ViewData["show"] = ViewData.ModelState.ContainsKey("MioForm") ? "" : ""; //TO DO da sistemare
+
+    //gestione checkbox ruoli
+    string ruoliString = "";
+    if (Model.Filtro!.Ruoli != null)
+    {
+        //per passare la lista alle pagine
+        ruoliString = string.Join(", ", Model.Filtro.Ruoli);
+
+        //per la gestione degli elementi gia selezionati
+        ViewData["checkedUser?"] = Model.Filtro.Ruoli.Contains("User") ? "checked" : "";
+        ViewData["checkedAdmin?"] = Model.Filtro.Ruoli.Contains("Admin") ? "checked" : "";
+        ViewData["checkedMod?"] = Model.Filtro.Ruoli.Contains("Moderatore") ? "checked" : "";
+    }
 }
 <div class="mx-5">
     <!-------------------------- titolo della pagina ---------------------------->
@@ -8,20 +22,99 @@
         <h1 class="display-5">@ViewData["Title"]</h1>
     </div>
 
-    <!---------------------- tabella di modifica ---------------->
+    <!----------------------- accordion di ricerca -------------------------->
+    <div class="accordion m-0 p-0 mb-4 w-50 float-end" id="accordionExample">
+        <div class="accordion-item border-0">
+            <h2 class="accordion-header float-end">
+                <button class="accordion-button m-0 p-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="bi bi-search"></i>
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse @ViewData["show"]"
+                data-bs-parent="#accordionExample">
+                <h5 class="text-center">Ricerca:</h5>
 
-    <table class="table text-center table-striped align-middle mt-5">
+                <!------------------------ form di ricerca ---------------------->
+                <form method="get">
+                    <!-- Id -->
+                    <div class="form-group w-25">
+                        <label asp-for="Filtro!.Id"></label>
+                        <input type="number" asp-for="Filtro!.Id" class="form-control" />
+                    </div>
+
+                    <!-- Data -->
+                    <div class="form-group row">
+                        <!--Data min-->
+                        <div class="col-6">
+                            <label asp-for="Filtro!.DataInizio"></label>
+                            <input type="datetime-local" asp-for="Filtro!.DataInizio" class="form-control" />
+                        </div>
+                        <!--Data max-->
+                        <div class="col-6">
+                            <label asp-for="Filtro!.DataFine"></label>
+                            <input type="datetime-local" asp-for="Filtro!.DataFine" class="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- Alias -->
+                    <div class="form-group w-25">
+                        <label asp-for="Filtro!.Alias"></label>
+                        <input type="text" asp-for="Filtro!.Alias" class="form-control" />
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group w-50">
+                        <label asp-for="Filtro!.Email"></label>
+                        <input type="text" asp-for="Filtro!.Email" class="form-control" />
+                    </div>
+
+                    <!-- Ruoli -->
+                    <div class="form-group w-50">
+                        <p class="p-0">Seleziona Ruoli:</p>
+                        <label for="chkUser">User</label>
+                        <input id="chkUser" type="checkbox" name="Filtro.Ruoli" value="User"
+                        @(ViewData["checkedUser?"]) />
+
+                        <label for="chkAdmin">Admin</label>
+                        <input id="chkAdmin" type="checkbox" name="Filtro.Ruoli" value="Admin"
+                        @(ViewData["checkedAdmin?"]) />
+
+                        <label for="chkMod">Moderatore</label>
+                        <input id="chkMod" type="checkbox" name="Filtro.Ruoli" value="Moderatore"
+                        @(ViewData["checkedMod?"]) />
+
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-primary float-end m-2">
+                        Filtra
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------- tabella di modifica ---------------->
+    <table class="table text-center table-striped align-middle mt-3">
         <thead>
             <tr>
                 <th>Id
                     @if (Model.Reverse != "idOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="idOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -29,12 +122,20 @@
                 <th>Data
                     @if (Model.Reverse != "dataOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="dataOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -44,12 +145,20 @@
                 <th>Alias
                     @if (Model.Reverse != "aliasOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="aliasOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -57,12 +166,20 @@
                 <th>Email
                     @if (Model.Reverse != "emailOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="emailOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -70,12 +187,20 @@
                 <th>Ruolo
                     @if (Model.Reverse != "ruoloOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="ruoloOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -83,12 +208,20 @@
                 <th>Operazione
                     @if (Model.Reverse != "operazioneOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="operazioneOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -96,12 +229,20 @@
                 <th>Tipologia
                     @if (Model.Reverse != "tipologiaOn")
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOn">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOn"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-down"></i></a>
                     }
                     else
                     {
-                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOff">
+                        <a class="voto" asp-controller="Admin" asp-action="Log" asp-route-reverse="tipologiaOff"
+                            asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">
                             <i class="bi bi-caret-up"></i></a>
                     }
                 </th>
@@ -142,18 +283,19 @@
 
                 </tr>
             }
-
         </tbody>
-
     </table>
-
 
     <!---------------------------- tasti paginazione -------------------------->
     <nav class="mt-5" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             <li class="page-item">
                 <a class="page-link" aria-label="Previous" asp-controller="Admin" asp-action="Log"
-                    asp-route-pageindex="1" asp-route-reverse="@Model.Reverse">
+                    asp-route-pageindex="1" asp-route-reverse="@Model.Reverse"
+                    asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
+                    asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                    asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                    asp-route-ruoli="@ruoliString">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
@@ -162,18 +304,32 @@
                 if (i == Model.PageIndex) //indica la pagina attiva
                 {
                     <li class="page-item active"><a class="page-link" asp-controller="Admin" asp-action="Log"
-                            asp-route-pageindex="@i" asp-route-reverse="@Model.Reverse">@i</a></li>
+                            asp-route-pageindex="@i" asp-route-reverse="@Model.Reverse"
+                            asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">@i</a>
+                    </li>
                 }
                 else
                 {
                     <li class="page-item"><a class="page-link" asp-controller="Admin" asp-action="Log" asp-route-pageindex="@i"
-                            asp-route-reverse="@Model.Reverse">@i</a></li>
+                            asp-route-reverse="@Model.Reverse"
+                            asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
+                            asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                            asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                            asp-route-ruoli="@ruoliString">@i</a>
+                    </li>
                 }
 
             }
             <li class="page-item">
                 <a class="page-link" aria-label="Next" asp-controller="Admin" asp-action="Log"
-                    asp-route-pageindex="@Model.NumeroPagine" asp-route-reverse="@Model.Reverse">
+                    asp-route-pageindex="@Model.NumeroPagine" asp-route-reverse="@Model.Reverse"
+                    asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
+                    asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
+                    asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
+                    asp-route-ruoli="@ruoliString">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

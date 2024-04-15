@@ -1,11 +1,14 @@
+using System.IO.Compression;
 using FotoGalleryMvcId.Data;
 using FotoGalleryMvcId.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace FotoGalleryMvcId.Controllers;
 
@@ -52,7 +55,7 @@ public class AdminController : Controller
             ElementiPerPagina = 10,
             PageIndex = pageIndex,
             Reverse = reverse,
-            MenuRuoli = menuRuoli
+            MenuRuoli = menuRuoli,
         };
 
         //rimuovo l'utente attuale dalla lista
@@ -388,19 +391,65 @@ public class AdminController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Log(int pageIndex = 1, string reverse = "idOff")
+    public async Task<IActionResult> Log(FiltroLogModel filtro, string ruoliString, int pageIndex = 1, string reverse = "idOff")
     {
+        if (!string.IsNullOrEmpty(ruoliString))
+        {
+            string[] ruoli = ruoliString.Split(",");
+            foreach (var ruolo in ruoli)
+            {
+                filtro.Ruoli!.Add(ruolo);
+            }
+        }
+
         // creo il modello per gestire la view
         var model = new LogViewModel
         {
             ElementiPerPagina = 15,
             PageIndex = pageIndex,
             Reverse = reverse,
-            Logs = await _db.Logs.ToListAsync()
+            Logs = await _db.Logs.ToListAsync(),
+            Filtro = filtro
         };
 
-        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2})", DateTime.Now.ToString("T"), pageIndex, reverse);
+        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2} - [Filtri --> Id: {3}, DataInizio: {4}, DataFine: {5}], Alias: {6}, Email: {7}, Ruoli: {8})",
+                DateTime.Now.ToString("T"), pageIndex, reverse, model.Filtro.Id, model.Filtro.DataInizio, model.Filtro.DataFine, model.Filtro.Alias, model.Filtro.Email, model.Filtro.Ruoli);
 
+        #region Filtri
+        //gestione dei filtri: Id
+        if (model.Filtro.Id > 0)
+        {
+
+            model.Logs = model.Logs.Where(l => l.Id == model.Filtro.Id);
+        }
+
+        //gestione dei filtri: Alias
+        if (!string.IsNullOrEmpty(model.Filtro.Alias))
+        {
+            model.Logs = model.Logs.Where(l => l.Alias!.Contains(model.Filtro.Alias));
+        }
+
+        //gestione dei filtri: Alias
+        if (!string.IsNullOrEmpty(model.Filtro.Email))
+        {
+            model.Logs = model.Logs.Where(l => l.Email!.Contains(model.Filtro.Email));
+        }
+
+        if (model.Filtro.Ruoli != null)
+        {
+            foreach (var ruolo in model.Filtro.Ruoli)
+            {
+                model.Logs = model.Logs.Where(l => l.Ruoli!.Contains(ruolo));
+            }
+        }
+
+        //gestione dei filtri: Date
+        //attento all'orario, si deve aggiungere 1 giorno alla data
+        model.Logs = model.Logs.Where(l => (l.DataOperazione > model.Filtro.DataInizio) && (l.DataOperazione < model.Filtro.DataFine.AddDays(1)));
+
+        #endregion
+
+        #region Reverse
         // //gestione ordinameneto tabella
         switch (reverse)
         {
@@ -464,6 +513,7 @@ public class AdminController : Controller
                 model.Logs = model.Logs.OrderByDescending(u => u.Id);
                 break;
         }
+        #endregion
 
         //paginazione dei logs
         model.NumeroPagine = (int)Math.Ceiling((double)model.Logs.Count() / model.ElementiPerPagina);

@@ -14,4 +14,9 @@ public class LogViewModel
     public int? PageIndex { get; set; }
     public int ElementiPerPagina { get; set; }
     public string? Reverse { get; set; }    //gestisce filtri di ordinamento
+
+    //per i filtri
+    [BindProperty]
+    public FiltroLogModel? Filtro { get; set; }
+
 }
