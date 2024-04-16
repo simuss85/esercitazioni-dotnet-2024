@@ -536,8 +536,8 @@
     "Stelle": 5.0,
     "Data": "2024-04-09T00:00:00+02:00",
     "Commento": "rrtreter",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 55,
@@ -646,6 +646,16 @@
     "Stelle": 3.0,
     "Data": "2024-04-16T00:00:00+02:00",
     "Commento": "cvxcvx",
+    "Visibile": true,
+    "Moderato": true
+  },
+  {
+    "Id": 66,
+    "Nome": "carlo@gmail.com",
+    "ImmagineId": 2,
+    "Stelle": 4.0,
+    "Data": "2024-04-16T00:00:00+02:00",
+    "Commento": "fdsfdfs",
     "Visibile": true,
     "Moderato": true
   }

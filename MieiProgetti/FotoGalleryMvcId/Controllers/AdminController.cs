@@ -473,7 +473,7 @@ public class AdminController : Controller
         }
 
         //gestione dei filtri: Date
-        model.Logs = model.Logs.Where(l => (l.DataOperazione > model.Filtro.DataInizio) && (l.DataOperazione < model.Filtro.DataFine));
+        model.Logs = model.Logs.Where(l => (l.DataOperazione > model.Filtro.DataInizio) && (l.DataOperazione < model.Filtro.DataFine.AddDays(1)));
 
         if (filtroAttivo)
         {
