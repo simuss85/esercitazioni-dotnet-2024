@@ -105,13 +105,13 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    StatusMessage = "Errore imprevisto durante il tentativo di impostare il numero di telefono.";
                     return RedirectToPage();
                 }
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Il tuo profilo è stato aggiornato";
             return RedirectToPage();
         }
     }

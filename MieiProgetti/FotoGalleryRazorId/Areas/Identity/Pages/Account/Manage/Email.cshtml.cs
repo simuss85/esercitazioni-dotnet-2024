@@ -125,14 +125,14 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Conferma la tua emali",
+                    $"Per favore conferma il tuo account tramite <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+                StatusMessage = "Link di conferma per modificare l'email inviata. Si prega di controllare la tua email.";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "La tua email è rimasta invariata.";
             return RedirectToPage();
         }
 
@@ -161,10 +161,10 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                "Conferma la tua email",
+                $"Per favore conferma il tuo account tramite <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Email di verifica inviata. Si prega di controllare la tua email.";
             return RedirectToPage();
         }
     }

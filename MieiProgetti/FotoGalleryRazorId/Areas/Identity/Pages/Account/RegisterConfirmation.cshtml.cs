@@ -55,7 +55,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                return NotFound($"Unable to load user with email '{email}'.");
+                return NotFound($"Impossibile caricare l'utente con l'e-mail '{email}'.");
             }
 
             Email = email;

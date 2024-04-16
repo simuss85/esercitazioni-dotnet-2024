@@ -59,7 +59,7 @@ namespace FotoGalleryRazorId.Areas.Identity.Pages.Account.Manage
             _logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
+            StatusMessage = "La chiave dell'app di autenticazione è stata reimpostata, dovrai configurare la tua app di autenticazione utilizzando la nuova chiave.";
 
             return RedirectToPage("./EnableAuthenticator");
         }
