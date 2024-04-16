@@ -399,6 +399,9 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> Log(FiltroLogModel filtro, string ruoliJoin, int pageIndex = 1, string reverse = "idOff")
     {
+        //per il show dei filtri
+        bool filtroAttivo = false;
+
         // creo il modello per gestire la view
         var model = new LogViewModel
         {
@@ -427,37 +430,42 @@ public class AdminController : Controller
         //gestione dei filtri: Id
         if (model.Filtro.Id > 0)
         {
-
+            filtroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Id == model.Filtro.Id);
         }
 
         //gestione dei filtri: Alias
         if (!string.IsNullOrEmpty(model.Filtro.Alias))
         {
+            filtroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Alias!.Contains(model.Filtro.Alias));
         }
 
         //gestione dei filtri: Email
         if (!string.IsNullOrEmpty(model.Filtro.Email))
         {
+            filtroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Email!.Contains(model.Filtro.Email));
         }
 
         //gestione dei filtri: Tipologia
         if (model.Filtro.Tipologia != null)
         {
+            filtroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Tipologia! == model.Filtro.Tipologia);
         }
 
         //gestione dei filtri: Operazione
         if (!string.IsNullOrEmpty(model.Filtro.Operazione))
         {
+            filtroAttivo = true;
             model.Logs = model.Logs.Where(l => l.OperazioneSvolta!.Contains(model.Filtro.Operazione));
         }
 
         //gestione dei filtri: Ruoli
         if (model.Filtro.Ruoli != null)
         {
+            filtroAttivo = true;
             foreach (var ruolo in model.Filtro.Ruoli)
             {
                 model.Logs = model.Logs.Where(l => l.Ruoli!.Contains(ruolo));
@@ -465,9 +473,17 @@ public class AdminController : Controller
         }
 
         //gestione dei filtri: Date
-        //attento all'orario, si deve aggiungere 1 giorno alla data
-        model.Logs = model.Logs.Where(l => (l.DataOperazione > model.Filtro.DataInizio) && (l.DataOperazione < model.Filtro.DataFine.AddDays(1)));
+        model.Logs = model.Logs.Where(l => (l.DataOperazione > model.Filtro.DataInizio) && (l.DataOperazione < model.Filtro.DataFine));
 
+        if (filtroAttivo)
+        {
+            ViewBag.Show = "show";
+        }
+        else
+        {
+
+            ViewBag.Show = "";
+        }
         #endregion
 
         #region Reverse
