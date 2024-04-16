@@ -406,8 +406,12 @@ public class AdminController : Controller
             PageIndex = pageIndex,
             Reverse = reverse,
             Logs = await _db.Logs.ToListAsync(),
-            Filtro = filtro
+            Filtro = filtro,
+            UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString
         };
+
+        //memorizzo UrlBack in un ViewBag
+        ViewBag.UrlBack = model.UrlBack;
 
         //traduco ruoliJoin in List
         if (!string.IsNullOrEmpty(ruoliJoin))
@@ -416,8 +420,8 @@ public class AdminController : Controller
             model.Filtro.Ruoli = ruoliSplit.ToList();
         }
 
-        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2} - [Filtri --> Id: {3}, DataInizio: {4}, DataFine: {5}], Alias: {6}, Email: {7}, Ruoli: {8}, Tipologia: {9}, Operazione: {10})",
-                DateTime.Now.ToString("T"), pageIndex, reverse, model.Filtro.Id, model.Filtro.DataInizio, model.Filtro.DataFine, model.Filtro.Alias, model.Filtro.Email, model.Filtro.Ruoli, model.Filtro.Tipologia, model.Filtro.Operazione);
+        _logger.LogInformation("{0} - Logs --> (PageIndex: {1} - Reverse: {2} - [Filtri --> Id: {3}, DataInizio: {4}, DataFine: {5}], Alias: {6}, Email: {7}, Ruoli: {8}, Tipologia: {9}, Operazione: {10}] - UrlBack: {11})",
+                DateTime.Now.ToString("T"), pageIndex, reverse, model.Filtro.Id, model.Filtro.DataInizio, model.Filtro.DataFine, model.Filtro.Alias, model.Filtro.Email, model.Filtro.Ruoli, model.Filtro.Tipologia, model.Filtro.Operazione, model.UrlBack);
 
         #region Filtri
         //gestione dei filtri: Id
@@ -542,7 +546,7 @@ public class AdminController : Controller
     [HttpPost]
     public async Task<IActionResult> EliminaLog(LogViewModel model)
     {
-        _logger.LogInformation("{0} - EliminaLog --> (IdLog: {1} - FIltri: {2})", DateTime.Now.ToString("T"), model.IdLog, model.Filtro!.Operazione);
+        _logger.LogInformation("{0} - EliminaLog --> (IdLog: {1} - UrlBack: {2})", DateTime.Now.ToString("T"), model.IdLog, model.UrlBack);
         //assicura che i dati inviati siano validi, altrimenti ricarica la pagina
         if (!ModelState.IsValid)
         {
@@ -560,7 +564,16 @@ public class AdminController : Controller
                 }
             }
             await _db.SaveChangesAsync();
-            return RedirectToAction("Log", "Admin", new { filtro = model.Filtro, pageIndex = model.PageIndex, reverse = model.Reverse });
+
+            if (!string.IsNullOrEmpty(model.UrlBack))
+            {
+                return LocalRedirect(model.UrlBack);
+            }
+            else
+            {
+                return RedirectToAction("Log", "Admin", new { filtro = model.Filtro, pageIndex = model.PageIndex, reverse = model.Reverse });
+            }
+
         }
     }
 }
