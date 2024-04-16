@@ -11,6 +11,12 @@
         ViewData["checkedAdmin?"] = Model.Filtro.Ruoli.Contains("Admin") ? "checked" : "";
         ViewData["checkedMod?"] = Model.Filtro.Ruoli.Contains("Moderatore") ? "checked" : "";
     }
+
+    //per la paginazione
+    int paginePerVisualizzare = 10;
+    int pagineDaVisualizzare = Math.Min(paginePerVisualizzare, Model.NumeroPagine);
+    int limiteInferiore = Math.Max(1, Model.PageIndex - (paginePerVisualizzare / 2));
+    int limiteSuperiore = Math.Min(Model.NumeroPagine, limiteInferiore + paginePerVisualizzare - 1);
 }
 <div class="container tabella-font-size">
     <!-------------------------- titolo della pagina ---------------------------->
@@ -510,8 +516,11 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            @for (int i = 1; i <= Model.NumeroPagine; i++)
+            @* se numero pagine è 23, conta = 3 *@
+            @for (int i = limiteInferiore; i <= limiteSuperiore; i++)
+
             {
+
                 if (i == Model.PageIndex) //indica la pagina attiva
                 {
                     <li class="page-item active"><a class="page-link" asp-controller="Admin" asp-action="Log"
@@ -534,12 +543,11 @@
                             asp-route-operazione="@Model.Filtro.Operazione">@i</a>
                     </li>
                 }
-
             }
             <li class="page-item">
-                <a class="page-link" aria-label="Next" asp-controller="Admin" asp-action="Log"
+                <a class="page-link" aria-label="Previous" asp-controller="Admin" asp-action="Log"
                     asp-route-pageindex="@Model.NumeroPagine" asp-route-reverse="@Model.Reverse"
-                    asp-route-datainizio="@Model.Filtro.DataInizio.ToString("yyyy-MM-dd")"
+                    asp-route-datainizio="@Model.Filtro!.DataInizio.ToString("yyyy-MM-dd")"
                     asp-route-datafine="@Model.Filtro.DataFine.ToString("yyyy-MM-dd")"
                     asp-route-alias="@Model.Filtro.Alias" asp-route-email="@Model.Filtro.Email"
                     asp-route-ruolijoin="@ViewBag.Ruoli" asp-route-tipologia="@Model.Filtro.Tipologia"
