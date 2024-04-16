@@ -1381,3 +1381,30 @@ Argomenti:
 - Progetto Mvc con Identity Framework: giorno 4.
 
 </details>
+
+<!-- ******************************************  15 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>15 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Progetto Mvc con Identity Framework: giorno 5.
+
+</details>
+
+<!-- ******************************************  16 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>16 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- Progetto Mvc con Identity Framework: giorno 6.
+
+</details>
+
+<!-- ******************************************  17 apr 2024   ****************************************** -->
+<details>
+    <summary><h3>17 apr 2024 ✔️</h3></summary>
+
+Argomenti:
+- FINE!!!
+
+</details>
