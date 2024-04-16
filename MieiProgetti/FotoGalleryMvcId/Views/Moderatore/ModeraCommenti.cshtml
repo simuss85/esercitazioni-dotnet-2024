@@ -54,6 +54,10 @@
                         }
                     </th>
 
+                    <th>Id_Immagine
+
+                    </th>
+
                     <th>Data inserimento
                         @if (Model.Reverse != "dataOn")
                         {
@@ -133,6 +137,7 @@
                             </div>
 
                         </td>
+                        <td><a asp-controller="User" asp-action="Immagine" asp-route-id="@voto.ImmagineId" asp-route-urlback="@ViewBag.UrlBack">@voto.ImmagineId</a></td>
                         <td>@voto.Data.ToString("d")</td>
                         <td class="check-td">
 

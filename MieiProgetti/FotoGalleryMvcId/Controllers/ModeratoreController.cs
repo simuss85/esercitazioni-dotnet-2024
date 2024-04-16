@@ -259,6 +259,9 @@ public class ModeratoreController : Controller
     [HttpGet]
     public IActionResult ModeraCommenti(int pageIndex = 1, string reverse = "idOff")
     {
+        //salvo url per il ritorno dalle immagini
+        ViewBag.UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString;
+
         // creo il modello per gestire la view
         var model = new ModeraCommentiViewModel
         {
