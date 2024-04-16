@@ -4,7 +4,7 @@
     "Path": "/img/img_01.jpg",
     "Titolo": "Immagine 1",
     "Voto": 2.5,
-    "NumeroVoti": 22,
+    "NumeroVoti": 23,
     "Autore": "Autore 1",
     "Data": "2024-02-23T00:00:00",
     "Categoria": "Paesaggi"
@@ -720,16 +720,6 @@
     "Categoria": "Animali"
   },
   {
-    "Id": 89,
-    "Path": "https://cuccioletti.it/cdn/shop/articles/gatto-comportamento-capire-gesti-smorfie-comportamenti-gatti_800x.jpg?v=1648465263",
-    "Titolo": "Titolo 89",
-    "Voto": 4.0,
-    "NumeroVoti": 1,
-    "Autore": "Autore 89",
-    "Data": "2024-04-05T10:30:26.496196+02:00",
-    "Categoria": "Animali"
-  },
-  {
     "Id": 90,
     "Path": "https://www.viridea.it/wp-content/uploads/2019/06/consiglio-cosa-fare-casa-arriva-gatto.jpg",
     "Titolo": "Gatto",
@@ -772,7 +762,7 @@
   {
     "Id": 98,
     "Path": "https://i.pinimg.com/236x/fa/bb/12/fabb1251c04d1d4e826e24524df0095c.jpg",
-    "Titolo": "Ganzo",
+    "Titolo": "Ganzo2",
     "Voto": 0.0,
     "NumeroVoti": 0,
     "Autore": "Autore 98",
