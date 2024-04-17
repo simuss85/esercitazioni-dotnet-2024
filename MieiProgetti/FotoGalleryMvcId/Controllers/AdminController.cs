@@ -158,7 +158,7 @@ public class AdminController : Controller
             Email = user.Email,
             Ruoli = user.Ruoli,
             OperazioneSvolta = $"Status modificato: utente {status}",
-            Tipologia = true   //true = UserExperience; false = Administrative
+            Tipologia = false   //true = UserExperience; false = Administrative
         };
         //salvo nel db
         await _db.Logs.AddAsync(log);
@@ -250,7 +250,7 @@ public class AdminController : Controller
                 Email = user.Email,
                 Ruoli = user.Ruoli,
                 OperazioneSvolta = $"Elimina utente: utente {user.Email}",
-                Tipologia = true   //true = UserExperience; false = Administrative
+                Tipologia = false   //true = UserExperience; false = Administrative
             };
             //salvo nel db
             await _db.Logs.AddAsync(log);
