@@ -1,6 +1,12 @@
 @model GestisciImmaginiViewModel
 @{
     ViewData["Title"] = "Gestisci Immagini";
+
+    //per la paginazione dinamica
+    int paginePerVisualizzare = 10;
+    int pagineDaVisualizzare = Math.Min(paginePerVisualizzare, Model.NumeroPagine);
+    int limiteInferiore = Math.Max(1, Model.PageIndex - (paginePerVisualizzare / 2));
+    int limiteSuperiore = Math.Min(Model.NumeroPagine, limiteInferiore + paginePerVisualizzare - 1);
 }
 
 <div class="container tabella-font-size">
@@ -166,7 +172,7 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-        @for (int i = 1; i <= Model.NumeroPagine; i++)
+        @for (int i = limiteInferiore; i <= limiteSuperiore; i++)
         {
             if (i == Model.PageIndex) //indica la pagina attiva
             {

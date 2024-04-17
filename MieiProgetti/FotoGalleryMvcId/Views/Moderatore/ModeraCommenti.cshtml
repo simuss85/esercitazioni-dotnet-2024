@@ -1,6 +1,12 @@
 @model ModeraCommentiViewModel
 @{
     ViewData["Title"] = "Moderatore";
+
+    //per la paginazione dinamica
+    int paginePerVisualizzare = 10;
+    int pagineDaVisualizzare = Math.Min(paginePerVisualizzare, Model.NumeroPagine);
+    int limiteInferiore = Math.Max(1, Model.PageIndex - (paginePerVisualizzare / 2));
+    int limiteSuperiore = Math.Min(Model.NumeroPagine, limiteInferiore + paginePerVisualizzare - 1);
 }
 
 <div class="container tabella-font-size">
@@ -176,9 +182,9 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            @for (int i = 1; i <= Model.NumeroPagine; i++)
+            @for (int i = limiteInferiore; i <= limiteSuperiore; i++)
             {
-                if (i == Model.PageIndex || (i == 1) && Model.PageIndex == null) //indica la pagina attiva
+                if (i == Model.PageIndex) //indica la pagina attiva
                 {
                     <li class="page-item active"><a class="page-link" asp-controller="Moderatore" asp-action="ModeraCommenti" asp-route-pageindex="@i" asp-route-reverse="@Model.Reverse">@i</a></li>
                 }

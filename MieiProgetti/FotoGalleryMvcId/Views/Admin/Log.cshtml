@@ -12,7 +12,7 @@
         ViewData["checkedMod?"] = Model.Filtro.Ruoli.Contains("Moderatore") ? "checked" : "";
     }
 
-    //per la paginazione
+    //per la paginazione dinamica
     int paginePerVisualizzare = 10;
     int pagineDaVisualizzare = Math.Min(paginePerVisualizzare, Model.NumeroPagine);
     int limiteInferiore = Math.Max(1, Model.PageIndex - (paginePerVisualizzare / 2));
