@@ -263,6 +263,12 @@
                     <button type="submit" class="btn btn-sm btn-primary float-end m-2">
                         Filtra
                     </button>
+                    @if (ViewBag.Show == "show")
+                    {
+                        <a class="btn btn-sm btn-danger float-end m-2" asp-action="Log" asp-controller="Admin"
+                            asp-route-pageindex="@Model.NumeroPagine" asp-route-reverse="@Model.Reverse">Reset</a>
+                    }
+
                 </form>
 
             </div>

@@ -808,5 +808,35 @@
     "Autore": "Autore 102",
     "Data": "2024-04-17T09:38:03.3652898+02:00",
     "Categoria": "Persone"
+  },
+  {
+    "Id": 103,
+    "Path": "https://media.istockphoto.com/id/467923438/it/foto/divertente-cane-si-inclina-testa-davanti-barn.jpg?s=612x612&w=0&k=20&c=S7PN2i2sNFlBK3Qoja3c3vKrFGRkmB_qWeUme_CWA0I=",
+    "Titolo": "Titolo 103",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 103",
+    "Data": "2024-04-17T09:54:37.101318+02:00",
+    "Categoria": "Cibo"
+  },
+  {
+    "Id": 104,
+    "Path": "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpeg",
+    "Titolo": "Titolo 104",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 104",
+    "Data": "2024-04-17T09:54:41.314889+02:00",
+    "Categoria": "Sport"
+  },
+  {
+    "Id": 105,
+    "Path": "https://www.shutterstock.com/image-photo/happy-puppy-welsh-corgi-14-600nw-2270841247.jpeg",
+    "Titolo": "Titolo 105",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 105",
+    "Data": "2024-04-17T09:54:51.7832104+02:00",
+    "Categoria": "Sport"
   }
 ]

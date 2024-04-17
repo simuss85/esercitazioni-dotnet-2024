@@ -399,8 +399,6 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> Log(FiltroLogModel filtro, string ruoliJoin, int pageIndex = 1, string reverse = "idOff")
     {
-        //per il show dei filtri
-        bool filtroAttivo = false;
 
         // creo il modello per gestire la view
         var model = new LogViewModel
@@ -410,7 +408,9 @@ public class AdminController : Controller
             Reverse = reverse,
             Logs = await _db.Logs.ToListAsync(),
             Filtro = filtro,
-            UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString
+            UrlBack = HttpContext.Request.Path + HttpContext.Request.QueryString,
+            FiltroAttivo = false //per il show dei filtri
+
         };
 
         //memorizzo UrlBack in un ViewBag
@@ -430,42 +430,42 @@ public class AdminController : Controller
         //gestione dei filtri: Id
         if (model.Filtro.Id > 0)
         {
-            filtroAttivo = true;
+            model.FiltroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Id == model.Filtro.Id);
         }
 
         //gestione dei filtri: Alias
         if (!string.IsNullOrEmpty(model.Filtro.Alias))
         {
-            filtroAttivo = true;
+            model.FiltroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Alias!.Contains(model.Filtro.Alias));
         }
 
         //gestione dei filtri: Email
         if (!string.IsNullOrEmpty(model.Filtro.Email))
         {
-            filtroAttivo = true;
+            model.FiltroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Email!.Contains(model.Filtro.Email));
         }
 
         //gestione dei filtri: Tipologia
         if (model.Filtro.Tipologia != null)
         {
-            filtroAttivo = true;
+            model.FiltroAttivo = true;
             model.Logs = model.Logs.Where(l => l.Tipologia! == model.Filtro.Tipologia);
         }
 
         //gestione dei filtri: Operazione
         if (!string.IsNullOrEmpty(model.Filtro.Operazione))
         {
-            filtroAttivo = true;
+            model.FiltroAttivo = true;
             model.Logs = model.Logs.Where(l => l.OperazioneSvolta!.Contains(model.Filtro.Operazione));
         }
 
         //gestione dei filtri: Ruoli
         if (model.Filtro.Ruoli != null)
         {
-            filtroAttivo = true;
+            model.FiltroAttivo = true;
             foreach (var ruolo in model.Filtro.Ruoli)
             {
                 model.Logs = model.Logs.Where(l => l.Ruoli!.Contains(ruolo));
@@ -475,7 +475,7 @@ public class AdminController : Controller
         //gestione dei filtri: Date
         model.Logs = model.Logs.Where(l => (l.DataOperazione > model.Filtro.DataInizio) && (l.DataOperazione < model.Filtro.DataFine.AddDays(1)));
 
-        if (filtroAttivo)
+        if (model.FiltroAttivo)
         {
             ViewBag.Show = "show";
         }

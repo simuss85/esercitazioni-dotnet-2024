@@ -24,6 +24,6 @@ public class LogViewModel
     public int ElementiPerPagina { get; set; }
     public string? Reverse { get; set; }    //gestisce filtri di ordinamento
 
-
+    public bool FiltroAttivo { get; set; }
 
 }
