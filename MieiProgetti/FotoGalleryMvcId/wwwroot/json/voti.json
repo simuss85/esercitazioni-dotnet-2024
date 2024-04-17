@@ -437,7 +437,7 @@
     "Data": "2024-04-09T00:00:00+02:00",
     "Commento": "sfssa",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 45,
@@ -616,8 +616,8 @@
     "Stelle": 4.0,
     "Data": "2024-04-12T00:00:00+02:00",
     "Commento": "Bello",
-    "Visibile": true,
-    "Moderato": false
+    "Visibile": false,
+    "Moderato": true
   },
   {
     "Id": 63,
@@ -637,7 +637,7 @@
     "Data": "2024-04-15T00:00:00+02:00",
     "Commento": "asdashdha",
     "Visibile": true,
-    "Moderato": false
+    "Moderato": true
   },
   {
     "Id": 65,
@@ -656,6 +656,26 @@
     "Stelle": 4.0,
     "Data": "2024-04-16T00:00:00+02:00",
     "Commento": "fdsfdfs",
+    "Visibile": true,
+    "Moderato": true
+  },
+  {
+    "Id": 67,
+    "Nome": "scemo@chilegge.com",
+    "ImmagineId": 99,
+    "Stelle": 4.0,
+    "Data": "2024-04-17T00:00:00+02:00",
+    "Commento": "bello dai",
+    "Visibile": false,
+    "Moderato": true
+  },
+  {
+    "Id": 68,
+    "Nome": "carlo@gmail.com",
+    "ImmagineId": 102,
+    "Stelle": 4.0,
+    "Data": "2024-04-17T00:00:00+02:00",
+    "Commento": "bello",
     "Visibile": true,
     "Moderato": true
   }

@@ -332,6 +332,10 @@ public class ModeratoreController : Controller
         {
             return View(model);
         }
+        else if (model.Selezione == null)
+        {
+            return RedirectToAction("ModeraCommenti", "Moderatore", new { pageIndex = model.PageIndex, reverse = model.Reverse });
+        }
         else
         {
             // verifica log

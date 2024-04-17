@@ -768,5 +768,45 @@
     "Autore": "Autore 98",
     "Data": "2024-04-11T17:45:35.612903+02:00",
     "Categoria": "Oggetti"
+  },
+  {
+    "Id": 99,
+    "Path": "https://media.istockphoto.com/id/467923438/it/foto/divertente-cane-si-inclina-testa-davanti-barn.jpg?s=612x612&w=0&k=20&c=S7PN2i2sNFlBK3Qoja3c3vKrFGRkmB_qWeUme_CWA0I=",
+    "Titolo": "adsadsad",
+    "Voto": 4.0,
+    "NumeroVoti": 1,
+    "Autore": "dasdas",
+    "Data": "2024-04-17T09:22:02.9652749+02:00",
+    "Categoria": "Oggetti"
+  },
+  {
+    "Id": 100,
+    "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
+    "Titolo": "Titolo 100",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 100",
+    "Data": "2024-04-17T09:35:29.450031+02:00",
+    "Categoria": "Paesaggi"
+  },
+  {
+    "Id": 101,
+    "Path": "https://media.istockphoto.com/id/467923438/it/foto/divertente-cane-si-inclina-testa-davanti-barn.jpg?s=612x612&w=0&k=20&c=S7PN2i2sNFlBK3Qoja3c3vKrFGRkmB_qWeUme_CWA0I=",
+    "Titolo": "Titolo 101",
+    "Voto": 0.0,
+    "NumeroVoti": 0,
+    "Autore": "Autore 101",
+    "Data": "2024-04-17T09:37:44.7842275+02:00",
+    "Categoria": "Persone"
+  },
+  {
+    "Id": 102,
+    "Path": "https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg",
+    "Titolo": "Titolo 102",
+    "Voto": 4.0,
+    "NumeroVoti": 1,
+    "Autore": "Autore 102",
+    "Data": "2024-04-17T09:38:03.3652898+02:00",
+    "Categoria": "Persone"
   }
 ]
