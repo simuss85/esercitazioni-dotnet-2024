@@ -61,7 +61,16 @@
                     </th>
 
                     <th>Id_Immagine
-
+                         @if (Model.Reverse != "idImmOn")
+                        {
+                            <a class="voto" asp-controller="Moderatore" asp-action="ModeraCommenti" asp-route-reverse="idImmOn">
+                                <i class="bi bi-caret-down"></i></a>
+                        }
+                        else
+                        {
+                            <a class="voto" asp-controller="Moderatore" asp-action="ModeraCommenti" asp-route-reverse="idImmOff">
+                                <i class="bi bi-caret-up"></i></a>
+                        }
                     </th>
 
                     <th>Data inserimento

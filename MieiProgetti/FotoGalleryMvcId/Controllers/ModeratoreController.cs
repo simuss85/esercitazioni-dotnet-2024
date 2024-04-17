@@ -286,6 +286,14 @@ public class ModeratoreController : Controller
                 model.Voti = model.Voti.OrderBy(v => v.Id);
                 break;
 
+            case "idImmOff":
+                model.Voti = model.Voti.OrderByDescending(v => v.ImmagineId);
+                break;
+
+            case "idImmOn":
+                model.Voti = model.Voti.OrderBy(v => v.ImmagineId);
+                break;
+
             case "dataOff":
                 model.Voti = model.Voti.OrderByDescending(v => v.Data);
                 break;
